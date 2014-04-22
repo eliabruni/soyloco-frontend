@@ -4,10 +4,14 @@ Soyloco
 ## Using this project
 
 
-### 0. First, install `Node.js`. Then, install the latest Cordova and Ionic command-line tools.
+### 0. Install Node.js and Cordova
+First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
 Follow the Android and iOS platform guides to install required platform dependencies.
 
-### 1. Make sure the `ionic` utility is installed:
+
+### 1. Install Ionic
+
+Make sure the `ionic` utility is installed:
 
 ```bash
 $ sudo npm install -g ionic
