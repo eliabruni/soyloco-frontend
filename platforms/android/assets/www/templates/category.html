@@ -1,0 +1,67 @@
+<ion-view title={{category.name}}>
+
+    <ion-tabs class="tabs-icon-only">
+
+        <!-- Who you like Tab -->
+        <ion-tab title="Who you like" icon="icon ion-ios7-people" href="">
+            <ion-nav-view name="tab-dash"></ion-nav-view>
+
+            <ion-content header-shrink scroll-event-interval="1">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47576.39960216657!2d-71.42116805!3d41.8169925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e444e0437e735d%3A0x69df7c4d48b3b627!2sProvidence%2C+RI!5e0!3m2!1sen!2sus!4v1397944855657" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                </div>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.otherPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+
+            </ion-content>
+        </ion-tab>
+
+        <!-- Who likes you Tab -->
+        <ion-tab title="Who likes you" icon="icon ion-ios7-person" href="">
+            <ion-nav-view name="tab-friends"></ion-nav-view>
+
+            <ion-content header-shrink scroll-event-interval="1">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47576.39960216657!2d-71.42116805!3d41.8169925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e444e0437e735d%3A0x69df7c4d48b3b627!2sProvidence%2C+RI!5e0!3m2!1sen!2sus!4v1397944855657" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                </div>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.myPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+
+            </ion-content>
+
+        </ion-tab>
+
+
+        <!-- Matches tab -->
+        <ion-tab title="Who you like" icon="icon ion-person-stalker soyloco-match-button" href="">
+            <ion-nav-view name="tab-dash"></ion-nav-view>
+
+            <ion-content header-shrink scroll-event-interval="1">
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47576.39960216657!2d-71.42116805!3d41.8169925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e444e0437e735d%3A0x69df7c4d48b3b627!2sProvidence%2C+RI!5e0!3m2!1sen!2sus!4v1397944855657" width="600" height="450" frameborder="0" style="border:0"></iframe>
+                </div>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.otherPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+
+            </ion-content>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

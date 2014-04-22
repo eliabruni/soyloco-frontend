@@ -1,0 +1,317 @@
+/* Your app's CSS, go crazy, make it your own */
+
+
+
+/*INTRO*/
+
+.slider {
+    height: 70%;
+}
+.slider-slide {
+    padding-top: 80px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+
+
+#facebook-logo {
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+
+}
+
+.facebook-button {
+    background-color: #3b5998;
+    color: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 19px;
+}
+
+#facebook-disclaimer {
+    color: #000000;
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+#list {
+    width: 170px;
+    margin: 30px auto;
+    font-size: 20px;
+}
+#list ol {
+    margin-top: 30px;
+}
+#list ol li {
+    text-align: left;
+    list-style: decimal;
+    margin: 10px 0px;
+}
+
+
+
+/*
+BAR
+*/
+.menu-bar-title{
+    font-size: 25px;
+}
+
+
+
+/*
+MENU VIEW
+*/
+
+
+.soyloco-ion-navicon {
+    font-size: 45px;
+    padding-left: 8px;
+}
+
+.soyloco-menu-button {
+    font-size: 64px;
+    color: #000000;
+}
+
+.soyloco-menu-text {
+    font-size: 27px;
+    text-decoration: none;
+    color: #000000;
+    padding-top: 30px;
+    border-style: none;
+}
+
+
+
+/*
+PLACES VIEW
+*/
+
+.soyloco-place-button {
+    font-size: 45px;
+    color: #000000;
+}
+
+.soyloco-place-text {
+    font-size: 22px;
+    text-decoration: none;
+    color: #000000;
+    padding-top: 5px;
+    padding-bottom: 25px
+    border-style: dotted;
+}
+
+
+
+/*
+PLACE VIEW
+*/
+
+.soyloco-match-button {
+    color: #ffffff;
+}
+
+
+
+/*
+SWIPE IN PLAY VIEW
+*/
+
+
+.swipe-like-icon {
+    font-size: 60px;
+    background-color : green;
+}
+
+.swipe-dislike-icon {
+    font-size: 60px;
+    background-color : red;
+}
+
+.ionic-logo {
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+
+.item-body > p {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+/* Your app's CSS, go crazy, make it your own */
+
+
+.pane {
+    background-color: #ffffff;
+}
+
+.bar.bar-transparent {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+}
+
+.bar .title {
+    color: #eee;
+}
+
+.swipe-cards {
+    position: fixed;
+}
+
+.swipe-card {
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    display: none;
+    position: fixed;
+    -webkit-transform: scale(1,1);
+    left: 50%;
+    top: 50%;
+    width: 350px;
+    height: 350px;
+    margin-left: -175px;
+    margin-top: -250px;
+    box-sizing: border-box;
+    background-color: rgb(255,255,255);
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.swipe-card .title {
+    height: 40px;
+    padding: 5px;
+    line-height: 30px;
+    color: #444;
+}
+.swipe-card .image {
+    overflow: hidden;
+    height: 350px;
+    width: 350px;
+    border-style: solid;
+    border-color: #444;
+}
+.swipe-card .button {
+    border: none;
+}
+.swipe-card .image img {
+    width: 100%;
+    border-radius: 0px 0px 4px 4px;
+}
+
+#start-card {
+    color: #fff;
+    background-color: #30BD8A;
+    line-height: 300px;
+    word-wrap: break-word;
+    border: 6px solid #4CD68E;
+    text-align: center;
+}
+#start-card span {
+    display: inline-block;
+    line-height: 40px;
+    width: 200px;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+#footer .button {
+    color: #fff;
+}
+
+@-webkit-keyframes bounceIn {
+    0% {
+        -webkit-transform: scale(0,0);
+    }
+    70% {
+        -webkit-transform: scale(1.2,1.2);
+    }
+    100% {
+        -webkit-transform: scale(1,1);
+    }
+}
+
+.swipe-card.pop-in-start {
+    -webkit-transform: scale(0,0);
+}
+.swipe-card.pop-in {
+    -webkit-animation: bounceIn 0.3s ease-out;
+}
+
+
+/*
+MAP IN CATEOGRY VIEW
+*/
+
+.scroll-content{
+    z-index: 11;
+    background-color:white;
+}
+
+.item{
+    /*  visibility: hidden;*/
+}
+
+.map{
+    position: relative;
+    padding-bottom: 75%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+SETTINGS VIEW
+*/
+
+
+.setting-form {
+    background: #e6e5eb;
+}
+
+div.ex
+{
+    padding:3px;
+    border-radius:.75rem;
+    background:#ffffff;
+    border-style: none;
+}
+
+.setting-item {
+    background: #ffffff;
+    color:#383641;
+    border-radius:.75rem;
+    font-size:20px;
+    border-style: none;
+    width: 100%;
+
+}
+
+.setting-divider {
+    background: #e6e5eb;
+    border-style: none;
+    font-size:22px;
+
+}
+
+.setting-button {
+    font-size:18px;
+    color:#000000;
+    text-align:center;
+}
+
