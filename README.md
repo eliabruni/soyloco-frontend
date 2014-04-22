@@ -4,7 +4,7 @@ Soyloco
 ## Using this project
 
 
-0. First, install `Node.js`. Then, install the latest Cordova and Ionic command-line tools.
+### 0. First, install `Node.js`. Then, install the latest Cordova and Ionic command-line tools.
 Follow the Android and iOS platform guides to install required platform dependencies.
 
 ### 1. Make sure the `ionic` utility is installed:
@@ -28,7 +28,7 @@ $ ionic emulate ios
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
 
 
-## Using Sass (optional)
+## Using Sass
 
 This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
 Sass's great features.
@@ -43,6 +43,4 @@ the include to your `ionic.app.css` file which now contains all your Sass code a
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 ```
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
 
