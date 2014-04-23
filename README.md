@@ -1,4 +1,4 @@
-Soyloco
+Soyloco frontend
 =====================
 
 ## Using this project
@@ -17,13 +17,13 @@ Make sure the `ionic` utility is installed:
 $ sudo npm install -g ionic
 ```
 
-### 2. Run Soyloco
+### 2. Run Soyloco frontend
 Ionic apps are based on Cordova, so we can use the Cordova utilities
 to build, test, and deploy our apps, but Ionic provides simple ways to do
 the same with the ionic utility (substitute ios for android to build for Android):
 
 ```bash
-$ cd soyloco
+$ cd soyloco-frontend
 $ ionic platform add ios
 $ ionic build ios
 $ ionic emulate ios
