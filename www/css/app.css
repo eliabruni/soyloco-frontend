@@ -2764,26 +2764,26 @@ ion-infinite-scroll.active .scroll-infinite {
     height: 100%; }
 
 .has-header {
-  top: 44px; }
+  top: 50px; }
 
 .has-subheader {
-  top: 88px; }
+  top: 100px; }
 
 .has-tabs-top {
-  top: 104px; }
+  top: 110px; }
 
 .has-header.has-subheader.has-tabs-top {
-  top: 148px; }
+  top: 160px; }
 
 .has-footer {
-  bottom: 44px; }
+  bottom: 50px; }
 
 .has-tabs,
 .bar-footer.has-tabs {
   bottom: 60px; }
 
 .has-footer.has-tabs {
-  bottom: 104px; }
+  bottom: 110px; }
 
 .pane {
   -webkit-transform: translate3d(0, 0, 0);
@@ -3053,7 +3053,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 44px;
+  height: 50px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -3091,11 +3091,11 @@ a.subdued {
       color: #444444; }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: #8e2d3f;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
-    color: #444444; }
+    color: white; }
     .bar.bar-stable .title {
-      color: #444444; }
+      color: white; }
   .bar.bar-positive {
     border-color: #145dd7;
     background-color: #4a87ee;
@@ -3157,8 +3157,8 @@ a.subdued {
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 17px;
-    line-height: 44px; }
+    font-size: 25px;
+    line-height: 50px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -3184,7 +3184,7 @@ a.subdued {
       font-size: 32px;
       line-height: 32px; }
     .bar .button.button-clear {
-      font-size: 17px;
+      font-size: 25px;
       font-weight: 300;
       padding-right: 2px;
       padding-left: 2px; }
@@ -3226,17 +3226,17 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: #444444;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-light .button.button-icon {
     border-color: transparent;
     background: none; }
 
 .bar-stable .button {
   border-color: #b2b2b2;
-  background-color: #f8f8f8;
-  color: #444444; }
+  background-color: #8e2d3f;
+  color: white; }
   .bar-stable .button:hover {
-    color: #444444;
+    color: white;
     text-decoration: none; }
   .bar-stable .button.active {
     border-color: #a2a2a2;
@@ -3246,8 +3246,8 @@ a.subdued {
     border-color: transparent;
     background: none;
     box-shadow: none;
-    color: #444444;
-    font-size: 17px; }
+    color: white;
+    font-size: 25px; }
   .bar-stable .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3268,7 +3268,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-positive .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3289,7 +3289,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-calm .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3310,7 +3310,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-assertive .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3331,7 +3331,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-balanced .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3352,7 +3352,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-energized .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3373,7 +3373,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-royal .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3394,7 +3394,7 @@ a.subdued {
     background: none;
     box-shadow: none;
     color: white;
-    font-size: 17px; }
+    font-size: 25px; }
   .bar-dark .button.button-icon {
     border-color: transparent;
     background: none; }
@@ -3414,11 +3414,11 @@ a.subdued {
   padding: 0; }
 
 .bar-subheader {
-  top: 44px;
+  top: 50px;
   display: block; }
 
 .bar-subfooter {
-  bottom: 44px;
+  bottom: 50px;
   display: block; }
 
 /**
@@ -3448,7 +3448,7 @@ a.subdued {
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   border-color: #b2b2b2;
-  background-color: #424242;
+  background-color: #282828;
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
   color: white;
   position: absolute;
@@ -3462,7 +3462,7 @@ a.subdued {
   line-height: 60px; }
   .tabs .tab-item .badge {
     background-color: white;
-    color: #424242; }
+    color: #282828; }
   @media (min--moz-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
     .tabs {
       padding-top: 2px;
@@ -3575,7 +3575,7 @@ a.subdued {
 /* Allow parent element to have tabs-top */
 .tabs-top > .tabs,
 .tabs.tabs-top {
-  top: 44px;
+  top: 50px;
   padding-top: 0;
   padding-bottom: 2px;
   background-position: bottom; }
@@ -3656,7 +3656,7 @@ a.subdued {
 /* Active state for tab */
 .tab-item.tab-item-active {
   opacity: 1;
-  background: #000000; }
+  background: #8e2d3f; }
   .tab-item.tab-item-active.tab-item-light {
     color: white; }
   .tab-item.tab-item-active.tab-item-stable {
@@ -5505,7 +5505,7 @@ progress {
   display: inline-block;
   margin: 0;
   padding: 1px 12px 0 12px;
-  min-width: 52px;
+  min-width: 66px;
   min-height: 47px;
   border-width: 1px;
   border-style: solid;
@@ -5513,7 +5513,7 @@ progress {
   vertical-align: top;
   text-align: center;
   text-overflow: ellipsis;
-  font-size: 16px;
+  font-size: 30px;
   line-height: 42px;
   cursor: pointer; }
   .button:hover {
