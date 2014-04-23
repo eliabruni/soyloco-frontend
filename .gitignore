@@ -1,3 +1,5 @@
 node_modules/
 platforms/android
 platforms/ios
+.idea
+.sass-cache

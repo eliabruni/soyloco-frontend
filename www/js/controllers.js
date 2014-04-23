@@ -85,7 +85,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         var cardTypes = [
             { title: 'Emma', image: 'img/emma.png' },
             { title: 'Emilia', image: 'img/emilia.png' },
-            { title: 'Jennifer', image: 'img/jennifer.png' },
+            { title: 'Jennifer', image: 'img/jennifer.png' }
         ];
 
         $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
