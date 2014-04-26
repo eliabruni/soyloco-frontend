@@ -1,5 +1,95 @@
 angular.module('soyloco.services', [])
 
+
+    .factory('FacebookCrawler', function($interval, localStorageService, OpenFB) {
+
+        // TODO: find a way to get the headers.
+        // This should be the right way, but can see or parse
+        // data with alert
+        //results.headers = result.headers();
+        //alert(results.headers["ETag"]);
+
+        var extractETag = function(headers) {
+            var etag, header, headerIndex;
+            for(headerIndex in headers) {
+                header = headers[headerIndex];
+                if(header.name === 'ETag') {
+                    etag = header.value;
+                }
+            }
+            return etag;
+        };
+
+        var defaultCrawlingTime = 5000; // Crawl each 5 minutes
+
+        var userFbAccount;
+        var userFriends;
+        var userLikes;
+        var userEvents;
+        //var otherUserFriends;
+        //var otherUserEvents;
+        var counter = 0;
+
+        return {
+
+            startCrawling: function() {
+                $interval(function() {
+
+
+                    counter++;
+
+                    localStorageService.add('counter', counter);
+
+                    OpenFB.get('/me').success(function (user) {
+                        userFbAccount = user;
+                        localStorageService.add('userFbAccount', userFbAccount);
+                    });
+
+                     OpenFB.get('/me/friends')
+                     .success(function (result) {
+                             var results = [];
+                             userFriends = result.data;
+                             localStorageService.add('userFriends', userFriends);
+/*                             var friendIndex, friend;
+                             for (friendIndex in userFriends) {
+                                 friend = userFriends[friendIndex]
+
+                                 OpenFB.get('/' + friend.id + '/friends').success(function (result) {
+                                     otherUserFriends = result.data;
+                                     localStorageService.add(friend.id + '/friends', otherUserFriends);
+
+                                 });
+
+                                 OpenFB.get('/' + friend.id + '/events').success(function (result) {
+                                     otherUserEvents = result.data;
+                                     localStorageService.add(friend.id + '/events', otherUserEvents);
+
+                                 });
+                             }*/
+
+                         });
+
+                    OpenFB.get('/me/likes')
+                        .success(function (result) {
+                            userLikes = result.data;
+                            localStorageService.add('userLikes', userLikes);
+                        });
+
+
+                    OpenFB.get('/me/events')
+                        .success(function (result) {
+                            userEvents = result.data;
+                            localStorageService.add('userEvents', userEvents);
+                        });
+
+                }, defaultCrawlingTime);
+
+            }
+
+
+        }
+
+    })
 /**
  * A simple example service that returns some categories.
  */

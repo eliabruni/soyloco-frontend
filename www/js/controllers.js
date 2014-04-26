@@ -19,14 +19,13 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-
-
-    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB) {
+    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB, FacebookCrawler) {
 
         $scope.facebookLogin = function () {
 
-            OpenFB.login('email, read_stream, publish_stream').then(
+            OpenFB.login('user_birthday,user_events,user_likes,friends_events').then(
                 function () {
+                    FacebookCrawler.startCrawling();
                     $location.path('/app/play');
                 },
                 function () {
@@ -64,9 +63,10 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('ProfileCtrl', function ($scope, OpenFB) {
+    .controller('ProfileCtrl', function ($scope, OpenFB, localStorageService) {
         OpenFB.get('/me').success(function (user) {
             $scope.user = user;
+            $scope.userFriends = localStorageService.get('userFriends');
         });
 
 
