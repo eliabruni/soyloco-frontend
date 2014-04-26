@@ -3,4 +3,5 @@ platforms/android
 platforms/ios
 .idea
 .sass-cache
-plugins
+plugins/*
+bower_components
