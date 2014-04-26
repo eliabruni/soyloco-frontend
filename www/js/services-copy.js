@@ -1,15 +1,13 @@
 angular.module('soyloco.services', [])
 
 
-    .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
+    .factory('FacebookCrawler', function($interval, localStorageService, OpenFB) {
 
         // TODO: find a way to get the headers.
         // This should be the right way, but can see or parse
         // data with alert
         //results.headers = result.headers();
         //alert(results.headers["ETag"]);
-
-        // TODO: check id the function below reads headers retrieved as above
 
         /*        var extractETag = function(headers) {
          var etag, header, headerIndex;
@@ -23,50 +21,76 @@ angular.module('soyloco.services', [])
          };*/
 
 
+        var fetchFriendsEvents = function (userFriends, friendsIndex) {
+
+            var inCounter = 1;
+            if (friendsIndex < userFriends.length) {
+
+
+                var friend = userFriends[friendsIndex];
+                var otherUserEvents;
+                OpenFB.get('/' + friend.id + '/events').success(function (result) {
+                    otherUserEvents = result.data;
+                    localStorageService.add(friend.id + '/events', otherUserEvents);
+                    friendsIndex++;
+                    fetchFriendsEvents(userFriends, friendsIndex);
+                    alert(friend.id);
+                });
+            } else {
+                alert('Finished friends events crawling number: ' + inCounter);
+                inCounter++;
+            }
+
+        };
+
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
 
         var userFbAccount;
         var userFriends;
         var userLikes;
         var userEvents;
-        //var counter = 0;
-        var done = 4;
+        var counter = 0;
 
         return {
 
+
             startCrawling: function() {
 
-                $interval(function() {
+                var stop;
+                // Don't start a new fight if we are already crawling
+                if ( angular.isDefined(stop) ) return;
+                stop = $interval(function() {
 
-                    // Don't start a new fight if we are already crawling
-                    if ( done<4 ) return;
 
-                    done = 0;
-                    //counter++;
-                    //alert('start global crawling number: ' + counter);
-                    //localStorageService.add('counter', counter);
+                    counter++;
+                    alert('start global crawling number: ' + counter);
+                    localStorageService.add('counter', counter);
 
                     OpenFB.get('/me').success(function (user) {
                         userFbAccount = user;
                         localStorageService.add('userFbAccount', userFbAccount);
-                        checkIfDone('t1');
-                    });
+                    }).success(OpenFB.get('/me/friends')
+                        .success(function (result) {
+                            var results = [];
+                            userFriends = result.data;
+                            localStorageService.add('userFriends', userFriends);
+                            fetchFriendsEvents(userFriends, 0);
+                        })).success()
+
+
 
                     OpenFB.get('/me/friends')
                         .success(function (result) {
                             var results = [];
                             userFriends = result.data;
                             localStorageService.add('userFriends', userFriends);
-
-                            var friendsIndex = 0
-                            fetchFriendsEvents(userFriends, friendsIndex);
+                            fetchFriendsEvents(userFriends, 0);
                         });
 
                     OpenFB.get('/me/likes')
                         .success(function (result) {
                             userLikes = result.data;
                             localStorageService.add('userLikes', userLikes);
-                            checkIfDone('t3');
                         });
 
 
@@ -74,44 +98,15 @@ angular.module('soyloco.services', [])
                         .success(function (result) {
                             userEvents = result.data;
                             localStorageService.add('userEvents', userEvents);
-                            checkIfDone('t4');
+
                         });
 
 
 
                 }, defaultCrawlingTime);
 
-
-                var fetchFriendsEvents = function (userFriends, friendsIndex) {
-
-                    //var inCounter = 1;
-                    var thisFriendIndex = friendsIndex;
-                    //alert('thisFriendIndex: ' + thisFriendIndex + ', userFriends.length: ' + userFriends.length)
-
-                    if (thisFriendIndex < userFriends.length - 100) {
-
-                        var friend = userFriends[thisFriendIndex];
-                        var otherUserEvents;
-                        OpenFB.get('/' + friend.id + '/events').success(function (result) {
-                            otherUserEvents = result.data;
-                            localStorageService.add(friend.id + '/events', otherUserEvents);
-                            thisFriendIndex++;
-                            fetchFriendsEvents(userFriends, thisFriendIndex);
-                        });
-                    } else {
-                        //alert('Finished friends events crawling number: ' + inCounter);
-                        checkIfDone('t2')
-                        //inCounter++;
-                    }
-                };
-
-                function checkIfDone(functionThatCalled) {
-                    done++;
-                    //alert(functionThatCalled);
-
-                }
-
             }
+
 
         }
 
