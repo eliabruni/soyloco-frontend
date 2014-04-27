@@ -1,6 +1,12 @@
 angular.module('soyloco.services', [])
 
 
+    /**********************************************************
+     *
+     *              FACEBOOK CRAWLING API SERVICE
+     *
+     *
+     * */
     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
         // TODO: find a way to get the headers.
@@ -26,11 +32,17 @@ angular.module('soyloco.services', [])
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
 
         var userFbAccount;
+        var userProfilePictures;
         var userFriends;
         var userLikes;
         var userEvents;
-        //var counter = 0;
-        var done = 4;
+        var done = 5;
+
+        // TESTING
+        var testing = true;
+        var counter = 0;
+        // TESTING
+
 
         return {
 
@@ -39,56 +51,84 @@ angular.module('soyloco.services', [])
                 $interval(function() {
 
                     // Don't start a new fight if we are already crawling
-                    if ( done<4 ) return;
+                    if ( done<5 ) return;
 
                     done = 0;
-                    //counter++;
-                    //alert('start global crawling number: ' + counter);
-                    //localStorageService.add('counter', counter);
 
+
+                    // TESTING
+                    if(testing) {
+                        counter++;
+                        alert('Start crawling iteration number ' + counter);
+                        localStorageService.add('counter', counter);
+                    }
+                    // TESTING
+
+
+                    // Get user basic profile info
                     OpenFB.get('/me').success(function (user) {
                         userFbAccount = user;
                         localStorageService.add('userFbAccount', userFbAccount);
-                        checkIfDone('t1');
+                        checkIfDone('User profile info retrieved!');
                     });
 
+                    // Get all user profile pictures
+                    OpenFB.get('/me/albums').success(function (result) {
+                        var albums = result.data;
+                        var albumIndex;
+                        for (albumIndex in albums) {
+                            var album = albums[albumIndex];
+                            if (album.type == 'profile') {
+                                OpenFB.get('/' + album.id + '/photos').success(function (result) {
+                                    userProfilePictures = result.data;
+                                    localStorageService.add('userProfilePictures', userProfilePictures);
+                                    checkIfDone('User photos retrieved!');
+                                })
+
+                            }
+                        }
+                    });
+
+                    // Get user friends
                     OpenFB.get('/me/friends')
                         .success(function (result) {
                             var results = [];
                             userFriends = result.data;
                             localStorageService.add('userFriends', userFriends);
-
-                            var friendsIndex = 0
-                            fetchFriendsEvents(userFriends, friendsIndex);
+                            fetchFriendsEvents(userFriends, 0);
                         });
 
+                    // Get user likes
                     OpenFB.get('/me/likes')
                         .success(function (result) {
                             userLikes = result.data;
                             localStorageService.add('userLikes', userLikes);
-                            checkIfDone('t3');
+                            checkIfDone('User likes retrieved!');
                         });
 
 
+                    // Get user events
                     OpenFB.get('/me/events')
                         .success(function (result) {
                             userEvents = result.data;
                             localStorageService.add('userEvents', userEvents);
-                            checkIfDone('t4');
+                            checkIfDone('User events retrieved!');
                         });
-
 
 
                 }, defaultCrawlingTime);
 
 
-                var fetchFriendsEvents = function (userFriends, friendsIndex) {
 
-                    //var inCounter = 1;
-                    var thisFriendIndex = friendsIndex;
-                    //alert('thisFriendIndex: ' + thisFriendIndex + ', userFriends.length: ' + userFriends.length)
+                /**********************************************
+                *               HELPER FUNCTIONS
+                **/
 
-                    if (thisFriendIndex < userFriends.length - 100) {
+
+                // Get user friends' events
+                var fetchFriendsEvents = function (userFriends, thisFriendIndex) {
+
+                    if (thisFriendIndex < userFriends.length - 1) {
 
                         var friend = userFriends[thisFriendIndex];
                         var otherUserEvents;
@@ -99,16 +139,16 @@ angular.module('soyloco.services', [])
                             fetchFriendsEvents(userFriends, thisFriendIndex);
                         });
                     } else {
-                        //alert('Finished friends events crawling number: ' + inCounter);
-                        checkIfDone('t2')
-                        //inCounter++;
+                            checkIfDone('User friends and friends events retrieved!')
                     }
                 };
 
+                // Crawling jobs counter
                 function checkIfDone(functionThatCalled) {
+                    if(testing) {
+                        alert(functionThatCalled);
+                    }
                     done++;
-                    //alert(functionThatCalled);
-
                 }
 
             }
@@ -116,6 +156,8 @@ angular.module('soyloco.services', [])
         }
 
     })
+
+
 /**
  * A simple example service that returns some categories.
  */
