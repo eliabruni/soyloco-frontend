@@ -8,12 +8,7 @@ Soyloco frontend
 First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
 Follow the Android and iOS platform guides to install required platform dependencies.
 
-### TODO: NEED A POINT ON INSTALL NECESSARY CORDOVA PLUGINS
-
-### 1. Install Cordova plugins
-
-
-### 2. Install Ionic
+### 1. Install Ionic
 
 Make sure the `ionic` utility is installed:
 
@@ -21,7 +16,7 @@ Make sure the `ionic` utility is installed:
 $ sudo npm install -g ionic
 ```
 
-### 3. Run Soyloco frontend
+### 2. Add ios/android platforms
 Ionic apps are based on Cordova, so we can use the Cordova utilities
 to build, test, and deploy our apps, but Ionic provides simple ways to do
 the same with the ionic utility (substitute ios for android to build for Android):
@@ -30,7 +25,10 @@ the same with the ionic utility (substitute ios for android to build for Android
 $ cd soyloco-frontend
 $ ionic platform add ios
 ```
-#### Before building and running or emulating the app, we need to install the
+
+### 3. Install Cordova plugins
+
+Before building and running or emulating the app, we need to install the
 require Cordova plugins.
 
 Basic device information:
@@ -90,7 +88,7 @@ Debug console:
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-console.git
 ```
 
-#### Now we are ready to build and run/emulate Soyloco-frontend
+### 4. Run/emulate Soyloco-frontend
 
 ```bash
 $ ionic build ios
@@ -98,21 +96,3 @@ $ ionic emulate ios
 ```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
-
-
-## Using Sass
-
-This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
-Sass's great features.
-
-Just update the `./scss/ionic.app.scss` file, and run `gulp` or `gulp watch` to rebuild the CSS files for Ionic.
-
-Note: if you choose to use the Sass method, make sure to remove the included `ionic.css` file in `index.html`, and then uncomment
-the include to your `ionic.app.css` file which now contains all your Sass code and Ionic itself:
-
-```html
-<!-- IF using Sass (run gulp sass first), then remove the CSS include above
-<link href="css/ionic.app.css" rel="stylesheet">
--->
-```
-
