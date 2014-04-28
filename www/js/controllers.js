@@ -23,7 +23,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         $scope.facebookLogin = function () {
 
-            OpenFB.login('user_birthday,publish_actions,user_events,user_photos,user_likes,friends_events').then(
+            OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
                 function () {
                     //TestEtags.testEtags();
                     FacebookCrawler.startCrawling();
@@ -68,7 +68,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         OpenFB.get('/me').success(function (user) {
             $scope.user = user;
             $scope.datas = localStorageService.get('dataToTestWithEtags');
-            $scope.userEvents = localStorageService.get('userEvents');
+            $scope.testingEvents = localStorageService.get('testingEvents');
         });
 
 
