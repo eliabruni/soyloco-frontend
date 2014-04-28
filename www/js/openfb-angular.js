@@ -11,7 +11,12 @@ angular.module('openfb', [])
 
     .factory('OpenFB', function ($rootScope, $q, $window, $http) {
 
+
+
         var FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth',
+
+        // That's the variable I use around the whole app
+            loggedInToFacebook,
 
         // By default we store fbtoken in sessionStorage. This can be overriden in init()
             tokenStore = window.sessionStorage,
@@ -31,6 +36,7 @@ angular.module('openfb', [])
 
         document.addEventListener("deviceready", function () {
             runningInCordova = true;
+
         }, false);
 
         /**
@@ -44,6 +50,10 @@ angular.module('openfb', [])
             fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
             if (store) tokenStore = store;
+        }
+
+        function getLoginStatus() {
+            return loggedInToFacebook;
         }
 
         /**
@@ -108,6 +118,21 @@ angular.module('openfb', [])
 
         }
 
+        document.addEventListener("online", onOnline, false);
+        document.addEventListener("offline", onOffline, false);
+
+        function onOnline() {
+            alert('online');
+            if (getLoginStatus()) {
+                alert('online');
+                //FacebookCrawler.startCrawling();
+            }
+        }
+
+        function onOffline() {
+            alert('offline');
+        }
+
         /**
          * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
          * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).
@@ -124,6 +149,7 @@ angular.module('openfb', [])
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
                 tokenStore['fbtoken'] = obj['access_token'];
+                loggedInToFacebook = true;
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -139,6 +165,8 @@ angular.module('openfb', [])
          */
         function logout() {
             tokenStore['fbtoken'] = undefined;
+            loggedInToFacebook = false;
+
         }
 
         /**
@@ -150,7 +178,7 @@ angular.module('openfb', [])
         function revokePermissions() {
             return api({method: 'DELETE', path: '/me/permissions'})
                 .success(function () {
-                    console.log('Permissions revoked');
+                    console.log('Permissions revoke”d');
                 });
         }
 
@@ -164,11 +192,14 @@ angular.module('openfb', [])
         function api(obj) {
 
             var method = obj.method || 'GET',
-                params = obj.params || {};
+                headers = obj.headers || {},
+                params = obj.params || {}
+
 
             params['access_token'] = tokenStore['fbtoken'];
 
-            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
+
+            return $http({method: method, url: 'https://graph.facebook.com' + obj.path,headers: headers, params: params})
                 .error(function(data, status, headers, config) {
                     if (data.error && data.error.type === 'OAuthException') {
                         $rootScope.$emit('OAuthException');
@@ -196,6 +227,16 @@ angular.module('openfb', [])
             return api({method: 'GET', path: path, params: params});
         }
 
+        /**
+         * Helper function for a GET call into the Graph API with headers
+         * @param path
+         * @param params
+         * @returns {*}
+         */
+        function getWithHeaders(path, headers, params) {
+            return api({method: 'GET', path: path, headers : headers, params: params });
+        }
+
         function parseQueryString(queryString) {
             var qs = decodeURIComponent(queryString),
                 obj = {},
@@ -215,7 +256,9 @@ angular.module('openfb', [])
             api: api,
             post: post,
             get: get,
-            oauthCallback: oauthCallback
+            oauthCallback: oauthCallback,
+            getLoginStatus: getLoginStatus,
+            getWithHeaders: getWithHeaders
         }
 
     });

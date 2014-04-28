@@ -10,12 +10,13 @@
             <div class="item item-image">
                 <img ng-src="https://graph.facebook.com/{{ user.id }}/picture?width=400&height=400" />
             </div>
-            <div class="item">
-                <h2>{{user.name}}</h2>
-            </div>
-        <div class="item">
-            <h1>{{counter}}</h1>
-        </div>
+        <h1>{{status}}</h1>
+
+        <ion-list>
+            <ion-item ng-repeat="event in events">
+                <h4>{{event}}</h4>
+            </ion-item>
+        </ion-list>
     </ion-content>
 
 </ion-view>

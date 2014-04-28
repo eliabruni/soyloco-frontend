@@ -23,6 +23,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             $state.go('app.login');
         });
 
+
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
