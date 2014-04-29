@@ -53,7 +53,7 @@ angular.module('soyloco.services', [])
         var done = 5;
 
         // TESTING
-        var testing = true;
+        var testing = false;
         var counter = 0;
         // TESTING
 
@@ -113,8 +113,7 @@ angular.module('soyloco.services', [])
                         .error(function (data, status, headers, config){
 
                             if (status === 304) {
-                                alert('304 in user basic info!');
-                                checkIfDone('304');
+                                checkIfDone('304 in user basic info!');
                             }
 
                         });
@@ -174,8 +173,7 @@ angular.module('soyloco.services', [])
                                 .error(function (data, status, headers, config){
 
                                     if (status === 304) {
-                                        alert('304 in user album pix!');
-                                        checkIfDone('304');
+                                        checkIfDone('304 in user album pix!');
                                     }
 
                                 })
@@ -241,8 +239,7 @@ angular.module('soyloco.services', [])
                         .error(function (data, status, headers, config){
 
                             if (status === 304) {
-                                alert('304 in user likes!');
-                                checkIfDone('304');
+                                checkIfDone('304 in user likes!');
                             }
 
                         });
@@ -289,8 +286,7 @@ angular.module('soyloco.services', [])
                         .error(function (data, status, headers, config){
 
                             if (status === 304) {
-                                alert('304 in user events!');
-                                checkIfDone('304');
+                                checkIfDone('304 in user events!');
                             }
 
                         });

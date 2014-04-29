@@ -67,8 +67,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     .controller('ProfileCtrl', function ($scope, OpenFB, localStorageService) {
         OpenFB.get('/me').success(function (user) {
             $scope.user = user;
-            $scope.datas = localStorageService.get('dataToTestWithEtags');
-            $scope.testingEvents = localStorageService.get('testingEvents');
+            $scope.counter = localStorageService.get('counter');
         });
 
 
