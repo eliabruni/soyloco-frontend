@@ -15,6 +15,8 @@ angular.module('soyloco.services', [])
 
         function init(appId, redirectURL, store) {
             FacebookCrawler.startCrawling();
+
+            // TODO: Shouldn't we add other listeners for the crawling, such as device not ready, etc?
             document.addEventListener("online", onOnline, false);
             document.addEventListener("offline", onOffline, false);
         }
@@ -60,11 +62,11 @@ angular.module('soyloco.services', [])
         var userFriends;
         var userLikes;
         var userEvents;
-        var done = 5;
+        var done;
 
         // TESTING
-        var testing = false;
-        var counter = 0;
+        var testing = true;
+        var counter;
         // TESTING
 
         // If defined, crawling is active and vice versa.
@@ -73,15 +75,16 @@ angular.module('soyloco.services', [])
 
         function startCrawling () {
 
-             stop = $interval(function() {
+            // We first stop any possible previous instance of startCrawling()
+            stopCrawling();
+
+            stop = $interval(function() {
 
                 // Don't start a new fight if we are already crawling
                 if ( done<5 ) return;
 
                 done = 0;
-
-                counter++;
-                localStorageService.add('counter', counter);
+                counter = 0;
 
                 // TESTING
                 if(testing) {
@@ -386,10 +389,10 @@ angular.module('soyloco.services', [])
         }
 
         /*************************************
-        *
-        *   This function stops the crawling
-        *
-        * */
+         *
+         *   This function stops the crawling
+         *
+         * */
         function stopCrawling() {
             if (angular.isDefined(stop)) {
                 $interval.cancel(stop);
