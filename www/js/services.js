@@ -1,14 +1,63 @@
 angular.module('soyloco.services', [])
 
 
+    /**********************************************************
+    *                  STORAGE UTILITY
+    *
+    * ********************************************************/
+    .factory('StorageUtility', function(localStorageService){
 
-/**********************************************************
- *
- *              FACEBOOK CRAWLER LAUNCHER
- *
- * ********************************************************/
+        // If data only got one-dimensional objects
+        function getOneDimDifferences(oldObj, newObj) {
+            var diff = {};
+
+            for (var k in oldObj) {
+                if (!(k in newObj))
+                    diff[k] = undefined;  // property gone so explicitly set it undefined
+                else if (oldObj[k] !== newObj[k])
+                    diff[k] = newObj[k];  // property in both but has changed
+            }
+
+            for (k in newObj) {
+                if (!(k in oldObj))
+                    diff[k] = newObj[k]; // property is new
+            }
+
+            return diff;
+        }
+
+        // For nested objects
+        function getMultipleDimDifferences(oldObj, newObj) {
+            var diff = {};
+
+            for (var k in oldObj) {
+                if (!(k in newObj))
+                    diff[k] = undefined;  // property gone so explicitly set it undefined
+                (!angular.equals(oldObj[k],newObj[k]))
+                    diff[k] = newObj[k];  // property in both but has changed
+            }
+
+            for (k in newObj) {
+                if (!(k in oldObj))
+                    diff[k] = newObj[k]; // property is new
+            }
+
+            return diff;
+        }
+
+        return {
+            getOneDimDifferences: getOneDimDifferences,
+            getMultipleDimDifferences: getMultipleDimDifferences
+        }
 
 
+    })
+
+
+    /**********************************************************
+     *              FACEBOOK CRAWLER LAUNCHER
+     *
+    * ********************************************************/
     .factory('Crawler', function(OpenFB, FacebookCrawler) {
 
         var testing = false;
@@ -47,12 +96,10 @@ angular.module('soyloco.services', [])
 
 
 
-/**********************************************************
- *
- *              FACEBOOK CRAWLING API SERVICE
- *
- * ********************************************************/
-
+    /**********************************************************
+    *              FACEBOOK CRAWLING API SERVICE
+    *
+    * ********************************************************/
     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
