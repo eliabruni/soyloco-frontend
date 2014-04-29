@@ -68,7 +68,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     .controller('ProfileCtrl', function ($scope, OpenFB, localStorageService) {
         OpenFB.get('/me').success(function (user) {
             $scope.user = user;
-            $scope.counter = localStorageService.get('counter');
+            $scope.longTermToken = localStorageService.get('longTermToken');
         });
 
 

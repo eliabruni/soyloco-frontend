@@ -11,6 +11,9 @@
             Next
         </button>
     </ion-nav-buttons>
+
+    <ion-content>
+
     <ion-slide-box on-slide-changed="slideChanged(index)">
         <ion-slide>
             <h3>Thank you for choosing Soyloco!</h3>
@@ -39,15 +42,18 @@
                 Too bad!
             </p>
         </ion-slide>
+
     </ion-slide-box>
 
-    <div id="facebook-logo">
-    <button class="button button-block facebook-button"ng-click="facebookLogin()">
-        Sign in with Facebook
-    </button>
-    </div>
-    <div id="facebook-disclaimer">
-    <p>We will never post anything to your Facebook account.</p>
-    </div>
 
+        <div id="facebook-logo">
+            <button class="button button-block facebook-button"ng-click="facebookLogin()">
+                Sign in with Facebook
+            </button>
+        </div>
+        <div id="facebook-disclaimer">
+            <p>We will never post anything to your Facebook account.</p>
+        </div>
+
+        </ion-content>
 </ion-view>

@@ -5,7 +5,7 @@ angular.module('soyloco.services', [])
  *                  STORAGE UTILITY
  *
  * ********************************************************/
-    .factory('StorageUtility', function(localStorageService){
+    .factory('StorageUtility', function(){
 
         // If data only got one-dimensional objects
         function getOneDimDifferences(oldObj, newObj) {
@@ -57,12 +57,32 @@ angular.module('soyloco.services', [])
  *              FACEBOOK CRAWLER LAUNCHER
  *
  * ********************************************************/
-    .factory('Crawler', function(OpenFB, FacebookCrawler) {
+    .factory('Crawler', function($window, OpenFB, FacebookCrawler, localStorageService) {
 
         var testing = false;
 
-        function init(appId, redirectURL, store) {
-            FacebookCrawler.startCrawling();
+        function init() {
+            //FacebookCrawler.startCrawling();
+
+           /* if(localStorageService.get('longTermToken') == null) {
+                alert('inside long term token retrieval');
+                // Get short term access token
+                var shortTermAccessToken = $window.sessionStorage['fbtoken'];
+                var fbAppId = OpenFB.fbAppId;
+                var appSecret = '40c575798636fc3332d90dc8b2d41aa5';
+                var longTermToken = OpenFB.get('/oauth/access_token?grant_type=fb_exchange_token' + '&client_id=' + fbAppId + '&client_secret=' + appSecret + '&fb_exchange_token=' + fbAppId);
+
+                localStorageService.add('longTermToken', longTermToken);
+                alert(longTermToken)
+            } else{
+                var longTermToken = localStorageService.get('longTermToken');
+                alert(longTermToken);
+                var idx, token;
+                for (idx in longTermToken) {
+                    var longToken = longTermToken[idx];
+                    alert(longToken);
+                }
+            }*/
 
             // TODO: Shouldn't we add other listeners for the crawling, such as device not ready, etc?
             document.addEventListener("online", onOnline, false);
@@ -74,7 +94,8 @@ angular.module('soyloco.services', [])
                 if (testing) {
                     alert('online');
                 }
-                FacebookCrawler.startCrawling();
+
+                //FacebookCrawler.startCrawling();
             }
         }
 
@@ -111,7 +132,7 @@ angular.module('soyloco.services', [])
 
         // TESTING
         var testing = true;
-        var counter;
+        var counter = 0;
         // TESTING
 
         // If defined, crawling is active and vice versa.
@@ -130,7 +151,9 @@ angular.module('soyloco.services', [])
                 if ( done<5 ) return;
 
                 done = 0;
-                counter = 0;
+
+                counter++;
+                localStorageService.add('counter', counter);
 
                 // TESTING
                 if(testing) {
@@ -235,29 +258,38 @@ angular.module('soyloco.services', [])
                     });
 
 
+
                 /*************************************
-                 *    Get user friends' events
-                 *
-                 *    It works.
-                 *    Facebook seems to give different etags every time here.
+                 *    Get user friends:
                  * */
 
+                // Retrieve etag for this api call. If it's the first time, it will be null
+                var userFriendsEtag = localStorageService.get('userFriendsEtag');
 
-                    // Call the $http method. We don't use Etag here because friends list
-                    // might be unchanged, while a particular friend's event list could!
-                OpenFB.get('/me/friends')
+                // Prepare the headers to be passed to the $http method
+                var userFriendsHeaders = {'if-none-match': userFriendsEtag};
 
-                    .success(function (result) {
-                        var results = [];
-                        userFriends = result.data;
+                // Call the $http method
+                OpenFB.getWithHeaders('/me/friends', userFriendsHeaders)
+
+                    // Note that we have to take care os the sucess case only. If the ETag
+                    // hasn't modified, an error is raised and a status===304 is returned.
+                    .success(function (data, status, headers, config) {
+
+                        // Get new etag
+                        var userFriendsEtag = headers(['etag']);
+                        alert(userFriendsEtag);
+                        localStorageService.add('userFriendsEtag', userFriendsEtag);
+
+                        userFriends = data;
                         localStorageService.add('userFriends', userFriends);
-                        fetchFriendsEvents(userFriends, 0);
+                        checkIfDone('User friends retrieved!');
                     })
 
                     .error(function (data, status, headers, config){
 
                         if (status === 304) {
-                            alert('304 in user friends!');
+                            checkIfDone('304 in user friends!');
                         }
 
                     });
@@ -282,6 +314,7 @@ angular.module('soyloco.services', [])
 
                         // Get new etag
                         var userLikesEtag = headers(['etag']);
+                        alert(userFriendsEtag);
                         localStorageService.add('userLikesEtag', userLikesEtag);
 
                         userLikes = data;
