@@ -118,21 +118,6 @@ angular.module('openfb', [])
 
         }
 
-        document.addEventListener("online", onOnline, false);
-        document.addEventListener("offline", onOffline, false);
-
-        function onOnline() {
-            alert('online');
-            if (getLoginStatus()) {
-                alert('online');
-                //FacebookCrawler.startCrawling();
-            }
-        }
-
-        function onOffline() {
-            alert('offline');
-        }
-
         /**
          * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
          * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).

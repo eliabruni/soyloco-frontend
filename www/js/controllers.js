@@ -19,14 +19,15 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB, FacebookCrawler) {
+    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB,Crawler) {
 
         $scope.facebookLogin = function () {
 
             OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
                 function () {
                     //TestEtags.testEtags();
-                    FacebookCrawler.startCrawling();
+
+                    Crawler.init();
                     $location.path('/app/play');
                 },
                 function () {

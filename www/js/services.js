@@ -4,28 +4,40 @@ angular.module('soyloco.services', [])
 
 /**********************************************************
  *
- *
- *              ONLINE STATUS MONITORING SERVICE
- *
+ *              FACEBOOK CRAWLER LAUNCHER
  *
  * ********************************************************/
 
 
-    .factory('Crawler', function(OpenFB) {
+    .factory('Crawler', function(OpenFB, FacebookCrawler) {
 
-        document.addEventListener("online", onOnline, false);
-        document.addEventListener("offline", onOffline, false);
+        var testing = false;
+
+        function init(appId, redirectURL, store) {
+            FacebookCrawler.startCrawling();
+            document.addEventListener("online", onOnline, false);
+            document.addEventListener("offline", onOffline, false);
+        }
+
 
         function onOnline() {
-            alert('online');
             if (OpenFB.getLoginStatus()) {
-                alert('online');
-                //FacebookCrawler.startCrawling();
+                if (testing) {
+                    alert('online');
+                }
+                FacebookCrawler.startCrawling();
             }
         }
 
         function onOffline() {
-            alert('offline');
+            if (testing) {
+                alert('offline');
+            }
+            FacebookCrawler.stopCrawling();
+        }
+
+        return {
+            init: init
         }
 
     })
@@ -35,13 +47,11 @@ angular.module('soyloco.services', [])
 
 /**********************************************************
  *
- *
  *              FACEBOOK CRAWLING API SERVICE
- *
  *
  * ********************************************************/
 
-     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
+    .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
 
@@ -57,318 +67,343 @@ angular.module('soyloco.services', [])
         var counter = 0;
         // TESTING
 
+        // If defined, crawling is active and vice versa.
+        var stop;
 
-        return {
 
-            startCrawling: function() {
+        function startCrawling () {
 
-                $interval(function() {
+             stop = $interval(function() {
 
-                    // Don't start a new fight if we are already crawling
-                    if ( done<5 ) return;
+                // Don't start a new fight if we are already crawling
+                if ( done<5 ) return;
 
-                    done = 0;
+                done = 0;
 
+                counter++;
+                localStorageService.add('counter', counter);
 
-                    // TESTING
-                    if(testing) {
-                        counter++;
-                        alert('Start crawling iteration number ' + counter);
-                        localStorageService.add('counter', counter);
-                    }
-                    // TESTING
+                // TESTING
+                if(testing) {
+                    counter++;
+                    alert('Start crawling iteration number ' + counter);
+                    localStorageService.add('counter', counter);
+                }
+                // TESTING
 
-
-
-                    /*************************************
-                     *    Get user basic profile info: GO!
-                     * */
-
-                    // Retrieve etag for this api call. If it's the first time, it will be null
-                    var userEtag = localStorageService.get('userEtag');
-
-                    // Prepare the headers to be passed to the $http method
-                    var userHeaders = {'if-none-match': userEtag};
-
-                    // Call the $http method
-                    OpenFB.getWithHeaders('/me', userHeaders)
-
-                        // Note that we have to take care os the sucess case only. If the ETag
-                        // hasn't modified, an error is raised and a status===304 is returned.
-                        .success(function (data, status, headers, config) {
-
-                            // Get data
-                            userFbAccount = data;
-                            localStorageService.add('userFbAccount', userFbAccount);
-
-
-                            // Get new etag
-                            var userEtag = headers(['etag']);
-                            localStorageService.add('userEtag', userEtag);
-
-                            checkIfDone('User profile info retrieved!');
-
-                        })
-
-                        .error(function (data, status, headers, config){
-
-                            if (status === 304) {
-                                checkIfDone('304 in user basic info!');
-                            }
-
-                        });
-
-
-                    /*************************************
-                     *    Get user profile pictures
-                     *
-                     *    It works, we store the image object vector (still to be parsed).
-                     *    Facebook seems to give different etags every time here.
-                     *
-                     * */
-
-
-                        // Call the $http method
-                    OpenFB.get('/me/albums')
-
-                        // Note that we have to take care os the sucess case only. If the ETag
-                        // hasn't modified, an error is raised and a status===304 is returned.
-                        .success(function (data, status, headers, config) {
-
-
-
-                            var outIndex, albums, albumIndex, album, profileAlbumId;
-                            for (outIndex in data) {
-                                albums = data[outIndex];
-                                for (albumIndex in albums) {
-                                    album = albums[albumIndex];
-                                    if (album.type == 'profile') {
-                                        profileAlbumId = album.id;
-
-                                    }
-                                }
-                            }
-
-                            // Retrieve etag for this api call. If it's the first time, it will be null
-                            var userProfileAlbumEtag = localStorageService.get('userProfileAlbumEtag');
-
-                            // Prepare the headers to be passed to the $http method
-                            var userProfileAlbumHeaders = {'if-none-match': userProfileAlbumEtag};
-
-                            OpenFB.getWithHeaders('/' + profileAlbumId + '/photos', {}, userProfileAlbumHeaders)
-
-                                .success(function (data, status, headers, config) {
-
-                                    // Get new etag
-                                    var userProfileAlbumEtag = headers(['etag']);
-
-                                    localStorageService.add('userProfileAlbumEtag', userProfileAlbumEtag);
-
-                                    var userProfilePictures = data;
-                                    localStorageService.add('userProfilePictures', userProfilePictures);
-                                    checkIfDone('User photos retrieved!');
-
-                                })
-
-                                .error(function (data, status, headers, config){
-
-                                    if (status === 304) {
-                                        checkIfDone('304 in user album pix!');
-                                    }
-
-                                })
-
-
-                        });
-
-
-                    /*************************************
-                     *    Get user friends' events
-                     *
-                     *    It works.
-                     *    Facebook seems to give different etags every time here.
-                     * */
-
-
-                        // Call the $http method. We don't use Etag here because friends list
-                        // might be unchanged, while a particular friend's event list could!
-                    OpenFB.get('/me/friends')
-
-                        .success(function (result) {
-                            var results = [];
-                            userFriends = result.data;
-                            localStorageService.add('userFriends', userFriends);
-                            fetchFriendsEvents(userFriends, 0);
-                        })
-
-                        .error(function (data, status, headers, config){
-
-                            if (status === 304) {
-                                alert('304 in user friends!');
-                            }
-
-                        });
-
-
-                    /*************************************
-                     *    Get user likes: GO!
-                     * */
-
-                    // Retrieve etag for this api call. If it's the first time, it will be null
-                    var userLikesEtag = localStorageService.get('userLikesEtag');
-
-                    // Prepare the headers to be passed to the $http method
-                    var userLikesHeaders = {'if-none-match': userLikesEtag};
-
-                    // Call the $http method
-                    OpenFB.getWithHeaders('/me/likes', userLikesHeaders)
-
-                        // Note that we have to take care os the sucess case only. If the ETag
-                        // hasn't modified, an error is raised and a status===304 is returned.
-                        .success(function (data, status, headers, config) {
-
-                            // Get new etag
-                            var userLikesEtag = headers(['etag']);
-                            localStorageService.add('userLikesEtag', userLikesEtag);
-
-                            userLikes = data;
-                            localStorageService.add('userLikes', userLikes);
-                            checkIfDone('User likes retrieved!');
-                        })
-
-                        .error(function (data, status, headers, config){
-
-                            if (status === 304) {
-                                checkIfDone('304 in user likes!');
-                            }
-
-                        });
-
-
-                    /*************************************
-                     *    Get user events
-                     *
-                     *    It works.
-                     *    Facebook seems to give different etags every time here.
-                     * */
-
-                    // Retrieve etag for this api call. If it's the first time, it will be null
-                    var userEventsEtag = localStorageService.get('userEventsEtag');
-
-                    // Prepare the headers to be passed to the $http method
-                    var userEventsHeaders = {'if-none-match': userEventsEtag};
-
-                    // Call the $http method
-                    OpenFB.getWithHeaders('/me/events', userEventsHeaders)
-
-                        // Note that we have to take care os the sucess case only. If the ETag
-                        // hasn't modified, an error is raised and a status===304 is returned.
-                        .success(function (data, status, headers, config) {
-
-                            var outIndex, events, eventIndex, event, profileAlbumId;
-                            for (outIndex in data) {
-                                events = data[outIndex];
-
-                                // Deal with saving
-                                //localStorageService.add('userEvents', userEvents);
-                                for (eventIndex in events) {
-                                    event = events[eventIndex];
-                                }
-                            }
-
-                            // Get new etag
-                            var userEventsEtag = headers(['etag']);
-                            localStorageService.add('userEventsEtag', userEventsEtag);
-
-                            checkIfDone('User events retrieved!');
-                        })
-
-                        .error(function (data, status, headers, config){
-
-                            if (status === 304) {
-                                checkIfDone('304 in user events!');
-                            }
-
-                        });
-
-
-                }, defaultCrawlingTime);
-
-
-
-
-                /***********************************************
-                 *               HELPER FUNCTIONS              *
-                 ***********************************************/
 
 
                 /*************************************
-                 *    Get user friends' events
+                 *    Get user basic profile info: GO!
                  * */
-                var fetchFriendsEvents = function (userFriends, thisFriendIndex) {
 
-                    if (thisFriendIndex < userFriends.length - 1) {
+                // Retrieve etag for this api call. If it's the first time, it will be null
+                var userEtag = localStorageService.get('userEtag');
+
+                // Prepare the headers to be passed to the $http method
+                var userHeaders = {'if-none-match': userEtag};
+
+                // Call the $http method
+                OpenFB.getWithHeaders('/me', userHeaders)
+
+                    // Note that we have to take care os the sucess case only. If the ETag
+                    // hasn't modified, an error is raised and a status===304 is returned.
+                    .success(function (data, status, headers, config) {
+
+                        // Get data
+                        userFbAccount = data;
+                        localStorageService.add('userFbAccount', userFbAccount);
+
+
+                        // Get new etag
+                        var userEtag = headers(['etag']);
+                        localStorageService.add('userEtag', userEtag);
+
+                        checkIfDone('User profile info retrieved!');
+
+                    })
+
+                    .error(function (data, status, headers, config){
+
+                        if (status === 304) {
+                            checkIfDone('304 in user basic info!');
+                        }
+
+                    });
+
+
+                /*************************************
+                 *    Get user profile pictures
+                 *
+                 *    It works, we store the image object vector (still to be parsed).
+                 *    Facebook seems to give different etags every time here.
+                 *
+                 * */
+
+
+                    // Call the $http method
+                OpenFB.get('/me/albums')
+
+                    // Note that we have to take care os the sucess case only. If the ETag
+                    // hasn't modified, an error is raised and a status===304 is returned.
+                    .success(function (data, status, headers, config) {
+
+
+
+                        var outIndex, albums, albumIndex, album, profileAlbumId;
+                        for (outIndex in data) {
+                            albums = data[outIndex];
+                            for (albumIndex in albums) {
+                                album = albums[albumIndex];
+                                if (album.type == 'profile') {
+                                    profileAlbumId = album.id;
+
+                                }
+                            }
+                        }
 
                         // Retrieve etag for this api call. If it's the first time, it will be null
-                        var userFriendsEventsEtag = localStorageService.get('userFriendsEventsEtag');
+                        var userProfileAlbumEtag = localStorageService.get('userProfileAlbumEtag');
 
                         // Prepare the headers to be passed to the $http method
-                        var userFriendsEventsHeaders = {'if-none-match': userFriendsEventsEtag};
+                        var userProfileAlbumHeaders = {'if-none-match': userProfileAlbumEtag};
 
-                        var friend = userFriends[thisFriendIndex];
-                        var otherUserEvents;
-                        OpenFB.get('/' + friend.id + '/events', userFriendsEventsHeaders)
+                        OpenFB.getWithHeaders('/' + profileAlbumId + '/photos', {}, userProfileAlbumHeaders)
 
-                            // Note that we have to take care os the sucess case only. If the ETag
-                            // hasn't modified, an error is raised and a status===304 is returned.
                             .success(function (data, status, headers, config) {
 
                                 // Get new etag
-                                var userFriendsEventsEtag = headers(['etag']);
-                                localStorageService.add('userFriendsEventsEtag', userFriendsEventsEtag);
+                                var userProfileAlbumEtag = headers(['etag']);
 
-                                var outIndex, otherUserEvents, eventIndex, event, profileAlbumId;
-                                for (outIndex in data) {
-                                    otherUserEvents = data[outIndex];
+                                localStorageService.add('userProfileAlbumEtag', userProfileAlbumEtag);
 
-                                    // Deal with saving
-                                    //localStorageService.add('userEvents', userEvents);
-                                    for (eventIndex in otherUserEvents) {
-                                        event = otherUserEvents[eventIndex];
-                                    }
-                                }
-                                thisFriendIndex++;
-                                fetchFriendsEvents(userFriends, thisFriendIndex);
+                                var userProfilePictures = data;
+                                localStorageService.add('userProfilePictures', userProfilePictures);
+                                checkIfDone('User photos retrieved!');
+
                             })
 
                             .error(function (data, status, headers, config){
 
-                                // Here is important that we keep the call to fetchFriendsEvents
-                                // also from within the error catch, since having one user events
-                                // not changed doesn't mean that for the other users must be the same.
                                 if (status === 304) {
-                                    thisFriendIndex++;
-                                    fetchFriendsEvents(userFriends, thisFriendIndex);
-                                    alert('304 in user friends events!');
+                                    checkIfDone('304 in user album pix!');
                                 }
 
-                            });
+                            })
 
-                    } else {
-                        checkIfDone('User friends and friends events retrieved!')
-                    }
-                };
 
-                // Crawling jobs counter
-                function checkIfDone(functionThatCalled) {
-                    if(testing) {
-                        alert(functionThatCalled);
-                    }
-                    done++;
+                    });
+
+
+                /*************************************
+                 *    Get user friends' events
+                 *
+                 *    It works.
+                 *    Facebook seems to give different etags every time here.
+                 * */
+
+
+                    // Call the $http method. We don't use Etag here because friends list
+                    // might be unchanged, while a particular friend's event list could!
+                OpenFB.get('/me/friends')
+
+                    .success(function (result) {
+                        var results = [];
+                        userFriends = result.data;
+                        localStorageService.add('userFriends', userFriends);
+                        fetchFriendsEvents(userFriends, 0);
+                    })
+
+                    .error(function (data, status, headers, config){
+
+                        if (status === 304) {
+                            alert('304 in user friends!');
+                        }
+
+                    });
+
+
+                /*************************************
+                 *    Get user likes: GO!
+                 * */
+
+                // Retrieve etag for this api call. If it's the first time, it will be null
+                var userLikesEtag = localStorageService.get('userLikesEtag');
+
+                // Prepare the headers to be passed to the $http method
+                var userLikesHeaders = {'if-none-match': userLikesEtag};
+
+                // Call the $http method
+                OpenFB.getWithHeaders('/me/likes', userLikesHeaders)
+
+                    // Note that we have to take care os the sucess case only. If the ETag
+                    // hasn't modified, an error is raised and a status===304 is returned.
+                    .success(function (data, status, headers, config) {
+
+                        // Get new etag
+                        var userLikesEtag = headers(['etag']);
+                        localStorageService.add('userLikesEtag', userLikesEtag);
+
+                        userLikes = data;
+                        localStorageService.add('userLikes', userLikes);
+                        checkIfDone('User likes retrieved!');
+                    })
+
+                    .error(function (data, status, headers, config){
+
+                        if (status === 304) {
+                            checkIfDone('304 in user likes!');
+                        }
+
+                    });
+
+
+                /*************************************
+                 *    Get user events
+                 *
+                 *    It works.
+                 *    Facebook seems to give different etags every time here.
+                 * */
+
+                // Retrieve etag for this api call. If it's the first time, it will be null
+                var userEventsEtag = localStorageService.get('userEventsEtag');
+
+                // Prepare the headers to be passed to the $http method
+                var userEventsHeaders = {'if-none-match': userEventsEtag};
+
+                // Call the $http method
+                OpenFB.getWithHeaders('/me/events', userEventsHeaders)
+
+                    // Note that we have to take care os the sucess case only. If the ETag
+                    // hasn't modified, an error is raised and a status===304 is returned.
+                    .success(function (data, status, headers, config) {
+
+                        var outIndex, events, eventIndex, event, profileAlbumId;
+                        for (outIndex in data) {
+                            events = data[outIndex];
+
+                            // Deal with saving
+                            //localStorageService.add('userEvents', userEvents);
+                            for (eventIndex in events) {
+                                event = events[eventIndex];
+                            }
+                        }
+
+                        // Get new etag
+                        var userEventsEtag = headers(['etag']);
+                        localStorageService.add('userEventsEtag', userEventsEtag);
+
+                        checkIfDone('User events retrieved!');
+                    })
+
+                    .error(function (data, status, headers, config){
+
+                        if (status === 304) {
+                            checkIfDone('304 in user events!');
+                        }
+
+                    });
+
+
+            }, defaultCrawlingTime);
+
+
+
+
+            /***********************************************
+             *               HELPER FUNCTIONS              *
+             ***********************************************/
+
+
+
+            /*************************************
+             *    Get user friends' events
+             * */
+            var fetchFriendsEvents = function (userFriends, thisFriendIndex) {
+
+                if (thisFriendIndex < userFriends.length - 1) {
+
+                    // Retrieve etag for this api call. If it's the first time, it will be null
+                    var userFriendsEventsEtag = localStorageService.get('userFriendsEventsEtag');
+
+                    // Prepare the headers to be passed to the $http method
+                    var userFriendsEventsHeaders = {'if-none-match': userFriendsEventsEtag};
+
+                    var friend = userFriends[thisFriendIndex];
+                    var otherUserEvents;
+                    OpenFB.get('/' + friend.id + '/events', userFriendsEventsHeaders)
+
+                        // Note that we have to take care os the sucess case only. If the ETag
+                        // hasn't modified, an error is raised and a status===304 is returned.
+                        .success(function (data, status, headers, config) {
+
+                            // Get new etag
+                            var userFriendsEventsEtag = headers(['etag']);
+                            localStorageService.add('userFriendsEventsEtag', userFriendsEventsEtag);
+
+                            var outIndex, otherUserEvents, eventIndex, event, profileAlbumId;
+                            for (outIndex in data) {
+                                otherUserEvents = data[outIndex];
+
+                                // Deal with saving
+                                //localStorageService.add('userEvents', userEvents);
+                                for (eventIndex in otherUserEvents) {
+                                    event = otherUserEvents[eventIndex];
+                                }
+                            }
+                            thisFriendIndex++;
+                            fetchFriendsEvents(userFriends, thisFriendIndex);
+                        })
+
+                        .error(function (data, status, headers, config){
+
+                            // Here is important that we keep the call to fetchFriendsEvents
+                            // also from within the error catch, since having one user events
+                            // not changed doesn't mean that for the other users must be the same.
+                            if (status === 304) {
+                                thisFriendIndex++;
+                                fetchFriendsEvents(userFriends, thisFriendIndex);
+                                alert('304 in user friends events!');
+                            }
+
+                        });
+
+                } else {
+                    checkIfDone('User friends and friends events retrieved!')
                 }
+            };
 
+            // Crawling jobs counter
+            function checkIfDone(functionThatCalled) {
+                if(testing) {
+                    alert(functionThatCalled);
+                }
+                done++;
             }
 
+
+
+        }
+
+        /*************************************
+        *
+        *   This function stops the crawling
+        *
+        * */
+        function stopCrawling() {
+            if (angular.isDefined(stop)) {
+                $interval.cancel(stop);
+                stop = undefined;
+                done = 5;
+                if(testing) {
+                    alert('Crawling stopped!')
+                }
+            }
+        };
+
+        return {
+            startCrawling: startCrawling,
+            stopCrawling: stopCrawling
         }
 
     })
@@ -440,7 +475,7 @@ angular.module('soyloco.services', [])
  *
  * ********************************************************/
 
-     .factory('TestEtags', function( $interval, localStorageService, OpenFB) {
+    .factory('TestEtags', function( $interval, localStorageService, OpenFB) {
 
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
