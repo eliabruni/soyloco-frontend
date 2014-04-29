@@ -1,10 +1,10 @@
 angular.module('soyloco.services', [])
 
 
-    /**********************************************************
-    *                  STORAGE UTILITY
-    *
-    * ********************************************************/
+/**********************************************************
+ *                  STORAGE UTILITY
+ *
+ * ********************************************************/
     .factory('StorageUtility', function(localStorageService){
 
         // If data only got one-dimensional objects
@@ -34,7 +34,7 @@ angular.module('soyloco.services', [])
                 if (!(k in newObj))
                     diff[k] = undefined;  // property gone so explicitly set it undefined
                 (!angular.equals(oldObj[k],newObj[k]))
-                    diff[k] = newObj[k];  // property in both but has changed
+                diff[k] = newObj[k];  // property in both but has changed
             }
 
             for (k in newObj) {
@@ -50,14 +50,13 @@ angular.module('soyloco.services', [])
             getMultipleDimDifferences: getMultipleDimDifferences
         }
 
-
     })
 
 
-    /**********************************************************
-     *              FACEBOOK CRAWLER LAUNCHER
-     *
-    * ********************************************************/
+/**********************************************************
+ *              FACEBOOK CRAWLER LAUNCHER
+ *
+ * ********************************************************/
     .factory('Crawler', function(OpenFB, FacebookCrawler) {
 
         var testing = false;
@@ -69,7 +68,6 @@ angular.module('soyloco.services', [])
             document.addEventListener("online", onOnline, false);
             document.addEventListener("offline", onOffline, false);
         }
-
 
         function onOnline() {
             if (OpenFB.getLoginStatus()) {
@@ -96,10 +94,10 @@ angular.module('soyloco.services', [])
 
 
 
-    /**********************************************************
-    *              FACEBOOK CRAWLING API SERVICE
-    *
-    * ********************************************************/
+/**********************************************************
+ *              FACEBOOK CRAWLING API SERVICE
+ *
+ * ********************************************************/
     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
@@ -119,15 +117,16 @@ angular.module('soyloco.services', [])
         // If defined, crawling is active and vice versa.
         var stop;
 
-
         function startCrawling () {
 
-            // We first stop any possible previous instance of startCrawling()
+            // We first stop any possible previous instance of startCrawling().
+            // Note that this is different from the done<5 check, since it's done
+            // just when startCrawling is called but not at the ith interval instance.
             stopCrawling();
 
             stop = $interval(function() {
 
-                // Don't start a new fight if we are already crawling
+                // Don't start a new crawling if we are already crawling
                 if ( done<5 ) return;
 
                 done = 0;
@@ -140,7 +139,6 @@ angular.module('soyloco.services', [])
                     localStorageService.add('counter', counter);
                 }
                 // TESTING
-
 
 
                 /*************************************
@@ -163,7 +161,6 @@ angular.module('soyloco.services', [])
                         // Get data
                         userFbAccount = data;
                         localStorageService.add('userFbAccount', userFbAccount);
-
 
                         // Get new etag
                         var userEtag = headers(['etag']);
@@ -198,8 +195,6 @@ angular.module('soyloco.services', [])
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
-
-
                         var outIndex, albums, albumIndex, album, profileAlbumId;
                         for (outIndex in data) {
                             albums = data[outIndex];
@@ -207,7 +202,6 @@ angular.module('soyloco.services', [])
                                 album = albums[albumIndex];
                                 if (album.type == 'profile') {
                                     profileAlbumId = album.id;
-
                                 }
                             }
                         }
@@ -224,13 +218,10 @@ angular.module('soyloco.services', [])
 
                                 // Get new etag
                                 var userProfileAlbumEtag = headers(['etag']);
-
                                 localStorageService.add('userProfileAlbumEtag', userProfileAlbumEtag);
-
                                 var userProfilePictures = data;
                                 localStorageService.add('userProfilePictures', userProfilePictures);
                                 checkIfDone('User photos retrieved!');
-
                             })
 
                             .error(function (data, status, headers, config){
@@ -240,7 +231,6 @@ angular.module('soyloco.services', [])
                                 }
 
                             })
-
 
                     });
 
@@ -328,14 +318,14 @@ angular.module('soyloco.services', [])
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
-                        var outIndex, events, eventIndex, event, profileAlbumId;
+                        var outIndex, eventIndex, event;
                         for (outIndex in data) {
-                            events = data[outIndex];
+                            userEvents = data[outIndex];
 
                             // Deal with saving
                             //localStorageService.add('userEvents', userEvents);
-                            for (eventIndex in events) {
-                                event = events[eventIndex];
+                            for (eventIndex in userEvents) {
+                                event = userEvents[eventIndex];
                             }
                         }
 
@@ -353,7 +343,6 @@ angular.module('soyloco.services', [])
                         }
 
                     });
-
 
             }, defaultCrawlingTime);
 
@@ -430,8 +419,6 @@ angular.module('soyloco.services', [])
                 }
                 done++;
             }
-
-
 
         }
 
@@ -515,45 +502,4 @@ angular.module('soyloco.services', [])
 
         }
 
-    })
-
-
-/**********************************************************
- *
- *              THIS IS JUST FOR TESTING ETAGS
- *
- *
- * ********************************************************/
-
-    .factory('TestEtags', function( $interval, localStorageService, OpenFB) {
-
-
-        var defaultCrawlingTime = 2000; // Crawl each 5 minutes
-        var userEvents;
-        var done = 1;
-
-        // TESTING
-        var testing = false;
-        // TESTING
-
-
-        return {
-
-            testEtags: function() {
-
-                $interval(function() {
-
-                    // Don't start a new fight if we are already crawling
-                    if ( done<1 ) return;
-
-                    done = 0;
-
-                }, defaultCrawlingTime);
-
-            }
-
-        }
-
-
     });
-
