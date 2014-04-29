@@ -1,6 +1,6 @@
 angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
     'soyloco.services','soyloco.directives', 'ionic.contrib.ui.cards',
-    'LocalStorageModule'])
+    'LocalStorageModule', 'google-maps'])
 
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
 

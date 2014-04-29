@@ -62,7 +62,7 @@ angular.module('soyloco.services', [])
         var testing = false;
 
         function init() {
-            //FacebookCrawler.startCrawling();
+            FacebookCrawler.startCrawling();
 
            /* if(localStorageService.get('longTermToken') == null) {
                 alert('inside long term token retrieval');
@@ -95,7 +95,7 @@ angular.module('soyloco.services', [])
                     alert('online');
                 }
 
-                //FacebookCrawler.startCrawling();
+                FacebookCrawler.startCrawling();
             }
         }
 

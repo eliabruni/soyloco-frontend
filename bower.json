@@ -22,8 +22,5 @@
   "dependencies": {
     "angular-cache": "~2.3.3",
     "ionic": "driftyco/ionic-bower#master"
-  },
-  "resolutions": {
-    "angular": "1.2.12"
   }
 }

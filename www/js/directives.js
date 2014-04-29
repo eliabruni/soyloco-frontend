@@ -11,10 +11,7 @@ angular.module('soyloco.directives', [])
                 });
             }
         }
-
-
     })
-
 
     .directive('headerShrink', function($document) {
         var shrink = function(header, content, amt, max) {

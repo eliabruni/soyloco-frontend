@@ -19,7 +19,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB,Crawler) {
+    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB, Crawler) {
 
         $scope.facebookLogin = function () {
 
@@ -27,7 +27,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                 function () {
                     //TestEtags.testEtags();
 
-                    Crawler.init();
+                    //Crawler.init();
                     $location.path('/app/play');
                 },
                 function () {
@@ -79,10 +79,40 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
+/*************************************
+ *
+ *          Category controller
+ *
+ * */
     .controller('CategoryCtrl', function($scope, $stateParams, Categories) {
+
+        // Get the category ID into scope
         $scope.category = Categories.get($stateParams.categoryId);
+
+        $scope.map = {
+            center: {
+                latitude: 45,
+                longitude: -73
+            },
+            zoom: 12,
+            draggable: false,
+            options: {
+                streetViewControl: false,
+                panControl: false,
+                mapTypeId: "roadmap",
+                disableDefaultUI: true
+            }
+        };
+
+
     })
 
+
+/*************************************
+ *
+ *          Play controller
+ *
+ * */
     .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate) {
         var cardTypes = [
             { title: 'Emma', image: 'img/emma.png' },

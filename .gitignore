@@ -4,4 +4,4 @@ platforms/ios
 .idea
 .sass-cache
 plugins/*
-bower_components
+www/components
