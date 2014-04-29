@@ -4,7 +4,7 @@ Soyloco frontend
 ## Using this project
 
 
-### 0. Install Node.js and Cordova
+### 0. Install Node.js and Cordova.
 First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
 Follow the Android and iOS platform guides to install required platform dependencies.
 

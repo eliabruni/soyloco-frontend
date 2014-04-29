@@ -4,10 +4,11 @@ angular.module('soyloco.services', [])
 
 /**********************************************************
  *
+ *
  *              ONLINE STATUS MONITORING SERVICE
  *
  *
- * */
+ * ********************************************************/
 
 
     .factory('Crawler', function(OpenFB) {
@@ -34,11 +35,13 @@ angular.module('soyloco.services', [])
 
 /**********************************************************
  *
+ *
  *              FACEBOOK CRAWLING API SERVICE
  *
  *
- * */
-    .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
+ * ********************************************************/
+
+     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
 
@@ -121,7 +124,7 @@ angular.module('soyloco.services', [])
                      *    Get user profile pictures
                      *
                      *    It works, we store the image object vector (still to be parsed).
-                     *    Facebook seems to giving different etags every time here.
+                     *    Facebook seems to give different etags every time here.
                      *
                      * */
 
@@ -185,7 +188,7 @@ angular.module('soyloco.services', [])
                      *    Get user friends' events
                      *
                      *    It works.
-                     *    Facebook seems to giving different etags every time here.
+                     *    Facebook seems to give different etags every time here.
                      * */
 
 
@@ -249,7 +252,7 @@ angular.module('soyloco.services', [])
                      *    Get user events
                      *
                      *    It works.
-                     *    Facebook seems to giving different etags every time here.
+                     *    Facebook seems to give different etags every time here.
                      * */
 
                     // Retrieve etag for this api call. If it's the first time, it will be null
@@ -299,11 +302,8 @@ angular.module('soyloco.services', [])
 
 
                 /***********************************************
-                 ***********************************************
-                 *
-                 *               HELPER FUNCTIONS
-                 **/
-
+                 *               HELPER FUNCTIONS              *
+                 ***********************************************/
 
 
                 /*************************************
@@ -442,8 +442,9 @@ angular.module('soyloco.services', [])
  *              THIS IS JUST FOR TESTING ETAGS
  *
  *
- * */
-    .factory('TestEtags', function( $interval, localStorageService, OpenFB) {
+ * ********************************************************/
+
+     .factory('TestEtags', function( $interval, localStorageService, OpenFB) {
 
 
         var defaultCrawlingTime = 2000; // Crawl each 5 minutes
@@ -473,5 +474,5 @@ angular.module('soyloco.services', [])
         }
 
 
-    })
+    });
 
