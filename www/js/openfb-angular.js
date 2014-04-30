@@ -20,6 +20,7 @@ angular.module('openfb', [])
 
             fbAppId,
             oauthRedirectURL,
+            online,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
         // inside the module instead of keeping them local within the login function.
@@ -46,6 +47,16 @@ angular.module('openfb', [])
         function init(appId, redirectURL) {
             fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
+            document.addEventListener("online", onOnline, false);
+            document.addEventListener("offline", onOffline, false);
+        }
+
+        function onOnline() {
+            online = true;
+        }
+
+        function onOffline() {
+            online = false;
         }
 
         function getLoginStatus() {
@@ -96,6 +107,14 @@ angular.module('openfb', [])
             if (runningInCordova) {
                 loginWindow.addEventListener('loadstart', function (event) {
                     var url = event.url;
+
+                    // If device not online we close window and go back
+                    // to login page
+                    if(!online) {
+                        loginWindow.close();
+                        return error();
+                    }
+
                     if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
                         loginWindow.close();
                         oauthCallback(url);
@@ -241,7 +260,8 @@ angular.module('openfb', [])
             get: get,
             oauthCallback: oauthCallback,
             getLoginStatus: getLoginStatus,
-            getWithHeaders: getWithHeaders
+            getWithHeaders: getWithHeaders,
+            online: online
         }
 
     });

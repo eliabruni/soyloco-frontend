@@ -31,7 +31,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     $location.path('/app/play');
                 },
                 function () {
-                    alert('OpenFB login failed');
+                    //alert('OpenFB login failed');
                 });
         };
 
