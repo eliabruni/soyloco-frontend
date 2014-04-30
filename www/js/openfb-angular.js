@@ -9,7 +9,7 @@
  */
 angular.module('openfb', [])
 
-    .factory('OpenFB', function ($rootScope, $q, $window, $http) {
+    .factory('OpenFB', function ($rootScope, $q, $window, $http, localStorageService) {
 
 
 
@@ -17,9 +17,6 @@ angular.module('openfb', [])
 
         // That's the variable I use around the whole app
             loggedInToFacebook,
-
-        // By default we store fbtoken in sessionStorage. This can be overriden in init()
-            tokenStore = window.sessionStorage,
 
             fbAppId,
             oauthRedirectURL,
@@ -46,10 +43,9 @@ angular.module('openfb', [])
          * @param redirectURL - The OAuth redirect URL. Optional. If not provided, we use sensible defaults.
          * @param store - The store used to save the Facebook token. Optional. If not provided, we use sessionStorage.
          */
-        function init(appId, redirectURL, store) {
+        function init(appId, redirectURL) {
             fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
-            if (store) tokenStore = store;
         }
 
         function getLoginStatus() {
@@ -133,7 +129,7 @@ angular.module('openfb', [])
             if (url.indexOf("access_token=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['fbtoken'] = obj['access_token'];
+                localStorageService.add('fbtoken', obj['access_token']);
                 loggedInToFacebook = true;
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
@@ -149,7 +145,7 @@ angular.module('openfb', [])
          * Application-level logout: we simply discard the token.
          */
         function logout() {
-            tokenStore['fbtoken'] = undefined;
+            localStorageService.remove('fbtoken');
             loggedInToFacebook = false;
 
         }
@@ -181,7 +177,9 @@ angular.module('openfb', [])
                 params = obj.params || {}
 
 
-            params['access_token'] = tokenStore['fbtoken'];
+            //params['access_token'] = tokenStore['fbtoken'];
+            params['access_token'] = localStorageService.get('fbtoken');
+
 
 
             return $http({method: method, url: 'https://graph.facebook.com' + obj.path,headers: headers, params: params})
