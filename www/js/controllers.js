@@ -19,20 +19,41 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate, OpenFB, Crawler) {
+    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
+                                       $ionicLoading, OpenFB, Crawler) {
 
         $scope.facebookLogin = function () {
 
-            OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
-                function () {
-                    //TestEtags.testEtags();
+            // Setup the loader
+            $scope.loading = $ionicLoading.show({
+                content: '<i class="icon ion-loading-c facebook-login-loader"></i>',
+                animation: 'fade-in',
+                showBackdrop: false,
+                maxWidth: 150,
+                showDelay: 0
+            });
 
-                    //Crawler.init();
-                    $location.path('/app/play');
-                },
-                function () {
-                    //alert('OpenFB login failed');
-                });
+            // Set a timeout to clear loader, however you would actually
+            // call the $scope.loading.hide(); method whenever everything is ready or loaded.
+            $timeout(function () {
+
+                OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
+                    function () {
+                        //TestEtags.testEtags();
+                        //Crawler.init();
+                        $location.path('/app/play');
+                    },
+                    function () {
+                        //alert('OpenFB login failed');
+                    });
+
+                $scope.loading.hide();
+            }, 5000);
+
+
+
+
+
         };
 
         $scope.next = function() {

@@ -20,7 +20,6 @@ angular.module('openfb', [])
 
             fbAppId,
             oauthRedirectURL,
-            online,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
         // inside the module instead of keeping them local within the login function.
@@ -47,17 +46,8 @@ angular.module('openfb', [])
         function init(appId, redirectURL) {
             fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
-            document.addEventListener("online", onOnline, false);
-            document.addEventListener("offline", onOffline, false);
         }
 
-        function onOnline() {
-            online = true;
-        }
-
-        function onOffline() {
-            online = false;
-        }
 
         function getLoginStatus() {
             return loggedInToFacebook;
@@ -85,6 +75,7 @@ angular.module('openfb', [])
 
             logout();
 
+
             // Check if an explicit oauthRedirectURL has been provided in init(). If not, infer the appropriate value
             if (!oauthRedirectURL) {
                 if (runningInCordova) {
@@ -100,6 +91,7 @@ angular.module('openfb', [])
                 }
             }
 
+
             loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
                 '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
 
@@ -110,7 +102,7 @@ angular.module('openfb', [])
 
                     // If device not online we close window and go back
                     // to login page
-                    if(!online) {
+                    if (navigator.network.connection.type == Connection.NONE) {
                         loginWindow.close();
                         return error();
                     }
@@ -260,8 +252,7 @@ angular.module('openfb', [])
             get: get,
             oauthCallback: oauthCallback,
             getLoginStatus: getLoginStatus,
-            getWithHeaders: getWithHeaders,
-            online: online
+            getWithHeaders: getWithHeaders
         }
 
     });
