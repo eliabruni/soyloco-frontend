@@ -164,19 +164,23 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         $scope.nextUser = function() {
             $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-            $scope.addCard();
-            $scope.addCard();
-            $scope.addCard();
-            $scope.addCard();
+            // Here we need to iterate over user cards
+            // and at last add card with index == 0 again
+            $scope.addCard(0);
+            $scope.addCard(1);
+            $scope.addCard(2);
+
+            // Add first card again
+            $scope.addCard(0);
         }
 
 
         $scope.cardSwiped = function(index) {
-            if (index == 0) {
+            // Index goes in decreasing order,
+            // We need to update at one before last, i.e. index == 1
+            if (index == 1) {
                 $scope.nextUser();
             }
-            //$scope.addCard();
-            //$scope.addCard();
 
         };
 
@@ -184,13 +188,14 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             //$scope.cards.splice(index, 1);
         };
 
-        $scope.addCard = function() {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            newCard.id = Math.random();
+        $scope.addCard = function(idx) {
+            var newCard = cardTypes[idx];
+            newCard.id = idx;
             $scope.cards.push(angular.extend({}, newCard));
         };
 
 
+        // TODO: Need to fix this function, check original codepen
         $scope.goAway = function() {
             var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
             card.swipe();
