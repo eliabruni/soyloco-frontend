@@ -44,9 +44,9 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             // This should deactivate button once pressed and hide back nav
             // NOT WORKING FOR NOW
             /*$ionicViewService.nextViewOptions({
-                disableAnimate: true,
-                disableBack: true
-            });*/
+             disableAnimate: true,
+             disableBack: true
+             });*/
 
             // Set a timeout to clear loader, however you would actually
             // call the $scope.loading.hide(); method whenever everything is ready or loaded.
@@ -59,7 +59,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
                     // TODO: Not capturing errors
                     function () {
-                        // Reset tapped to 0 so that the facebook login button can
+                        // Reset numTaps to 0 so that the facebook login button can
                         // be tapped again
                         numTaps = 0;
                     });
@@ -162,14 +162,26 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             { title: 'Jennifer', image: 'img/jennifer.png' }
         ];
 
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+        $scope.nextUser = function() {
+            $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+            $scope.addCard();
+            $scope.addCard();
+            $scope.addCard();
+            $scope.addCard();
+        }
+
 
         $scope.cardSwiped = function(index) {
-            $scope.addCard();
+            if (index == 0) {
+                $scope.nextUser();
+            }
+            //$scope.addCard();
+            //$scope.addCard();
+
         };
 
         $scope.cardDestroyed = function(index) {
-            $scope.cards.splice(index, 1);
+            //$scope.cards.splice(index, 1);
         };
 
         $scope.addCard = function() {
@@ -178,9 +190,11 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             $scope.cards.push(angular.extend({}, newCard));
         };
 
+
         $scope.goAway = function() {
             var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
             card.swipe();
+            $scope.nextUser();
         };
 
     })
