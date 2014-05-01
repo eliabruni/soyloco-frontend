@@ -91,40 +91,37 @@ angular.module('openfb', [])
                 }
             }
 
+            // If device not online we close window and go back
+            // to login page
+            if (navigator.network.connection.type != Connection.NONE) {
 
-            loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
-                '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
+                loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
+                    '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
 
-            // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
-            if (runningInCordova) {
-                loginWindow.addEventListener('loadstart', function (event) {
-                    var url = event.url;
+                // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
+                if (runningInCordova) {
+                    loginWindow.addEventListener('loadstart', function (event) {
+                        var url = event.url;
 
-                    // If device not online we close window and go back
-                    // to login page
-                    if (navigator.network.connection.type == Connection.NONE) {
-                        loginWindow.close();
-                        return error();
-                    }
+                        if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
+                            loginWindow.close();
+                            oauthCallback(url);
+                        }
+                    });
 
-                    if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
-                        loginWindow.close();
-                        oauthCallback(url);
-                    }
-                });
+                    loginWindow.addEventListener('exit', function () {
+                        // Handle the situation where the user closes the login window manually before completing the login process
+                        deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+                    });
+                }
+                // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
+                // oauthCallback() function. See oauthcallback.html for details.
 
-                loginWindow.addEventListener('exit', function () {
-                    // Handle the situation where the user closes the login window manually before completing the login process
-                    deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-                });
+            } else {
+                deferredLogin.reject();
             }
-            // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
-            // oauthCallback() function. See oauthcallback.html for details.
-
             return deferredLogin.promise;
-
         }
-
         /**
          * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
          * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).

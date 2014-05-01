@@ -121,7 +121,7 @@ angular.module('soyloco.services', [])
  * ********************************************************/
     .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
 
-        var defaultCrawlingTime = 2000; // Crawl each 5 minutes
+        var defaultCrawlingTime = 5000; // Crawl each 5 minutes
 
         var userFbAccount;
         var userProfilePictures;
@@ -131,7 +131,7 @@ angular.module('soyloco.services', [])
         var done;
 
         // TESTING
-        var testing = true;
+        var testing = false;
         var counter = 0;
         // TESTING
 
@@ -477,6 +477,7 @@ angular.module('soyloco.services', [])
         }
 
     })
+
 
 
 /**

@@ -108,6 +108,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             });
 
         // fallback route
+        // If fallback route is changed, remeber to move Crawler.init()
         $urlRouterProvider.otherwise('/app/play');
 
     });

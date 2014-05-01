@@ -20,18 +20,33 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     })
 
     .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
-                                       $ionicLoading, OpenFB, Crawler) {
+                                       $ionicLoading, OpenFB) {
+
+        var numTaps = 0;
 
         $scope.facebookLogin = function () {
 
+            // This is to avoid multiple tapping
+
+            numTaps++;
+            if (numTaps > 1) {
+                return;
+            }
+
             // Setup the loader
-            $scope.loading = $ionicLoading.show({
-                content: '<i class="icon ion-loading-c facebook-login-loader"></i>',
-                animation: 'fade-in',
-                showBackdrop: false,
-                maxWidth: 150,
-                showDelay: 0
+            $scope.show = $ionicLoading.show({
+                template: '<i class="icon ion-loading-c facebook-login-loader"></i>',
+                noBackdrop: 'true',
+                duration: 5000
             });
+
+            // TODO
+            // This should deactivate button once pressed and hide back nav
+            // NOT WORKING FOR NOW
+            /*$ionicViewService.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });*/
 
             // Set a timeout to clear loader, however you would actually
             // call the $scope.loading.hide(); method whenever everything is ready or loaded.
@@ -39,15 +54,16 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
                 OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
                     function () {
-                        //TestEtags.testEtags();
-                        //Crawler.init();
-                        $location.path('/app/play');
+                        $state.go('app.play');
                     },
-                    function () {
-                        //alert('OpenFB login failed');
-                    });
 
-                $scope.loading.hide();
+                    // TODO: Not capturing errors
+                    function () {
+                        // Reset tapped to 0 so that the facebook login button can
+                        // be tapped again
+                        numTaps = 0;
+                    });
+                $ionicLoading.hide();
             }, 5000);
 
 
@@ -134,7 +150,12 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Play controller
  *
  * */
-    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate) {
+    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate, Crawler) {
+
+        // Crwaling starts here becuse it's the fallback route.
+        // If fallback route is changed, remeber to move Crawler.init().
+        //Crawler.init();
+
         var cardTypes = [
             { title: 'Emma', image: 'img/emma.png' },
             { title: 'Emilia', image: 'img/emilia.png' },
