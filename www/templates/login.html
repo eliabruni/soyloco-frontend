@@ -1,50 +1,35 @@
 <ion-view title="soyloco" hide-back-button="true" style="background: #fffff" hide-nav-bar="true">
-    <ion-nav-buttons side="left">
-        <button class="button button-positive button-clear no-animation"
-                ng-click="previous()" ng-if="slideIndex > 0">
-            Previous Slide
-        </button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <button class="button button-positive button-clear no-animation"
-                ng-click="next()" ng-if="slideIndex != 2">
-            Next
-        </button>
-    </ion-nav-buttons>
 
-    <ion-content>
+        <ion-pane>
 
-    <ion-slide-box on-slide-changed="slideChanged(index)">
-        <ion-slide>
-            <h3>Thank you for choosing Soyloco!</h3>
-            <p>
-                We've worked super hard to make you happy.
-            </p>
-            <p>
-                But if you are angry, too bad.
-            </p>
-        </ion-slide>
-        <ion-slide>
-            <h3>Using soyloco</h3>
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+            <ion-slide>
+                <p>
+                    We've worked super hard to make you happy.
+                </p>
+                <p>
+                    But if you are angry, too bad.
+                </p>
+            </ion-slide>
+            <ion-slide>
+                <h3>Using Awesome</h3>
 
-            <div id="list">
-                <h5>Just three steps:</h5>
-                <ol>
-                    <li>Be soyloco</li>
-                    <li>Stay soyloco</li>
-                    <li>There is no step 3</li>
-                </ol>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <h3>Any questions?</h3>
-            <p>
-                Too bad!
-            </p>
-        </ion-slide>
-
-    </ion-slide-box>
-
+                <div id="list">
+                    <h5>Just three steps:</h5>
+                    <ol>
+                        <li>Be awesome</li>
+                        <li>Stay awesome</li>
+                        <li>There is no step 3</li>
+                    </ol>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <h3>Any questions?</h3>
+                <p>
+                    Too bad!
+                </p>
+            </ion-slide>
+        </ion-slide-box>
 
         <div id="facebook-logo">
             <button class="button button-block facebook-button"ng-click="facebookLogin()">
@@ -54,6 +39,5 @@
         <div id="facebook-disclaimer">
             <p>We will never post anything to your Facebook account.</p>
         </div>
-
-        </ion-content>
+        </ion-pane>
 </ion-view>

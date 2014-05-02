@@ -3120,7 +3120,7 @@ a.subdued {
       color: #444444; }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #ff3b30;
+    background-color: #45668e;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: white; }
     .bar.bar-stable .title {
@@ -3264,7 +3264,7 @@ a.subdued {
 
 .bar-stable .button {
   border-color: #b2b2b2;
-  background-color: #ff3b30;
+  background-color: #45668e;
   color: white; }
   .bar-stable .button:hover {
     color: white;
@@ -3688,7 +3688,7 @@ a.subdued {
 /* Active state for tab */
 .tab-item.tab-item-active {
   opacity: 1;
-  background: #FF3B30; }
+  background: #771527; }
   .tab-item.tab-item-active.tab-item-light {
     color: white; }
   .tab-item.tab-item-active.tab-item-stable {

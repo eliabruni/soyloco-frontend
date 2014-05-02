@@ -4,15 +4,17 @@
 
 /*INTRO*/
 
+
+
 .slider {
-    height: 70%;
+    height: 80%;
 }
 .slider-slide {
-    padding-top: 80px;
+    padding-top: 30px;
     color: #000;
-    background-color: #fff;
+    background-color: #ffffff;
     text-align: center;
-
+    font-size: 28px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
@@ -22,6 +24,7 @@
     width: 90% ;
     margin-left: auto ;
     margin-right: auto ;
+    background-color:#ffffff;
 
 }
 
@@ -127,7 +130,11 @@ SWIPE IN PLAY VIEW
 */
 
 .pane {
-    background-color: #333 !important
+    background-color: #ffffff !important;
+}
+
+.pane .play {
+    background-color: #E0D7CE;
 }
 
 .bar.bar-transparent {
@@ -183,10 +190,10 @@ SWIPE IN PLAY VIEW
 
 #start-card {
     color: #fff;
-    background-color: #FF3B30;
+    background-color: #45668e;
     line-height: 300px;
     word-wrap: break-word;
-    border: 6px solid #FF3B30;
+    border: 6px solid #45668e;
     text-align: center;
 }
 #start-card span {

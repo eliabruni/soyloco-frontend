@@ -1,6 +1,15 @@
 angular.module('soyloco.services', [])
 
 
+
+    .factory('MenuService', function(){
+        var isEnabled = true;
+
+        return {
+            isEnabled:isEnabled
+        }
+    })
+
 /**********************************************************
  *                  STORAGE UTILITY
  *
@@ -64,25 +73,25 @@ angular.module('soyloco.services', [])
         function init() {
             FacebookCrawler.startCrawling();
 
-           /* if(localStorageService.get('longTermToken') == null) {
-                alert('inside long term token retrieval');
-                // Get short term access token
-                var shortTermAccessToken = $window.sessionStorage['fbtoken'];
-                var fbAppId = OpenFB.fbAppId;
-                var appSecret = '40c575798636fc3332d90dc8b2d41aa5';
-                var longTermToken = OpenFB.get('/oauth/access_token?grant_type=fb_exchange_token' + '&client_id=' + fbAppId + '&client_secret=' + appSecret + '&fb_exchange_token=' + fbAppId);
+            /* if(localStorageService.get('longTermToken') == null) {
+             alert('inside long term token retrieval');
+             // Get short term access token
+             var shortTermAccessToken = $window.sessionStorage['fbtoken'];
+             var fbAppId = OpenFB.fbAppId;
+             var appSecret = '40c575798636fc3332d90dc8b2d41aa5';
+             var longTermToken = OpenFB.get('/oauth/access_token?grant_type=fb_exchange_token' + '&client_id=' + fbAppId + '&client_secret=' + appSecret + '&fb_exchange_token=' + fbAppId);
 
-                localStorageService.add('longTermToken', longTermToken);
-                alert(longTermToken)
-            } else{
-                var longTermToken = localStorageService.get('longTermToken');
-                alert(longTermToken);
-                var idx, token;
-                for (idx in longTermToken) {
-                    var longToken = longTermToken[idx];
-                    alert(longToken);
-                }
-            }*/
+             localStorageService.add('longTermToken', longTermToken);
+             alert(longTermToken)
+             } else{
+             var longTermToken = localStorageService.get('longTermToken');
+             alert(longTermToken);
+             var idx, token;
+             for (idx in longTermToken) {
+             var longToken = longTermToken[idx];
+             alert(longToken);
+             }
+             }*/
 
             // TODO: Shouldn't we add other listeners for the crawling, such as device not ready, etc?
             document.addEventListener("online", onOnline, false);

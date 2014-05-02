@@ -1,6 +1,8 @@
 angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
-    .controller('AppCtrl', function ($scope, $state, OpenFB) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, MenuService) {
+
+        $scope.MenuService = MenuService;
 
         $scope.logout = function () {
             OpenFB.logout();
@@ -20,7 +22,9 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     })
 
     .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
-                                       $ionicLoading, OpenFB) {
+                                       $ionicLoading, OpenFB, MenuService) {
+
+        MenuService.isEnabled = false;
 
         var numTaps = 0;
 
@@ -103,6 +107,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     })
 
     .controller('ProfileCtrl', function ($scope, OpenFB, localStorageService) {
+
         OpenFB.get('/me').success(function (user) {
             $scope.user = user;
             $scope.longTermToken = localStorageService.get('longTermToken');
@@ -150,7 +155,12 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Play controller
  *
  * */
-    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate, Crawler) {
+    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate, Crawler, MenuService) {
+
+
+        // Need to reactivate the side menu just here because it's the fallback route;
+        MenuService.isEnabled = true;
+
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
