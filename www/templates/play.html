@@ -4,15 +4,16 @@
     </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
         <ion-pane>
-
-
+            <ion-header-bar class="bar-transparent">
+                <h1 class="title">Help Out</h1>
+            </ion-header-bar>
             <swipe-cards on-swipe="onSwipe($event)">
 
                 <swipe-cards>
-                    <swipe-card on-swipe="nextUser()" id="start-card">
+                    <swipe-card on-swipe="nextUser(1)" id="start-card">
                         Swipe down for a new card
                     </swipe-card>
-                    <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+                    <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index, cards[$index].userId)">
 
                             <div class="title">
                                 {{$index}}
@@ -22,49 +23,13 @@
                                 <img ng-src="{{card.image}}">
                             </div>
                             <div class="button-bar">
-                                <button class="button button-clear button-positive" ng-click="goAway()">Answer</button>
-                                <button class="button button-clear button-positive" ng-click="goAway()">Decline</button>
+                                <button class="button button-clear button-positive" ng-click="goAway({{card.userId}})">Nope</button>
+                                <button class="button button-clear button-positive" ng-click="goAway({{card.userId}})">Like</button>
                             </div>
                     </swipe-card>
                 </swipe-cards>
             </swipe-cards>
 
-
-            <!--   <swipe-cards on-swipe="onSwipe($event)">
-
-                   <swipe-cards>
-                       <swipe-card on-swipe="cardSwiped()" id="start-card">
-                           Swipe down for a new card
-                       </swipe-card>
-                       <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
-
-                           <div>
-                               <div class="image">
-                                   <img ng-src="{{card.image}}">
-                               </div>
-                               <div class="title">
-                                   {{card.title}}
-                               </div>
-                               <div class="item tabs tabs-secondary tabs-icon-left">
-                                   <a class="tab-item" href="#">
-                                       <i class="icon ion-android-social"></i>
-                                           22
-                                   </a>
-                                   <a class="tab-item" href="#">
-                                       <i class="icon ion-android-location"></i>
-                                       4
-                                   </a>
-                               </div>
-                           </div>
-
-                       </swipe-card>
-                   </swipe-cards>
-
-               </swipe-cards>-->
-<!--            <div class="button-bar">
-                <button class="button button-icon ion-close-circled swipe-dislike-icon" ng-click="goAway()"></button>
-                <button class="button button-icon ion-checkmark-circled swipe-like-icon" ng-click="goAway()"></button>
-            </div>-->
         </ion-pane>
 
 

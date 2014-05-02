@@ -156,51 +156,62 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         // If fallback route is changed, remeber to move Crawler.init().
         //Crawler.init();
 
-        var cardTypes = [
-            { title: 'Emma', image: 'img/emma.png' },
-            { title: 'Emilia', image: 'img/emilia.png' },
-            { title: 'Jennifer', image: 'img/jennifer.png' }
+        var users = [
+            {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},
+                {id: 2,userId: 1, image: 'img/emilia.jpg'},
+                {id: 3,userId: 1, image: 'img/emilia.jpg'}]},
+
+            {id:2, name:'emma', photos:[{id: 1,userId: 2, image: 'img/emma.jpg'},
+                {id: 2,userId: 2, image: 'img/emma.jpg'},
+                {id: 3,userId: 2, image: 'img/emma.jpg'}]},
+            {id:3, name:'jennifer', photos:[{id: 1, userId: 3, image: 'img/jennifer.jpg'},
+                {id: 2, userId: 3,image: 'img/jennifer.jpg'},
+                {id: 3, userId: 3,image: 'img/jennifer.jpg'}]}
         ];
 
-        $scope.nextUser = function() {
-            $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-            // Here we need to iterate over user cards
-            // and at last add card with index == 0 again
-            $scope.addCard(0);
-            $scope.addCard(1);
-            $scope.addCard(2);
+        $scope.nextUser = function(nextUserId) {
+
+            var photos = users[nextUserId-1].photos;
+            $scope.cards = Array.prototype.slice.call(photos, 0, 0);
+
+            var photoIdx, photo;
+            for (photoIdx in photos) {
+                photo = photos[photoIdx];
+                $scope.addUserCard(photo);
+            }
 
             // Add first card again
-            $scope.addCard(0);
-        }
+            $scope.addUserCard(photos[0]);
+        };
 
+        $scope.addUserCard = function(userCard) {
+            $scope.cards.push(angular.extend({}, userCard));
+        };
 
-        $scope.cardSwiped = function(index) {
+        $scope.cardSwiped = function(index, userId) {
+
             // Index goes in decreasing order,
             // We need to update at one before last, i.e. index == 1
             if (index == 1) {
-                $scope.nextUser();
+                $scope.nextUser(userId);
             }
 
         };
 
         $scope.cardDestroyed = function(index) {
-            //$scope.cards.splice(index, 1);
+            $scope.cards.splice(index, 1);
         };
 
-        $scope.addCard = function(idx) {
-            var newCard = cardTypes[idx];
-            newCard.id = idx;
-            $scope.cards.push(angular.extend({}, newCard));
+        $scope.goAway = function(userId) {
+
+            // This is just for infinite user loop
+            if(userId == 3) {
+                $scope.nextUser(1);
+            } else {
+                $scope.nextUser(userId + 1);
+            }
         };
 
-
-        // TODO: Need to fix this function, check original codepen
-        $scope.goAway = function() {
-            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
-            card.swipe();
-            $scope.nextUser();
-        };
 
     })
 
