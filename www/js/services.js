@@ -197,8 +197,7 @@ angular.module('soyloco.services', [])
                             birthday : data['birthday'],
                             email: data['email'],
                             firstName: data['first_name'],
-                            gender: 'uela',
-                            newprop: 'new'
+                            gender: data['gender']
                         };
 
                         if(localStorageService.get('userFbInfo') == null) {
