@@ -24,11 +24,13 @@ angular.module('soyloco.services', [])
                 if (!(k in newObj))
                     diff[k] = undefined;  // property gone so explicitly set it undefined
                 else if (oldObj[k] !== newObj[k])
+
                     diff[k] = newObj[k];  // property in both but has changed
             }
 
             for (k in newObj) {
                 if (!(k in oldObj))
+
                     diff[k] = newObj[k]; // property is new
             }
 
@@ -128,7 +130,7 @@ angular.module('soyloco.services', [])
  *              FACEBOOK CRAWLING API SERVICE
  *
  * ********************************************************/
-    .factory('FacebookCrawler', function( $interval, localStorageService, OpenFB) {
+    .factory('FacebookCrawler', function( $interval, OpenFB, localStorageService, StorageUtility) {
 
         var defaultCrawlingTime = 5000; // Crawl each 5 minutes
 
@@ -184,15 +186,33 @@ angular.module('soyloco.services', [])
                 var userHeaders = {'if-none-match': userEtag};
 
                 // Call the $http method
-                OpenFB.getWithHeaders('/me', userHeaders)
+                OpenFB.getWithHeaders('/me')
 
                     // Note that we have to take care os the sucess case only. If the ETag
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
-                        // Get data
-                        userFbAccount = data;
-                        localStorageService.add('userFbAccount', userFbAccount);
+                        var userFbInfo = {
+                            id: data['id'],
+                            birthday : data['birthday'],
+                            email: data['email'],
+                            firstName: data['first_name'],
+                            gender: 'uela',
+                            newprop: 'new'
+                        };
+
+                        if(localStorageService.get('userFbInfo') == null) {
+                            localStorageService.add('userFbInfo', userFbInfo);
+                        } else {
+
+                            var diff = StorageUtility.getOneDimDifferences(localStorageService.get('userFbInfo'), userFbInfo);
+                            if (diff.length != undefined) {
+                                localStorageService.add('userFbInfo', userFbInfo);
+
+                                // TODO: Send diff to server
+                            }
+
+                        }
 
                         // Get new etag
                         var userEtag = headers(['etag']);
@@ -287,7 +307,6 @@ angular.module('soyloco.services', [])
 
                         // Get new etag
                         var userFriendsEtag = headers(['etag']);
-                        alert(userFriendsEtag);
                         localStorageService.add('userFriendsEtag', userFriendsEtag);
 
                         userFriends = data;
@@ -296,7 +315,6 @@ angular.module('soyloco.services', [])
                     })
 
                     .error(function (data, status, headers, config){
-
                         if (status === 304) {
                             checkIfDone('304 in user friends!');
                         }
@@ -323,7 +341,6 @@ angular.module('soyloco.services', [])
 
                         // Get new etag
                         var userLikesEtag = headers(['etag']);
-                        alert(userFriendsEtag);
                         localStorageService.add('userLikesEtag', userLikesEtag);
 
                         userLikes = data;

@@ -164,7 +164,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
-        //Crawler.init();
+        Crawler.init();
 
         var users = [
             {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},
