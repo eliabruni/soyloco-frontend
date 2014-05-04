@@ -228,6 +228,76 @@ SWIPE IN PLAY VIEW
 }
 
 
+
+.pulse-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+
+
+}
+
+#pulse1, #pulse2 {
+    border-radius:50%;
+    position:absolute;
+    height: 150px; width: 150px;
+    top: 50%; left:50%;
+    border: 2px solid rgba(66, 152, 181, 1);
+    -webkit-animation: pulsate 3s infinite;
+    animation: pulsate 3s infinite;
+    background-color:#4298b5;
+    -webkit-transform:translateX(-50%) translateY(-50%);
+    transform:translateX(-50%) translateY(-50%);
+}
+#pulse2 {
+    -webkit-animation: pulsate 3s -1.5s infinite;
+    animation: pulsate 3s -1.5s infinite;
+}
+
+@-webkit-keyframes pulsate {
+    0%,100% {
+        width:150px;
+        height:150px;
+        opacity:0;
+    }
+    1% { opacity:1; }
+    70% {
+        opacity:0.5;
+    }
+    99.999% {
+        width:350px;
+        height:350px;
+        opacity:0;
+    }
+}
+
+@keyframes pulsate {
+    0%, 100% {
+        width: 150px;
+        height: 150px;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 0.5;
+    }
+    99.999% {
+        width: 950px;
+        height: 950px;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+
 /*
 MAP IN CATEOGRY VIEW
 */
