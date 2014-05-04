@@ -1,0 +1,26 @@
+{
+  "name": "y",
+  "version": "0.09",
+  "homepage": "n",
+  "authors": [
+    "y"
+  ],
+  "description": "Frontend for Soyloco",
+  "main": "[www/index.html|www/oauthcallback.html|www/css/*|www/js/*|www/templates/*|scss/*]",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "n",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-cache": "~2.3.3",
+    "ionic": "driftyco/ionic-bower#master"
+  }
+}

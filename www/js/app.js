@@ -1,6 +1,8 @@
-angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers','soyloco.services','soyloco.directives', 'ionic.contrib.ui.cards' ])
+angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
+    'soyloco.services','soyloco.directives', 'ionic.contrib.ui.cards',
+    'LocalStorageModule', 'google-maps'])
 
-    .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
+    .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService) {
 
         OpenFB.init('738982816123885');
 
@@ -11,7 +13,8 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers','soyloco.ser
         });
 
         $rootScope.$on('$stateChangeStart', function(event, toState) {
-            if (toState.name !== "app.login" && toState.name !== "app.logout" && !$window.sessionStorage['fbtoken']) {
+            if (toState.name !== "app.login" && toState.name !== "app.logout" &&
+                (localStorageService.get('fbtoken') === null) ) {
                 $state.go('app.login');
                 event.preventDefault();
             }
@@ -20,6 +23,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers','soyloco.ser
         $rootScope.$on('OAuthException', function() {
             $state.go('app.login');
         });
+
 
     })
 
@@ -104,6 +108,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers','soyloco.ser
             });
 
         // fallback route
+        // If fallback route is changed, remeber to move Crawler.init()
         $urlRouterProvider.otherwise('/app/play');
 
     });
