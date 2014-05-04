@@ -155,7 +155,8 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Play controller
  *
  * */
-    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate, Crawler, MenuService) {
+    .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
+                                     $ionicSwipeCardDelegate, Crawler, MenuService) {
 
 
         // Need to reactivate the side menu just here because it's the fallback route;
@@ -164,7 +165,24 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
-        Crawler.init();
+        //Crawler.init();
+
+
+
+        // TODO: change the nonsense timeout. The problem is that without is doesn't work.
+        $timeout(function () {
+            $ionicSlideBoxDelegate.enableSlide(false);
+        }, 0);
+
+        //TODO: This is just a plcaeholder for a call to the server
+        $timeout(function () {
+            $ionicSlideBoxDelegate.next();
+            //$ionicSlideBoxDelegate.enableSlide(false);
+
+        }, 5000);
+
+
+
 
         var users = [
             {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},

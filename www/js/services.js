@@ -1,8 +1,11 @@
 angular.module('soyloco.services', [])
 
 
-
-    .factory('MenuService', function(){
+/**********************************************************
+ *                  MENU UTILITY
+ *
+ * ********************************************************/
+    .factory('MenuService', function() {
         var isEnabled = true;
 
         return {
@@ -101,7 +104,7 @@ angular.module('soyloco.services', [])
         }
 
         function onOnline() {
-            if (OpenFB.getLoginStatus()) {
+            if (localStorageService.get('fbtoken') != null) {
                 if (testing) {
                     alert('online');
                 }
