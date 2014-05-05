@@ -5,9 +5,12 @@
 /*INTRO*/
 
 
+.login-slider {
+    height: 80%;
+}
 
 .slider {
-    height: 80%;
+    height: 100%;
 }
 .slider-slide {
     padding-top: 30px;
@@ -130,7 +133,7 @@ SWIPE IN PLAY VIEW
 */
 
 .pane {
-    background-color: #ffffff !important;
+    background-color: #fff !important;
 }
 
 .pane .play {
@@ -204,10 +207,6 @@ SWIPE IN PLAY VIEW
     vertical-align: middle;
 }
 
-#footer .button {
-    color: #fff;
-}
-
 @-webkit-keyframes bounceIn {
     0% {
         -webkit-transform: scale(0,0);
@@ -229,73 +228,45 @@ SWIPE IN PLAY VIEW
 
 
 
-.pulse-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-
-
-}
 
 #pulse1, #pulse2 {
-    border-radius:50%;
-    position:absolute;
-    height: 150px; width: 150px;
-    top: 50%; left:50%;
-    border: 2px solid rgba(66, 152, 181, 1);
-    -webkit-animation: pulsate 3s infinite;
-    animation: pulsate 3s infinite;
-    background-color:#4298b5;
-    -webkit-transform:translateX(-50%) translateY(-50%);
-    transform:translateX(-50%) translateY(-50%);
-}
-#pulse2 {
-    -webkit-animation: pulsate 3s -1.5s infinite;
-    animation: pulsate 3s -1.5s infinite;
+    width: 100px;
+    height: 100px;
+    border-radius: 800px;
+    -webkit-animation: out 6s infinite ease-out;
+    animation: out 6s infinite ease-out;
+    background: #FA664F;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
 }
 
-@-webkit-keyframes pulsate {
-    0%,100% {
-        width:150px;
-        height:150px;
-        opacity:0;
-    }
-    1% { opacity:1; }
-    70% {
-        opacity:0.5;
-    }
-    99.999% {
-        width:350px;
-        height:350px;
-        opacity:0;
-    }
+#pulse1 {
+    -webkit-animation: out 6s -3s  infinite ease-out;
+    animation: out 6s -3s infinite ease-out;
 }
 
-@keyframes pulsate {
-    0%, 100% {
-        width: 150px;
-        height: 150px;
-        opacity: 0;
-    }
-    1% {
-        opacity: 1;
-    }
-    70% {
-        opacity: 0.5;
-    }
-    99.999% {
-        width: 950px;
-        height: 950px;
-        top: 50%;
-        left: 50%;
-        z-index: 1;
-        -webkit-transform: translateX(-50%) translateY(-50%);
-        transform: translateX(-50%) translateY(-50%);
-    }
+
+
+@-webkit-keyframes out {
+    0% {box-shadow: 0px 0px 0px 0px #FA664F;}
+    100% {box-shadow: 0px 0px 0px 150px rgba(0, 0, 0, 0.0);}
 }
+
+@keyframes out {
+    0% {box-shadow: 0px 0px 0px 0px #FA664F;}
+    100% {box-shadow: 0px 0px 0px 150px rgba(0, 0, 0, 0.0);}
+}
+
+
+
+
+
+
+
+
+
 
 
 /*

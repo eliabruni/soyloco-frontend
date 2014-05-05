@@ -179,7 +179,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             $ionicSlideBoxDelegate.next();
             //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 5000);
+        }, 10000);
 
 
 
