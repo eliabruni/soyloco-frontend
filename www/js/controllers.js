@@ -106,12 +106,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('ProfileCtrl', function ($scope, OpenFB, localStorageService) {
-
-        OpenFB.get('/me').success(function (user) {
-            $scope.user = user;
-            $scope.longTermToken = localStorageService.get('longTermToken');
-        });
+    .controller('ProfileCtrl', function ($scope) {
 
 
     })
@@ -133,19 +128,63 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         $scope.map = {
             center: {
-                latitude: 45,
-                longitude: -73
+                latitude: 33.22,
+                longitude: 35.33
             },
             zoom: 12,
-            draggable: false,
+            draggable: true,
             options: {
                 streetViewControl: false,
                 panControl: false,
                 mapTypeId: "roadmap",
                 disableDefaultUI: true
-            }
-        };
+            },
+            markers : [
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.22,
+                    "longitude":35.33,
+                    fit:true
 
+                },
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.23,
+                    "longitude":35.34,
+                    fit:true
+
+                },
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.21,
+                    "longitude":35.32,
+                    fit:true
+
+                },
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.224,
+                    "longitude":35.323,
+                    fit:true
+
+                },
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.24,
+                    "longitude":35.31,
+                    fit:true
+                },
+                {
+                    icon: 'img/maps/blue_marker.png',
+                    "latitude":33.256,
+                    "longitude":35.3123,
+                    fit:true
+
+                }
+
+
+            ]
+        };
 
     })
 
@@ -166,7 +205,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
         if (!Crawler.getInit()) {
-            Crawler.init();
+            //Crawler.init();
         }
 
 

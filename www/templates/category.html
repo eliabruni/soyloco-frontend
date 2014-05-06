@@ -28,11 +28,17 @@
             <ion-content header-shrink scroll-event-interval="1">
 
                 <div class="map">
-                    <google-map center="map.center"
+                    <google-map id="mymap"
+                                center="map.center"
                                 zoom="map.zoom"
                                 draggable="true"
+                                mark-click="false"
                                 options="map.options">
+
+                        <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+
                     </google-map>
+
                 </div>
                 <ion-list>
                     <ion-item ng-repeat="place in category.otherPlaces"
@@ -52,10 +58,15 @@
 
             <ion-content header-shrink scroll-event-interval="1">
                 <div class="map">
-                    <google-map center="map.center"
+                    <google-map id="mymap"
+                                center="map.center"
                                 zoom="map.zoom"
                                 draggable="true"
+                                mark-click="false"
                                 options="map.options">
+
+                        <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+
                     </google-map>
                 </div>
                 <ion-list>
@@ -78,10 +89,15 @@
 
             <ion-content header-shrink scroll-event-interval="1">
                 <div class="map">
-                    <google-map center="map.center"
+                    <google-map id="mymap"
+                                center="map.center"
                                 zoom="map.zoom"
                                 draggable="true"
+                                mark-click="false"
                                 options="map.options">
+
+                        <markers models="map.markers" coords="'self'" icon="'icon'" fit="'fit'"></markers>
+
                     </google-map>
                 </div>
                 <ion-list>
