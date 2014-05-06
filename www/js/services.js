@@ -73,6 +73,7 @@ angular.module('soyloco.services', [])
  * ********************************************************/
     .factory('Crawler', function($window, OpenFB, FacebookCrawler, localStorageService) {
 
+        var isInit = false;
         var testing = false;
 
         function init() {
@@ -101,6 +102,8 @@ angular.module('soyloco.services', [])
             // TODO: Shouldn't we add other listeners for the crawling, such as device not ready, etc?
             document.addEventListener("online", onOnline, false);
             document.addEventListener("offline", onOffline, false);
+
+            isInit = true;
         }
 
         function onOnline() {
@@ -120,8 +123,18 @@ angular.module('soyloco.services', [])
             FacebookCrawler.stopCrawling();
         }
 
+        function getInit() {
+            return isInit;
+        }
+
+        function setInit(status) {
+            isInit = status;
+        }
+
         return {
-            init: init
+            init: init,
+            getInit: getInit,
+            setInit: setInit
         }
 
     })
@@ -157,7 +170,9 @@ angular.module('soyloco.services', [])
             // We first stop any possible previous instance of startCrawling().
             // Note that this is different from the done<5 check, since it's done
             // just when startCrawling is called but not at the ith interval instance.
+
             stopCrawling();
+
 
             stop = $interval(function() {
 
@@ -166,8 +181,8 @@ angular.module('soyloco.services', [])
 
                 done = 0;
 
-                counter++;
-                localStorageService.add('counter', counter);
+                //counter++;
+                //localStorageService.add('counter', counter);
 
                 // TESTING
                 if(testing) {

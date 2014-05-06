@@ -16,8 +16,6 @@ angular.module('openfb', [])
         var FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth',
 
         // That's the variable I use around the whole app
-            loggedInToFacebook,
-
             fbAppId,
             oauthRedirectURL,
 
@@ -48,10 +46,6 @@ angular.module('openfb', [])
             if (redirectURL) oauthRedirectURL = redirectURL;
         }
 
-
-        function getLoginStatus() {
-            return loggedInToFacebook;
-        }
 
         /**
          * Login to Facebook using OAuth. If running in a Browser, the OAuth workflow happens in a a popup window.
@@ -138,7 +132,6 @@ angular.module('openfb', [])
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
                 localStorageService.add('fbtoken', obj['access_token']);
-                loggedInToFacebook = true;
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -154,8 +147,6 @@ angular.module('openfb', [])
          */
         function logout() {
             localStorageService.remove('fbtoken');
-            loggedInToFacebook = false;
-
         }
 
         /**
@@ -248,7 +239,6 @@ angular.module('openfb', [])
             post: post,
             get: get,
             oauthCallback: oauthCallback,
-            getLoginStatus: getLoginStatus,
             getWithHeaders: getWithHeaders
         }
 

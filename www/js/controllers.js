@@ -15,7 +15,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     $state.go('app.login');
                 },
                 function () {
-                    alert('Revoke permissions failed');
+                    //alert('Revoke permissions failed');
                 });
         };
 
@@ -100,7 +100,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     $scope.status = "This item has been shared on OpenFB";
                 })
                 .error(function(data) {
-                    alert(data.error.message);
+                    //alert(data.error.message);
                 });
         };
 
@@ -165,7 +165,9 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
-        //Crawler.init();
+        if (!Crawler.getInit()) {
+            Crawler.init();
+        }
 
 
 
@@ -243,9 +245,10 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('SettingsCtrl', function($scope, $state, OpenFB) {
+    .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler) {
         $scope.logout = function () {
             OpenFB.logout();
+            Crawler.setInit(false);
             $state.go('app.login');
         };
     });
