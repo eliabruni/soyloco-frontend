@@ -2,7 +2,8 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
     'soyloco.services','soyloco.directives', 'ionic.contrib.ui.cards',
     'LocalStorageModule', 'google-maps'])
 
-    .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService) {
+    .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService,
+                   LocationService) {
 
         OpenFB.init('738982816123885');
 
@@ -12,18 +13,28 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             }
         });
 
-/*       $rootScope.$on('$stateChangeStart', function(event, toState) {
+        // Retrieve html location
+        LocationService.getLatLong().then(
+            function(latLong) {
+                localStorageService.add('htmlLocation', latLong);
+            },
+
+            function(error) {
+                alert(error);
+            }
+        );
+
+       $rootScope.$on('$stateChangeStart', function(event, toState) {
             if (toState.name !== "app.login" && toState.name !== "app.logout" &&
                 (localStorageService.get('fbtoken') === null) ) {
                 $state.go('app.login');
                 event.preventDefault();
             }
-        });*/
+        });
 
         $rootScope.$on('OAuthException', function() {
             $state.go('app.login');
         });
-
 
     })
 

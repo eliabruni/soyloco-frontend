@@ -102,8 +102,11 @@ angular.module('soyloco.services', [])
             // TODO: Shouldn't we add other listeners for the crawling, such as device not ready, etc?
             document.addEventListener("online", onOnline, false);
             document.addEventListener("offline", onOffline, false);
-
             isInit = true;
+        }
+
+        function stop() {
+            FacebookCrawler.stopCrawling();
         }
 
         function onOnline() {
@@ -133,6 +136,7 @@ angular.module('soyloco.services', [])
 
         return {
             init: init,
+            stop: stop,
             getInit: getInit,
             setInit: setInit
         }
@@ -170,7 +174,6 @@ angular.module('soyloco.services', [])
             // We first stop any possible previous instance of startCrawling().
             // Note that this is different from the done<5 check, since it's done
             // just when startCrawling is called but not at the ith interval instance.
-
             stopCrawling();
 
 
@@ -285,11 +288,14 @@ angular.module('soyloco.services', [])
 
                             .success(function (data, status, headers, config) {
 
+                                var userProfilePictures = data;
+                                localStorageService.add('userProfilePictures', userProfilePictures);
+
+
                                 // Get new etag
                                 var userProfileAlbumEtag = headers(['etag']);
                                 localStorageService.add('userProfileAlbumEtag', userProfileAlbumEtag);
-                                var userProfilePictures = data;
-                                localStorageService.add('userProfilePictures', userProfilePictures);
+
                                 checkIfDone('User photos retrieved!');
                             })
 
@@ -522,6 +528,46 @@ angular.module('soyloco.services', [])
     })
 
 
+    .factory('LocationService', function($q) {
+
+        var latLong = null;
+
+        var getLatLong = function(refresh) {
+
+            var deferred = $q.defer();
+
+            if( latLong === null || refresh ) {
+
+                console.log('Getting lat long');
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    console.log('Position=')
+                    console.log(pos);
+                    latLong =  { 'lat' : pos.coords.latitude, 'long' : pos.coords.longitude }
+                    deferred.resolve(latLong);
+
+                }, function(error) {
+                    console.log('Got error!');
+                    console.log(error);
+                    latLong = null
+
+                    deferred.reject('Failed to Get Lat Long')
+
+                });
+
+            }  else {
+                deferred.resolve(latLong);
+            }
+
+            return deferred.promise;
+
+        };
+
+        return {
+
+            getLatLong : getLatLong
+
+        }
+    })
 
 /**
  * A simple example service that returns some categories.

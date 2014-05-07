@@ -70,10 +70,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                 $ionicLoading.hide();
             }, 5000);
 
-
-
-
-
         };
 
         $scope.next = function() {
@@ -121,17 +117,24 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, Categories) {
+    .controller('CategoryCtrl', function($scope, $stateParams, Categories, localStorageService) {
 
         // Get the category ID into scope
         $scope.category = Categories.get($stateParams.categoryId);
 
+        var lat = 33.22;
+        var long = 35.33;
+        if (localStorageService.get('htmlLocation') != null) {
+            lat = localStorageService.get('htmlLocation').lat;
+            long = localStorageService.get('htmlLocation').long;
+        }
+
         $scope.map = {
             center: {
-                latitude: 33.22,
-                longitude: 35.33
+                latitude: lat,
+                longitude: long
             },
-            zoom: 12,
+            zoom: 14,
             draggable: true,
             options: {
                 streetViewControl: false,
@@ -181,8 +184,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     fit:true
 
                 }
-
-
             ]
         };
 
@@ -287,6 +288,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler) {
         $scope.logout = function () {
             OpenFB.logout();
+            Crawler.stop();
             Crawler.setInit(false);
             $state.go('app.login');
         };
