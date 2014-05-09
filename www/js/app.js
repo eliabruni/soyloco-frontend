@@ -3,9 +3,10 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
     'LocalStorageModule', 'google-maps'])
 
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService,
-                   LocationService) {
+                   Geo) {
 
         OpenFB.init('738982816123885');
+        Geo.init();
 
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
@@ -13,7 +14,8 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             }
         });
 
-        // Retrieve html location
+
+/*        // Retrieve html location
         LocationService.getLatLong().then(
             function(latLong) {
                 localStorageService.add('htmlLocation', latLong);
@@ -22,7 +24,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             function(error) {
                 alert(error);
             }
-        );
+        );*/
 
        $rootScope.$on('$stateChangeStart', function(event, toState) {
             if (toState.name !== "app.login" && toState.name !== "app.logout" &&

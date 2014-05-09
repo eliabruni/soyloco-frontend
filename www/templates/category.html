@@ -29,12 +29,14 @@
 
                 <div class="map">
                     <google-map id="mymap"
-                                center="map.center"
+                                center="center"
                                 zoom="map.zoom"
                                 draggable="true"
                                 mark-click="false"
                                 options="map.options">
-
+                        <marker coords="selfMarker.coords"
+                                icon="selfMarker.icon">
+                        </marker>
 <!--
                         <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
 -->
@@ -61,12 +63,14 @@
             <ion-content header-shrink scroll-event-interval="1">
                 <div class="map">
                     <google-map id="mymap"
-                                center="map.center"
+                                center="center"
                                 zoom="map.zoom"
                                 draggable="true"
                                 mark-click="false"
                                 options="map.options">
-
+                        <marker coords="selfMarker.coords"
+                                icon="selfMarker.icon">
+                        </marker>
 <!--
                         <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
 -->
@@ -94,14 +98,18 @@
             <ion-content header-shrink scroll-event-interval="1">
                 <div class="map">
                     <google-map id="mymap"
-                                center="map.center"
+                                center="center"
                                 zoom="map.zoom"
                                 draggable="true"
                                 mark-click="false"
                                 options="map.options">
 
+                        <marker coords="selfMarker.coords"
+                                icon="selfMarker.icon">
+                        </marker>
+
 <!--
-                        <markers models="map.markers" coords="'self'" icon="'icon'" fit="'fit'"></markers>
+                        <markers models="map.selfMarker" coords="'self'" icon="'icon'" fit="'fit'"></markers>
 -->
 
                     </google-map>

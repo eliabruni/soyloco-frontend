@@ -117,23 +117,60 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, Categories, localStorageService) {
+    .controller('CategoryCtrl', function($scope, $stateParams, Categories, Geo) {
 
         // Get the category ID into scope
         $scope.category = Categories.get($stateParams.categoryId);
 
         var lat = 33.22;
         var long = 35.33;
-        if (localStorageService.get('htmlLocation') != null) {
-            lat = localStorageService.get('htmlLocation').lat;
-            long = localStorageService.get('htmlLocation').long;
+
+        if (Geo.getPosition() != null) {
+            var position = Geo.getPosition();
+            lat = position.lat;
+            long = position.long;
         }
 
-        $scope.map = {
-            center: {
-                latitude: lat,
-                longitude: long
+        $scope.Geo = Geo;
+
+        $scope.center = {
+            latitude: lat,
+            longitude: long
+        };
+
+        $scope.selfMarker = {
+            icon: 'img/maps/blue_marker.png',
+            coords: {
+                latitude:lat,
+                longitude:long
             },
+            fit:true
+        };
+
+
+        $scope.$watch('Geo.getPosition()', function(newPosition) {
+/*            $scope.center = {
+                latitude: newPosition.lat,
+                longitude: newPosition.long
+            };*/
+
+            $scope.$apply(function () {
+
+                $scope.selfMarker = {
+                    icon: 'img/maps/self_marker_move.png',
+                    coords: {
+                        latitude:newPosition.lat,
+                        longitude:newPosition.long
+                    },
+                    fit:true
+                };
+            });
+            $scope.$apply();
+
+
+        });
+
+        $scope.map = {
             zoom: 14,
             draggable: true,
             options: {
@@ -206,7 +243,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
         if (!Crawler.getInit()) {
-            Crawler.init();
+            //Crawler.init();
         }
 
 

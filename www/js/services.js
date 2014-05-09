@@ -13,6 +13,52 @@ angular.module('soyloco.services', [])
         }
     })
 
+/**********************************************************
+ *                  MENU UTILITY
+ *
+ * ********************************************************/
+    .factory('Geo', function() {
+
+        var watchID,
+            position;
+
+        // device APIs are available
+        function init() {
+
+
+            // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // device APIs are available
+            function onDeviceReady() {
+                // Throw an error if no update is received every 30 seconds
+                // Provides a hint that the application needs the best possible results.
+                var options = { timeout: 30000, enableHighAccuracy: true };
+                watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+            }
+
+            // onSuccess Geolocation
+            function onSuccess(pos) {
+                position =  { 'lat' : pos.coords.latitude, 'long' : pos.coords.longitude };
+            }
+
+            // onError Callback receives a PositionError object
+            function onError(error) {
+                alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
+            }
+        }
+
+        function getPosition() {
+            return position;
+        }
+
+        return {
+            init: init,
+            getPosition: getPosition
+        }
+    })
+
 
 /**
  * A simple example service that returns some categories.
