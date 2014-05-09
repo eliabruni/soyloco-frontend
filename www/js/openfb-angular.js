@@ -173,15 +173,11 @@ angular.module('openfb', [])
 
             var method = obj.method || 'GET',
                 headers = obj.headers || {},
-                params = obj.params || {}
+                params = obj.params || {};
 
-
-            //params['access_token'] = tokenStore['fbtoken'];
             params['access_token'] = localStorageService.get('fbtoken');
 
-
-
-            return $http({method: method, url: 'https://graph.facebook.com' + obj.path,headers: headers, params: params})
+            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, headers: headers, params: params})
                 .error(function(data, status, headers, config) {
                     if (data.error && data.error.type === 'OAuthException') {
                         $rootScope.$emit('OAuthException');
