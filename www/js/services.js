@@ -45,19 +45,23 @@ angular.module('soyloco.services', [])
             var diff = {};
 
             for (var k in oldObj) {
-                if (!(k in newObj))
+                if (!(k in newObj)) {
                     diff[k] = undefined;  // property gone so explicitly set it undefined
-                (!angular.equals(oldObj[k],newObj[k]))
-                diff[k] = newObj[k];  // property in both but has changed
+                }
+                else if (!angular.equals(oldObj[k],newObj[k])) {
+                    diff[k] = newObj[k];  // property in both but has changed
+                }
             }
 
             for (k in newObj) {
-                if (!(k in oldObj))
+                if (!(k in oldObj)) {
                     diff[k] = newObj[k]; // property is new
+                }
             }
 
             return diff;
         }
+
 
         return {
             getOneDimDifferences: getOneDimDifferences,
@@ -153,21 +157,15 @@ angular.module('soyloco.services', [])
     .factory('FacebookCrawler', function( $interval, OpenFB, localStorageService, StorageUtility) {
 
         var defaultCrawlingTime = 5000; // Crawl each 5 minutes
-
-        var userFbAccount;
-        var userProfilePictures;
-        var userFriends;
-        var userLikes;
-        var userEvents;
         var done;
+
+        // If defined, crawling is active and vice versa.
+        var stop;
 
         // TESTING
         var testing = false;
         var counter = 0;
         // TESTING
-
-        // If defined, crawling is active and vice versa.
-        var stop;
 
         function startCrawling () {
 
@@ -176,11 +174,10 @@ angular.module('soyloco.services', [])
             // just when startCrawling is called but not at the ith interval instance.
             stopCrawling();
 
-
             stop = $interval(function() {
 
                 // Don't start a new crawling if we are already crawling
-                if ( done<5 ) return;
+                if (done < 5) return;
 
                 done = 0;
 
@@ -197,7 +194,7 @@ angular.module('soyloco.services', [])
 
 
                 /*************************************
-                 *    Get user basic profile info: GO!
+                 *    Get user basic profile info: GO
                  * */
 
                 // Retrieve etag for this api call. If it's the first time, it will be null
@@ -207,17 +204,21 @@ angular.module('soyloco.services', [])
                 var userHeaders = {'if-none-match': userEtag};
 
                 // Call the $http method
-                OpenFB.getWithHeaders('/me')
+                OpenFB.getWithHeaders('/me', userHeaders)
 
                     // Note that we have to take care os the sucess case only. If the ETag
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
                         var userFbInfo = {
+                            // This user ID
                             id: data['id'],
-                            birthday : data['birthday'],
-                            email: data['email'],
+                            // The user's first name
                             firstName: data['first_name'],
+                            // This person's birthday in the format MM/DD/YYYY.
+                            birthday : data['birthday'],
+                            // The gender pronoun selected by this person.
+                            // This is omitted if that pronoun is a custom value.
                             gender: data['gender']
                         };
 
@@ -226,12 +227,11 @@ angular.module('soyloco.services', [])
                         } else {
 
                             var diff = StorageUtility.getOneDimDifferences(localStorageService.get('userFbInfo'), userFbInfo);
-                            if (diff.length != undefined) {
+                            if (!isEmpty(diff)) {
                                 localStorageService.add('userFbInfo', userFbInfo);
 
                                 // TODO: Send diff to server
                             }
-
                         }
 
                         // Get new etag
@@ -272,8 +272,8 @@ angular.module('soyloco.services', [])
                             albums = data[outIndex];
                             for (albumIndex in albums) {
                                 album = albums[albumIndex];
-                                if (album.type == 'profile') {
-                                    profileAlbumId = album.id;
+                                if (album['type'] == 'profile') {
+                                    profileAlbumId = album['id'];
                                 }
                             }
                         }
@@ -284,27 +284,55 @@ angular.module('soyloco.services', [])
                         // Prepare the headers to be passed to the $http method
                         var userProfileAlbumHeaders = {'if-none-match': userProfileAlbumEtag};
 
-                        OpenFB.getWithHeaders('/' + profileAlbumId + '/photos', {}, userProfileAlbumHeaders)
+
+                        OpenFB.getWithHeaders('/' + profileAlbumId + '/photos', userProfileAlbumHeaders)
 
                             .success(function (data, status, headers, config) {
 
-                                var userProfilePictures = data;
-                                localStorageService.add('userProfilePictures', userProfilePictures);
+                                var photos = data['data'];
 
+                                // TODO: Preallocation?	Be careful, it might cause bugs
+                                // Photos array
+                                var userProfilePhotos = [];
+
+                                var photoIdx, photo;
+                                for (photoIdx in photos) {
+                                    photo = photos[photoIdx];
+                                    // Store ith photo into photoArray
+                                    userProfilePhotos.push({
+                                        // The photo ID
+                                        id: photo['id'],
+                                        // Link to the image source of the photo
+                                        source: photo['source']
+                                    });
+                                }
+
+                                // Note that we have to stringify and parse userProfilePhotos
+                                if (localStorageService.get('userProfilePhotos') == null) {
+                                    localStorageService.add('userProfilePhotos', userProfilePhotos);
+
+                                } else {
+                                    var diff = StorageUtility.getMultipleDimDifferences(localStorageService.get('userProfilePhotos'), userProfilePhotos);
+                                    if (!isEmpty(diff)) {
+                                        localStorageService.add('userProfilePhotos', userProfilePhotos);
+
+                                        // TODO: Send diff to server
+                                    }
+
+                                }
 
                                 // Get new etag
                                 var userProfileAlbumEtag = headers(['etag']);
                                 localStorageService.add('userProfileAlbumEtag', userProfileAlbumEtag);
 
                                 checkIfDone('User photos retrieved!');
+
                             })
 
                             .error(function (data, status, headers, config){
-
                                 if (status === 304) {
                                     checkIfDone('304 in user album pix!');
                                 }
-
                             })
 
                     });
@@ -328,12 +356,43 @@ angular.module('soyloco.services', [])
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
+                        var friends = data['data'];
+
+                        // TODO: Preallocation?	Be careful, it might cause bugs
+                        // Friends array
+                        var userFriends = [];
+
+                        var friendIdx, friend;
+                        for (friendIdx in friends) {
+                            friend = friends[friendIdx];
+                            // Two only accessible fileds: 'id' and 'name'
+
+                            // Store ith friend into friends array
+                            userFriends.push({
+                                // The friend ID
+                                id: friend['id'],
+                                // The person's  name
+                                firstName: friend['name']
+                            });
+                        }
+
+                        // Note that we have to stringify and parse userProfilePhotos
+                        if(localStorageService.get('userFriends') == null) {
+                            localStorageService.add('userFriends', userFriends);
+
+                        } else {
+                            var diff = StorageUtility.getMultipleDimDifferences(localStorageService.get('userFriends'), userFriends);
+                            if (!isEmpty(diff)) {
+                                localStorageService.add('userFriends', userFriends);
+
+                                // TODO: Send diff to server
+                            }
+                        }
+
                         // Get new etag
                         var userFriendsEtag = headers(['etag']);
                         localStorageService.add('userFriendsEtag', userFriendsEtag);
 
-                        userFriends = data;
-                        localStorageService.add('userFriends', userFriends);
                         checkIfDone('User friends retrieved!');
                     })
 
@@ -346,7 +405,7 @@ angular.module('soyloco.services', [])
 
 
                 /*************************************
-                 *    Get user likes: GO!
+                 *    Get user likes:
                  * */
 
                 // Retrieve etag for this api call. If it's the first time, it will be null
@@ -362,12 +421,42 @@ angular.module('soyloco.services', [])
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
+                        var likes = data['data'];
+
+                        // TODO: Preallocation?	Be careful, it might cause bugs
+                        // Friends array
+                        var userLikes = [];
+
+                        var likeIdx, like;
+                        for (likeIdx in likes) {
+                            like = likes[likeIdx];
+
+                            // Two only accessible fileds: 'id' and 'name'
+                            // Store ith friend into friends array
+                            userLikes.push({
+                                // The friend ID
+                                id: like['id']
+                            });
+                        }
+
+                        // Note that we have to stringify and parse userProfilePhotos
+                        if(localStorageService.get('userLikes') == null) {
+                            localStorageService.add('userLikes', userLikes);
+
+                        } else {
+                            var diff = StorageUtility.getMultipleDimDifferences(localStorageService.get('userLikes'), userLikes);
+                            if (!isEmpty(diff)) {
+                                localStorageService.add('userLikes', userLikes);
+
+                                // TODO: Send diff to server
+                            }
+
+                        }
+
                         // Get new etag
                         var userLikesEtag = headers(['etag']);
                         localStorageService.add('userLikesEtag', userLikesEtag);
 
-                        userLikes = data;
-                        localStorageService.add('userLikes', userLikes);
                         checkIfDone('User likes retrieved!');
                     })
 
@@ -400,14 +489,37 @@ angular.module('soyloco.services', [])
                     // hasn't modified, an error is raised and a status===304 is returned.
                     .success(function (data, status, headers, config) {
 
-                        var outIndex, eventIndex, event;
-                        for (outIndex in data) {
-                            userEvents = data[outIndex];
+                        var events = data['data'];
 
-                            // Deal with saving
-                            //localStorageService.add('userEvents', userEvents);
-                            for (eventIndex in userEvents) {
-                                event = userEvents[eventIndex];
+                        // TODO: Preallocation?	Be careful, it might cause bugs
+                        // Friends array
+                        var userEvents = [];
+
+                        var eventIdx, event;
+                        for (eventIdx in events) {
+                            event = events[eventIdx];
+
+                            // Store ith friend into friends array
+                            userEvents.push({
+                                // The friend ID
+                                id: event['id'],
+                                name: event['name'],
+                                startTime : event['start_time'],
+                                endTime : event['end_time'],
+                                location: event['location']
+                            });
+                        }
+
+                        // Note that we have to stringify and parse userProfilePhotos
+                        if(localStorageService.get('userEvents') == null) {
+                            localStorageService.add('userEvents', userEvents);
+
+                        } else {
+                            var diff = StorageUtility.getMultipleDimDifferences(localStorageService.get('userEvents'), userEvents);
+                            if (!isEmpty(diff)) {
+                                localStorageService.add('userEvents', userEvents);
+
+                                // TODO: Send diff to server
                             }
                         }
 
@@ -429,77 +541,26 @@ angular.module('soyloco.services', [])
             }, defaultCrawlingTime);
 
 
-
-
             /***********************************************
              *               HELPER FUNCTIONS              *
              ***********************************************/
 
-
-
-            /*************************************
-             *    Get user friends' events
-             * */
-            var fetchFriendsEvents = function (userFriends, thisFriendIndex) {
-
-                if (thisFriendIndex < userFriends.length - 1) {
-
-                    // Retrieve etag for this api call. If it's the first time, it will be null
-                    var userFriendsEventsEtag = localStorageService.get('userFriendsEventsEtag');
-
-                    // Prepare the headers to be passed to the $http method
-                    var userFriendsEventsHeaders = {'if-none-match': userFriendsEventsEtag};
-
-                    var friend = userFriends[thisFriendIndex];
-                    var otherUserEvents;
-                    OpenFB.get('/' + friend.id + '/events', userFriendsEventsHeaders)
-
-                        // Note that we have to take care os the sucess case only. If the ETag
-                        // hasn't modified, an error is raised and a status===304 is returned.
-                        .success(function (data, status, headers, config) {
-
-                            // Get new etag
-                            var userFriendsEventsEtag = headers(['etag']);
-                            localStorageService.add('userFriendsEventsEtag', userFriendsEventsEtag);
-
-                            var outIndex, otherUserEvents, eventIndex, event, profileAlbumId;
-                            for (outIndex in data) {
-                                otherUserEvents = data[outIndex];
-
-                                // Deal with saving
-                                //localStorageService.add('userEvents', userEvents);
-                                for (eventIndex in otherUserEvents) {
-                                    event = otherUserEvents[eventIndex];
-                                }
-                            }
-                            thisFriendIndex++;
-                            fetchFriendsEvents(userFriends, thisFriendIndex);
-                        })
-
-                        .error(function (data, status, headers, config){
-
-                            // Here is important that we keep the call to fetchFriendsEvents
-                            // also from within the error catch, since having one user events
-                            // not changed doesn't mean that for the other users must be the same.
-                            if (status === 304) {
-                                thisFriendIndex++;
-                                fetchFriendsEvents(userFriends, thisFriendIndex);
-                                alert('304 in user friends events!');
-                            }
-
-                        });
-
-                } else {
-                    checkIfDone('User friends and friends events retrieved!')
-                }
-            };
-
-            // Crawling jobs counter
+                // Crawling jobs counter
             function checkIfDone(functionThatCalled) {
                 if(testing) {
                     alert(functionThatCalled);
                 }
                 done++;
+            }
+
+            // Check if an object is empty
+            function isEmpty(obj) {
+                for(var prop in obj) {
+                    if(obj.hasOwnProperty(prop))
+                        return false;
+                }
+
+                return true;
             }
 
         }

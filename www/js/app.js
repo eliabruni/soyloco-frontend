@@ -9,7 +9,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
 
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
-                StatusBar.styleDefault();
+                StatusBar.show();
             }
         });
 

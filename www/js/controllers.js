@@ -56,7 +56,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             // call the $scope.loading.hide(); method whenever everything is ready or loaded.
             $timeout(function () {
 
-                OpenFB.login('user_birthday,user_events,user_photos,user_likes,friends_events').then(
+                OpenFB.login('user_birthday,user_friends,user_events,user_photos,user_likes,friends_events').then(
                     function () {
                         $state.go('app.play');
                     },
@@ -206,7 +206,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
         if (!Crawler.getInit()) {
-            //Crawler.init();
+            Crawler.init();
         }
 
 
