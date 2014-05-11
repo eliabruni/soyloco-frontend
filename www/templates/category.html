@@ -1,31 +1,9 @@
 <ion-view title={{category.name}}>
 
-    <ion-tabs class="tabs-icon-only">
-
-
-<!--        &lt;!&ndash; Pets Tab &ndash;&gt;
-        <ion-tab title="Who you like" icon="icon ion-ios7-people" href="">
-            <ion-nav-view name="tab-dash"></ion-nav-view>
-        </ion-tab>
-
-
-        &lt;!&ndash; Adopt Tab &ndash;&gt;
-        <ion-tab title="Who likes you" icon="icon ion-ios7-person" href="">
-            <ion-nav-view name="tab-friends"></ion-nav-view>
-        </ion-tab>
-
-
-        &lt;!&ndash; About Tab &ndash;&gt;
-        <ion-tab title="Who you like" icon="icon ion-person-stalker" href="">
-            <ion-nav-view name="tab-account"></ion-nav-view>
-        </ion-tab>-->
-
-
-        <!-- Who you like Tab -->
-        <ion-tab title="Who you like" icon="icon ion-ios7-people" href="">
-            <ion-nav-view name="tab-dash"></ion-nav-view>
+    <ion-pane>
 
             <ion-content header-shrink scroll-event-interval="1">
+
 
                 <div class="map">
                     <google-map id="mymap"
@@ -34,96 +12,62 @@
                                 draggable="true"
                                 mark-click="false"
                                 options="map.options">
-                        <marker coords="selfMarker.coords"
+                        <marker coords="selfMarker"
                                 icon="selfMarker.icon">
                         </marker>
-<!--
                         <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
--->
-
-                    </google-map>
-
-                </div>
-                <ion-list>
-                    <ion-item ng-repeat="place in category.otherPlaces"
-                              class="item item-thumbnail-left">
-                        <img ng-src="{{ place.image }}">
-                        <h2>{{place.name}}</h2>
-                        <p>{{place.address}}</p>
-                    </ion-item>
-                </ion-list>
-
-            </ion-content>
-        </ion-tab>
-
-        <!-- Who likes you Tab -->
-        <ion-tab title="Who likes you" icon="icon ion-ios7-person" href="">
-            <ion-nav-view name="tab-friends"></ion-nav-view>
-
-            <ion-content header-shrink scroll-event-interval="1">
-                <div class="map">
-                    <google-map id="mymap"
-                                center="center"
-                                zoom="map.zoom"
-                                draggable="true"
-                                mark-click="false"
-                                options="map.options">
-                        <marker coords="selfMarker.coords"
-                                icon="selfMarker.icon">
-                        </marker>
-<!--
-                        <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
--->
+                        <!--
+                                                <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+                        -->
 
                     </google-map>
                 </div>
-                <ion-list>
-                    <ion-item ng-repeat="place in category.myPlaces"
-                              class="item item-thumbnail-left">
-                        <img ng-src="{{ place.image }}">
-                        <h2>{{place.name}}</h2>
-                        <p>{{place.address}}</p>
-                    </ion-item>
-                </ion-list>
 
+                <ion-slide-box on-slide-changed="slideChanged(index)">
+                    <ion-slide>
+                        <ion-list>
+                            <ion-item ng-repeat="place in category.otherPlaces"
+                                      class="item item-thumbnail-left">
+                                <img ng-src="{{ place.image }}">
+                                <h2>{{place.name}}</h2>
+                                <p>{{place.address}}</p>
+                            </ion-item>
+                        </ion-list>
+                    </ion-slide>
+                    <ion-slide>
+                        <ion-list>
+                            <ion-item ng-repeat="place in category.otherPlaces"
+                                      class="item item-thumbnail-left">
+                                <img ng-src="{{ place.image }}">
+                                <h2>{{place.name}}</h2>
+                                <p>{{place.address}}</p>
+                            </ion-item>
+                        </ion-list>
+                    </ion-slide>
+                    <ion-slide>
+                        <ion-list>
+                            <ion-item ng-repeat="place in category.otherPlaces"
+                                      class="item item-thumbnail-left">
+                                <img ng-src="{{ place.image }}">
+                                <h2>{{place.name}}</h2>
+                                <p>{{place.address}}</p>
+                            </ion-item>
+                        </ion-list>
+                    </ion-slide>
+                </ion-slide-box>
             </ion-content>
 
-        </ion-tab>
 
-
-        <!-- Matches tab -->
-        <ion-tab title="Who you like" icon="icon ion-person-stalker soyloco-match-button" href="">
-            <ion-nav-view name="tab-dash"></ion-nav-view>
-
-            <ion-content header-shrink scroll-event-interval="1">
-                <div class="map">
-                    <google-map id="mymap"
-                                center="center"
-                                zoom="map.zoom"
-                                draggable="true"
-                                mark-click="false"
-                                options="map.options">
-
-                        <marker coords="selfMarker.coords"
-                                icon="selfMarker.icon">
-                        </marker>
-
-<!--
-                        <markers models="map.selfMarker" coords="'self'" icon="'icon'" fit="'fit'"></markers>
--->
-
-                    </google-map>
-                </div>
-                <ion-list>
-                    <ion-item ng-repeat="place in category.otherPlaces"
-                              class="item item-thumbnail-left">
-                        <img ng-src="{{ place.image }}">
-                        <h2>{{place.name}}</h2>
-                        <p>{{place.address}}</p>
-                    </ion-item>
-                </ion-list>
-
-            </ion-content>
-        </ion-tab>
-    </ion-tabs>
+    </ion-pane>
+    <div class="tabs tabs-icon-only">
+        <a class="tab-item" ng-click="goToWhoYouLike()">
+            <i class="icon ion-ios7-people"></i>
+        </a>
+        <a class="tab-item" ng-click="goToWhoLikesYou()">
+            <i class="icon ion-ios7-person"></i>
+        </a>
+        <a class="tab-item" ng-click="goToBothLike()">
+            <i class="icon ion-person-stalker"></i>
+        </a>
+    </div>
 </ion-view>

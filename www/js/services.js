@@ -32,8 +32,7 @@ angular.module('soyloco.services', [])
             // device APIs are available
             function onDeviceReady() {
                 // Throw an error if no update is received every 30 seconds
-                // Provides a hint that the application needs the best possible results.
-                var options = { timeout: 30000, enableHighAccuracy: true };
+                var options = { timeout: 30000};
                 watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
             }
 

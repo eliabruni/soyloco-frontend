@@ -72,13 +72,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         };
 
-        $scope.next = function() {
-            $ionicSlideBoxDelegate.next();
-        };
-        $scope.previous = function() {
-            $ionicSlideBoxDelegate.previous();
-        };
-
         // Called each time the slide changes
         $scope.slideChanged = function(index) {
             $scope.slideIndex = index;
@@ -117,10 +110,15 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, Categories, Geo) {
+    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate,
+                                         Categories, Geo) {
 
         // Get the category ID into scope
         $scope.category = Categories.get($stateParams.categoryId);
+
+
+        // MAP LOGIC
+
 
         var lat = 33.22;
         var long = 35.33;
@@ -139,35 +137,18 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         };
 
         $scope.selfMarker = {
-            icon: 'img/maps/blue_marker.png',
-            coords: {
-                latitude:lat,
-                longitude:long
-            },
+            icon: 'img/maps/self_marker.png',
+            latitude:lat,
+            longitude:long,
             fit:true
         };
 
 
         $scope.$watch('Geo.getPosition()', function(newPosition) {
-/*            $scope.center = {
-                latitude: newPosition.lat,
-                longitude: newPosition.long
-            };*/
-
             $scope.$apply(function () {
-
-                $scope.selfMarker = {
-                    icon: 'img/maps/self_marker_move.png',
-                    coords: {
-                        latitude:newPosition.lat,
-                        longitude:newPosition.long
-                    },
-                    fit:true
-                };
+                $scope.selfMarker.latitude = newPosition.lat;
+                $scope.selfMarker.longitude = newPosition.long;
             });
-            $scope.$apply();
-
-
         });
 
         $scope.map = {
@@ -182,47 +163,72 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             markers : [
                 {
                     icon: 'img/maps/blue_marker.png',
-                    "latitude":33.22,
-                    "longitude":35.33,
+                    "latitude":$scope.selfMarker.latitude+0.001,
+                    "longitude":$scope.selfMarker.longitude+0.003,
                     fit:true
 
                 },
                 {
                     icon: 'img/maps/blue_marker.png',
-                    "latitude":33.23,
-                    "longitude":35.34,
-                    fit:true
-
-                },
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":33.21,
-                    "longitude":35.32,
-                    fit:true
-
-                },
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":33.224,
-                    "longitude":35.323,
-                    fit:true
-
-                },
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":33.24,
-                    "longitude":35.31,
-                    fit:true
-                },
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":33.256,
-                    "longitude":35.3123,
+                    "latitude":$scope.selfMarker.latitude+0.002,
+                    "longitude":$scope.selfMarker.longitude+0.001,
                     fit:true
 
                 }
             ]
         };
+
+
+
+        // SLIDER LOGIC
+
+        $scope.slideIndex = 0;
+
+        // Called each time the slide changes
+        $scope.slideChanged = function(index) {
+            $scope.slideIndex = index;
+        };
+
+        $scope.goToWhoYouLike = function() {
+
+            if ($scope.slideIndex == 1) {
+                $ionicSlideBoxDelegate.previous();
+            }
+            else if ($scope.slideIndex == 2) {
+                $ionicSlideBoxDelegate.previous();
+                $ionicSlideBoxDelegate.previous();
+            }
+            $scope.slideIndex == 0;
+        };
+
+        $scope.goToWhoLikesYou = function() {
+
+            if ($scope.slideIndex == 0) {
+                $ionicSlideBoxDelegate.next();
+            }
+            else if ($scope.slideIndex == 2) {
+                $ionicSlideBoxDelegate.previous();
+            }
+            $scope.slideIndex == 1;
+
+        };
+
+        // Called each time the slide changes
+        $scope.goToBothLike = function() {
+
+            if ($scope.slideIndex == 0) {
+                $ionicSlideBoxDelegate.next();
+                $ionicSlideBoxDelegate.next();
+            }
+            else if ($scope.slideIndex == 1) {
+                $ionicSlideBoxDelegate.next();
+            }
+            $scope.slideIndex == 2;
+
+        };
+
+
+
 
     })
 
