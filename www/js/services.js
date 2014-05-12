@@ -6,15 +6,25 @@ angular.module('soyloco.services', [])
  *
  * ********************************************************/
     .factory('MenuService', function() {
-        var isEnabled = true;
+        this.leftIsEnabled = false;
+        this.rightIsEnabled = false;
+
+        function  enableLeftMenu(enable) {
+            this.leftIsEnabled = enable;
+        }
+
+        function  enableRightMenu(enable) {
+            this.rightIsEnabled = enable;
+        }
 
         return {
-            isEnabled:isEnabled
+            enableLeftMenu: enableLeftMenu,
+            enableRightMenu: enableRightMenu
         }
     })
 
 /**********************************************************
- *                  MENU UTILITY
+     *                  GEO UTILITY
  *
  * ********************************************************/
     .factory('Geo', function() {
@@ -24,7 +34,6 @@ angular.module('soyloco.services', [])
 
         // device APIs are available
         function init() {
-
 
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -204,4 +213,29 @@ angular.module('soyloco.services', [])
             }
         }
 
-    });
+    })
+
+/**
+ * A simple example service that returns some categories.
+ */
+    .factory('Users', function() {
+        var users = [
+            {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},
+                {id: 2,userId: 1, image: 'img/emilia.jpg'},
+                {id: 3,userId: 1, image: 'img/emilia.jpg'}]},
+
+            {id:2, name:'emma', photos:[{id: 1,userId: 2, image: 'img/emma.jpg'},
+                {id: 2,userId: 2, image: 'img/emma.jpg'},
+                {id: 3,userId: 2, image: 'img/emma.jpg'}]},
+            {id:3, name:'jennifer', photos:[{id: 1, userId: 3, image: 'img/jennifer.jpg'},
+                {id: 2, userId: 3,image: 'img/jennifer.jpg'},
+                {id: 3, userId: 3,image: 'img/jennifer.jpg'}]}
+        ];
+
+        return {
+            all: function () {
+                return users;
+            }
+        }
+
+    })

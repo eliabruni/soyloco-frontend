@@ -102,7 +102,8 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('ProfileCtrl', function ($scope) {
+    .controller('ProfileCtrl', function ($scope, MenuService) {
+        MenuService.enableRightMenu(false);
 
 
     })
@@ -112,8 +113,10 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate,
-                                         Categories, Geo) {
+    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicLoading,
+                                         Categories, Geo, MenuService) {
+
+        MenuService.enableRightMenu(true);
 
         Categories.setCategoryIdx(0);
 
@@ -122,13 +125,15 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                 return Categories.actualCategoryIdx;
             },
 
-            function(newVal, oldVal) {
+            function() {
                 $scope.category = Categories.getActualCategory();
             }, true);
 
 
 
         // MAP LOGIC
+
+        // Fake coords to make browser working
         var lat = 33.22;
         var long = 35.33;
 
@@ -137,8 +142,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             lat = position.lat;
             long = position.long;
         }
-
-        $scope.Geo = Geo;
 
         $scope.center = {
             latitude: lat,
@@ -248,11 +251,12 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *
  * */
     .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
-                                     $ionicSwipeCardDelegate, Crawler, MenuService) {
+                                     $ionicSwipeCardDelegate, Crawler, MenuService, Users) {
 
 
         // Need to reactivate the side menu just here because it's the fallback route;
-        MenuService.isEnabled = true;
+        MenuService.enableLeftMenu(true);
+        MenuService.enableRightMenu(false);
 
 
         // Crwaling starts here becuse it's the fallback route.
@@ -260,7 +264,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         if (!Crawler.getInit()) {
             //Crawler.init();
         }
-
 
 
         // TODO: change the nonsense timeout. The problem is that without is doesn't work.
@@ -276,20 +279,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         }, 10000);
 
 
-
-
-        var users = [
-            {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},
-                {id: 2,userId: 1, image: 'img/emilia.jpg'},
-                {id: 3,userId: 1, image: 'img/emilia.jpg'}]},
-
-            {id:2, name:'emma', photos:[{id: 1,userId: 2, image: 'img/emma.jpg'},
-                {id: 2,userId: 2, image: 'img/emma.jpg'},
-                {id: 3,userId: 2, image: 'img/emma.jpg'}]},
-            {id:3, name:'jennifer', photos:[{id: 1, userId: 3, image: 'img/jennifer.jpg'},
-                {id: 2, userId: 3,image: 'img/jennifer.jpg'},
-                {id: 3, userId: 3,image: 'img/jennifer.jpg'}]}
-        ];
+        var users = Users.all();
 
         $scope.nextUser = function(nextUserId) {
 
@@ -337,7 +327,9 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler) {
+    .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler, MenuService) {
+        MenuService.enableRightMenu(false);
+
         $scope.logout = function () {
             OpenFB.logout();
             Crawler.stop();
