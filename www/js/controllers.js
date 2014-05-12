@@ -1,6 +1,6 @@
 angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
-    .controller('AppCtrl', function ($scope, $state, OpenFB, MenuService) {
+    .controller('AppCtrl', function ($scope, $state, OpenFB, MenuService, Categories) {
 
         $scope.MenuService = MenuService;
 
@@ -18,6 +18,13 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     //alert('Revoke permissions failed');
                 });
         };
+
+
+        $scope.setCategoryIdx = function(categoryIdx) {
+            Categories.setCategoryIdx(categoryIdx);
+        }
+
+
 
     })
 
@@ -100,11 +107,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('CategoriesCtrl', function($scope, Categories) {
-        $scope.categories = Categories.all();
-
-    })
-
 /*************************************
  *
  *          Category controller
@@ -113,13 +115,20 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate,
                                          Categories, Geo) {
 
+        Categories.setCategoryIdx(0);
+
         // Get the category ID into scope
-        $scope.category = Categories.get($stateParams.categoryId);
+        $scope.$watch(function () {
+                return Categories.actualCategoryIdx;
+            },
+
+            function(newVal, oldVal) {
+                $scope.category = Categories.getActualCategory();
+            }, true);
+
 
 
         // MAP LOGIC
-
-
         var lat = 33.22;
         var long = 35.33;
 

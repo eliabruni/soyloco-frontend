@@ -14,25 +14,13 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
             }
         });
 
-
-/*        // Retrieve html location
-        LocationService.getLatLong().then(
-            function(latLong) {
-                localStorageService.add('htmlLocation', latLong);
-            },
-
-            function(error) {
-                alert(error);
-            }
-        );*/
-
-       $rootScope.$on('$stateChangeStart', function(event, toState) {
+/*       $rootScope.$on('$stateChangeStart', function(event, toState) {
             if (toState.name !== "app.login" && toState.name !== "app.logout" &&
                 (localStorageService.get('fbtoken') === null) ) {
                 $state.go('app.login');
                 event.preventDefault();
             }
-        });
+        });*/
 
         $rootScope.$on('OAuthException', function() {
             $state.go('app.login');
@@ -80,18 +68,8 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
                 }
             })
 
-            .state('app.categories', {
-                url: "/categories",
-                views: {
-                    'menuContent' :{
-                        templateUrl: "templates/categories.html",
-                        controller: 'CategoriesCtrl'
-                    }
-                }
-            })
-
             .state('app.category', {
-                url: "/categories/:categoryId",
+                url: "/category",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/category.html",

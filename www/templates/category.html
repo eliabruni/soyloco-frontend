@@ -1,4 +1,10 @@
 <ion-view title={{category.name}}>
+    <ion-nav-buttons side="left" class="soyloco-nav-buttons">
+        <i menu-toggle="left" class="icon ion-home ion-navicon soyloco-ion-navicon"></i>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right" class="soyloco-nav-buttons">
+        <i menu-toggle="right" class="icon ion-gear-a soyloco-ion-navicon"></i>
+    </ion-nav-buttons>
 
     <ion-pane>
 
@@ -23,7 +29,7 @@
                     </google-map>
                 </div>
 
-                <ion-slide-box on-slide-changed="slideChanged(index)">
+                <ion-slide-box show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
                     <ion-slide>
                         <ion-list>
                             <ion-item ng-repeat="place in category.otherPlaces"
@@ -36,7 +42,7 @@
                     </ion-slide>
                     <ion-slide>
                         <ion-list>
-                            <ion-item ng-repeat="place in category.otherPlaces"
+                            <ion-item ng-repeat="place in category.myPlaces"
                                       class="item item-thumbnail-left">
                                 <img ng-src="{{ place.image }}">
                                 <h2>{{place.name}}</h2>
