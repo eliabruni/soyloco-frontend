@@ -6,7 +6,7 @@ angular.module('soyloco.services', [])
  *
  * ********************************************************/
     .factory('MenuService', function() {
-        this.leftIsEnabled = false;
+        this.leftIsEnabled = true;
         this.rightIsEnabled = false;
 
         function  enableLeftMenu(enable) {
@@ -52,8 +52,8 @@ angular.module('soyloco.services', [])
 
             // onError Callback receives a PositionError object
             function onError(error) {
-                alert('code: ' + error.code + '\n' +
-                    'message: ' + error.message + '\n');
+               /* alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');*/
             }
         }
 

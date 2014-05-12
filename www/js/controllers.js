@@ -31,7 +31,8 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
     .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
                                        $ionicLoading, OpenFB, MenuService) {
 
-        MenuService.isEnabled = false;
+        MenuService.enableLeftMenu(false);
+        MenuService.enableRightMenu(false);
 
         var numTaps = 0;
 
@@ -61,11 +62,12 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
             // Set a timeout to clear loader, however you would actually
             // call the $scope.loading.hide(); method whenever everything is ready or loaded.
-            $timeout(function () {
+            var timer = $timeout(function () {
 
                 OpenFB.login('user_birthday,user_friends,user_events,user_photos,user_likes,friends_events').then(
                     function () {
-                        $state.go('app.play');
+
+                        $state.go('app.category');
                     },
 
                     // TODO: Not capturing errors
@@ -76,6 +78,17 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                     });
                 $ionicLoading.hide();
             }, 5000);
+
+            // When the DOM element is removed from the page,
+            // AngularJS will trigger the $destroy event on
+            // the scope. This gives us a chance to cancel any
+            // pending timer that we may have.
+            $scope.$on(
+                "$destroy",
+                function(event) {
+                    $timeout.cancel(timer);
+                }
+            );
 
         };
 
@@ -114,9 +127,22 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *
  * */
     .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicLoading,
-                                         Categories, Geo, MenuService) {
+                                         Categories, Geo, MenuService, Crawler) {
 
         MenuService.enableRightMenu(true);
+
+
+        // Need to reactivate the side menu just here because it's the fallback route;
+        MenuService.enableLeftMenu(true);
+
+
+
+        // Crwaling starts here becuse it's the fallback route.
+        // If fallback route is changed, remeber to move Crawler.init().
+        if (!Crawler.getInit()) {
+            //Crawler.init();
+        }
+
 
         Categories.setCategoryIdx(0);
 
@@ -251,32 +277,33 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
  *
  * */
     .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
-                                     $ionicSwipeCardDelegate, Crawler, MenuService, Users) {
+                                     $ionicSwipeCardDelegate, MenuService, Users) {
 
 
-        // Need to reactivate the side menu just here because it's the fallback route;
-        MenuService.enableLeftMenu(true);
         MenuService.enableRightMenu(false);
 
-
-        // Crwaling starts here becuse it's the fallback route.
-        // If fallback route is changed, remeber to move Crawler.init().
-        if (!Crawler.getInit()) {
-            //Crawler.init();
-        }
-
-
-        // TODO: change the nonsense timeout. The problem is that without is doesn't work.
+        // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
         $timeout(function () {
             $ionicSlideBoxDelegate.enableSlide(false);
         }, 0);
 
         //TODO: This is just a plcaeholder for a call to the server
-        $timeout(function () {
+        var timer = $timeout(function () {
             $ionicSlideBoxDelegate.next();
             //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 10000);
+        }, 5000);
+
+        // When the DOM element is removed from the page,
+        // AngularJS will trigger the $destroy event on
+        // the scope. This gives us a chance to cancel any
+        // pending timer that we may have.
+        $scope.$on(
+            "$destroy",
+            function(event) {
+                $timeout.cancel(timer);
+            }
+        );
 
 
         var users = Users.all();

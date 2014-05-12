@@ -11,16 +11,17 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
                 StatusBar.show();
+                StatusBar.styleDefault();
             }
         });
 
-/*       $rootScope.$on('$stateChangeStart', function(event, toState) {
-            if (toState.name !== "app.login" && toState.name !== "app.logout" &&
-                (localStorageService.get('fbtoken') === null) ) {
-                $state.go('app.login');
-                event.preventDefault();
-            }
-        });*/
+        /*       $rootScope.$on('$stateChangeStart', function(event, toState) {
+         if (toState.name !== "app.login" && toState.name !== "app.logout" &&
+         (localStorageService.get('fbtoken') === null) ) {
+         $state.go('app.login');
+         event.preventDefault();
+         }
+         });*/
 
         $rootScope.$on('OAuthException', function() {
             $state.go('app.login');
@@ -100,7 +101,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
 
         // fallback route
         // If fallback route is changed, remeber to move Crawler.init()
-        $urlRouterProvider.otherwise('/app/play');
+        $urlRouterProvider.otherwise('/app/category');
 
     });
 
