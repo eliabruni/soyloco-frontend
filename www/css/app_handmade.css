@@ -1,9 +1,9 @@
 /* Your app's CSS, go crazy, make it your own */
 
 
-
-/*INTRO*/
-
+/*************************************
+*   LOGIN
+*/
 
 .login-slider {
     height: 80%;
@@ -21,7 +21,6 @@
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
-
 
 #facebook-logo {
     width: 90% ;
@@ -66,10 +65,8 @@
 }
 
 
-
-
-/*
-MENU VIEW
+/*************************************
+*   MENU VIEW
 */
 
 .soyloco-ion-navicon {
@@ -98,32 +95,72 @@ MENU VIEW
 
 
 
-/*
-PLACES VIEW
+
+
+/*************************************
+*   PLAY VIEW
 */
 
-.soyloco-place-button {
-    font-size: 45px;
-    color: #000000;
-}
 
-.soyloco-place-text {
-    font-size: 22px;
-    text-decoration: none;
-    color: #000000;
-    padding-top: 5px;
-    padding-bottom: 25px
-    border-style: dotted;
+.play-slider {
+    height: 100%;
 }
 
 
+/*BUTTONS*/
 
+
+.swipe-button-left {
+    margin-top: 450px;
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+    margin-left: 0px;
+    z-index: 1;
+}
+
+.swipe-button-right {
+    margin-top: 450px;
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+    margin-left: 0px;
+    z-index: 1;
+}
+
+
+.icon-cancel-soyloco {
+    font-size: 2.3em;
+    color:#FF3B30;
+    display: block;
+    background-color: #f7f7f7;
+    margin: 22.5px;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    line-height: 83.75px;
+    border-radius: 50%;
 /*
-PLACE VIEW
+    box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
 */
+}
 
-.soyloco-match-button {
-    color: #ffffff;
+.icon-heart-soyloco {
+    font-size: 2.8em;
+    color:#76EE00;
+    display: block;
+    background-color: #f7f7f7;
+    margin: 22.5px;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    line-height: 83.75px;
+    border-radius: 50%;
+/*
+    box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
+*/
 }
 
 
@@ -134,24 +171,12 @@ SWIPE IN PLAY VIEW
 
 .pane {
     background-color: #fff !important;
-}
 
-.pane .play {
-    background-color: #E0D7CE;
-}
-
-.bar.bar-transparent {
-    background-color: transparent;
-    background-image: none;
-    border: none;
-}
-
-.bar .title {
-    color: #eee;
 }
 
 .swipe-cards {
     position: fixed;
+    z-index: 2;
 }
 
 .swipe-card {
@@ -163,7 +188,7 @@ SWIPE IN PLAY VIEW
     left: 50%;
     top: 50%;
     width: 300px;
-    height: 300px;
+    height: 320px;
     margin-left: -150px;
     margin-top: -150px;
     box-sizing: border-box;
@@ -173,59 +198,22 @@ SWIPE IN PLAY VIEW
     -webkit-animation-fill-mode: forwards;
 }
 
-.swipe-card .title {
-    height: 40px;
-    padding: 5px;
-    line-height: 30px;
-    color: #444;
-}
 .swipe-card .image {
     overflow: hidden;
-    max-height: 210px;
+    width: 300px;
+    height: 300px;
 }
-.swipe-card .button {
-    border: none;
-}
+
 .swipe-card .image img {
     width: 100%;
-    border-radius: 0px 0px 4px 4px;
+    height:85%;
+    border-radius: 0px 0px 0px 0px;
 }
 
-#start-card {
-    color: #fff;
-    background-color: #45668e;
-    line-height: 300px;
-    word-wrap: break-word;
-    border: 6px solid #45668e;
-    text-align: center;
-}
-#start-card span {
-    display: inline-block;
-    line-height: 40px;
-    width: 200px;
-    font-size: 30px;
-    vertical-align: middle;
-}
 
-@-webkit-keyframes bounceIn {
-    0% {
-        -webkit-transform: scale(0,0);
-    }
-    70% {
-        -webkit-transform: scale(1.2,1.2);
-    }
-    100% {
-        -webkit-transform: scale(1,1);
-    }
-}
-
-.swipe-card.pop-in-start {
-    -webkit-transform: scale(0,0);
-}
-.swipe-card.pop-in {
-    -webkit-animation: bounceIn 0.3s ease-out;
-}
-
+/*
+SPINNER
+*/
 
 .spinner{
     width:4em;
@@ -297,15 +285,10 @@ SWIPE IN PLAY VIEW
 
 }
 
-
-
-
-
-
-
 /*
 MAP IN CATEOGRY VIEW
 */
+
 
 .scroll-content{
     z-index: 11;
@@ -331,10 +314,11 @@ MAP IN CATEOGRY VIEW
     width: 100%;
     height: 100%; }
 
-/*
-SETTINGS VIEW
-*/
 
+
+/*************************************
+*   SETTINGS VIEW
+*/
 
 .setting-form {
     background: #e6e5eb;

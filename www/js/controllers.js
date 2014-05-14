@@ -292,7 +292,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             $ionicSlideBoxDelegate.next();
             //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 5000);
+        }, 10);
 
         // When the DOM element is removed from the page,
         // AngularJS will trigger the $destroy event on
@@ -308,10 +308,14 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         var users = Users.all();
 
+
         $scope.nextUser = function(nextUserId) {
+
+            $scope.userId = nextUserId;
 
             var photos = users[nextUserId-1].photos;
             $scope.cards = Array.prototype.slice.call(photos, 0, 0);
+            $scope.userName = users[nextUserId-1].name;
 
             var photoIdx, photo;
             for (photoIdx in photos) {
@@ -323,11 +327,14 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             $scope.addUserCard(photos[0]);
         };
 
+
         $scope.addUserCard = function(userCard) {
             $scope.cards.push(angular.extend({}, userCard));
         };
 
         $scope.cardSwiped = function(index, userId) {
+
+            $scope.userId = userId;
 
             // Index goes in decreasing order,
             // We need to update at one before last, i.e. index == 1
@@ -350,6 +357,14 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                 $scope.nextUser(userId + 1);
             }
         };
+
+        // Start with first card
+        // TODO: put this into directive?
+        var init = function () {
+            $scope.nextUser(1);
+        };
+        // and fire it after definition
+        init();
 
 
     })

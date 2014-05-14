@@ -220,16 +220,25 @@ angular.module('soyloco.services', [])
  */
     .factory('Users', function() {
         var users = [
-            {id:1, name:'emilia', photos:[{id: 1, userId: 1, image: 'img/emilia.jpg'},
-                {id: 2,userId: 1, image: 'img/emilia.jpg'},
-                {id: 3,userId: 1, image: 'img/emilia.jpg'}]},
 
-            {id:2, name:'emma', photos:[{id: 1,userId: 2, image: 'img/emma.jpg'},
-                {id: 2,userId: 2, image: 'img/emma.jpg'},
-                {id: 3,userId: 2, image: 'img/emma.jpg'}]},
-            {id:3, name:'jennifer', photos:[{id: 1, userId: 3, image: 'img/jennifer.jpg'},
-                {id: 2, userId: 3,image: 'img/jennifer.jpg'},
-                {id: 3, userId: 3,image: 'img/jennifer.jpg'}]}
+                {id:1, name:'emilia', photos:[
+                    {id: 1, userId: 1, image: 'img/emilia.jpg'},
+                    {id: 2,userId: 1, image: 'img/emilia.jpg'},
+                    {id: 3,userId: 1, image: 'img/emilia.jpg'}
+                ]},
+
+                {id:2, name:'emma', photos:[
+                    {id: 1,userId: 2, image: 'img/emma.jpg'},
+                    {id: 2,userId: 2, image: 'img/emma.jpg'},
+                    {id: 3,userId: 2, image: 'img/emma.jpg'}
+                ]},
+
+                {id:3, name:'jennifer', photos:[
+                    {id: 1, userId: 3, image: 'img/jennifer.jpg'},
+                    {id: 2, userId: 3,image: 'img/jennifer.jpg'},
+                    {id: 3, userId: 3,image: 'img/jennifer.jpg'}
+                ]}
+
         ];
 
         return {
