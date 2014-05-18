@@ -15,30 +15,20 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 
-// TODO: need to create our own soyloco theme
-
-$button-font-size:                30px !default;
-
-$bar-stable-bg:                   #45668e;
+$bar-stable-bg:                   #FF3B30;
 $bar-stable-text:                 #ffffff;
 $bar-height:                      50px !default;
 $bar-title-font-size:             25px !default;
 
-$tabs-height:                     60px;
-$tabs-icon-size:                  38px;
+$tabs-height:                     55px;
+$tabs-icon-size:                  35px;
 $tabs-default-bg:                 #282828;
 $tabs-default-text:               #ffffff;
 
-$button-stable-bg:                white;
-$button-stable-text:              #444 !default;
-$button-stable-border:            #b2b2b2 !default;
-$button-stable-active-bg:         red !default;
-$button-stable-active-border:     white !default;
-
-
-// for facebook login
-//$button-border-radius:           10px 10px 10px 10px;
-
+//$button-default-active-bg: red;
+/*$button-default-bg:               red;
+$button-default-text:             red;
+$button-default-active-border:   white;*/
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css

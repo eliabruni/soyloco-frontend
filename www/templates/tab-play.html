@@ -1,13 +1,18 @@
-<ion-view title="soyloco">
-    <ion-nav-buttons side="left" class="soyloco-nav-buttons">
-        <i menu-toggle="left" class="icon ion-home ion-navicon soyloco-ion-navicon"></i>
-    </ion-nav-buttons>
-
+<ion-view title="Play">
     <div class="play-slider">
         <ion-slide-box class="slide-test" does-continue="false" show-pager="false" slide-interval="5000" on-slide-changed="">
             <ion-slide>
                 <ion-pane>
-                    <div class="spinner"></div>
+                        <div class="loading clearfix">
+                            <div class="loading-block">
+                            </div>
+                            <div class="loading-block">
+                            </div>
+                            <div class="loading-block">
+                            </div>
+                            <div class="loading-label">Loading...</div>
+                        </div>
+
                 </ion-pane>
             </ion-slide>
 
@@ -44,7 +49,5 @@
 
 
     </div>
-
-
 
 </ion-view>

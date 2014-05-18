@@ -13,7 +13,7 @@
     height: 100%;
 }
 .slider-slide {
-    padding-top: 30px;
+    padding-top: 0px;
     color: #000;
     background-color: #ffffff;
     text-align: center;
@@ -36,6 +36,7 @@
     border-radius: 10px 10px 10px 10px;
     font-size: 19px;
 }
+
 
 #facebook-disclaimer {
     color: #000000;
@@ -65,42 +66,21 @@
 }
 
 
+
 /*************************************
-*   MENU VIEW
+*   TABS
 */
-
-.soyloco-ion-navicon {
-    width: 40px;
-    height:40px;
-    text-align:center;
-    font-size: 45px;
-    /*padding-left: 8px;*/
-    padding-bottom: 30px;
-    border-style: solid;
-    border-width: 2px;
+.tab-item.tab-item-active,
+.tab-item.active,
+.tab-item.activated {
+    opacity: 1;
+    background:#FF3B30;
 }
-
-.soyloco-menu-button {
-    font-size: 64px;
-    color: #000000;
-}
-
-.soyloco-menu-text {
-    font-size: 27px;
-    text-decoration: none;
-    color: #000000;
-    padding-top: 30px;
-    border-style: none;
-}
-
-
-
 
 
 /*************************************
 *   PLAY VIEW
 */
-
 
 .play-slider {
     height: 100%;
@@ -111,7 +91,7 @@
 
 
 .swipe-button-left {
-    margin-top: 450px;
+    margin-top: 385px;
     position: relative;
     display: inline-block;
     margin-right: 0px;
@@ -120,7 +100,7 @@
 }
 
 .swipe-button-right {
-    margin-top: 450px;
+    margin-top: 385px;
     position: relative;
     display: inline-block;
     margin-right: 0px;
@@ -133,7 +113,9 @@
     font-size: 2.3em;
     color:#FF3B30;
     display: block;
+/*
     background-color: #f7f7f7;
+*/
     margin: 22.5px;
     width: 90px;
     height: 90px;
@@ -141,13 +123,14 @@
     text-align: center;
     line-height: 83.75px;
     border-radius: 50%;
+    vertical-align:middle;
 /*
     box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
 */
 }
 
 .icon-heart-soyloco {
-    font-size: 2.8em;
+    font-size: 2.3em;
     color:#76EE00;
     display: block;
     background-color: #f7f7f7;
@@ -158,12 +141,12 @@
     text-align: center;
     line-height: 83.75px;
     border-radius: 50%;
-/*
-    box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
-*/
+    vertical-align:middle;
+
+    /*
+        box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
+    */
 }
-
-
 
 /*
 SWIPE IN PLAY VIEW
@@ -186,22 +169,25 @@ SWIPE IN PLAY VIEW
     position: fixed;
     -webkit-transform: scale(1,1);
     left: 50%;
-    top: 50%;
-    width: 300px;
-    height: 320px;
-    margin-left: -150px;
-    margin-top: -150px;
+    top: 40%;
+    width: 343px;
+    height: 335px;
+    margin-left: -171.5px;
+    margin-top: -167.5px;
     box-sizing: border-box;
     background-color: rgb(255,255,255);
     border-radius: 4px;
     overflow: hidden;
     -webkit-animation-fill-mode: forwards;
+    border-color: #888;
+    border: 1px solid;
 }
 
 .swipe-card .image {
     overflow: hidden;
-    width: 300px;
-    height: 300px;
+    width: 343px;
+    height: 335px;
+
 }
 
 .swipe-card .image img {
@@ -214,6 +200,77 @@ SWIPE IN PLAY VIEW
 /*
 SPINNER
 */
+
+
+
+.loading {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-left: -25px;
+    height: 80px;
+}
+
+.loading-block {
+    width: 10px;
+    height: 40px;
+    background: #B25B91;
+    background-image: -o-linear-gradient(-90deg, #282BD8 0%, #F475DC 0%, #B25B91 100%);
+    background-image: -moz-linear-gradient(-90deg, #282BD8 0%, #F475DC 0%, #B25B91 100%);
+    background-image: -webkit-linear-gradient(-90deg, #282BD8 0%, #F475DC 0%, #B25B91 100%);
+    background-image: -ms-linear-gradient(-90deg, #282BD8 0%, #F475DC 0%, #B25B91 100%);
+    background-image: linear-gradient(-180deg, #282BD8 0%, #F475DC 0%, #B25B91 100%);
+    margin-left: 5px;
+    float: left;
+    border-radius: 4px;
+    border: 1px solid #9C4F78;
+}
+
+.loading-block:first-child {
+    -webkit-animation: block-animation .6s ease-out 0 infinite alternate;
+}
+
+.loading-block:nth-child(2) {
+    -webkit-animation: block-animation .6s ease-out 0.3s infinite alternate;
+}
+
+.loading-block:nth-child(3) {
+    -webkit-animation: block-animation .6s ease-out 0.6s infinite alternate;
+}
+
+
+@-webkit-keyframes block-animation {
+    0% { opacity: 1; height: 40px; margin-top:0px  }
+    /* 50% { opacity: .5; } */
+    100% { opacity: .4; height: 10px; margin-top:20px }
+}
+
+.loading-label {
+    font-family: Lato;
+    color: #aaa;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .spinner{
     width:4em;
@@ -285,9 +342,27 @@ SPINNER
 
 }
 
-/*
-MAP IN CATEOGRY VIEW
+
+/*************************************
+*   CATEGORY VIEW
 */
+
+/*
+MAP
+*/
+
+
+.who-you-like-icon {
+    font-size:25px;
+}
+
+.who-likes-you-icon {
+    font-size:23px;
+}
+
+.both-like-icon {
+    font-size:20px;
+}
 
 
 .scroll-content{
@@ -299,9 +374,9 @@ MAP IN CATEOGRY VIEW
     /*  visibility: hidden;*/
 }
 
-.map{
+.map {
     position: relative;
-    padding-bottom: 75%;
+    padding-bottom: 93%;
     padding-top: 30px; height: 0; overflow: hidden;
 }
 
@@ -313,45 +388,3 @@ MAP IN CATEOGRY VIEW
     left: 0;
     width: 100%;
     height: 100%; }
-
-
-
-/*************************************
-*   SETTINGS VIEW
-*/
-
-.setting-form {
-    background: #e6e5eb;
-}
-
-div.ex
-{
-    padding:3px;
-    border-radius:.75rem;
-    background:#ffffff;
-    border-style: none;
-}
-
-.setting-item {
-    background: #ffffff;
-    color:#383641;
-    border-radius:.75rem;
-    font-size:20px;
-    border-style: none;
-    width: 100%;
-
-}
-
-.setting-divider {
-    background: #e6e5eb;
-    border-style: none;
-    font-size:22px;
-
-}
-
-.setting-button {
-    font-size:18px;
-    color:#000000;
-    text-align:center;
-}
-
