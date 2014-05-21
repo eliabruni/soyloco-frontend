@@ -4,13 +4,13 @@ angular.module('soyloco.controllers', [])
 
         $scope.logout = function () {
             OpenFB.logout();
-            $state.go('app.login');
+            $state.go('login');
         };
 
         $scope.revokePermissions = function () {
             OpenFB.revokePermissions().then(
                 function () {
-                    $state.go('app.login');
+                    $state.go('login');
                 },
                 function () {
                     //alert('Revoke permissions failed');
@@ -253,7 +253,7 @@ angular.module('soyloco.controllers', [])
             $ionicSlideBoxDelegate.next();
             //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 10000);
+        }, 2000);
 
         // When the DOM element is removed from the page,
         // AngularJS will trigger the $destroy event on

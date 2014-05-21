@@ -1,5 +1,48 @@
-<ion-view title="Login">
-    <ion-content class="has-header padding">
-        <h1>Invite</h1>
-    </ion-content>
+
+<ion-view title="Login" hide-back-button="true" style="background: #fffff" hide-nav-bar="true">
+
+    <ion-pane>
+
+        <div class="login-slider">
+
+            <ion-slide-box on-slide-changed="slideChanged(index)">
+                <ion-slide>
+                    <p>
+                        We've worked super hard to make you happy.
+                    </p>
+                    <p>
+                        But if you are angry, too bad.
+                    </p>
+                </ion-slide>
+                <ion-slide>
+                    <h3>Using Awesome</h3>
+
+                    <div id="list">
+                        <h5>Just three steps:</h5>
+                        <ol>
+                            <li>Be awesome</li>
+                            <li>Stay awesome</li>
+                            <li>There is no step 3</li>
+                        </ol>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <h3>Any questions?</h3>
+                    <p>
+                        Too bad!
+                    </p>
+                </ion-slide>
+            </ion-slide-box>
+
+            <div id="facebook-logo">
+                <button class="button button-block facebook-button"ng-click="facebookLogin()">
+                    Sign in with Facebook
+                </button>
+            </div>
+            <div id="facebook-disclaimer">
+                <p>We will never post anything to your Facebook account.</p>
+            </div>
+        </div>
+    </ion-pane>
+
 </ion-view>

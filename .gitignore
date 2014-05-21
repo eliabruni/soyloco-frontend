@@ -5,4 +5,5 @@ platforms/ios
 .sass-cache
 plugins/*
 www/components
+www/lib
 bower_components

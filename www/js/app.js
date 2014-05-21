@@ -51,6 +51,17 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
         // Set up the various states which the app can be in.
         // Each state's controller can be found in controllers.js
         $stateProvider
+            .state('login', {
+                url: "/login",
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
+            })
+
+            .state('logout', {
+                url: "/logout",
+                templateUrl: "templates/logout.html",
+                controller: 'LogoutCtrl'
+            })
 
             // setup an abstract state for the tabs directive
             .state('tab', {
@@ -58,26 +69,6 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
                 abstract: true,
                 templateUrl: "templates/tabs.html",
                 controller: "TabsCtrl"
-            })
-
-            .state('login', {
-                url: "/login",
-                views: {
-                    'login': {
-                        templateUrl: "templates/login.html",
-                        controller: "LoginCtrl"
-                    }
-                }
-            })
-
-            .state('logout', {
-                url: "/logout",
-                views: {
-                    'logout': {
-                        templateUrl: "templates/logout.html",
-                        controller: "LogoutCtrl"
-                    }
-                }
             })
 
             // Each tab has its own nav history stack:
@@ -111,7 +102,6 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
                     }
                 }
             })
-
 
             .state('tab.invite', {
                 url: '/invite',
