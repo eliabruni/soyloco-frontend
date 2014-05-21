@@ -4,3 +4,4 @@ platforms/ios
 .idea
 .sass-cache
 plugins
+www/components
