@@ -24,7 +24,7 @@ angular.module('soyloco.services', [])
     })
 
 /**********************************************************
-     *                  GEO UTILITY
+ *                  GEO UTILITY
  *
  * ********************************************************/
     .factory('Geo', function() {
@@ -52,8 +52,8 @@ angular.module('soyloco.services', [])
 
             // onError Callback receives a PositionError object
             function onError(error) {
-               /* alert('code: ' + error.code + '\n' +
-                    'message: ' + error.message + '\n');*/
+                /* alert('code: ' + error.code + '\n' +
+                 'message: ' + error.message + '\n');*/
             }
         }
 
@@ -221,23 +221,23 @@ angular.module('soyloco.services', [])
     .factory('Users', function() {
         var users = [
 
-                {id:1, name:'emilia', photos:[
-                    {id: 1, userId: 1, image: 'img/emilia.jpg'},
-                    {id: 2,userId: 1, image: 'img/emilia.jpg'},
-                    {id: 3,userId: 1, image: 'img/emilia.jpg'}
-                ]},
+            {id:1, name:'emilia', photos:[
+                {id: 1, userId: 1, image: 'img/emilia.jpg'},
+                {id: 2,userId: 1, image: 'img/emilia.jpg'},
+                {id: 3,userId: 1, image: 'img/emilia.jpg'}
+            ]},
 
-                {id:2, name:'emma', photos:[
-                    {id: 1,userId: 2, image: 'img/emma.jpg'},
-                    {id: 2,userId: 2, image: 'img/emma.jpg'},
-                    {id: 3,userId: 2, image: 'img/emma.jpg'}
-                ]},
+            {id:2, name:'emma', photos:[
+                {id: 1,userId: 2, image: 'img/emma.jpg'},
+                {id: 2,userId: 2, image: 'img/emma.jpg'},
+                {id: 3,userId: 2, image: 'img/emma.jpg'}
+            ]},
 
-                {id:3, name:'jennifer', photos:[
-                    {id: 1, userId: 3, image: 'img/jennifer.jpg'},
-                    {id: 2, userId: 3,image: 'img/jennifer.jpg'},
-                    {id: 3, userId: 3,image: 'img/jennifer.jpg'}
-                ]}
+            {id:3, name:'jennifer', photos:[
+                {id: 1, userId: 3, image: 'img/jennifer.jpg'},
+                {id: 2, userId: 3,image: 'img/jennifer.jpg'},
+                {id: 3, userId: 3,image: 'img/jennifer.jpg'}
+            ]}
 
         ];
 

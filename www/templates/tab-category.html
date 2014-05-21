@@ -1,0 +1,61 @@
+<ion-view title="Soyloco">
+
+    <ion-pane>
+
+        <ion-content header-shrink scroll-event-interval="1">
+
+            <div class="map">
+                <google-map id="mymap"
+                            center="center"
+                            zoom="map.zoom"
+                            draggable="true"
+                            mark-click="false"
+                            options="map.options">
+                    <marker coords="selfMarker"
+                            icon="selfMarker.icon">
+                    </marker>
+                    <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+                    <!--
+                                            <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+                    -->
+
+                </google-map>
+            </div>
+
+            <ion-slide-box show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
+                <ion-slide>
+                    <ion-list>
+                        <ion-item ng-repeat="place in category.otherPlaces"
+                                  class="item item-thumbnail-left">
+                            <img ng-src="{{ place.image }}">
+                            <h2>{{place.name}}</h2>
+                            <p>{{place.address}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-slide>
+                <ion-slide>
+                    <ion-list>
+                        <ion-item ng-repeat="place in category.myPlaces"
+                                  class="item item-thumbnail-left">
+                            <img ng-src="{{ place.image }}">
+                            <h2>{{place.name}}</h2>
+                            <p>{{place.address}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-slide>
+                <ion-slide>
+                    <ion-list>
+                        <ion-item ng-repeat="place in category.otherPlaces"
+                                  class="item item-thumbnail-left">
+                            <img ng-src="{{ place.image }}">
+                            <h2>{{place.name}}</h2>
+                            <p>{{place.address}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-slide>
+            </ion-slide-box>
+        </ion-content>
+
+
+    </ion-pane>
+</ion-view>

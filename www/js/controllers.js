@@ -1,38 +1,30 @@
-angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
+angular.module('soyloco.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $state, OpenFB, MenuService, Categories) {
-
-        $scope.MenuService = MenuService;
+    .controller('TabsCtrl', function ($scope, $state, OpenFB) {
 
         $scope.logout = function () {
             OpenFB.logout();
-            $state.go('app.login');
+            $state.go('login');
         };
 
         $scope.revokePermissions = function () {
             OpenFB.revokePermissions().then(
                 function () {
-                    $state.go('app.login');
+                    $state.go('login');
                 },
                 function () {
                     //alert('Revoke permissions failed');
                 });
         };
 
-
-        $scope.setCategoryIdx = function(categoryIdx) {
-            Categories.setCategoryIdx(categoryIdx);
-        }
-
-
-
     })
 
+/*************************************
+ *          Login controller
+ *
+ * */
     .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
-                                       $ionicLoading, OpenFB, MenuService) {
-
-        MenuService.enableLeftMenu(false);
-        MenuService.enableRightMenu(false);
+                                       $ionicLoading, OpenFB) {
 
         var numTaps = 0;
 
@@ -67,7 +59,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
                 OpenFB.login('user_birthday,user_friends,user_events,user_photos,user_likes,friends_events').then(
                     function () {
 
-                        $state.go('app.category');
+                        $state.go('tab.category');
                     },
 
                     // TODO: Not capturing errors
@@ -99,42 +91,16 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('ShareCtrl', function ($scope, OpenFB) {
 
-        $scope.item = {};
-
-        $scope.share = function () {
-            OpenFB.post('/me/feed', $scope.item)
-                .success(function () {
-                    $scope.status = "This item has been shared on OpenFB";
-                })
-                .error(function(data) {
-                    //alert(data.error.message);
-                });
-        };
-
-    })
-
-    .controller('ProfileCtrl', function ($scope, MenuService) {
-        MenuService.enableRightMenu(false);
-
-
-    })
 
 /*************************************
- *
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicLoading,
-                                         Categories, Geo, MenuService, Crawler) {
+    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate,$ionicNavBarDelegate, $ionicLoading,
+                                         Categories, Geo, Crawler) {
 
-        MenuService.enableRightMenu(true);
-
-
-        // Need to reactivate the side menu just here because it's the fallback route;
-        MenuService.enableLeftMenu(true);
-
+        $ionicNavBarDelegate.align('left');
 
 
         // Crwaling starts here becuse it's the fallback route.
@@ -217,7 +183,6 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
         };
 
 
-
         // SLIDER LOGIC
 
         $scope.slideIndex = 0;
@@ -265,22 +230,18 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
         };
 
-
-
-
     })
 
 
+    .controller('ProfileCtrl', function($scope) {
+    })
+
 /*************************************
- *
  *          Play controller
  *
  * */
     .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
-                                     $ionicSwipeCardDelegate, MenuService, Users) {
-
-
-        MenuService.enableRightMenu(false);
+                                     $ionicSwipeCardDelegate, Users) {
 
         // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
         $timeout(function () {
@@ -292,7 +253,7 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
             $ionicSlideBoxDelegate.next();
             //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 10);
+        }, 2000);
 
         // When the DOM element is removed from the page,
         // AngularJS will trigger the $destroy event on
@@ -369,13 +330,23 @@ angular.module('soyloco.controllers', ['ionic.contrib.ui.cards'])
 
     })
 
-    .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler, MenuService) {
-        MenuService.enableRightMenu(false);
+/*************************************
+ *          Invite controller
+ *
+ * */
+    .controller('InviteCtrl', function($scope) {
+    })
+
+/*************************************
+ *          Logout controller
+ *
+ * */
+    .controller('SettingsCtrl', function($scope, $state, OpenFB, Crawler) {
 
         $scope.logout = function () {
             OpenFB.logout();
             Crawler.stop();
             Crawler.setInit(false);
-            $state.go('app.login');
+            $state.go('login');
         };
     });
