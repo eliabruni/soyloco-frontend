@@ -1,42 +1,106 @@
-Ionic App Base
+Soyloco frontend
 =====================
-
-A starting project for Ionic that optionally supports
-using custom SCSS.
 
 ## Using this project
 
-We recommend using the `ionic` utility to create new Ionic projects that are based on this project but use a ready-made starter template.
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+### 0. Install Node.js and Cordova
+First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
+Follow the Android and iOS platform guides to install required platform dependencies.
+
+### TODO: NEED A POINT ON INSTALL NECESSARY CORDOVA PLUGINS
+
+### 1. Install Cordova plugins
+
+
+### 2. Install Ionic
+
+Make sure the `ionic` utility is installed:
 
 ```bash
 $ sudo npm install -g ionic
 ```
 
-Then run:
+### 3. Run Soyloco frontend
+Ionic apps are based on Cordova, so we can use the Cordova utilities
+to build, test, and deploy our apps, but Ionic provides simple ways to do
+the same with the ionic utility (substitute ios for android to build for Android):
 
 ```bash
-$ sudo npm install -g ionic
-$ ionic start myProject tabs
+$ cd soyloco-frontend
+$ ionic platform add ios
+```
+#### Before building and running or emulating the app, we need to install the
+require Cordova plugins.
+
+Basic device information:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+```
+
+Network Connection and Battery Events:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git
+```
+
+Accelerometer, Compass, and Geolocation:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+```
+
+Camera, Media playback and Capture:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-media-capture.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git
+```
+
+Access files on device or network (File API):
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git
+```
+
+Notification via dialog box or vibration:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git
+```
+
+Contacts:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git
+```
+
+Splashscreen:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git
+```
+
+Open new browser windows (InAppBrowser):
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
+```
+
+Debug console:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-console.git
+```
+
+#### Now we are ready to build and run/emulate Soyloco-frontend
+
+```bash
+$ ionic build ios
+$ ionic emulate ios
 ```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
 
-## Installation
 
-While we recommend using the `ionic` utility to create new Ionic projects, you can use this repo as a barebones starting point to your next Ionic app.
-
-To use this project as is, first clone the repo from GitHub, then run:
-
-```bash
-$ cd ionic-app-base
-$ sudo npm install -g cordova ionic gulp
-$ npm install
-$ gulp init
-```
-
-## Using Sass (optional)
+## Using Sass
 
 This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
 Sass's great features.
@@ -51,6 +115,3 @@ the include to your `ionic.app.css` file which now contains all your Sass code a
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 ```
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
-

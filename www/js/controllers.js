@@ -97,11 +97,14 @@ angular.module('soyloco.controllers', [])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate,$ionicNavBarDelegate, $ionicLoading,
-                                         Categories, Geo, Crawler) {
+    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
+                                         $ionicLoading, Crawler, Categories, Geo) {
 
         $ionicNavBarDelegate.align('left');
 
+        // This set the actual category
+        Categories.setCategoryIdx(0);
+        $scope.category = Categories.getActualCategory();
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
@@ -109,78 +112,14 @@ angular.module('soyloco.controllers', [])
             //Crawler.init();
         }
 
-
-        Categories.setCategoryIdx(0);
-
-        // Get the category ID into scope
-        $scope.$watch(function () {
-                return Categories.actualCategoryIdx;
-            },
-
-            function() {
-                $scope.category = Categories.getActualCategory();
-            }, true);
-
-
-
-        // MAP LOGIC
-
-        // Fake coords to make browser working
-        var lat = 33.22;
-        var long = 35.33;
-
-        if (Geo.getPosition() != null) {
-            var position = Geo.getPosition();
-            lat = position.lat;
-            long = position.long;
-        }
-
-        $scope.center = {
-            latitude: lat,
-            longitude: long
-        };
-
-        $scope.selfMarker = {
-            icon: 'img/maps/self_marker.png',
-            latitude:lat,
-            longitude:long,
-            fit:true
-        };
-
+        $scope.map = Geo.getMap();
 
         $scope.$watch('Geo.getPosition()', function(newPosition) {
             $scope.$apply(function () {
-                $scope.selfMarker.latitude = newPosition.lat;
-                $scope.selfMarker.longitude = newPosition.long;
+                $scope.map.selfMarker.latitude = newPosition.lat;
+                $scope.map.selfMarker.longitude = newPosition.long;
             });
         });
-
-        $scope.map = {
-            zoom: 14,
-            draggable: true,
-            options: {
-                streetViewControl: false,
-                panControl: false,
-                mapTypeId: "roadmap",
-                disableDefaultUI: true
-            },
-            markers : [
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":$scope.selfMarker.latitude+0.001,
-                    "longitude":$scope.selfMarker.longitude+0.003,
-                    fit:true
-
-                },
-                {
-                    icon: 'img/maps/blue_marker.png',
-                    "latitude":$scope.selfMarker.latitude+0.002,
-                    "longitude":$scope.selfMarker.longitude+0.001,
-                    fit:true
-
-                }
-            ]
-        };
 
 
         // SLIDER LOGIC

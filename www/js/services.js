@@ -1,39 +1,19 @@
 angular.module('soyloco.services', [])
 
-
-/**********************************************************
- *                  MENU UTILITY
- *
- * ********************************************************/
-    .factory('MenuService', function() {
-        this.leftIsEnabled = true;
-        this.rightIsEnabled = false;
-
-        function  enableLeftMenu(enable) {
-            this.leftIsEnabled = enable;
-        }
-
-        function  enableRightMenu(enable) {
-            this.rightIsEnabled = enable;
-        }
-
-        return {
-            enableLeftMenu: enableLeftMenu,
-            enableRightMenu: enableRightMenu
-        }
-    })
-
 /**********************************************************
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function() {
+    .factory('Geo', function(localStorageService) {
 
         var watchID,
-            position;
+            position,
+            map;
 
         // device APIs are available
         function init() {
+
+            createMap();
 
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -48,6 +28,10 @@ angular.module('soyloco.services', [])
             // onSuccess Geolocation
             function onSuccess(pos) {
                 position =  { 'lat' : pos.coords.latitude, 'long' : pos.coords.longitude };
+
+                // Write position on local storage
+                // TODO: Should also send it to the server
+                localStorageService.add('position', position);
             }
 
             // onError Callback receives a PositionError object
@@ -57,13 +41,71 @@ angular.module('soyloco.services', [])
             }
         }
 
+        function createMap() {
+
+            // TODO: introduce case there is no position yet, with some loading on the map div
+            var position = localStorageService.get('position');
+
+            var lat = position.lat;
+            var long = position.long;
+
+            if (getPosition() != null) {
+                var position = getPosition();
+                lat = position.lat;
+                long = position.long;
+            }
+
+            map = {
+                center : {
+                    latitude: lat,
+                    longitude: long
+                },
+                selfMarker : {
+                    icon: 'img/maps/self_marker.png',
+                    latitude:lat,
+                    longitude:long,
+                    fit:true
+                },
+                zoom: 14,
+                draggable: true,
+                options: {
+                    streetViewControl: false,
+                    panControl: false,
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true
+                },
+                markers : [
+                    {
+                        icon: 'img/maps/blue_marker.png',
+                        "latitude":lat+0.001,
+                        "longitude":long+0.003,
+                        fit:true
+
+                    },
+                    {
+                        icon: 'img/maps/blue_marker.png',
+                        "latitude":lat+0.002,
+                        "longitude":long+0.001,
+                        fit:true
+
+                    }
+                ]
+            };
+
+        }
+
         function getPosition() {
             return position;
         }
 
+        function getMap() {
+            return map;
+        }
+
         return {
             init: init,
-            getPosition: getPosition
+            getPosition: getPosition,
+            getMap: getMap
         }
     })
 

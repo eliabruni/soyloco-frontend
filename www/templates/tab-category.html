@@ -6,15 +6,15 @@
 
             <div class="map">
                 <google-map id="mymap"
-                            center="center"
+                            center="map.center"
                             zoom="map.zoom"
                             draggable="true"
                             mark-click="false"
                             options="map.options">
-                    <marker coords="selfMarker"
-                            icon="selfMarker.icon">
+                    <marker coords="map.selfMarker"
+                            icon="map.selfMarker.icon">
                     </marker>
-                    <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+                    <markers models="map.markers" coords="'map.markers'" icon="'map.markers.icon'"></markers>
                     <!--
                                             <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
                     -->

@@ -14,10 +14,11 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
     .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService,
                   Geo) {
 
+        OpenFB.init('738982816123885');
+        Geo.init();
+
         $ionicPlatform.ready(function() {
 
-            OpenFB.init('738982816123885');
-            Geo.init();
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
