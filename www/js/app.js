@@ -7,7 +7,7 @@
 // 'soyloco.controllers' is found in controllers.js
 
 
-angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers',
+angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.geocoding',
     'soyloco.services','soyloco.directives', 'soyloco.crawling', 'ionic.contrib.ui.cards',
     'LocalStorageModule', 'google-maps'])
 
