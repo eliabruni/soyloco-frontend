@@ -2806,6 +2806,9 @@ ion-infinite-scroll.active .scroll-infinite {
 .has-footer {
   bottom: 50px; }
 
+.has-subfooter {
+  bottom: 100px; }
+
 .has-tabs,
 .bar-footer.has-tabs {
   bottom: 55px; }
@@ -3140,7 +3143,7 @@ a.subdued {
       color: #444444; }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #3f729b;
+    background-color: #282828;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: white; }
     .bar.bar-stable .title {
@@ -3289,7 +3292,7 @@ a.subdued {
 
 .bar-stable .button {
   border-color: #b2b2b2;
-  background-color: #3f729b;
+  background-color: #282828;
   color: white; }
   .bar-stable .button:hover {
     color: white;
@@ -4739,6 +4742,11 @@ button.item.item-button-right {
 .padding-horizontal > .list .item {
   margin-right: 0;
   margin-left: 0; }
+  .card .item.item-input input,
+  .list-inset .item.item-input input,
+  .padding > .list .item.item-input input,
+  .padding-horizontal > .list .item.item-input input {
+    padding-right: 44px; }
 
 .padding-left > .list .item {
   margin-left: 0; }
@@ -5397,6 +5405,11 @@ input:checked + .checkbox-icon:after {
   content: ' ';
   cursor: pointer;
   pointer-events: none; }
+
+/* Fix to avoid background color bleeding */
+/* (occured on (at least) Android 4.2, Asus MeMO Pad HD7 ME173X) */
+.platform-android4_2 .toggle .track {
+  -webkit-background-clip: padding-box; }
 
 /* the handle (circle) thats inside the toggle's track area */
 /* also the handle's appearance when it is "off" */

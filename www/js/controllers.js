@@ -118,28 +118,27 @@ angular.module('soyloco.controllers', [])
             showBackdrop: false
         });
 
+        if (navigator.network.connection.type != Connection.NONE) {
 
-        // if (navigator.network.connection.type != Connection.NONE) {
+            // TODO: 1. it works but when app goes from offline to online - solved
+            // TODO: 2. dynamically update map view
+            // TODO: 3. also the category list shouldn't be rendered
+            Geo.getMap().then(
+                function(map) {
+
+                    $scope.map = map;
+                    $scope.map.isReady = true;
+                    $scope.loading.hide();
+                    //location.reload();
+                },
+
+                function(error) {
+                    alert(error);
+                }
+            );
+        }
 
 
-        // TODO: 1. it works but when app goes from offline to online
-        // TODO: 2. dinamycally update map view
-        // TODO: 3. also the category list shouldn't be rendered
-        Geo.getMap().then(
-            function(map) {
-
-                $scope.map = map;
-                $scope.map.isReady = true;
-                $scope.loading.hide();
-                alert(map.center.latitude);
-                //location.reload();
-            },
-
-            function(error) {
-                alert(error);
-            }
-        );
-        // }
 
 
         /*        $scope.$watch('Geo.getPosition()', function(newPosition) {

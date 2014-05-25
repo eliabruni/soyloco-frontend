@@ -4,9 +4,10 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function(localStorageService, $q) {
+    .factory('Geo', function(localStorageService, $q, $interval) {
 
-        var watchID,
+        var geoActivateTime = 5000,
+            stop,
             position,
             map;
 
@@ -16,11 +17,26 @@ angular.module('soyloco.geocoding', [])
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
 
+            // Function to kill the $interval call to geolocation
+            function stopGeoActivate() {
+                if (angular.isDefined(stop)) {
+                    $interval.cancel(stop);
+                    stop = undefined;
+                }
+            };
+
             // device APIs are available
             function onDeviceReady() {
-                // Throw an error if no update is received every 30 seconds
-                var options = { timeout: 30000};
-                watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+
+                // Brutal way to force watching in any case.
+                // The problem is when GPS is first off and is then switched on,
+                // in tat case position isn't watched with the standard navigator.geolocation.watchPosition.
+                //TODO: Need to find a better, more efficient way to do this.
+                // Works only with device online
+                stop = $interval(function() {
+                    navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 0});
+                }, geoActivateTime)
+
             }
 
             // onSuccess Geolocation
@@ -34,29 +50,22 @@ angular.module('soyloco.geocoding', [])
 
             // onError Callback receives a PositionError object
             function onError(error) {
-                /* alert('code: ' + error.code + '\n' +
-                 'message: ' + error.message + '\n');*/
+                alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
             }
         }
 
-        var getPosition = function(refresh) {
+        var getPosition = function() {
 
-            if(localStorageService.get('position') != null) {
-                position = localStorageService.get('position');
-            }
+            // TODO: turn this on when ready with testing
+            /*            if(localStorageService.get('position') != null) {
+             position = localStorageService.get('position');
+             }*/
 
             var deferred = $q.defer();
 
-            if( position === null || refresh ) {
-
-                navigator.geolocation.getCurrentPosition(function(pos) {
-                    position =  { 'lat' : pos.coords.latitude, 'long' : pos.coords.longitude }
-                    deferred.resolve(position);
-
-                }, function(error) {
-                    position = null
-                    deferred.reject('Failed to Get Position')
-                });
+            if(angular.isUndefined(position) || position === null) {
+                deferred.reject('Failed to Get Position');
 
             }  else {
                 deferred.resolve(position);
@@ -117,6 +126,7 @@ angular.module('soyloco.geocoding', [])
 
             getPosition().then(
                 function(position) {
+
                     var map = createMap(position);
                     deferred.resolve(map);
 
