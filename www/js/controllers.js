@@ -97,7 +97,7 @@ angular.module('soyloco.controllers', [])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
+    .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
                                          $ionicLoading, Crawler, Categories, Geo) {
 
         $ionicNavBarDelegate.align('left');
@@ -113,30 +113,36 @@ angular.module('soyloco.controllers', [])
         }
 
 
-        $scope.loading = $ionicLoading.show({
-            content: 'Getting map...',
-            showBackdrop: false
-        });
-
-        if (navigator.network.connection.type != Connection.NONE) {
-
-            // TODO: 1. it works but when app goes from offline to online - solved
-            // TODO: 2. dynamically update map view
-            // TODO: 3. also the category list shouldn't be rendered
-            Geo.getMap().then(
-                function(map) {
-
-                    $scope.map = map;
-                    $scope.map.isReady = true;
-                    $scope.loading.hide();
-                    //location.reload();
-                },
-
-                function(error) {
-                    alert(error);
-                }
-            );
+        if (!Geo.getMapInitialized()) {
+            $rootScope.loading = $ionicLoading.show({
+                content: 'Getting map...',
+                showBackdrop: false
+            });
         }
+
+
+
+        // TODO: 1. dynamically update map view
+        // TODO: 2. also the category list shouldn't be rendered
+
+        Geo.getMap().then(
+            function (map) {
+                $scope.map = map;
+
+                $scope.map.isReady = true;
+
+                $scope.loading.hide();
+
+                //location.reload();
+            },
+
+            function (error) {
+                alert(error);
+            }
+        );
+
+
+
 
 
 
@@ -150,11 +156,11 @@ angular.module('soyloco.controllers', [])
          });*/
 
 
-        // SLIDER LOGIC
+// SLIDER LOGIC
 
         $scope.slideIndex = 0;
 
-        // Called each time the slide changes
+// Called each time the slide changes
         $scope.slideChanged = function(index) {
             $scope.slideIndex = index;
         };
@@ -183,7 +189,7 @@ angular.module('soyloco.controllers', [])
 
         };
 
-        // Called each time the slide changes
+// Called each time the slide changes
         $scope.goToBothLike = function() {
 
             if ($scope.slideIndex == 0) {

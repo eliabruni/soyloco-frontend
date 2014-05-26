@@ -4,15 +4,26 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function(localStorageService, $q, $interval) {
+    .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
 
         var geoActivateTime = 5000,
             stop,
             position,
-            map;
+            map,
+            mapInitialized = false;
 
         // device APIs are available
         function init() {
+
+            /*if(localStorageService.get('position') != null) {
+             var position = localStorageService.get('position');
+             alert('calling on local storage get map apply');
+
+             $rootScope.map = createMap(position);
+             $rootScope.map.isReady = true;
+             mapInitialized = true;
+             }*/
+
 
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -33,7 +44,7 @@ angular.module('soyloco.geocoding', [])
                 // in tat case position isn't watched with the standard navigator.geolocation.watchPosition.
                 //TODO: Need to find a better, more efficient way to do this.
                 // Works only with device online
-                stop = $interval(function() {
+                stop = $interval(function () {
                     navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 0});
                 }, geoActivateTime)
 
@@ -41,11 +52,23 @@ angular.module('soyloco.geocoding', [])
 
             // onSuccess Geolocation
             function onSuccess(pos) {
-                position =  { 'lat' : pos.coords.latitude, 'long' : pos.coords.longitude };
+                position = { 'lat': pos.coords.latitude, 'long': pos.coords.longitude };
 
                 // Write position on local storage
                 // TODO: Should also send it to the server
                 localStorageService.add('position', position);
+/*
+                // TODO: Do we really need connection? And only here are also above?
+                if (!mapInitialized && navigator.network.connection.type != Connection.NONE) {
+
+                    alert('calling on success get map apply');
+
+                    $rootScope.map = createMap(position);
+                    $rootScope.map.isReady = true;
+                    $rootScope.loading.hide();
+
+                    mapInitialized = true;
+                }*/
             }
 
             // onError Callback receives a PositionError object
@@ -54,27 +77,6 @@ angular.module('soyloco.geocoding', [])
                     'message: ' + error.message + '\n');
             }
         }
-
-        var getPosition = function() {
-
-            // TODO: turn this on when ready with testing
-            /*            if(localStorageService.get('position') != null) {
-             position = localStorageService.get('position');
-             }*/
-
-            var deferred = $q.defer();
-
-            if(angular.isUndefined(position) || position === null) {
-                deferred.reject('Failed to Get Position');
-
-            }  else {
-                deferred.resolve(position);
-            }
-
-            return deferred.promise;
-
-        };
-
 
         function createMap(position) {
 
@@ -116,32 +118,64 @@ angular.module('soyloco.geocoding', [])
                 ]
             };
 
-            return map;
+            return map
 
         }
+
+        function getMapInitialized() {
+            return mapInitialized;
+        }
+
+
+        //TESTING
 
         function getMap() {
 
             var deferred = $q.defer();
 
-            getPosition().then(
-                function(position) {
+            alert('calling getmap')
 
-                    var map = createMap(position);
+            if (!mapInitialized) {
+
+                alert('calling not init map case')
+
+
+                stop = $interval(function () {
+
+/*                if(localStorageService.get('position') != null) {
+                    position = localStorageService.get('position');
+                }*/
+
+                if(!angular.isUndefined(position) || !position === null) {
+
+                    map = createMap(position);
                     deferred.resolve(map);
-
-                },
-                function(error) {
-                    alert(error);
-                    deferred.reject('Failed to Get Map')
+                    mapInitialized = true;
+                    if (angular.isDefined(stop)) {
+                        $interval.cancel(stop);
+                        stop = undefined;
+                    }
                 }
-            );
+
+
+            }, 3000);
+
+            } else {
+                alert('calling init map case')
+                alert(map.center.latitude);
+                deferred.resolve(map);
+            }
 
             return deferred.promise;
+
         }
+
+        //TESTING
 
         return {
             init: init,
+            getMapInitialized: getMapInitialized,
             getMap: getMap
+
         }
     })
