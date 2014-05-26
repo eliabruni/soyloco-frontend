@@ -55,8 +55,6 @@ angular.module('soyloco.geocoding', [])
                     'message: ' + error.message + '\n');
             }
 
-            alert('calling position = null')
-            position = null;
         }
 
         function createMap(position) {
@@ -114,12 +112,7 @@ angular.module('soyloco.geocoding', [])
 
             var deferred = $q.defer();
 
-            alert('calling getmap')
-
             if (!mapInitialized) {
-
-                alert('calling not init map case')
-
 
                 stop = $interval(function () {
 
