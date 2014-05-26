@@ -128,9 +128,7 @@ angular.module('soyloco.controllers', [])
         Geo.getMap().then(
             function (map) {
                 $scope.map = map;
-
                 $scope.map.isReady = true;
-
                 $scope.loading.hide();
 
                 //location.reload();
@@ -140,10 +138,6 @@ angular.module('soyloco.controllers', [])
                 alert(error);
             }
         );
-
-
-
-
 
 
 

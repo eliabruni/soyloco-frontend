@@ -15,16 +15,6 @@ angular.module('soyloco.geocoding', [])
         // device APIs are available
         function init() {
 
-            /*if(localStorageService.get('position') != null) {
-             var position = localStorageService.get('position');
-             alert('calling on local storage get map apply');
-
-             $rootScope.map = createMap(position);
-             $rootScope.map.isReady = true;
-             mapInitialized = true;
-             }*/
-
-
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -57,18 +47,6 @@ angular.module('soyloco.geocoding', [])
                 // Write position on local storage
                 // TODO: Should also send it to the server
                 localStorageService.add('position', position);
-/*
-                // TODO: Do we really need connection? And only here are also above?
-                if (!mapInitialized && navigator.network.connection.type != Connection.NONE) {
-
-                    alert('calling on success get map apply');
-
-                    $rootScope.map = createMap(position);
-                    $rootScope.map.isReady = true;
-                    $rootScope.loading.hide();
-
-                    mapInitialized = true;
-                }*/
             }
 
             // onError Callback receives a PositionError object
@@ -76,6 +54,9 @@ angular.module('soyloco.geocoding', [])
                 alert('code: ' + error.code + '\n' +
                     'message: ' + error.message + '\n');
             }
+
+            alert('calling position = null')
+            position = null;
         }
 
         function createMap(position) {
@@ -142,27 +123,29 @@ angular.module('soyloco.geocoding', [])
 
                 stop = $interval(function () {
 
-/*                if(localStorageService.get('position') != null) {
-                    position = localStorageService.get('position');
-                }*/
-
-                if(!angular.isUndefined(position) || !position === null) {
-
-                    map = createMap(position);
-                    deferred.resolve(map);
-                    mapInitialized = true;
-                    if (angular.isDefined(stop)) {
-                        $interval.cancel(stop);
-                        stop = undefined;
+                    if(localStorageService.get('position') != null) {
+                        position = localStorageService.get('position');
                     }
-                }
 
 
-            }, 3000);
+                    //TODO: internet connection check is not sync. When device is first off and then
+                    //TODO: on, cordova fires too fast and map is not really instantiated.
+                    //TODO: Need to find a better way to check internet connection
+                    if((!angular.isUndefined(position) || !position === null)
+                        && navigator.network.connection.type != Connection.NONE) {
+
+                        map = createMap(position);
+                        deferred.resolve(map);
+                        mapInitialized = true;
+                        if (angular.isDefined(stop)) {
+                            $interval.cancel(stop);
+                            stop = undefined;
+                        }
+                    }
+
+                }, 3000);
 
             } else {
-                alert('calling init map case')
-                alert(map.center.latitude);
                 deferred.resolve(map);
             }
 
