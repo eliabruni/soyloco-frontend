@@ -7,10 +7,11 @@ angular.module('soyloco.geocoding', [])
     .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
 
         var geoActivateTime = 5000,
-            stop,
+            geoActivateStop,
             position,
             map,
-            mapInitialized = false;
+            mapInitialized = false,
+            mapInitStop;
 
         // device APIs are available
         function init() {
@@ -20,9 +21,9 @@ angular.module('soyloco.geocoding', [])
 
             // Function to kill the $interval call to geolocation
             function stopGeoActivate() {
-                if (angular.isDefined(stop)) {
-                    $interval.cancel(stop);
-                    stop = undefined;
+                if (angular.isDefined(geoActivateStop)) {
+                    $interval.cancel(geoActivateStop);
+                    geoActivateStop = undefined;
                 }
             };
 
@@ -34,7 +35,7 @@ angular.module('soyloco.geocoding', [])
                 // in tat case position isn't watched with the standard navigator.geolocation.watchPosition.
                 //TODO: Need to find a better, more efficient way to do this.
                 // Works only with device online
-                stop = $interval(function () {
+                geoActivateStop = $interval(function () {
                     navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 0});
                 }, geoActivateTime)
 
@@ -114,12 +115,11 @@ angular.module('soyloco.geocoding', [])
 
             if (!mapInitialized) {
 
-                stop = $interval(function () {
+                mapInitStop = $interval(function () {
 
                     if(localStorageService.get('position') != null) {
                         position = localStorageService.get('position');
                     }
-
 
                     //TODO: internet connection check is not sync. When device is first off and then
                     //TODO: on, cordova fires too fast and map is not really instantiated.
@@ -130,9 +130,9 @@ angular.module('soyloco.geocoding', [])
                         map = createMap(position);
                         deferred.resolve(map);
                         mapInitialized = true;
-                        if (angular.isDefined(stop)) {
-                            $interval.cancel(stop);
-                            stop = undefined;
+                        if (angular.isDefined(mapInitStop)) {
+                            $interval.cancel(mapInitStop);
+                            mapInitStop = undefined;
                         }
                     }
 
