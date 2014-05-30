@@ -6,8 +6,8 @@ angular.module('soyloco.geocoding', [])
  * ********************************************************/
     .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
 
-        var geoActivateTime = 5000,
-            geoActivateStop,
+        var geoWatchTime = 5000,
+            geoWatchId,
             position,
             map,
             mapInitialized = false,
@@ -19,46 +19,16 @@ angular.module('soyloco.geocoding', [])
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
 
-            // Function to kill the $interval call to geolocation
-            function stopGeoActivate() {
-                if (angular.isDefined(geoActivateStop)) {
-                    $interval.cancel(geoActivateStop);
-                    geoActivateStop = undefined;
-                }
-            };
-
             // device APIs are available
             function onDeviceReady() {
 
-                // Brutal way to force watching in any case.
-                // The problem is when GPS is first off and is then switched on,
-                // in tat case position isn't watched with the standard navigator.geolocation.watchPosition.
-                //TODO: Need to find a better, more efficient way to do this.
-                // Works only with device online
-                geoActivateStop = $interval(function () {
-                    navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 0});
-                }, geoActivateTime)
-
-            }
-
-            // onSuccess Geolocation
-            function onSuccess(pos) {
-                position = { 'lat': pos.coords.latitude, 'long': pos.coords.longitude };
-
-                // Write position on local storage
-                // TODO: Should also send it to the server
-                localStorageService.add('position', position);
-            }
-
-            // onError Callback receives a PositionError object
-            function onError(error) {
-                alert('code: ' + error.code + '\n' +
-                    'message: ' + error.message + '\n');
+                // Start getting position
+                start();
             }
 
         }
 
-        function createMap(position) {
+        function constructMap(position) {
 
             var lat = position.lat;
             var long = position.long;
@@ -72,7 +42,8 @@ angular.module('soyloco.geocoding', [])
                     icon: 'img/maps/self_marker.png',
                     latitude:lat,
                     longitude:long,
-                    fit:true
+                    fit:true,
+                    isReady:false
                 },
                 zoom: 14,
                 draggable: true,
@@ -107,7 +78,53 @@ angular.module('soyloco.geocoding', [])
         }
 
 
-        //TESTING
+        function start() {
+            navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 1000});
+
+            geoWatchId = $interval(function () {
+                navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 1000});
+            }, geoWatchTime);
+        }
+
+        function stop() {
+            if (geoWatchId) {
+                $interval.cancel(geoWatchId);
+            }
+        }
+
+        function success(pos) {
+
+            position = { 'lat': pos.coords.latitude, 'long': pos.coords.longitude };
+
+            // Write position on local storage
+            // TODO: Should also send it to the server
+            localStorageService.add('position', position);
+
+            map.selfMarker.isReady = true;
+
+            // We update position only when a reasonable lat or long change happens
+            if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
+                || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
+
+                updatePosition(position);
+
+            }
+        }
+
+        // onError Callback receives a PositionError object
+        function error(error) {
+
+            alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+
+            map.selfMarker.isReady = false;
+
+        }
+
+        function updatePosition(position) {
+            map.selfMarker.latitude = position.lat;
+            map.selfMarker.longitude = position.long;
+        }
 
         function getMap() {
 
@@ -115,38 +132,37 @@ angular.module('soyloco.geocoding', [])
 
             if (!mapInitialized) {
 
-                mapInitStop = $interval(function () {
-
-                    if(localStorageService.get('position') != null) {
-                        position = localStorageService.get('position');
-                    }
-
-                    //TODO: internet connection check is not sync. When device is first off and then
-                    //TODO: on, cordova fires too fast and map is not really instantiated.
-                    //TODO: Need to find a better way to check internet connection
-                    if((!angular.isUndefined(position) || !position === null)
-                        && navigator.network.connection.type != Connection.NONE) {
-
-                        map = createMap(position);
-                        deferred.resolve(map);
-                        mapInitialized = true;
-                        if (angular.isDefined(mapInitStop)) {
-                            $interval.cancel(mapInitStop);
-                            mapInitStop = undefined;
+                if(localStorageService.get('position') != null
+                    && navigator.network.connection.type != Connection.NONE) {
+                    position = localStorageService.get('position');
+                    createMap();
+                } else {
+                    mapInitStop = $interval(function () {
+                        if(localStorageService.get('position') != null
+                            && navigator.network.connection.type != Connection.NONE) {
+                            createMap();
+                            if (angular.isDefined(mapInitStop)) {
+                                $interval.cancel(mapInitStop);
+                                mapInitStop = undefined;
+                            }
                         }
-                    }
-
-                }, 3000);
+                    }, 3000);
+                }
 
             } else {
                 deferred.resolve(map);
             }
 
+            // Utility to create map
+            function createMap() {
+                map = constructMap(position);
+                deferred.resolve(map);
+                mapInitialized = true;
+            }
+
             return deferred.promise;
 
         }
-
-        //TESTING
 
         return {
             init: init,

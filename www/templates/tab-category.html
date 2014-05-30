@@ -12,7 +12,7 @@
                                 refresh="true"
                                 mark-click="false"
                                 options="map.options">
-                        <marker coords="map.selfMarker"
+                        <marker ng-if="map.selfMarker.isReady" coords="map.selfMarker"
                                 icon="map.selfMarker.icon">
                         </marker>
                         <markers models="map.markers" coords="'map.markers'" icon="'map.markers.icon'"></markers>
@@ -24,7 +24,7 @@
 
             </div>
 
-            <ion-slide-box show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
+            <ion-slide-box ng-if="showSlide" show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
                 <ion-slide>
                     <ion-list>
                         <ion-item ng-repeat="place in category.otherPlaces"

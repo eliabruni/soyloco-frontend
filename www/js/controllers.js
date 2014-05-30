@@ -112,7 +112,6 @@ angular.module('soyloco.controllers', [])
             //Crawler.init();
         }
 
-
         if (!Geo.getMapInitialized()) {
             $rootScope.loading = $ionicLoading.show({
                 content: 'Getting map...',
@@ -120,15 +119,17 @@ angular.module('soyloco.controllers', [])
             });
         }
 
-
-
         // TODO: 1. dynamically update map view
         // TODO: 2. also the category list shouldn't be rendered
 
+        $scope.showSlide = false;
         Geo.getMap().then(
             function (map) {
                 $scope.map = map;
+
                 $scope.map.isReady = true;
+                $scope.showSlide = true;
+
                 $scope.loading.hide();
 
                 //location.reload();
@@ -138,6 +139,10 @@ angular.module('soyloco.controllers', [])
                 alert(error);
             }
         );
+
+
+
+
 
 
 
