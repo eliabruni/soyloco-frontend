@@ -5,7 +5,7 @@
         <ion-content header-shrink scroll-event-interval="1">
             <div class="map">
 
-                    <google-map ng-if="map.isReady" id="mymap"
+                    <google-map ng-if="map !== undefined" id="mymap"
                                 center="map.center"
                                 zoom="map.zoom"
                                 draggable="true"
@@ -15,7 +15,9 @@
                         <marker ng-if="map.selfMarker.isReady" coords="map.selfMarker"
                                 icon="map.selfMarker.icon">
                         </marker>
+<!--
                         <markers models="map.markers" coords="'map.markers'" icon="'map.markers.icon'"></markers>
+-->
                         <!--
                                                 <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
                         -->

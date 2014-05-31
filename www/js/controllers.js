@@ -97,7 +97,7 @@ angular.module('soyloco.controllers', [])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
+    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
                                          $ionicLoading, Crawler, Categories, Geo) {
 
         $ionicNavBarDelegate.align('left');
@@ -113,23 +113,19 @@ angular.module('soyloco.controllers', [])
         }
 
         if (!Geo.getMapInitialized()) {
-            $rootScope.loading = $ionicLoading.show({
+            $scope.loading = $ionicLoading.show({
                 content: 'Getting map...',
                 showBackdrop: false
             });
         }
 
-        // TODO: 1. dynamically update map view
-        // TODO: 2. also the category list shouldn't be rendered
-
         $scope.showSlide = false;
         Geo.getMap().then(
             function (map) {
+                alert('get map')
                 $scope.map = map;
-
                 $scope.map.isReady = true;
                 $scope.showSlide = true;
-
                 $scope.loading.hide();
 
                 //location.reload();
@@ -141,19 +137,7 @@ angular.module('soyloco.controllers', [])
         );
 
 
-
-
-
-
-
-        /*        $scope.$watch('Geo.getPosition()', function(newPosition) {
-         $scope.$apply(function () {
-         $scope.map.selfMarker.latitude = newPosition.lat;
-         $scope.map.selfMarker.longitude = newPosition.long;
-         alert('INSIDE getPosition $watch');
-         });
-         });*/
-
+        alert('after map')
 
 // SLIDER LOGIC
 

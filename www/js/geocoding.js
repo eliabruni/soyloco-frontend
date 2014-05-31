@@ -4,7 +4,7 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
+    .factory('Geo', function(localStorageService, $q, $interval, $timeout) {
 
         var geoWatchTime = 5000,
             geoWatchId,
@@ -100,13 +100,20 @@ angular.module('soyloco.geocoding', [])
             // TODO: Should also send it to the server
             localStorageService.add('position', position);
 
-            map.selfMarker.isReady = true;
+            //alert('inside success')
 
-            // We update position only when a reasonable lat or long change happens
-            if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
-                || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
 
-                updatePosition(position);
+            if(mapInitialized) {
+                //alert('inside mapInitialized')
+
+                map.selfMarker.isReady = true;
+
+                // We update position only when a reasonable lat or long change happens
+                if ((position.lat.toFixed(4) == map.selfMarker.latitude.toFixed(4))
+                    || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
+
+                    updatePosition(position);
+                }
 
             }
         }
@@ -117,34 +124,73 @@ angular.module('soyloco.geocoding', [])
             alert('code: ' + error.code + '\n' +
                 'message: ' + error.message + '\n');
 
-            map.selfMarker.isReady = false;
+            if(mapInitialized) {
+                map.selfMarker.isReady = false;
+            }
 
         }
 
         function updatePosition(position) {
-            map.selfMarker.latitude = position.lat;
+            map.selfMarker.latitude = position.lat+0.0001;
             map.selfMarker.longitude = position.long;
         }
 
         function getMap() {
 
+            //alert('0')
+
             var deferred = $q.defer();
+
+            //alert('1')
+
 
             if (!mapInitialized) {
 
+               // alert('2')
+
                 if(localStorageService.get('position') != null
                     && navigator.network.connection.type != Connection.NONE) {
-                    position = localStorageService.get('position');
-                    createMap();
+                 //   alert('3a')
+
+                    var actualPosition = localStorageService.get('position');
+                   // alert('3b')
+
+                    createMap(actualPosition);
+                    //alert('3c')
+
                 } else {
                     mapInitStop = $interval(function () {
+                      //  alert('4a')
+
                         if(localStorageService.get('position') != null
                             && navigator.network.connection.type != Connection.NONE) {
-                            createMap();
+                        //    alert('4b')
+
                             if (angular.isDefined(mapInitStop)) {
+                          //      alert('4e')
+
                                 $interval.cancel(mapInitStop);
+                            //    alert('4f')
+
                                 mapInitStop = undefined;
+                              //  alert('4g')
+
                             }
+
+                            $timeout(function() {
+
+
+                                var actualPosition = localStorageService.get('position');
+                             //   alert('4c')
+
+
+                             //   alert(map.draggable);
+                                createMap(actualPosition);
+                             //   alert('4d')
+
+
+                            }, 5000);
+
                         }
                     }, 3000);
                 }
@@ -154,8 +200,8 @@ angular.module('soyloco.geocoding', [])
             }
 
             // Utility to create map
-            function createMap() {
-                map = constructMap(position);
+            function createMap(actualPosition) {
+                map = constructMap(actualPosition);
                 deferred.resolve(map);
                 mapInitialized = true;
             }
