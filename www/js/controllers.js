@@ -122,12 +122,13 @@ angular.module('soyloco.controllers', [])
         $scope.showSlide = false;
         Geo.getMap().then(
             function (map) {
-                alert('get map')
                 $scope.map = map;
                 $scope.map.isReady = true;
-                $scope.showSlide = true;
+                if(!$scope.map.default) {
+                    alert('show slide!')
+                    $scope.showSlide = true;
+                }
                 $scope.loading.hide();
-
                 //location.reload();
             },
 
@@ -136,9 +137,56 @@ angular.module('soyloco.controllers', [])
             }
         );
 
+/*        Geo.getLastMap().then(
+            function(newMap) {
+                alert('changing!')
+                $scope.map = newMap;
+                $scope.showSlide = true;
 
-        alert('after map')
 
+            }
+        )*/
+
+
+/*        $scope.showSlide = false;
+        Geo.getMap().then(
+            function (map) {
+                $scope.map = map;
+                $scope.map.isReady = true;
+                if(!$scope.map.default) {
+                    $scope.showSlide = true;
+                }
+                $scope.loading.hide();
+                //location.reload();
+            },
+
+            function (error) {
+                alert(error);
+            }
+        );
+
+        Geo.getLastMap().then(
+            function(newMap) {
+                alert('changing!')
+                $scope.map = newMap;
+                $scope.showSlide = true;
+                alert('before refreshing')
+                //$scope.map.control.refresh();
+                alert('after refreshing')
+
+
+            }
+        )*/
+
+
+/*        $scope.$watch('Geo.accessMap()', function(newMap) {
+            $scope.$apply(function () {
+                alert('changing!')
+                $scope.map = newMap;
+                $scope.showSlide = true;
+
+            });
+        });*/
 // SLIDER LOGIC
 
         $scope.slideIndex = 0;

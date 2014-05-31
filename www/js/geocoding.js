@@ -4,7 +4,7 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function(localStorageService, $q, $interval, $timeout) {
+    .factory('Geo', function($rootScope, localStorageService, $q, $interval, $timeout) {
 
         var geoWatchTime = 5000,
             geoWatchId,
@@ -28,54 +28,7 @@ angular.module('soyloco.geocoding', [])
 
         }
 
-        function constructMap(position) {
 
-            var lat = position.lat;
-            var long = position.long;
-
-            map = {
-                center : {
-                    latitude: lat,
-                    longitude: long
-                },
-                selfMarker : {
-                    icon: 'img/maps/self_marker.png',
-                    latitude:lat,
-                    longitude:long,
-                    fit:true,
-                    isReady:false
-                },
-                zoom: 14,
-                draggable: true,
-                options: {
-                    streetViewControl: false,
-                    panControl: false,
-                    mapTypeId: "roadmap",
-                    disableDefaultUI: true
-                },
-                markers : [
-                    {
-                        icon: 'img/maps/blue_marker.png',
-                        "latitude":lat+0.001,
-                        "longitude":long+0.003,
-                        fit:true
-                    },
-                    {
-                        icon: 'img/maps/blue_marker.png',
-                        "latitude":lat+0.002,
-                        "longitude":long+0.001,
-                        fit:true
-                    }
-                ]
-            };
-
-            return map
-
-        }
-
-        function getMapInitialized() {
-            return mapInitialized;
-        }
 
 
         function start() {
@@ -130,6 +83,79 @@ angular.module('soyloco.geocoding', [])
 
         }
 
+        function createDefaultMap() {
+            map = {
+                center : {
+                    latitude: 1,
+                    longitude: 1
+                },
+                zoom: 14,
+                draggable: false,
+                options: {
+                    streetViewControl: false,
+                    panControl: false,
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true
+                },
+                default:true
+            };
+
+            return map;
+        }
+
+
+        function constructMap(position) {
+
+            alert(position.lat);
+
+            var lat = position.lat;
+            var long = position.long;
+
+            map = {
+                center : {
+                    latitude: lat,
+                    longitude: long
+                },
+                selfMarker : {
+                    icon: 'img/maps/self_marker.png',
+                    latitude:lat,
+                    longitude:long,
+                    fit:true,
+                    isReady:false
+                },
+                zoom: 14,
+                draggable: true,
+                options: {
+                    streetViewControl: false,
+                    panControl: false,
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true
+                },
+                markers : [
+                    {
+                        icon: 'img/maps/blue_marker.png',
+                        "latitude":lat+0.001,
+                        "longitude":long+0.003,
+                        fit:true
+                    },
+                    {
+                        icon: 'img/maps/blue_marker.png',
+                        "latitude":lat+0.002,
+                        "longitude":long+0.001,
+                        fit:true
+                    }
+                ],
+                default:false
+            };
+
+            return map
+
+        }
+
+        function getMapInitialized() {
+            return mapInitialized;
+        }
+
         function updatePosition(position) {
             map.selfMarker.latitude = position.lat+0.0001;
             map.selfMarker.longitude = position.long;
@@ -137,63 +163,43 @@ angular.module('soyloco.geocoding', [])
 
         function getMap() {
 
-            //alert('0')
-
             var deferred = $q.defer();
-
-            //alert('1')
 
 
             if (!mapInitialized) {
 
-               // alert('2')
-
                 if(localStorageService.get('position') != null
                     && navigator.network.connection.type != Connection.NONE) {
-                 //   alert('3a')
+
+                    alert('actual map!');
 
                     var actualPosition = localStorageService.get('position');
-                   // alert('3b')
-
                     createMap(actualPosition);
-                    //alert('3c')
+                    mapInitialized = true;
 
                 } else {
+                    alert('default map')
+                    map = createDefaultMap();
+                    deferred.resolve(map);
+                    mapInitialized = true;
+
                     mapInitStop = $interval(function () {
-                      //  alert('4a')
 
                         if(localStorageService.get('position') != null
                             && navigator.network.connection.type != Connection.NONE) {
-                        //    alert('4b')
-
                             if (angular.isDefined(mapInitStop)) {
-                          //      alert('4e')
-
                                 $interval.cancel(mapInitStop);
-                            //    alert('4f')
-
                                 mapInitStop = undefined;
-                              //  alert('4g')
-
                             }
-
-                            $timeout(function() {
-
-
-                                var actualPosition = localStorageService.get('position');
-                             //   alert('4c')
-
-
-                             //   alert(map.draggable);
-                                createMap(actualPosition);
-                             //   alert('4d')
-
-
-                            }, 5000);
-
+                            var actualPosition = localStorageService.get('position');
+                            createMap(actualPosition);
+                            alert('updated map')
                         }
                     }, 3000);
+
                 }
+
+
 
             } else {
                 deferred.resolve(map);
@@ -203,9 +209,27 @@ angular.module('soyloco.geocoding', [])
             function createMap(actualPosition) {
                 map = constructMap(actualPosition);
                 deferred.resolve(map);
-                mapInitialized = true;
             }
 
+            return deferred.promise;
+
+        }
+
+        function getLastMap() {
+            var deferred = $q.defer();
+
+            stop = $interval(function () {
+
+                if(!map.default) {
+                    deferred.resolve(map);
+
+                    if (angular.isDefined(stop)) {
+                        $interval.cancel(stop);
+                        stop = undefined;
+                    }
+
+                }
+            }, 3000);
             return deferred.promise;
 
         }
@@ -213,7 +237,8 @@ angular.module('soyloco.geocoding', [])
         return {
             init: init,
             getMapInitialized: getMapInitialized,
-            getMap: getMap
+            getMap: getMap,
+            getLastMap: getLastMap
 
         }
     })
