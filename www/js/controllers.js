@@ -92,7 +92,6 @@ angular.module('soyloco.controllers', [])
     })
 
 
-
 /*************************************
  *          Category controller
  *
@@ -112,32 +111,36 @@ angular.module('soyloco.controllers', [])
             //Crawler.init();
         }
 
-        if (!Geo.getMapInitialized()) {
+        // Need to assign Geo to watch its values
+        $scope.Geo = Geo;
+
+        if (!Geo.mapIsReady()) {
             $scope.loading = $ionicLoading.show({
                 content: 'Getting map...',
                 showBackdrop: false
             });
         }
 
-        $scope.showSlide = false;
-        Geo.getMap().then(
-            function (map) {
-                alert('get map')
-                $scope.map = map;
-                $scope.map.isReady = true;
-                $scope.showSlide = true;
-                $scope.loading.hide();
+        $scope.showMap = Geo.mapIsReady();
+        $scope.map = Geo.getMap();
 
-                //location.reload();
-            },
 
-            function (error) {
-                alert(error);
+        $scope.$watch('Geo.mapIsReady()', function(newVal, oldVal) {
+            if(newVal) {
+                $scope.showMap = newVal;
+                $scope.map = Geo.getMap();
             }
-        );
 
+            if (!Geo.mapIsReady()) {
+                $scope.loading = $ionicLoading.show({
+                    content: 'Getting map...',
+                    showBackdrop: false
+                });
+            } else {
+                $ionicLoading.hide();
+            }
+        });
 
-        alert('after map')
 
 // SLIDER LOGIC
 
