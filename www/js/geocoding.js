@@ -154,16 +154,12 @@ angular.module('soyloco.geocoding', [])
 
                 if(localStorageService.get('position') != null
                     && navigator.network.connection.type != Connection.NONE) {
-
-                    alert('actual map!');
-
                     var actualPosition = localStorageService.get('position');
                     createMap(actualPosition);
                     mapInitialized = true;
                     isMapReady = true;
 
                 } else {
-                    alert('default map')
                     map = createDefaultMap();
                     mapInitialized = true;
 
