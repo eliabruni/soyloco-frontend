@@ -97,7 +97,7 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
-                                         $ionicLoading, Crawler, Categories, Geo) {
+                                         $ionicLoading, Crawler, Categories, Geo, $timeout) {
 
         $ionicNavBarDelegate.align('left');
 
@@ -125,10 +125,26 @@ angular.module('soyloco.controllers', [])
         $scope.map = Geo.getMap();
 
 
+        //$scope.googleMap = {}; // this is filled when google map is initiated
+
         $scope.$watch('Geo.mapIsReady()', function(newVal, oldVal) {
             if(newVal) {
                 $scope.showMap = newVal;
                 $scope.map = Geo.getMap();
+
+
+               /* $timeout(function() {
+                    alert('before map instance');
+
+
+                    $scope.googleMap.control.getGMap();
+                    alert('before refresh');
+
+                    $scope.googleMap.control.refresh($scope.map.center);
+                    alert('after refresh');
+                }, 3000)*/;
+
+
             }
 
             if (!Geo.mapIsReady()) {

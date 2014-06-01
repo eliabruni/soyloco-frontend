@@ -103,7 +103,7 @@ angular.module('soyloco.geocoding', [])
             var long = position.long;
 
             map = {
-                center : {
+                    center : {
                     latitude: lat,
                     longitude: long
                 },
