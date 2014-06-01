@@ -92,7 +92,6 @@ angular.module('soyloco.controllers', [])
     })
 
 
-
 /*************************************
  *          Category controller
  *
@@ -112,81 +111,37 @@ angular.module('soyloco.controllers', [])
             //Crawler.init();
         }
 
-        if (!Geo.getMapInitialized()) {
+        // Need to assign Geo to watch its values
+        $scope.Geo = Geo;
+
+        if (!Geo.mapIsReady()) {
             $scope.loading = $ionicLoading.show({
                 content: 'Getting map...',
                 showBackdrop: false
             });
         }
 
-        $scope.showSlide = false;
-        Geo.getMap().then(
-            function (map) {
-                $scope.map = map;
-                $scope.map.isReady = true;
-                if(!$scope.map.default) {
-                    alert('show slide!')
-                    $scope.showSlide = true;
-                }
-                $scope.loading.hide();
-                //location.reload();
-            },
+        $scope.showMap = Geo.mapIsReady();
+        $scope.map = Geo.getMap();
 
-            function (error) {
-                alert(error);
+
+        $scope.$watch('Geo.mapIsReady()', function(newVal, oldVal) {
+            if(newVal) {
+                $scope.showMap = newVal;
+                $scope.map = Geo.getMap();
             }
-        );
 
-/*        Geo.getLastMap().then(
-            function(newMap) {
-                alert('changing!')
-                $scope.map = newMap;
-                $scope.showSlide = true;
-
-
+            if (!Geo.mapIsReady()) {
+                $scope.loading = $ionicLoading.show({
+                    content: 'Getting map...',
+                    showBackdrop: false
+                });
+            } else {
+                $ionicLoading.hide();
             }
-        )*/
+        });
 
 
-/*        $scope.showSlide = false;
-        Geo.getMap().then(
-            function (map) {
-                $scope.map = map;
-                $scope.map.isReady = true;
-                if(!$scope.map.default) {
-                    $scope.showSlide = true;
-                }
-                $scope.loading.hide();
-                //location.reload();
-            },
-
-            function (error) {
-                alert(error);
-            }
-        );
-
-        Geo.getLastMap().then(
-            function(newMap) {
-                alert('changing!')
-                $scope.map = newMap;
-                $scope.showSlide = true;
-                alert('before refreshing')
-                //$scope.map.control.refresh();
-                alert('after refreshing')
-
-
-            }
-        )*/
-
-
-/*        $scope.$watch('Geo.accessMap()', function(newMap) {
-            $scope.$apply(function () {
-                alert('changing!')
-                $scope.map = newMap;
-                $scope.showSlide = true;
-
-            });
-        });*/
 // SLIDER LOGIC
 
         $scope.slideIndex = 0;

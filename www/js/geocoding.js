@@ -4,13 +4,14 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function($rootScope, localStorageService, $q, $interval, $timeout) {
+    .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
 
         var geoWatchTime = 5000,
             geoWatchId,
             position,
             map,
             mapInitialized = false,
+            isMapReady = false,
             mapInitStop;
 
         // device APIs are available
@@ -27,9 +28,6 @@ angular.module('soyloco.geocoding', [])
             }
 
         }
-
-
-
 
         function start() {
             navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 1000});
@@ -53,12 +51,8 @@ angular.module('soyloco.geocoding', [])
             // TODO: Should also send it to the server
             localStorageService.add('position', position);
 
-            //alert('inside success')
-
 
             if(mapInitialized) {
-                //alert('inside mapInitialized')
-
                 map.selfMarker.isReady = true;
 
                 // We update position only when a reasonable lat or long change happens
@@ -67,7 +61,6 @@ angular.module('soyloco.geocoding', [])
 
                     updatePosition(position);
                 }
-
             }
         }
 
@@ -105,8 +98,6 @@ angular.module('soyloco.geocoding', [])
 
 
         function constructMap(position) {
-
-            alert(position.lat);
 
             var lat = position.lat;
             var long = position.long;
@@ -152,19 +143,12 @@ angular.module('soyloco.geocoding', [])
 
         }
 
-        function getMapInitialized() {
-            return mapInitialized;
-        }
-
         function updatePosition(position) {
             map.selfMarker.latitude = position.lat+0.0001;
             map.selfMarker.longitude = position.long;
         }
 
         function getMap() {
-
-            var deferred = $q.defer();
-
 
             if (!mapInitialized) {
 
@@ -176,11 +160,11 @@ angular.module('soyloco.geocoding', [])
                     var actualPosition = localStorageService.get('position');
                     createMap(actualPosition);
                     mapInitialized = true;
+                    isMapReady = true;
 
                 } else {
                     alert('default map')
                     map = createDefaultMap();
-                    deferred.resolve(map);
                     mapInitialized = true;
 
                     mapInitStop = $interval(function () {
@@ -193,52 +177,31 @@ angular.module('soyloco.geocoding', [])
                             }
                             var actualPosition = localStorageService.get('position');
                             createMap(actualPosition);
-                            alert('updated map')
+                            isMapReady = true;
                         }
                     }, 3000);
 
                 }
-
-
-
-            } else {
-                deferred.resolve(map);
             }
 
             // Utility to create map
             function createMap(actualPosition) {
                 map = constructMap(actualPosition);
-                deferred.resolve(map);
             }
 
-            return deferred.promise;
+            return map;
 
         }
 
-        function getLastMap() {
-            var deferred = $q.defer();
-
-            stop = $interval(function () {
-
-                if(!map.default) {
-                    deferred.resolve(map);
-
-                    if (angular.isDefined(stop)) {
-                        $interval.cancel(stop);
-                        stop = undefined;
-                    }
-
-                }
-            }, 3000);
-            return deferred.promise;
-
+        function mapIsReady() {
+            return isMapReady;
         }
 
         return {
             init: init,
-            getMapInitialized: getMapInitialized,
             getMap: getMap,
-            getLastMap: getLastMap
-
+            mapIsReady: mapIsReady,
+            getInstantMap: getMap
         }
+
     })
