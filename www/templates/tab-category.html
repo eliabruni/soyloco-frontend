@@ -5,11 +5,10 @@
         <ion-content header-shrink scroll-event-interval="1">
             <div class="map">
 
-                <google-map ng-if="showMap" id="mymap"
+                <google-map ng-if="showMap"
                             center="map.center"
                             zoom="map.zoom"
                             draggable="true"
-                            refresh="showMap"
                             control="googleMap"
                             mark-click="false"
                             options="map.options">

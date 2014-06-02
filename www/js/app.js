@@ -30,13 +30,13 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
                 StatusBar.styleDefault();
             }
 
-/*            $rootScope.$on('$stateChangeStart', function(event, toState) {
+           $rootScope.$on('$stateChangeStart', function(event, toState) {
                 if (toState.name !== "login" && toState.name !== "logout" &&
                     (localStorageService.get('fbtoken') === null) ) {
                     $state.go('login');
                     event.preventDefault();
                 }
-            });*/
+            });
 
             $rootScope.$on('OAuthException', function() {
                 $state.go('login');
