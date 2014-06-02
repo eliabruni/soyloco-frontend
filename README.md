@@ -41,53 +41,21 @@ $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-devi
 Network Connection and Battery Events:
 ```bash
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git
 ```
 
-Accelerometer, Compass, and Geolocation:
+Device orientation:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+```
+
+Geolocation:
+```bash
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
-```
-
-Camera, Media playback and Capture:
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-media-capture.git
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git
-```
-
-Access files on device or network (File API):
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git
-```
-
-Notification via dialog box or vibration:
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git
-```
-
-Contacts:
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git
-```
-
-Splashscreen:
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git
 ```
 
 Open new browser windows (InAppBrowser):
 ```bash
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
-```
-
-Debug console:
-```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-console.git
 ```
 
 #### Now we are ready to build and run/emulate Soyloco-frontend

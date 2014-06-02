@@ -59,7 +59,8 @@ angular.module('soyloco.controllers', [])
                 OpenFB.login('user_birthday,user_friends,user_events,user_photos,user_likes,friends_events').then(
                     function () {
 
-                        $state.go('tab.category');
+                        $state.go('laoder');
+
                     },
 
                     // TODO: Not capturing errors
@@ -97,115 +98,97 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
-                                         $ionicLoading, Crawler, Categories, Geo, $timeout) {
-
-        $ionicNavBarDelegate.align('left');
-
-        // This set the actual category
-        Categories.setCategoryIdx(0);
-        $scope.category = Categories.getActualCategory();
-
-        // Crwaling starts here becuse it's the fallback route.
-        // If fallback route is changed, remeber to move Crawler.init().
-        if (!Crawler.getInit()) {
-            //Crawler.init();
-        }
-
-        // Need to assign Geo to watch its values
-        $scope.Geo = Geo;
-
-        if (!Geo.mapIsReady()) {
-            $scope.loading = $ionicLoading.show({
-                content: 'Getting map...',
-                showBackdrop: false
-            });
-        }
-
-        $scope.showMap = Geo.mapIsReady();
-        $scope.map = Geo.getMap();
+                                         $ionicLoading, Crawler, Categories, Geo) {
 
 
-        //$scope.googleMap = {}; // this is filled when google map is initiated
+        $scope.showMap = false;
 
-        $scope.$watch('Geo.mapIsReady()', function(newVal, oldVal) {
-            if(newVal) {
-                $scope.showMap = newVal;
-                $scope.map = Geo.getMap();
-
-
-               /* $timeout(function() {
-                    alert('before map instance');
-
-
-                    $scope.googleMap.control.getGMap();
-                    alert('before refresh');
-
-                    $scope.googleMap.control.refresh($scope.map.center);
-                    alert('after refresh');
-                }, 3000)*/;
-
-
-            }
-
-            if (!Geo.mapIsReady()) {
-                $scope.loading = $ionicLoading.show({
-                    content: 'Getting map...',
-                    showBackdrop: false
-                });
-            } else {
-                $ionicLoading.hide();
-            }
+        $scope.loadingIndicator = $ionicLoading.show({
+            content: 'Loading Data',
+            animation: 'fade-in',
+            showBackdrop: false,
+            maxWidth: 200,
+            showDelay: 500
         });
+
+
+        Geo.getMap().then(function(map) {
+
+
+            $ionicNavBarDelegate.align('left');
+
+            // This set the actual category
+            Categories.setCategoryIdx(0);
+            $scope.category = Categories.getActualCategory();
+
+            // Crwaling starts here becuse it's the fallback route.
+            // If fallback route is changed, remeber to move Crawler.init().
+            if (!Crawler.getInit()) {
+                //Crawler.init();
+            }
+
+
+            //$scope.map = Geo.getInstantMap();
+
+            // Need to assign Geo to watch its values
+            $scope.Geo = Geo;
+            $scope.map = map;
+            $scope.showMap = Geo.isMapInitialized();
 
 
 // SLIDER LOGIC
 
-        $scope.slideIndex = 0;
+            $scope.slideIndex = 0;
 
 // Called each time the slide changes
-        $scope.slideChanged = function(index) {
-            $scope.slideIndex = index;
-        };
+            $scope.slideChanged = function(index) {
+                $scope.slideIndex = index;
+            };
 
-        $scope.goToWhoYouLike = function() {
+            $scope.goToWhoYouLike = function() {
 
-            if ($scope.slideIndex == 1) {
-                $ionicSlideBoxDelegate.previous();
-            }
-            else if ($scope.slideIndex == 2) {
-                $ionicSlideBoxDelegate.previous();
-                $ionicSlideBoxDelegate.previous();
-            }
-            $scope.slideIndex == 0;
-        };
+                if ($scope.slideIndex == 1) {
+                    $ionicSlideBoxDelegate.previous();
+                }
+                else if ($scope.slideIndex == 2) {
+                    $ionicSlideBoxDelegate.previous();
+                    $ionicSlideBoxDelegate.previous();
+                }
+                $scope.slideIndex == 0;
+            };
 
-        $scope.goToWhoLikesYou = function() {
+            $scope.goToWhoLikesYou = function() {
 
-            if ($scope.slideIndex == 0) {
-                $ionicSlideBoxDelegate.next();
-            }
-            else if ($scope.slideIndex == 2) {
-                $ionicSlideBoxDelegate.previous();
-            }
-            $scope.slideIndex == 1;
+                if ($scope.slideIndex == 0) {
+                    $ionicSlideBoxDelegate.next();
+                }
+                else if ($scope.slideIndex == 2) {
+                    $ionicSlideBoxDelegate.previous();
+                }
+                $scope.slideIndex == 1;
 
-        };
+            };
 
 // Called each time the slide changes
-        $scope.goToBothLike = function() {
+            $scope.goToBothLike = function() {
 
-            if ($scope.slideIndex == 0) {
-                $ionicSlideBoxDelegate.next();
-                $ionicSlideBoxDelegate.next();
-            }
-            else if ($scope.slideIndex == 1) {
-                $ionicSlideBoxDelegate.next();
-            }
-            $scope.slideIndex == 2;
+                if ($scope.slideIndex == 0) {
+                    $ionicSlideBoxDelegate.next();
+                    $ionicSlideBoxDelegate.next();
+                }
+                else if ($scope.slideIndex == 1) {
+                    $ionicSlideBoxDelegate.next();
+                }
+                $scope.slideIndex == 2;
 
-        };
+            };
+
+            $scope.loadingIndicator.hide();
+
+        })
 
     })
+
 
 
     .controller('ProfileCtrl', function($scope) {
@@ -311,6 +294,7 @@ angular.module('soyloco.controllers', [])
  * */
     .controller('InviteCtrl', function($scope) {
     })
+
 
 /*************************************
  *          Logout controller

@@ -4,14 +4,13 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function($rootScope, localStorageService, $q, $interval) {
+    .factory('Geo', function(localStorageService, $q, $interval) {
 
         var geoWatchTime = 5000,
             geoWatchId,
             position,
             map,
             mapInitialized = false,
-            isMapReady = false,
             mapInitStop;
 
         // device APIs are available
@@ -55,8 +54,9 @@ angular.module('soyloco.geocoding', [])
             if(mapInitialized) {
                 map.selfMarker.isReady = true;
 
+
                 // We update position only when a reasonable lat or long change happens
-                if ((position.lat.toFixed(4) == map.selfMarker.latitude.toFixed(4))
+                if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
                     || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
 
                     updatePosition(position);
@@ -76,27 +76,6 @@ angular.module('soyloco.geocoding', [])
 
         }
 
-        function createDefaultMap() {
-            map = {
-                center : {
-                    latitude: 1,
-                    longitude: 1
-                },
-                zoom: 14,
-                draggable: false,
-                options: {
-                    streetViewControl: false,
-                    panControl: false,
-                    mapTypeId: "roadmap",
-                    disableDefaultUI: true
-                },
-                default:true
-            };
-
-            return map;
-        }
-
-
         function constructMap(position) {
 
             var lat = position.lat;
@@ -112,7 +91,7 @@ angular.module('soyloco.geocoding', [])
                     latitude:lat,
                     longitude:long,
                     fit:true,
-                    isReady:false
+                    isReady:true
                 },
                 zoom: 14,
                 draggable: true,
@@ -135,8 +114,7 @@ angular.module('soyloco.geocoding', [])
                         "longitude":long+0.001,
                         fit:true
                     }
-                ],
-                default:false
+                ]
             };
 
             return map
@@ -144,11 +122,13 @@ angular.module('soyloco.geocoding', [])
         }
 
         function updatePosition(position) {
-            map.selfMarker.latitude = position.lat+0.0001;
+            map.selfMarker.latitude = position.lat;
             map.selfMarker.longitude = position.long;
         }
 
         function getMap() {
+
+            var deferred = $q.defer();
 
             if (!mapInitialized) {
 
@@ -156,48 +136,60 @@ angular.module('soyloco.geocoding', [])
                     && navigator.network.connection.type != Connection.NONE) {
                     var actualPosition = localStorageService.get('position');
                     createMap(actualPosition);
-                    mapInitialized = true;
-                    isMapReady = true;
 
                 } else {
-                    map = createDefaultMap();
-                    mapInitialized = true;
+                    //map = createDefaultMap();
+                    //mapInitialized = true;
 
                     mapInitStop = $interval(function () {
 
                         if(localStorageService.get('position') != null
                             && navigator.network.connection.type != Connection.NONE) {
+
                             if (angular.isDefined(mapInitStop)) {
                                 $interval.cancel(mapInitStop);
                                 mapInitStop = undefined;
                             }
                             var actualPosition = localStorageService.get('position');
                             createMap(actualPosition);
-                            isMapReady = true;
                         }
                     }, 3000);
 
                 }
+            } else {
+                deferred.resolve(map);
             }
 
             // Utility to create map
             function createMap(actualPosition) {
                 map = constructMap(actualPosition);
+                deferred.resolve(map);
+                mapInitialized = true;
+
             }
 
-            return map;
+            return deferred.promise;
 
         }
 
-        function mapIsReady() {
-            return isMapReady;
+        function getInstantMap() {
+            return map;
+        }
+
+        function getSelfMarker() {
+            return map.selfMarker;
+        }
+
+        function isMapInitialized() {
+            return mapInitialized;
         }
 
         return {
             init: init,
             getMap: getMap,
-            mapIsReady: mapIsReady,
-            getInstantMap: getMap
+            getSelfMarker: getSelfMarker,
+            getInstantMap: getInstantMap,
+            isMapInitialized: isMapInitialized
         }
 
     })
