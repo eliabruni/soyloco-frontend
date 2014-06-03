@@ -11,7 +11,8 @@ angular.module('soyloco.geocoding', [])
             position,
             map,
             mapInitialized = false,
-            mapInitStop;
+            mapInitStop,
+            needToReloadView = false;
 
         // device APIs are available
         function init() {
@@ -152,6 +153,7 @@ angular.module('soyloco.geocoding', [])
                             }
                             var actualPosition = localStorageService.get('position');
                             createMap(actualPosition);
+                            needToReloadView = true;
                         }
                     }, 3000);
 
@@ -184,12 +186,22 @@ angular.module('soyloco.geocoding', [])
             return mapInitialized;
         }
 
+        function getViewToReload() {
+            return needToReloadView;
+        }
+
+        function setViewToReload(toReload) {
+             needToReloadView = toReload;
+        }
+
         return {
             init: init,
             getMap: getMap,
             getSelfMarker: getSelfMarker,
             getInstantMap: getInstantMap,
-            isMapInitialized: isMapInitialized
+            isMapInitialized: isMapInitialized,
+            getViewToReload:getViewToReload,
+            setViewToReload:setViewToReload
         }
 
     })

@@ -183,7 +183,15 @@ angular.module('soyloco.controllers', [])
 
             };
 
+
+            if (Geo.getViewToReload()) {
+                alert('reloading view')
+                location.reload();
+                Geo.setViewToReload(false);
+            }
+
             $scope.loadingIndicator.hide();
+
 
         })
 
