@@ -98,7 +98,7 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
-                                         $ionicLoading, Crawler, Categories, Geo) {
+                                         $ionicLoading, Crawler, Categories, Geo, $timeout) {
 
 
         $scope.showMap = false;
@@ -110,6 +110,7 @@ angular.module('soyloco.controllers', [])
             maxWidth: 200,
             showDelay: 500
         });
+
 
 
         Geo.getMap().then(function(map) {
@@ -137,6 +138,8 @@ angular.module('soyloco.controllers', [])
 
 
 // SLIDER LOGIC
+
+
 
             $scope.slideIndex = 0;
 
@@ -182,6 +185,11 @@ angular.module('soyloco.controllers', [])
                 $scope.slideIndex == 2;
 
             };
+
+            $timeout(function() {
+                $ionicSlideBoxDelegate.enableSlide(false);
+                $scope.goToWhoYouLike();
+            }, 10);
 
 
             if (Geo.getViewToReload()) {

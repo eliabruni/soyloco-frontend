@@ -1,67 +1,84 @@
-<ion-view title="Soyloco">
+<ion-view hide-nav-bar="true">
 
-    <ion-pane>
+    <!--
+        <ion-pane>
+    -->
 
-        <ion-content header-shrink scroll-event-interval="1">
-            <div class="map">
+    <div class="button-bar">
+        <div class="button-bar-container" align="right">
+            <a class="button button-icon ion-ios7-people above-bar-icon-people"  ng-click="goToWhoYouLike()" ></a>
+            <a class="button button-icon ion-person above-bar-icon-person" ng-click="goToWhoLikesYou()"></a>
+            <a class="button button-icon ion-person-stalker above-bar-icon-stalker" ng-click="goToBothLike()"></a>
+        </div>
 
-                <google-map ng-if="showMap"
-                            center="map.center"
-                            zoom="map.zoom"
-                            draggable="true"
-                            control="googleMap"
-                            mark-click="false"
-                            options="map.options">
-                    <marker ng-if="map.selfMarker.isReady" coords="map.selfMarker"
-                            icon="map.selfMarker.icon">
-                                        </marker>
-<!--
-                            <markers models="map.markers" coords="'map.markers'" icon="'map.markers.icon'"></markers>
-                    on'"></markers>
--->
-                    <!--
-                            <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
+    </div>
+
+    <ion-content header-shrink scroll-event-interval="1">
+
+
+
+        <div class="map">
+
+
+            <google-map ng-if="showMap"
+                        center="map.center"
+                        zoom="map.zoom"
+                        draggable="true"
+                        control="googleMap"
+                        mark-click="false"
+                        options="map.options">
+                <marker ng-if="map.selfMarker.isReady" coords="map.selfMarker"
+                        icon="map.selfMarker.icon">
+                </marker>
+                <!--
+                                            <markers models="map.markers" coords="'map.markers'" icon="'map.markers.icon'"></markers>
+                                    on'"></markers>
+                -->
+                <!--
+                        <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
 ></markers>
-                        -->
+                    -->
 
-                </google-map>
+            </google-map>
 
-            </div>
+        </div>
 
-            <ion-slide-box ng-if="showMap" show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
-                <ion-slide>
-                    <ion-list>
-                        <ion-item ng-repeat="place in category.otherPlaces"
-                                  class="item item-thumbnail-left">
-                            <img ng-src="{{ place.image }}">
-                            <h2>{{place.name}}</h2>
-                            <p>{{place.address}}</p>
-                        </ion-item>
-                    </ion-list>
-                </ion-slide>
-                <ion-slide>
-                    <ion-list>
-                        <ion-item ng-repeat="place in category.myPlaces"
-                                  class="item item-thumbnail-left">
-                            <img ng-src="{{ place.image }}">
-                            <h2>{{place.name}}</h2>
-                            <p>{{place.address}}</p>
-                        </ion-item>
-                    </ion-list>
-                </ion-slide>
-                <ion-slide>
-                    <ion-list>
-                        <ion-item ng-repeat="place in category.otherPlaces"
-                                  class="item item-thumbnail-left">
-                            <img ng-src="{{ place.image }}">
-                            <h2>{{place.name}}</h2>
-                            <p>{{place.address}}</p>
-                        </ion-item>
-                    </ion-list>
-                </ion-slide>
-            </ion-slide-box>
-        </ion-content>
+        <ion-slide-box ng-if="showMap" show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
+            <ion-slide>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.otherPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.myPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.otherPlaces"
+                              class="item item-thumbnail-left">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
 
 
-    </ion-pane>
+    <!--
+        </ion-pane>
+    -->
 </ion-view>
