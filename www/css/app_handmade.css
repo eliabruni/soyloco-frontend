@@ -210,35 +210,43 @@ BUTTONS ABOVE
 */
 
 .button-bar{
-    background: rgba(50, 80, 109,0.8) !important;
+    background: rgba(50, 80, 109,0.9) !important;
     position: absolute;
     z-index:1000;
     height: 50px;
+    padding-left:15px;
+}
+
+.button-bar-view-title-container {
+    width: 70%;
+    font-size: 20px;
+    color: white;
+    margin:auto;
 }
 
 .button-bar-container {
     width: 100%;
-    margin:auto
+    margin:auto;
 }
 
 .above-bar-icon-people {
     font-size: 39px;
     color: #ccc;
-    padding-right:10px;
+    padding-right:15px;
 
 }
 
 .above-bar-icon-person {
     font-size: 30px;
     color: #ccc;
-    padding-right:10px;
+    padding-right:15px;
 
 }
 
 .above-bar-icon-stalker {
     font-size: 30px;
     color: #ccc;
-    padding-right:10px;
+    padding-right:15px;
 }
 
 /*.above-bar-icon-settings {

@@ -112,6 +112,8 @@ angular.module('soyloco.controllers', [])
         });
 
 
+        var mapViews = [{title: 'WHO YOU LIKE'},{title: 'WHO LIKES YOU'},{title: 'MATCHES'}];
+
 
         Geo.getMap().then(function(map) {
 
@@ -141,6 +143,7 @@ angular.module('soyloco.controllers', [])
 
 
 
+
             $scope.slideIndex = 0;
 
 // Called each time the slide changes
@@ -158,6 +161,8 @@ angular.module('soyloco.controllers', [])
                     $ionicSlideBoxDelegate.previous();
                 }
                 $scope.slideIndex == 0;
+                $scope.viewName = mapViews[0].title;
+
             };
 
             $scope.goToWhoLikesYou = function() {
@@ -169,6 +174,7 @@ angular.module('soyloco.controllers', [])
                     $ionicSlideBoxDelegate.previous();
                 }
                 $scope.slideIndex == 1;
+                $scope.viewName = mapViews[1].title;
 
             };
 
@@ -183,6 +189,8 @@ angular.module('soyloco.controllers', [])
                     $ionicSlideBoxDelegate.next();
                 }
                 $scope.slideIndex == 2;
+                $scope.viewName = mapViews[2].title;
+
 
             };
 
