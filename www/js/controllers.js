@@ -23,7 +23,7 @@ angular.module('soyloco.controllers', [])
  *          Login controller
  *
  * */
-    .controller('LoginCtrl', function ($scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
+    .controller('LoginCtrl', function ($rootScope, $scope, $location, $state, $ionicSlideBoxDelegate,$timeout,
                                        $ionicLoading, OpenFB) {
 
         var numTaps = 0;
@@ -97,7 +97,7 @@ angular.module('soyloco.controllers', [])
  *          Category controller
  *
  * */
-    .controller('CategoryCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
+    .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
                                          $ionicLoading, Crawler, Categories, Geo, $timeout) {
 
 
@@ -114,102 +114,112 @@ angular.module('soyloco.controllers', [])
 
         var mapViews = [{title: 'WHO YOU LIKE'},{title: 'WHO LIKES YOU'},{title: 'MATCHES'}];
 
+        // By default we set it to 'Who you like'
+        $scope.viewName = mapViews[0].title;
 
-        Geo.getMap().then(function(map) {
 
+        if (!$rootScope.deviceReady) {
+            // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-            $ionicNavBarDelegate.align('left');
-
-            // This set the actual category
-            Categories.setCategoryIdx(0);
-            $scope.category = Categories.getActualCategory();
-
-            // Crwaling starts here becuse it's the fallback route.
-            // If fallback route is changed, remeber to move Crawler.init().
-            if (!Crawler.getInit()) {
-                //Crawler.init();
+            // device APIs are available
+            function onDeviceReady() {
+                $rootScope.deviceReady = true;
+                loadView();
             }
+        } else {
+            loadView();
+        }
 
+        function loadView() {
 
-            //$scope.map = Geo.getInstantMap();
+            Geo.getMap().then(function (map) {
 
-            // Need to assign Geo to watch its values
-            $scope.Geo = Geo;
-            $scope.map = map;
-            $scope.showMap = Geo.isMapInitialized();
+                $ionicNavBarDelegate.align('left');
 
+                // This set the actual category
+                Categories.setCategoryIdx(0);
+                $scope.category = Categories.getActualCategory();
+
+                // Crwaling starts here becuse it's the fallback route.
+                // If fallback route is changed, remeber to move Crawler.init().
+                if (!Crawler.getInit()) {
+                    //Crawler.init();
+                }
+
+                // Need to assign Geo to watch its values
+                $scope.Geo = Geo;
+                $scope.map = map;
 
 // SLIDER LOGIC
 
-
-
-
-            $scope.slideIndex = 0;
+                $scope.slideIndex = 0;
 
 // Called each time the slide changes
-            $scope.slideChanged = function(index) {
-                $scope.slideIndex = index;
-            };
+                $scope.slideChanged = function (index) {
+                    $scope.slideIndex = index;
+                };
 
-            $scope.goToWhoYouLike = function() {
+                $scope.goToWhoYouLike = function () {
 
-                if ($scope.slideIndex == 1) {
-                    $ionicSlideBoxDelegate.previous();
-                }
-                else if ($scope.slideIndex == 2) {
-                    $ionicSlideBoxDelegate.previous();
-                    $ionicSlideBoxDelegate.previous();
-                }
-                $scope.slideIndex == 0;
-                $scope.viewName = mapViews[0].title;
+                    if ($scope.slideIndex == 1) {
+                        $ionicSlideBoxDelegate.previous();
+                    }
+                    else if ($scope.slideIndex == 2) {
+                        $ionicSlideBoxDelegate.previous();
+                        $ionicSlideBoxDelegate.previous();
+                    }
+                    $scope.slideIndex == 0;
+                    $scope.viewName = mapViews[0].title;
 
-            };
+                };
 
-            $scope.goToWhoLikesYou = function() {
+                $scope.goToWhoLikesYou = function () {
 
-                if ($scope.slideIndex == 0) {
-                    $ionicSlideBoxDelegate.next();
-                }
-                else if ($scope.slideIndex == 2) {
-                    $ionicSlideBoxDelegate.previous();
-                }
-                $scope.slideIndex == 1;
-                $scope.viewName = mapViews[1].title;
+                    if ($scope.slideIndex == 0) {
+                        $ionicSlideBoxDelegate.next();
+                    }
+                    else if ($scope.slideIndex == 2) {
+                        $ionicSlideBoxDelegate.previous();
+                    }
+                    $scope.slideIndex == 1;
+                    $scope.viewName = mapViews[1].title;
 
-            };
+                };
 
 // Called each time the slide changes
-            $scope.goToBothLike = function() {
+                $scope.goToBothLike = function () {
 
-                if ($scope.slideIndex == 0) {
-                    $ionicSlideBoxDelegate.next();
-                    $ionicSlideBoxDelegate.next();
+                    if ($scope.slideIndex == 0) {
+                        $ionicSlideBoxDelegate.next();
+                        $ionicSlideBoxDelegate.next();
+                    }
+                    else if ($scope.slideIndex == 1) {
+                        $ionicSlideBoxDelegate.next();
+                    }
+                    $scope.slideIndex == 2;
+                    $scope.viewName = mapViews[2].title;
+
+
+                };
+
+                $timeout(function () {
+                    $ionicSlideBoxDelegate.enableSlide(false);
+                    $scope.goToWhoYouLike();
+                }, 10);
+
+                if (Geo.getViewToReload()) {
+                    location.reload();
+                    Geo.setViewToReload(false);
                 }
-                else if ($scope.slideIndex == 1) {
-                    $ionicSlideBoxDelegate.next();
+
+                if (!Geo.getViewToReload()) {
+                    $scope.showMap = Geo.isMapInitialized();
+                    $scope.loadingIndicator.hide()
                 }
-                $scope.slideIndex == 2;
-                $scope.viewName = mapViews[2].title;
 
-
-            };
-
-            $timeout(function() {
-                $ionicSlideBoxDelegate.enableSlide(false);
-                $scope.goToWhoYouLike();
-            }, 10);
-
-
-            if (Geo.getViewToReload()) {
-                alert('reloading view')
-                location.reload();
-                Geo.setViewToReload(false);
-            }
-
-            $scope.loadingIndicator.hide();
-
-
-        })
+            })
+        }
 
     })
 

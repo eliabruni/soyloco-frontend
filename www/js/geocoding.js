@@ -22,7 +22,7 @@ angular.module('soyloco.geocoding', [])
 
             // device APIs are available
             function onDeviceReady() {
-
+                $rootScope.deviceReady = true;
                 // Start getting position
                 start();
             }
@@ -83,7 +83,7 @@ angular.module('soyloco.geocoding', [])
             var long = position.long;
 
             map = {
-                    center : {
+                center : {
                     latitude: lat,
                     longitude: long
                 },
@@ -135,12 +135,11 @@ angular.module('soyloco.geocoding', [])
 
                 if(localStorageService.get('position') != null
                     && navigator.network.connection.type != Connection.NONE) {
+
                     var actualPosition = localStorageService.get('position');
                     createMap(actualPosition);
 
                 } else {
-                    //map = createDefaultMap();
-                    //mapInitialized = true;
 
                     mapInitStop = $interval(function () {
 
@@ -174,10 +173,6 @@ angular.module('soyloco.geocoding', [])
 
         }
 
-        function getInstantMap() {
-            return map;
-        }
-
         function getSelfMarker() {
             return map.selfMarker;
         }
@@ -191,14 +186,13 @@ angular.module('soyloco.geocoding', [])
         }
 
         function setViewToReload(toReload) {
-             needToReloadView = toReload;
+            needToReloadView = toReload;
         }
 
         return {
             init: init,
             getMap: getMap,
             getSelfMarker: getSelfMarker,
-            getInstantMap: getInstantMap,
             isMapInitialized: isMapInitialized,
             getViewToReload:getViewToReload,
             setViewToReload:setViewToReload
