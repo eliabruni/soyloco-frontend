@@ -74,7 +74,14 @@
 .tab-item.active,
 .tab-item.activated {
     opacity: 1;
+    background:#000;
+    text-decoration: none;
+    border-bottom: 5px solid #cb2027;
+/*
     background:#32506d;
+*/
+    height: 100%;
+
 }
 
 
@@ -110,8 +117,9 @@
 
 
 .icon-cancel-soyloco {
-    font-size: 2.3em;
-    color:#32506d;
+    font-size: 2.7em;
+    font-weight: bold;
+    color:#cb2027;
     display: block;
 /*
     background-color: #f7f7f7;
@@ -132,7 +140,7 @@
 
 
 .icon-heart-soyloco {
-    font-size: 2.3em;
+    font-size: 2.7em;
     color:#76EE00;
     display: block;
     background-color: #f7f7f7;
@@ -210,7 +218,11 @@ BUTTONS ABOVE
 */
 
 .button-bar{
-    background: rgba(50, 80, 109,0.9) !important;
+/*
+    background: rgba(50, 80, 109,0.8) !important;
+*/
+    background: rgba(203, 32, 39,0.8) !important;
+
     position: absolute;
     z-index:1000;
     height: 50px;
