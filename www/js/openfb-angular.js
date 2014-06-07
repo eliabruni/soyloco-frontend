@@ -9,13 +9,13 @@
  */
 angular.module('openfb', [])
 
-    .factory('OpenFB', function ($rootScope, $q, $window, $http) {
+    .factory('OpenFB', function ($rootScope, $q, $window, $http, localStorageService) {
+
+
 
         var FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth',
 
-        // By default we store fbtoken in sessionStorage. This can be overriden in init()
-            tokenStore = window.sessionStorage,
-
+        // That's the variable I use around the whole app
             fbAppId,
             oauthRedirectURL,
 
@@ -31,6 +31,7 @@ angular.module('openfb', [])
 
         document.addEventListener("deviceready", function () {
             runningInCordova = true;
+
         }, false);
 
         /**
@@ -40,11 +41,11 @@ angular.module('openfb', [])
          * @param redirectURL - The OAuth redirect URL. Optional. If not provided, we use sensible defaults.
          * @param store - The store used to save the Facebook token. Optional. If not provided, we use sessionStorage.
          */
-        function init(appId, redirectURL, store) {
+        function init(appId, redirectURL) {
             fbAppId = appId;
             if (redirectURL) oauthRedirectURL = redirectURL;
-            if (store) tokenStore = store;
         }
+
 
         /**
          * Login to Facebook using OAuth. If running in a Browser, the OAuth workflow happens in a a popup window.
@@ -68,6 +69,7 @@ angular.module('openfb', [])
 
             logout();
 
+
             // Check if an explicit oauthRedirectURL has been provided in init(). If not, infer the appropriate value
             if (!oauthRedirectURL) {
                 if (runningInCordova) {
@@ -83,31 +85,37 @@ angular.module('openfb', [])
                 }
             }
 
-            loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
-                '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
+            // If device not online we close window and go back
+            // to login page
+            if (navigator.network.connection.type != Connection.NONE) {
 
-            // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
-            if (runningInCordova) {
-                loginWindow.addEventListener('loadstart', function (event) {
-                    var url = event.url;
-                    if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
-                        loginWindow.close();
-                        oauthCallback(url);
-                    }
-                });
+                loginWindow = window.open(FB_LOGIN_URL + '?client_id=' + fbAppId + '&redirect_uri=' + oauthRedirectURL +
+                    '&response_type=token&display=popup&scope=' + fbScope, '_blank', 'location=no');
 
-                loginWindow.addEventListener('exit', function () {
-                    // Handle the situation where the user closes the login window manually before completing the login process
-                    deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-                });
+                // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
+                if (runningInCordova) {
+                    loginWindow.addEventListener('loadstart', function (event) {
+                        var url = event.url;
+
+                        if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
+                            loginWindow.close();
+                            oauthCallback(url);
+                        }
+                    });
+
+                    loginWindow.addEventListener('exit', function () {
+                        // Handle the situation where the user closes the login window manually before completing the login process
+                        deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+                    });
+                }
+                // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
+                // oauthCallback() function. See oauthcallback.html for details.
+
+            } else {
+                deferredLogin.reject();
             }
-            // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
-            // oauthCallback() function. See oauthcallback.html for details.
-
             return deferredLogin.promise;
-
         }
-
         /**
          * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
          * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).
@@ -123,7 +131,7 @@ angular.module('openfb', [])
             if (url.indexOf("access_token=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['fbtoken'] = obj['access_token'];
+                localStorageService.add('fbtoken', obj['access_token']);
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -138,7 +146,7 @@ angular.module('openfb', [])
          * Application-level logout: we simply discard the token.
          */
         function logout() {
-            tokenStore['fbtoken'] = undefined;
+            localStorageService.remove('fbtoken');
         }
 
         /**
@@ -150,7 +158,7 @@ angular.module('openfb', [])
         function revokePermissions() {
             return api({method: 'DELETE', path: '/me/permissions'})
                 .success(function () {
-                    console.log('Permissions revoked');
+                    console.log('Permissions revoke”d');
                 });
         }
 
@@ -164,11 +172,12 @@ angular.module('openfb', [])
         function api(obj) {
 
             var method = obj.method || 'GET',
+                headers = obj.headers || {},
                 params = obj.params || {};
 
-            params['access_token'] = tokenStore['fbtoken'];
+            params['access_token'] = localStorageService.get('fbtoken');
 
-            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
+            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, headers: headers, params: params})
                 .error(function(data, status, headers, config) {
                     if (data.error && data.error.type === 'OAuthException') {
                         $rootScope.$emit('OAuthException');
@@ -196,6 +205,16 @@ angular.module('openfb', [])
             return api({method: 'GET', path: path, params: params});
         }
 
+        /**
+         * Helper function for a GET call into the Graph API with headers
+         * @param path
+         * @param params
+         * @returns {*}
+         */
+        function getWithHeaders(path, headers, params) {
+            return api({method: 'GET', path: path, headers : headers, params: params });
+        }
+
         function parseQueryString(queryString) {
             var qs = decodeURIComponent(queryString),
                 obj = {},
@@ -215,7 +234,8 @@ angular.module('openfb', [])
             api: api,
             post: post,
             get: get,
-            oauthCallback: oauthCallback
+            oauthCallback: oauthCallback,
+            getWithHeaders: getWithHeaders
         }
 
     });

@@ -3,5 +3,12 @@ platforms/android
 platforms/ios
 .idea
 .sass-cache
+<<<<<<< HEAD
 plugins
 www/components
+=======
+plugins/*
+www/components
+www/lib
+bower_components
+>>>>>>> nightly

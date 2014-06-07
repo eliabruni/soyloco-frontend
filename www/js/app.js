@@ -1,110 +1,137 @@
-angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers','soyloco.services','soyloco.directives', 'ionic.contrib.ui.cards' ])
+// Soyloco App
 
-    .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'soyloco' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'soyloco.services' is found in services.js
+// 'soyloco.controllers' is found in controllers.js
 
-        OpenFB.init('738982816123885');
 
-        $ionicPlatform.ready(function () {
-            if (window.StatusBar) {
+angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.geocoding',
+    'soyloco.services','soyloco.directives', 'soyloco.crawling', 'ionic.contrib.ui.cards',
+    'LocalStorageModule', 'google-maps'])
+
+    .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService,
+                  Geo) {
+
+
+
+        $ionicPlatform.ready(function() {
+
+
+            $rootScope.platformReady = true;
+
+            OpenFB.init('738982816123885');
+            Geo.init();
+
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if(window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if(window.StatusBar) {
+                // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-        });
 
-        $rootScope.$on('$stateChangeStart', function(event, toState) {
-            if (toState.name !== "app.login" && toState.name !== "app.logout" && !$window.sessionStorage['fbtoken']) {
-                $state.go('app.login');
-                event.preventDefault();
-            }
-        });
+/*
+           $rootScope.$on('$stateChangeStart', function(event, toState) {
+                if (toState.name !== "login" && toState.name !== "logout" &&
+                    (localStorageService.get('fbtoken') === null) ) {
+                    $state.go('login');
+                    event.preventDefault();
+                }
+            });
+*/
 
-        $rootScope.$on('OAuthException', function() {
-            $state.go('app.login');
-        });
+            $rootScope.$on('OAuthException', function() {
+                $state.go('login');
+            });
 
+        });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
+
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
         $stateProvider
-
-            .state('app', {
-                url: "/app",
-                abstract: true,
-                templateUrl: "templates/menu.html",
-                controller: "AppCtrl"
-            })
-
-            .state('app.login', {
+            .state('login', {
                 url: "/login",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/login.html",
-                        controller: "LoginCtrl"
-                    }
-                }
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
             })
 
-            .state('app.logout', {
+            .state('logout', {
                 url: "/logout",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/logout.html",
-                        controller: "LogoutCtrl"
-                    }
-                }
+                templateUrl: "templates/logout.html",
+                controller: 'LogoutCtrl'
             })
 
-            .state('app.profile', {
-                url: "/profile",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/profile.html",
-                        controller: "ProfileCtrl"
-                    }
-                }
+            // setup an abstract state for the tabs directive
+            .state('tab', {
+                url: "/tab",
+                abstract: true,
+                templateUrl: "templates/tabs.html",
+                controller: "TabsCtrl"
             })
 
-            .state('app.categories', {
-                url: "/categories",
-                views: {
-                    'menuContent' :{
-                        templateUrl: "templates/categories.html",
-                        controller: 'CategoriesCtrl'
-                    }
-                }
-            })
+            // Each tab has its own nav history stack:
 
-            .state('app.category', {
-                url: "/categories/:categoryId",
+            .state('tab.category', {
+                url: '/category',
                 views: {
-                    'menuContent' :{
-                        templateUrl: "templates/category.html",
+                    'tab-category': {
+                        templateUrl: 'templates/tab-category.html',
                         controller: 'CategoryCtrl'
                     }
                 }
             })
 
-            .state('app.play', {
-                url: "/play",
+            .state('tab.profile', {
+                url: '/profile',
                 views: {
-                    'menuContent' :{
-                        templateUrl: "templates/play.html",
+                    'tab-profile': {
+                        templateUrl: 'templates/tab-profile.html',
+                        controller: 'ProfileCtrl'
+                    }
+                }
+            })
+
+            .state('tab.play', {
+                url: '/play',
+                views: {
+                    'tab-play': {
+                        templateUrl: 'templates/tab-play.html',
                         controller: 'PlayCtrl'
                     }
                 }
             })
 
-            .state('app.settings', {
-                url: "/settings",
+            .state('tab.invite', {
+                url: '/invite',
                 views: {
-                    'menuContent' :{
-                        templateUrl: "templates/settings.html",
+                    'tab-invite': {
+                        templateUrl: 'templates/tab-invite.html',
+                        controller: 'InviteCtrl'
+                    }
+                }
+            })
+
+            .state('tab.settings', {
+                url: '/settings',
+                views: {
+                    'tab-settings': {
+                        templateUrl: 'templates/tab-settings.html',
                         controller: 'SettingsCtrl'
                     }
                 }
-            });
+            })
 
-        // fallback route
-        $urlRouterProvider.otherwise('/app/play');
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/tab/category');
 
     });
 
