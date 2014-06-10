@@ -102,18 +102,58 @@ angular.module('soyloco.geocoding', [])
                     mapTypeId: "roadmap",
                     disableDefaultUI: true
                 },
-                markers : [
+                markersWhoYouLike : [
                     {
+                        id: 1,
                         icon: 'img/maps/blue_marker.png',
-                        "latitude":lat+0.001,
-                        "longitude":long+0.003,
-                        fit:true
+                        latitude:lat+0.001,
+                        longitude:long+0.003,
+                        showWindow: false
+
                     },
                     {
+                        id: 2,
                         icon: 'img/maps/blue_marker.png',
-                        "latitude":lat+0.002,
-                        "longitude":long+0.001,
-                        fit:true
+                        latitude:lat+0.001,
+                        longitude:long+0.001,
+                        showWindow: false
+
+                    }
+                ],
+                markersWhoLikesYou : [
+                    {
+                        id: 1,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.002,
+                        longitude:long+0.002,
+                        showWindow: false
+
+                    },
+                    {
+                        id: 2,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.002,
+                        longitude:long+0.001,
+                        showWindow: false
+
+                    }
+                ],
+                markersMatches : [
+                    {
+                        id: 1,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.003,
+                        longitude:long+0.001,
+                        showWindow: false
+
+                    },
+                    {
+                        id: 2,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.001,
+                        longitude:long+0.002,
+                        showWindow: false
+
                     }
                 ]
             };

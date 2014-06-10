@@ -76,10 +76,10 @@
     opacity: 1;
     background:#000;
     text-decoration: none;
-    border-bottom: 5px solid #cb2027;
-/*
-    background:#32506d;
-*/
+    border-bottom: 4px solid #cb2027;
+    /*
+        background:#32506d;
+    */
     height: 100%;
 
 }
@@ -121,9 +121,9 @@
     font-weight: bold;
     color:#cb2027;
     display: block;
-/*
-    background-color: #f7f7f7;
-*/
+    /*
+        background-color: #f7f7f7;
+    */
     margin: 22.5px;
     width: 90px;
     height: 90px;
@@ -132,9 +132,9 @@
     line-height: 83.75px;
     border-radius: 50%;
     vertical-align:middle;
-/*
-    box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
-*/
+    /*
+        box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
+    */
 }
 
 
@@ -189,7 +189,7 @@ SWIPE IN PLAY VIEW
     border-radius: 4px;
     overflow: hidden;
     -webkit-animation-fill-mode: forwards;
-    border-color: #888;
+    border-color: #e59094;
     border: 1px solid;
 }
 
@@ -218,9 +218,9 @@ BUTTONS ABOVE
 */
 
 .button-bar{
-/*
-    background: rgba(50, 80, 109,0.8) !important;
-*/
+    /*
+        background: rgba(50, 80, 109,0.8) !important;
+    */
     background: rgba(203, 32, 39,0.8) !important;
 
     position: absolute;
@@ -243,23 +243,26 @@ BUTTONS ABOVE
 
 .above-bar-icon-people {
     font-size: 39px;
-    color: #ccc;
-    padding-right:15px;
+    color: #e59094;
+    padding-right:10px;
+    padding-left:10px;
+    border-right: 1px solid #e59094;
 
 }
 
 .above-bar-icon-person {
     font-size: 30px;
-    color: #ccc;
-    padding-right:15px;
+    color: #e59094;
+    padding-right:10px;
+    padding-left:10px;    border-right: 1px solid #e59094;
 
 }
 
 .above-bar-icon-stalker {
     font-size: 30px;
-    color: #ccc;
-    padding-right:15px;
-}
+    color: #e59094;
+    padding-right:10px;
+    padding-left:10px;}
 
 /*.above-bar-icon-settings {
     font-size: 30px;

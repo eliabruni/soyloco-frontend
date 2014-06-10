@@ -190,7 +190,7 @@ angular.module('soyloco.controllers', [])
                 };
 
 // Called each time the slide changes
-                $scope.goToBothLike = function () {
+                $scope.goToMatches = function () {
 
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();
