@@ -119,6 +119,7 @@ angular.module('soyloco.controllers', [])
 
 
         if (!$rootScope.deviceReady) {
+
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -134,6 +135,7 @@ angular.module('soyloco.controllers', [])
         function loadView() {
 
             Geo.getMap().then(function (map) {
+
 
                 $ionicNavBarDelegate.align('left');
 

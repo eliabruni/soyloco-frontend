@@ -4,7 +4,7 @@ angular.module('soyloco.geocoding', [])
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function(localStorageService, $q, $interval) {
+    .factory('Geo', function($rootScope, $q, $interval, localStorageService) {
 
         var geoWatchTime = 5000,
             geoWatchId,
@@ -137,6 +137,7 @@ angular.module('soyloco.geocoding', [])
                     && navigator.network.connection.type != Connection.NONE) {
 
                     var actualPosition = localStorageService.get('position');
+
                     createMap(actualPosition);
 
                 } else {
