@@ -32,9 +32,9 @@
                         icon="map.selfMarker.icon">
                 </marker>
 
-                <markers ng-if="slideIndex == 0" models="map.markersWhoYouLike" coords="'self'" icon="'icon'"></markers>
-                <markers ng-if="slideIndex == 1" models="map.markersWhoLikesYou" coords="'self'" icon="'icon'"></markers>
-                <markers ng-if="slideIndex == 2" models="map.markersMatches" coords="'self'" icon="'icon'"></markers>
+                <markers ng-if="slideIndex == 0" models="map.markersWhoYouLike" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 1" models="map.markersWhoLikesYou" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 2" models="map.markersMatches" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
 
 
                 <!--
@@ -50,7 +50,7 @@
             <ion-slide>
                 <ion-list>
                     <ion-item ng-repeat="place in category.otherPlaces"
-                              class="item item-thumbnail-left">
+                              class="item item-thumbnail-left" ng-click="puOnTop(place)">
                         <img ng-src="{{ place.image }}">
                         <h2>{{place.name}}</h2>
                         <p>{{place.address}}</p>
@@ -60,7 +60,7 @@
             <ion-slide>
                 <ion-list>
                     <ion-item ng-repeat="place in category.myPlaces"
-                              class="item item-thumbnail-left">
+                              class="item item-thumbnail-left" ng-click="puOnTop(place)">
                         <img ng-src="{{ place.image }}">
                         <h2>{{place.name}}</h2>
                         <p>{{place.address}}</p>
@@ -70,7 +70,7 @@
             <ion-slide>
                 <ion-list>
                     <ion-item ng-repeat="place in category.otherPlaces"
-                              class="item item-thumbnail-left">
+                              class="item item-thumbnail-left" ng-click="puOnTop(place)">
                         <img ng-src="{{ place.image }}">
                         <h2>{{place.name}}</h2>
                         <p>{{place.address}}</p>

@@ -221,17 +221,18 @@ BUTTONS ABOVE
     /*
         background: rgba(50, 80, 109,0.8) !important;
     */
-    background: rgba(203, 32, 39,0.8) !important;
+    background: rgba(203, 32, 39,0.9) !important;
 
     position: absolute;
     z-index:1000;
     height: 50px;
-    padding-left:15px;
+    padding-left:10px;
 }
 
 .button-bar-view-title-container {
     width: 80%;
     font-size: 20px;
+    font-weight: bold;
     color: white;
     margin:auto;
 }

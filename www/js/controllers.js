@@ -132,6 +132,7 @@ angular.module('soyloco.controllers', [])
             loadView();
         }
 
+
         function loadView() {
 
             Geo.getMap().then(function (map) {
@@ -152,6 +153,8 @@ angular.module('soyloco.controllers', [])
                 // Need to assign Geo to watch its values
                 $scope.Geo = Geo;
                 $scope.map = map;
+
+
 
 // SLIDER LOGIC
 
@@ -210,6 +213,79 @@ angular.module('soyloco.controllers', [])
                     $scope.goToWhoYouLike();
                 }, 10);
 
+
+
+
+
+
+
+                // Put the given place on top of the category list
+                $scope.puOnTop = function(place) {
+
+                    if ($scope.slideIndex == 0) {
+                        $scope.category.otherPlaces.splice($scope.category.otherPlaces.indexOf(place), 1);
+                        $scope.category.otherPlaces.splice(0,0,place);
+                        $scope.$apply();
+                    }
+
+                    else if ($scope.slideIndex == 1) {
+                        $scope.category.myPlaces.splice($scope.category.myPlaces.indexOf(place), 1);
+                        $scope.category.myPlaces.splice(0,0,place);
+                        $scope.$apply();
+                    }
+
+                    else if ($scope.slideIndex == 2) {
+                        $scope.category.otherPlaces.splice($scope.category.otherPlaces.indexOf(place), 1);
+                        $scope.category.otherPlaces.splice(0,0,place);
+                        $scope.$apply();
+                    }
+                }
+
+                // FUNCTIONS FOR MARKERS CLICKING
+
+                //alert('0')
+
+                var onMarkerClicked = function (marker) {
+                    alert('here')
+                    alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
+                    //$scope.puOnTop()
+                    $scope.$apply();
+                };
+
+                //alert('1a')
+
+
+                _.each($scope.map.markersWhoYouLike, function (marker) {
+                    marker.onClicked = function () {
+                        //alert('clicking')
+                        onMarkerClicked(marker);
+                    };
+                });
+
+                //alert('2')
+
+
+                _.each($scope.map.markersWhoLikesYou, function (marker) {
+                    marker.onClicked = function () {
+                        onMarkerClicked(marker);
+                    };
+                });
+
+                //alert('3')
+
+
+                _.each($scope.map.markersMatches, function (marker) {
+                    marker.onClicked = function () {
+                        onMarkerClicked(marker);
+                    };
+                });
+
+
+
+
+
+
+
                 if (Geo.getViewToReload()) {
                     location.reload();
                     Geo.setViewToReload(false);
@@ -219,11 +295,14 @@ angular.module('soyloco.controllers', [])
                     $scope.showMap = Geo.isMapInitialized();
                     $scope.loadingIndicator.hide()
                 }
-
             })
         }
 
+
     })
+
+
+
 
 
 
