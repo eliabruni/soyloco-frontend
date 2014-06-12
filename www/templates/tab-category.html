@@ -21,7 +21,7 @@
 
         <div class="map">
 
-            <google-map ng-if="showMap"
+            <google-map data-tap-disabled="true" ng-if="showMap"
                         center="map.center"
                         zoom="map.zoom"
                         draggable="true"
@@ -35,7 +35,6 @@
                 <markers ng-if="slideIndex == 0" models="map.markersWhoYouLike" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
                 <markers ng-if="slideIndex == 1" models="map.markersWhoLikesYou" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
                 <markers ng-if="slideIndex == 2" models="map.markersMatches" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
-
 
                 <!--
                         <markers models="map.markers" coords="'self'" icon="'icon'"></markers>

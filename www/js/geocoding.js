@@ -108,15 +108,27 @@ angular.module('soyloco.geocoding', [])
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.001,
                         longitude:long+0.003,
-                        showWindow: false
-
+                        showWindow: false,
+                        place: {
+                            id: 1,
+                            name: 'Walthers',
+                            address: 'Piazza Walther',
+                            image: 'img/walthers.jpg'
+                        }
                     },
                     {
                         id: 2,
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.001,
                         longitude:long+0.001,
-                        showWindow: false
+                        showWindow: false,
+                        place: {
+                            id: 2,
+                            name: 'Nadamas',
+                            address: 'Piazza Erbe',
+                            image: 'img/nadamas.jpg'
+                        }
+
 
                     }
                 ],
@@ -126,7 +138,13 @@ angular.module('soyloco.geocoding', [])
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.002,
                         longitude:long+0.002,
-                        showWindow: false
+                        showWindow: false,
+                        place: {
+                            id: 1,
+                            name: 'Walthers',
+                            address: 'Piazza Walther',
+                            image: 'img/walthers.jpg'
+                        }
 
                     },
                     {
@@ -134,7 +152,13 @@ angular.module('soyloco.geocoding', [])
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.002,
                         longitude:long+0.001,
-                        showWindow: false
+                        showWindow: false,
+                        place: {
+                            id: 2,
+                            name: 'Nadamas',
+                            address: 'Piazza Erbe',
+                            image: 'img/nadamas.jpg'
+                        }
 
                     }
                 ],
@@ -144,7 +168,13 @@ angular.module('soyloco.geocoding', [])
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.003,
                         longitude:long+0.001,
-                        showWindow: false
+                        showWindow: false,
+                        place: {
+                            id: 1,
+                            name: 'Walthers',
+                            address: 'Piazza Walther',
+                            image: 'img/walthers.jpg'
+                        }
 
                     },
                     {
@@ -152,7 +182,13 @@ angular.module('soyloco.geocoding', [])
                         icon: 'img/maps/blue_marker.png',
                         latitude:lat+0.001,
                         longitude:long+0.002,
-                        showWindow: false
+                        showWindow: false,
+                        place: {
+                            id: 2,
+                            name: 'Nadamas',
+                            address: 'Piazza Erbe',
+                            image: 'img/nadamas.jpg'
+                        }
 
                     }
                 ]

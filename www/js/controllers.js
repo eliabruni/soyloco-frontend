@@ -100,7 +100,6 @@ angular.module('soyloco.controllers', [])
     .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
                                          $ionicLoading, Crawler, Categories, Geo, $timeout) {
 
-
         $scope.showMap = false;
 
         $scope.loadingIndicator = $ionicLoading.show({
@@ -111,12 +110,10 @@ angular.module('soyloco.controllers', [])
             showDelay: 500
         });
 
-
-        var mapViews = [{title: 'WHO YOU LIKE'},{title: 'WHO LIKES YOU'},{title: 'MATCHES'}];
+        var mapViews = [{title: 'WHO YOU LIKE'}, {title: 'WHO LIKES YOU'}, {title: 'MATCHES'}];
 
         // By default we set it to 'Who you like'
         $scope.viewName = mapViews[0].title;
-
 
         if (!$rootScope.deviceReady) {
 
@@ -132,11 +129,9 @@ angular.module('soyloco.controllers', [])
             loadView();
         }
 
-
         function loadView() {
 
             Geo.getMap().then(function (map) {
-
 
                 $ionicNavBarDelegate.align('left');
 
@@ -153,7 +148,6 @@ angular.module('soyloco.controllers', [])
                 // Need to assign Geo to watch its values
                 $scope.Geo = Geo;
                 $scope.map = map;
-
 
 
 // SLIDER LOGIC
@@ -192,7 +186,7 @@ angular.module('soyloco.controllers', [])
 
                 };
 
-// Called each time the slide changes
+                // Called each time the slide changes
                 $scope.goToMatches = function () {
 
                     if ($scope.slideIndex == 0) {
@@ -212,12 +206,6 @@ angular.module('soyloco.controllers', [])
                     $ionicSlideBoxDelegate.enableSlide(false);
                     $scope.goToWhoYouLike();
                 }, 10);
-
-
-
-
-
-
 
                 // Put the given place on top of the category list
                 $scope.puOnTop = function(place) {
@@ -243,36 +231,26 @@ angular.module('soyloco.controllers', [])
 
                 // FUNCTIONS FOR MARKERS CLICKING
 
-                //alert('0')
-
                 var onMarkerClicked = function (marker) {
-                    alert('here')
-                    alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
-                    //$scope.puOnTop()
+
+                    $scope.puOnTop(marker.place);
                     $scope.$apply();
                 };
 
-                //alert('1a')
-
-
                 _.each($scope.map.markersWhoYouLike, function (marker) {
                     marker.onClicked = function () {
-                        //alert('clicking')
                         onMarkerClicked(marker);
+
+                        //change marker (extract a function here)
+
                     };
                 });
-
-                //alert('2')
-
 
                 _.each($scope.map.markersWhoLikesYou, function (marker) {
                     marker.onClicked = function () {
                         onMarkerClicked(marker);
                     };
                 });
-
-                //alert('3')
-
 
                 _.each($scope.map.markersMatches, function (marker) {
                     marker.onClicked = function () {
