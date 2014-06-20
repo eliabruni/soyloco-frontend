@@ -1,81 +1,68 @@
-angular.module('soyloco.geocoding', [])
+angular.module('soyloco.map', [])
 
 /**********************************************************
  *                  GEO UTILITY
  *
  * ********************************************************/
-    .factory('Geo', function($rootScope, $q, $interval, localStorageService) {
+    .factory('GMap', function($rootScope, $q, $interval, localStorageService, Geo) {
 
-        var geoWatchTime = 5000,
-            geoWatchId,
-            position,
+        var position,
+            positionMaxAge = 1000,
             map,
             mapInitialized = false,
             mapInitStop,
-            needToReloadView = false;
+            needToReloadView = false,
+            positionWatchTime = 5000;
 
-        // device APIs are available
-        function init() {
+        function getMap() {
 
-            // Wait for device API libraries to load
-            document.addEventListener("deviceready", onDeviceReady, false);
+            var deferred = $q.defer();
 
-            // device APIs are available
-            function onDeviceReady() {
-                $rootScope.deviceReady = true;
-                // Start getting position
-                start();
-            }
+            if (!mapInitialized) {
 
-        }
+                if((Geo.isPositionAvailable() || isPositionRecent())
+                    && navigator.network.connection.type != Connection.NONE) {
 
-        function start() {
-            navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 1000});
+                    var actualPosition = localStorageService.get('position');
+                    createMap(actualPosition);
 
-            geoWatchId = $interval(function () {
-                navigator.geolocation.getCurrentPosition(success, error, {maximumAge: 1000});
-            }, geoWatchTime);
-        }
+                } else {
 
-        function stop() {
-            if (geoWatchId) {
-                $interval.cancel(geoWatchId);
-            }
-        }
+                    mapInitStop = $interval(function () {
 
-        function success(pos) {
+                        if((Geo.isPositionAvailable())
+                            && navigator.network.connection.type != Connection.NONE) {
 
-            position = { 'lat': pos.coords.latitude, 'long': pos.coords.longitude };
+                            if (angular.isDefined(mapInitStop)) {
+                                $interval.cancel(mapInitStop);
+                                mapInitStop = undefined;
+                            }
+                            var actualPosition = localStorageService.get('position');
+                            createMap(actualPosition);
+                            //needToReloadView = true;
+                        }
+                    }, 3000);
 
-            // Write position on local storage
-            // TODO: Should also send it to the server
-            localStorageService.add('position', position);
-
-
-            if(mapInitialized) {
-                map.selfMarker.isReady = true;
-
-
-                // We update position only when a reasonable lat or long change happens
-                if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
-                    || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
-
-                    updatePosition(position);
                 }
-            }
-        }
-
-        // onError Callback receives a PositionError object
-        function error(error) {
-
-            alert('code: ' + error.code + '\n' +
-                'message: ' + error.message + '\n');
-
-            if(mapInitialized) {
-                map.selfMarker.isReady = false;
+            } else {
+                deferred.resolve(map);
             }
 
+            // Utility to create map
+            function createMap(actualPosition) {
+                map = constructMap(actualPosition);
+                watchPosition();
+                deferred.resolve(map);
+                mapInitialized = true;
+            }
+
+            return deferred.promise;
+
         }
+
+        /*
+         HELPER FUNCTIONS
+         */
 
         function constructMap(position) {
 
@@ -198,57 +185,56 @@ angular.module('soyloco.geocoding', [])
 
         }
 
+        function watchPosition() {
+
+            var positionWatchId = $interval(function () {
+
+                var position = localStorage.get('position');
+
+                // We update position only when a reasonable lat or long change happens
+                if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
+                    || (position.long.toFixed(4) != map.selfMarker.longitude.toFixed(4)))  {
+
+                    updatePosition(position);
+
+                }
+
+            }, positionWatchTime);
+
+        }
+
         function updatePosition(position) {
             map.selfMarker.latitude = position.lat;
             map.selfMarker.longitude = position.long;
         }
 
-        function getMap() {
 
-            var deferred = $q.defer();
+        function isPositionRecent() {
 
-            if (!mapInitialized) {
+            var positionAvailable = false;
 
-                if(localStorageService.get('position') != null
-                    && navigator.network.connection.type != Connection.NONE) {
-
-                    var actualPosition = localStorageService.get('position');
-
-                    createMap(actualPosition);
-
+            // Check if there's an updated position
+            if(localStorageService.get('position') != null) {
+                var tempPosition = localStorageService.get('position');
+                var date = new Date();
+                var actualTimestamp = date.getTime();
+                if ((actualTimestamp - tempPosition.timestamp) < positionMaxAge) {
+                    position = tempPosition;
+                    positionAvailable = true;
                 } else {
-
-                    mapInitStop = $interval(function () {
-
-                        if(localStorageService.get('position') != null
-                            && navigator.network.connection.type != Connection.NONE) {
-
-                            if (angular.isDefined(mapInitStop)) {
-                                $interval.cancel(mapInitStop);
-                                mapInitStop = undefined;
-                            }
-                            var actualPosition = localStorageService.get('position');
-                            createMap(actualPosition);
-                            needToReloadView = true;
-                        }
-                    }, 3000);
-
+                    positionAvailable = false;
                 }
             } else {
-                deferred.resolve(map);
+                positionAvailable = false;
             }
 
-            // Utility to create map
-            function createMap(actualPosition) {
-                map = constructMap(actualPosition);
-                deferred.resolve(map);
-                mapInitialized = true;
-
-            }
-
-            return deferred.promise;
-
+            return positionAvailable;
         }
+
+
+        /*
+         GETTERS AND SETTERS
+         */
 
         function getSelfMarker() {
             return map.selfMarker;
@@ -267,7 +253,6 @@ angular.module('soyloco.geocoding', [])
         }
 
         return {
-            init: init,
             getMap: getMap,
             getSelfMarker: getSelfMarker,
             isMapInitialized: isMapInitialized,

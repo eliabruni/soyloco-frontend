@@ -7,22 +7,19 @@
 // 'soyloco.controllers' is found in controllers.js
 
 
-angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.geocoding',
+angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.geo','soyloco.map',
     'soyloco.services','soyloco.directives', 'soyloco.crawling', 'ionic.contrib.ui.cards',
     'LocalStorageModule', 'google-maps'])
 
-    .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB, localStorageService,
-                  Geo) {
+    .run(function($rootScope, $state, $ionicPlatform, $window, OpenFB,
+                  localStorageService, Geo) {
 
 
 
         $ionicPlatform.ready(function() {
 
-
-            $rootScope.platformReady = true;
-
             OpenFB.init('738982816123885');
-            Geo.init();
+            Geo.start();
 
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)

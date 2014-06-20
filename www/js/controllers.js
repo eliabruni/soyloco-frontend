@@ -98,7 +98,7 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
-                                         $ionicLoading, Crawler, Categories, Geo, $timeout) {
+                                         $ionicLoading, $timeout, Crawler, Categories, GMap, Geo) {
 
         $scope.showMap = false;
 
@@ -123,15 +123,45 @@ angular.module('soyloco.controllers', [])
             // device APIs are available
             function onDeviceReady() {
                 $rootScope.deviceReady = true;
-                loadView();
+                displayMap();
             }
         } else {
-            loadView();
+            displayMap();
         }
 
-        function loadView() {
+        $scope.Geo = Geo;
 
-            Geo.getMap().then(function (map) {
+        var positionAvailable = Geo.isPositionAvailable();
+
+        $scope.$watch('Geo.isPositionAvailable()', function(status) {
+
+            if (!positionAvailable && status) {
+                alert('position available')
+                positionAvailable = status;
+                displayMap();
+            } else if (!status) {
+                alert('position unavailable')
+                obscureMap();
+            }
+        });
+
+
+        function obscureMap() {
+            $scope.showMap = false;
+
+            $scope.loadingIndicator = $ionicLoading.show({
+                content: 'Loading Data',
+                animation: 'fade-in',
+                showBackdrop: false,
+                maxWidth: 200,
+                showDelay: 500,
+                duration: 2000
+            });
+        }
+
+        function displayMap() {
+
+            GMap.getMap().then(function (map) {
 
                 $ionicNavBarDelegate.align('left');
 
@@ -145,8 +175,8 @@ angular.module('soyloco.controllers', [])
                     //Crawler.init();
                 }
 
-                // Need to assign Geo to watch its values
-                $scope.Geo = Geo;
+                // Need to assign Map to watch its values
+                $scope.GMap = GMap;
                 $scope.map = map;
 
 
@@ -259,29 +289,18 @@ angular.module('soyloco.controllers', [])
                 });
 
 
-
-
-
-
-
-                if (Geo.getViewToReload()) {
+                if (GMap.getViewToReload()) {
                     location.reload();
-                    Geo.setViewToReload(false);
+                    GMap.setViewToReload(false);
                 }
 
-                if (!Geo.getViewToReload()) {
-                    $scope.showMap = Geo.isMapInitialized();
+                if (!GMap.getViewToReload()) {
+                    $scope.showMap = GMap.isMapInitialized();
                     $scope.loadingIndicator.hide()
                 }
             })
         }
-
-
     })
-
-
-
-
 
 
     .controller('ProfileCtrl', function($scope) {
