@@ -59,7 +59,7 @@ angular.module('soyloco.controllers', [])
                 OpenFB.login('user_birthday,user_friends,user_events,user_photos,user_likes,friends_events').then(
                     function () {
 
-                        $state.go('laoder');
+                        $state.go('tab.category');
 
                     },
 
@@ -125,22 +125,17 @@ angular.module('soyloco.controllers', [])
                 $rootScope.deviceReady = true;
                 displayMap();
             }
-        } else {
+          // TODO: this condition is possibly unnecessary
+        } else if (Geo.isPositionAvailable()) {
             displayMap();
         }
 
         $scope.Geo = Geo;
 
-        var positionAvailable = Geo.isPositionAvailable();
-
         $scope.$watch('Geo.isPositionAvailable()', function(status) {
-
-            if (!positionAvailable && status) {
-                alert('position available')
-                positionAvailable = status;
+            if (status) {
                 displayMap();
             } else if (!status) {
-                alert('position unavailable')
                 obscureMap();
             }
         });
@@ -295,7 +290,7 @@ angular.module('soyloco.controllers', [])
                 }
 
                 if (!GMap.getViewToReload()) {
-                    $scope.showMap = GMap.isMapInitialized();
+                    $scope.showMap = true;
                     $scope.loadingIndicator.hide()
                 }
             })
