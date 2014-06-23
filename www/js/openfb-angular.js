@@ -119,7 +119,7 @@ angular.module('openfb', [])
         /**
          * Called either by oauthcallback.html (when the app is running the browser) or by the loginWindow loadstart event
          * handler defined in the login() function (when the app is running in the Cordova/PhoneGap container).
-         * @param url - The oautchRedictURL called by Facebook with the access_token in the querystring at the ned of the
+         * @param url - The oautchRedictURL called by Facebook with the access_token in the querystring at the end of the
          * OAuth workflow.
          */
         function oauthCallback(url) {

@@ -7,7 +7,6 @@ angular.module('soyloco.map', [])
     .factory('GMap', function($rootScope, $q, $interval, localStorageService, Geo) {
 
         var position,
-            positionMaxAge = 1000,
             map,
             mapInitialized = false,
             mapInitStop,
@@ -20,7 +19,7 @@ angular.module('soyloco.map', [])
 
             if (!mapInitialized) {
 
-                if((Geo.isPositionAvailable() || isPositionRecent())
+                if((Geo.isPositionAvailable())
                     && navigator.network.connection.type != Connection.NONE) {
 
                     var actualPosition = localStorageService.get('position');
@@ -189,7 +188,7 @@ angular.module('soyloco.map', [])
 
             var positionWatchId = $interval(function () {
 
-                var position = localStorage.get('position');
+                var position = localStorageService.get('position');
 
                 // We update position only when a reasonable lat or long change happens
                 if ((position.lat.toFixed(4) != map.selfMarker.latitude.toFixed(4))
@@ -206,29 +205,6 @@ angular.module('soyloco.map', [])
         function updatePosition(position) {
             map.selfMarker.latitude = position.lat;
             map.selfMarker.longitude = position.long;
-        }
-
-
-        function isPositionRecent() {
-
-            var positionAvailable = false;
-
-            // Check if there's an updated position
-            if(localStorageService.get('position') != null) {
-                var tempPosition = localStorageService.get('position');
-                var date = new Date();
-                var actualTimestamp = date.getTime();
-                if ((actualTimestamp - tempPosition.timestamp) < positionMaxAge) {
-                    position = tempPosition;
-                    positionAvailable = true;
-                } else {
-                    positionAvailable = false;
-                }
-            } else {
-                positionAvailable = false;
-            }
-
-            return positionAvailable;
         }
 
 

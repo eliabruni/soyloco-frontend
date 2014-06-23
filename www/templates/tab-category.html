@@ -6,10 +6,12 @@
 
     <div class="button-bar">
 
-        <div class="button-bar-view-title-container" align="left" ng-if="showMap">
+<!--        <div class="button-bar-view-title-container" align="left" ng-if="showMap">
             {{viewName}}
-        </div>
-        <div class="button-bar-container" align="right" ng-if="showMap">
+        </div>-->
+        <div class="button-bar-container" ng-if="showMap">
+            <a class="button button-icon ion-android-drawer above-bar-icon-people"  ></a>
+            <a class="button button-icon ion-ios7-home above-bar-icon-people"  ng-click="goToWhoYouLike()" ></a>
             <a class="button button-icon ion-ios7-people above-bar-icon-people"  ng-click="goToWhoYouLike()" ></a>
             <a class="button button-icon ion-person above-bar-icon-person" ng-click="goToWhoLikesYou()"></a>
             <a class="button button-icon ion-person-stalker above-bar-icon-stalker" ng-click="goToMatches()"></a>
