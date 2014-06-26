@@ -1,23 +1,38 @@
-<ion-view hide-nav-bar="true">
+<ion-view>
+    <ion-nav-buttons side="left">
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon-round"></button>
+
+        <button class="button button-clear button-light" ng-click="toggleLeft()">Default</button>
+        <button class="button button-icon button-clear ion-ios7-people" ng-click="goToWhoYouLike()">
+        </button>
+        <button class="button button-icon button-clear ion-person" ng-click="goToWhoLikesYou()">
+        </button>
+        <button class="button button-icon button-clear ion-person-stalker" ng-click="goToMatches()">
+        </button>
+        <button class="button button-clear"></button>
+    </ion-nav-buttons>
 
     <!--
         <ion-pane>
     -->
 
-    <div class="button-bar">
+<!--    <div class="button-bar">
 
-<!--        <div class="button-bar-view-title-container" align="left" ng-if="showMap">
+&lt;!&ndash;        <div class="button-bar-view-title-container" align="left" ng-if="showMap">
             {{viewName}}
-        </div>-->
+        </div>&ndash;&gt;
         <div class="button-bar-container" ng-if="showMap">
             <a class="button button-icon ion-android-drawer above-bar-icon-people"  ></a>
             <a class="button button-icon ion-ios7-home above-bar-icon-people"  ng-click="goToWhoYouLike()" ></a>
             <a class="button button-icon ion-ios7-people above-bar-icon-people"  ng-click="goToWhoYouLike()" ></a>
             <a class="button button-icon ion-person above-bar-icon-person" ng-click="goToWhoLikesYou()"></a>
-            <a class="button button-icon ion-person-stalker above-bar-icon-stalker" ng-click="goToMatches()"></a>
+            <a class="button button-icon ion-person-stalker above-bar-icon-salker" ng-click="goToMatches()"></a>
         </div>
 
-    </div>
+    </div>-->
 
     <ion-content header-shrink scroll-event-interval="1">
 

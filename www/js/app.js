@@ -7,7 +7,7 @@
 // 'soyloco.controllers' is found in controllers.js
 
 
-angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.geo','soyloco.map',
+angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers', 'soyloco.geo','soyloco.map',
     'soyloco.services','soyloco.directives', 'soyloco.crawling', 'ionic.contrib.ui.cards',
     'LocalStorageModule', 'google-maps'])
 
@@ -78,7 +78,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
             .state('tab.category', {
                 url: '/category',
                 views: {
-                    'tab-category': {
+                    'menuContent' :{
                         templateUrl: 'templates/tab-category.html',
                         controller: 'CategoryCtrl'
                     }
@@ -88,7 +88,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
             .state('tab.profile', {
                 url: '/profile',
                 views: {
-                    'tab-profile': {
+                    'menuContent' :{
                         templateUrl: 'templates/tab-profile.html',
                         controller: 'ProfileCtrl'
                     }
@@ -98,7 +98,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
             .state('tab.play', {
                 url: '/play',
                 views: {
-                    'tab-play': {
+                    'menuContent' :{
                         templateUrl: 'templates/tab-play.html',
                         controller: 'PlayCtrl'
                     }
@@ -108,7 +108,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
             .state('tab.invite', {
                 url: '/invite',
                 views: {
-                    'tab-invite': {
+                    'menuContent' :{
                         templateUrl: 'templates/tab-invite.html',
                         controller: 'InviteCtrl'
                     }
@@ -118,7 +118,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'soyloco.controllers', 'soyloco.ge
             .state('tab.settings', {
                 url: '/settings',
                 views: {
-                    'tab-settings': {
+                    'menuContent' :{
                         templateUrl: 'templates/tab-settings.html',
                         controller: 'SettingsCtrl'
                     }

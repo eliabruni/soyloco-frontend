@@ -3,33 +3,46 @@
   Each tab's child <ion-nav-view> directive will have its own
   navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-only">
+<ion-side-menus>
+
+    <ion-pane ion-side-menu-content>
+        <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+            <ion-nav-back-button class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button>
+        </ion-nav-bar>
+
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
+
+    <ion-side-menu side="left">
+        <ion-content>
+            <ul class="list">
+                <a class="item item-icon-left menu-item-profile" href="#/tab/profile" menu-close>
+
+                    <!-- circular image -->
+                    <img style="vertical-align:middle" src="http://i.imgur.com/jZN7xit.jpg" class="circular">
+                    W Shakespeare
+                </a>
+<!--                <a class="item item-icon-left" href="#/tab/category" menu-close>
+                    <i class="icon ion-home "></i>
+                    Places
+                </a>-->
+                <a class="item item-icon-left menu-item-standard" href="#/tab/play" menu-close>
+                    <i class="icon ion-heart"></i>
+                    Play
+                </a>
+                <a class="item item-icon-left menu-item-standard" href="#/tab/settings" menu-close>
+                    <i class="icon ion-ios7-gear"></i>
+                    Settings
+                </a>
+                <a class="item item-icon-left menu-item-standard" href="#/tab/invite" menu-close>
+                    <i class="icon ion-android-share"></i>
+                    Invite
+                </a>
+
+            </ul>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
 
 
-    <!-- Pets Tab -->
-    <ion-tab title="Category" icon="icon ion-ios7-location" href="#/tab/category">
-        <ion-nav-view name="tab-category"></ion-nav-view>
-    </ion-tab>
-
-    <!-- Profile Tab -->
-    <ion-tab title="Profile" icon="icon ion-person" href="#/tab/profile">
-        <ion-nav-view name="tab-profile"></ion-nav-view>
-    </ion-tab>
-
-    <!-- Play Tab -->
-    <ion-tab title="Play" icon="icon ion-heart" href="#/tab/play">
-        <ion-nav-view name="tab-play"></ion-nav-view>
-    </ion-tab>
-
-    <!-- Invite Tab -->
-    <ion-tab title="Invite" icon="icon ion-person-add" href="#/tab/invite">
-        <ion-nav-view name="tab-invite"></ion-nav-view>
-    </ion-tab>
-
-    <!-- Setings Tab -->
-    <ion-tab title="Settings" icon="icon ion-ios7-gear" href="#/tab/settings">
-        <ion-nav-view name="tab-settings"></ion-nav-view>
-    </ion-tab>
-
-
-</ion-tabs>

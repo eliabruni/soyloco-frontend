@@ -21,15 +21,15 @@ $button-default-active-border:   white;*/
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 */
 /*!
-  Ionicons, v1.4.1
+  Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
   https://twitter.com/benjsperry  https://twitter.com/ionicframework
   MIT License: https://github.com/driftyco/ionicons
 */
 @font-face {
   font-family: "Ionicons";
-  src: url("components/ionic/fonts/ionicons.eot?v=1.4.1");
-  src: url("components/ionic/fonts/ionicons.eot?v=1.4.1#iefix") format("embedded-opentype"), url("components/ionic/fonts/ionicons.ttf?v=1.4.1") format("truetype"), url("components/ionic/fonts/ionicons.woff?v=1.4.1") format("woff"), url("components/ionic/fonts/ionicons.svg?v=1.4.1#Ionicons") format("svg");
+  src: url("components/ionic/fonts/ionicons.eot?v=1.5.2");
+  src: url("components/ionic/fonts/ionicons.eot?v=1.5.2#iefix") format("embedded-opentype"), url("components/ionic/fonts/ionicons.ttf?v=1.5.2") format("truetype"), url("components/ionic/fonts/ionicons.woff?v=1.5.2") format("woff"), url("components/ionic/fonts/ionicons.svg?v=1.5.2#Ionicons") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -39,7 +39,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-loading-d,
 .ion-looping,
 .ion-refreshing,
-.ion-ios7-reloading, .ionicons:before,
+.ion-ios7-reloading, .ionicons,
 .ion-alert:before,
 .ion-alert-circled:before,
 .ion-android-add:before,
@@ -49,6 +49,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-arrow-back:before,
 .ion-android-arrow-down-left:before,
 .ion-android-arrow-down-right:before,
+.ion-android-arrow-forward:before,
 .ion-android-arrow-up-left:before,
 .ion-android-arrow-up-right:before,
 .ion-android-battery:before,
@@ -66,6 +67,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-developer:before,
 .ion-android-display:before,
 .ion-android-download:before,
+.ion-android-drawer:before,
 .ion-android-dropdown:before,
 .ion-android-earth:before,
 .ion-android-folder:before,
@@ -96,6 +98,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-social:before,
 .ion-android-social-user:before,
 .ion-android-sort:before,
+.ion-android-stair-drawer:before,
 .ion-android-star:before,
 .ion-android-stopwatch:before,
 .ion-android-storage:before,
@@ -104,8 +107,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-system-windows:before,
 .ion-android-timer:before,
 .ion-android-trash:before,
+.ion-android-user-menu:before,
 .ion-android-volume:before,
 .ion-android-wifi:before,
+.ion-aperture:before,
 .ion-archive:before,
 .ion-arrow-down-a:before,
 .ion-arrow-down-b:before,
@@ -130,6 +135,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-arrow-up-a:before,
 .ion-arrow-up-b:before,
 .ion-arrow-up-c:before,
+.ion-asterisk:before,
 .ion-at:before,
 .ion-bag:before,
 .ion-battery-charging:before,
@@ -140,6 +146,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-beaker:before,
 .ion-beer:before,
 .ion-bluetooth:before,
+.ion-bonfire:before,
 .ion-bookmark:before,
 .ion-briefcase:before,
 .ion-bug:before,
@@ -147,6 +154,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-calendar:before,
 .ion-camera:before,
 .ion-card:before,
+.ion-cash:before,
 .ion-chatbox:before,
 .ion-chatbox-working:before,
 .ion-chatboxes:before,
@@ -165,6 +173,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-close:before,
 .ion-close-circled:before,
 .ion-close-round:before,
+.ion-closed-captioning:before,
 .ion-cloud:before,
 .ion-code:before,
 .ion-code-download:before,
@@ -174,6 +183,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-compose:before,
 .ion-connection-bars:before,
 .ion-contrast:before,
+.ion-cube:before,
 .ion-disc:before,
 .ion-document:before,
 .ion-document-text:before,
@@ -188,7 +198,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-female:before,
 .ion-filing:before,
 .ion-film-marker:before,
+.ion-fireball:before,
 .ion-flag:before,
+.ion-flame:before,
 .ion-flash:before,
 .ion-flash-off:before,
 .ion-flask:before,
@@ -196,14 +208,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-fork:before,
 .ion-fork-repo:before,
 .ion-forward:before,
+.ion-funnel:before,
 .ion-game-controller-a:before,
 .ion-game-controller-b:before,
 .ion-gear-a:before,
 .ion-gear-b:before,
 .ion-grid:before,
 .ion-hammer:before,
+.ion-happy:before,
 .ion-headphone:before,
 .ion-heart:before,
+.ion-heart-broken:before,
 .ion-help:before,
 .ion-help-buoy:before,
 .ion-help-circled:before,
@@ -220,6 +235,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-alarm-outline:before,
 .ion-ios7-albums:before,
 .ion-ios7-albums-outline:before,
+.ion-ios7-americanfootball:before,
+.ion-ios7-americanfootball-outline:before,
+.ion-ios7-analytics:before,
+.ion-ios7-analytics-outline:before,
 .ion-ios7-arrow-back:before,
 .ion-ios7-arrow-down:before,
 .ion-ios7-arrow-forward:before,
@@ -232,6 +251,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-arrow-up:before,
 .ion-ios7-at:before,
 .ion-ios7-at-outline:before,
+.ion-ios7-barcode:before,
+.ion-ios7-barcode-outline:before,
+.ion-ios7-baseball:before,
+.ion-ios7-baseball-outline:before,
+.ion-ios7-basketball:before,
+.ion-ios7-basketball-outline:before,
 .ion-ios7-bell:before,
 .ion-ios7-bell-outline:before,
 .ion-ios7-bolt:before,
@@ -289,6 +314,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-drag:before,
 .ion-ios7-email:before,
 .ion-ios7-email-outline:before,
+.ion-ios7-expand:before,
 .ion-ios7-eye:before,
 .ion-ios7-eye-outline:before,
 .ion-ios7-fastforward:before,
@@ -301,6 +327,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-flag-outline:before,
 .ion-ios7-folder:before,
 .ion-ios7-folder-outline:before,
+.ion-ios7-football:before,
+.ion-ios7-football-outline:before,
 .ion-ios7-gear:before,
 .ion-ios7-gear-outline:before,
 .ion-ios7-glasses:before,
@@ -310,6 +338,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-help:before,
 .ion-ios7-help-empty:before,
 .ion-ios7-help-outline:before,
+.ion-ios7-home:before,
+.ion-ios7-home-outline:before,
 .ion-ios7-infinite:before,
 .ion-ios7-infinite-outline:before,
 .ion-ios7-information:before,
@@ -324,6 +354,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-location-outline:before,
 .ion-ios7-locked:before,
 .ion-ios7-locked-outline:before,
+.ion-ios7-loop:before,
+.ion-ios7-loop-strong:before,
 .ion-ios7-medkit:before,
 .ion-ios7-medkit-outline:before,
 .ion-ios7-mic:before,
@@ -342,12 +374,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-musical-notes:before,
 .ion-ios7-navigate:before,
 .ion-ios7-navigate-outline:before,
+.ion-ios7-paper:before,
+.ion-ios7-paper-outline:before,
 .ion-ios7-paperplane:before,
 .ion-ios7-paperplane-outline:before,
 .ion-ios7-partlysunny:before,
 .ion-ios7-partlysunny-outline:before,
 .ion-ios7-pause:before,
 .ion-ios7-pause-outline:before,
+.ion-ios7-paw:before,
+.ion-ios7-paw-outline:before,
 .ion-ios7-people:before,
 .ion-ios7-people-outline:before,
 .ion-ios7-person:before,
@@ -365,8 +401,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-plus-outline:before,
 .ion-ios7-pricetag:before,
 .ion-ios7-pricetag-outline:before,
+.ion-ios7-pricetags:before,
+.ion-ios7-pricetags-outline:before,
 .ion-ios7-printer:before,
 .ion-ios7-printer-outline:before,
+.ion-ios7-pulse:before,
+.ion-ios7-pulse-strong:before,
 .ion-ios7-rainy:before,
 .ion-ios7-rainy-outline:before,
 .ion-ios7-recording:before,
@@ -378,10 +418,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-refresh-outline:before,
 .ion-ios7-reload:before,
 .ion-ios7-reloading:before,
+.ion-ios7-reverse-camera:before,
+.ion-ios7-reverse-camera-outline:before,
 .ion-ios7-rewind:before,
 .ion-ios7-rewind-outline:before,
 .ion-ios7-search:before,
 .ion-ios7-search-strong:before,
+.ion-ios7-settings:before,
+.ion-ios7-settings-strong:before,
+.ion-ios7-shrink:before,
 .ion-ios7-skipbackward:before,
 .ion-ios7-skipbackward-outline:before,
 .ion-ios7-skipforward:before,
@@ -390,6 +435,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-speedometer:before,
 .ion-ios7-speedometer-outline:before,
 .ion-ios7-star:before,
+.ion-ios7-star-half:before,
 .ion-ios7-star-outline:before,
 .ion-ios7-stopwatch:before,
 .ion-ios7-stopwatch-outline:before,
@@ -397,12 +443,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-sunny-outline:before,
 .ion-ios7-telephone:before,
 .ion-ios7-telephone-outline:before,
+.ion-ios7-tennisball:before,
+.ion-ios7-tennisball-outline:before,
 .ion-ios7-thunderstorm:before,
 .ion-ios7-thunderstorm-outline:before,
 .ion-ios7-time:before,
 .ion-ios7-time-outline:before,
 .ion-ios7-timer:before,
 .ion-ios7-timer-outline:before,
+.ion-ios7-toggle:before,
+.ion-ios7-toggle-outline:before,
 .ion-ios7-trash:before,
 .ion-ios7-trash-outline:before,
 .ion-ios7-undo:before,
@@ -449,6 +499,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-man:before,
 .ion-map:before,
 .ion-medkit:before,
+.ion-merge:before,
 .ion-mic-a:before,
 .ion-mic-b:before,
 .ion-mic-c:before,
@@ -458,12 +509,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-model-s:before,
 .ion-monitor:before,
 .ion-more:before,
+.ion-mouse:before,
 .ion-music-note:before,
 .ion-navicon:before,
 .ion-navicon-round:before,
 .ion-navigate:before,
+.ion-network:before,
 .ion-no-smoking:before,
 .ion-nuclear:before,
+.ion-outlet:before,
 .ion-paper-airplane:before,
 .ion-paperclip:before,
 .ion-pause:before,
@@ -475,22 +529,31 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-pinpoint:before,
 .ion-pizza:before,
 .ion-plane:before,
+.ion-planet:before,
 .ion-play:before,
 .ion-playstation:before,
 .ion-plus:before,
 .ion-plus-circled:before,
 .ion-plus-round:before,
+.ion-podium:before,
 .ion-pound:before,
 .ion-power:before,
 .ion-pricetag:before,
 .ion-pricetags:before,
 .ion-printer:before,
+.ion-pull-request:before,
+.ion-qr-scanner:before,
+.ion-quote:before,
 .ion-radio-waves:before,
 .ion-record:before,
 .ion-refresh:before,
 .ion-refreshing:before,
 .ion-reply:before,
 .ion-reply-all:before,
+.ion-ribbon-a:before,
+.ion-ribbon-b:before,
+.ion-sad:before,
+.ion-scissors:before,
 .ion-search:before,
 .ion-settings:before,
 .ion-share:before,
@@ -513,13 +576,19 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-social-dropbox-outline:before,
 .ion-social-facebook:before,
 .ion-social-facebook-outline:before,
+.ion-social-foursquare:before,
+.ion-social-foursquare-outline:before,
 .ion-social-freebsd-devil:before,
 .ion-social-github:before,
 .ion-social-github-outline:before,
+.ion-social-google:before,
+.ion-social-google-outline:before,
 .ion-social-googleplus:before,
 .ion-social-googleplus-outline:before,
 .ion-social-hackernews:before,
 .ion-social-hackernews-outline:before,
+.ion-social-instagram:before,
+.ion-social-instagram-outline:before,
 .ion-social-linkedin:before,
 .ion-social-linkedin-outline:before,
 .ion-social-pinterest:before,
@@ -535,6 +604,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-social-tux:before,
 .ion-social-twitter:before,
 .ion-social-twitter-outline:before,
+.ion-social-usd:before,
+.ion-social-usd-outline:before,
 .ion-social-vimeo:before,
 .ion-social-vimeo-outline:before,
 .ion-social-windows:before,
@@ -555,9 +626,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-thermometer:before,
 .ion-thumbsdown:before,
 .ion-thumbsup:before,
+.ion-toggle:before,
+.ion-toggle-filled:before,
 .ion-trash-a:before,
 .ion-trash-b:before,
+.ion-trophy:before,
 .ion-umbrella:before,
+.ion-university:before,
 .ion-unlocked:before,
 .ion-upload:before,
 .ion-usb:before,
@@ -566,6 +641,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-volume-low:before,
 .ion-volume-medium:before,
 .ion-volume-mute:before,
+.ion-wand:before,
 .ion-waterdrop:before,
 .ion-wifi:before,
 .ion-wineglass:before,
@@ -663,6 +739,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-arrow-down-right:before {
   content: "\f2cc"; }
 
+.ion-android-arrow-forward:before {
+  content: "\f30f"; }
+
 .ion-android-arrow-up-left:before {
   content: "\f2cd"; }
 
@@ -713,6 +792,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-android-download:before {
   content: "\f2dd"; }
+
+.ion-android-drawer:before {
+  content: "\f310"; }
 
 .ion-android-dropdown:before {
   content: "\f2de"; }
@@ -804,6 +886,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-sort:before {
   content: "\f2fb"; }
 
+.ion-android-stair-drawer:before {
+  content: "\f311"; }
+
 .ion-android-star:before {
   content: "\f2fc"; }
 
@@ -828,11 +913,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-android-trash:before {
   content: "\f303"; }
 
+.ion-android-user-menu:before {
+  content: "\f312"; }
+
 .ion-android-volume:before {
   content: "\f304"; }
 
 .ion-android-wifi:before {
   content: "\f305"; }
+
+.ion-aperture:before {
+  content: "\f313"; }
 
 .ion-archive:before {
   content: "\f102"; }
@@ -906,6 +997,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-arrow-up-c:before {
   content: "\f10e"; }
 
+.ion-asterisk:before {
+  content: "\f314"; }
+
 .ion-at:before {
   content: "\f10f"; }
 
@@ -936,6 +1030,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-bluetooth:before {
   content: "\f116"; }
 
+.ion-bonfire:before {
+  content: "\f315"; }
+
 .ion-bookmark:before {
   content: "\f26b"; }
 
@@ -956,6 +1053,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-card:before {
   content: "\f119"; }
+
+.ion-cash:before {
+  content: "\f316"; }
 
 .ion-chatbox:before {
   content: "\f11b"; }
@@ -1011,6 +1111,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-close-round:before {
   content: "\f129"; }
 
+.ion-closed-captioning:before {
+  content: "\f317"; }
+
 .ion-cloud:before {
   content: "\f12b"; }
 
@@ -1037,6 +1140,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-contrast:before {
   content: "\f275"; }
+
+.ion-cube:before {
+  content: "\f318"; }
 
 .ion-disc:before {
   content: "\f12d"; }
@@ -1080,8 +1186,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-film-marker:before {
   content: "\f135"; }
 
+.ion-fireball:before {
+  content: "\f319"; }
+
 .ion-flag:before {
   content: "\f279"; }
+
+.ion-flame:before {
+  content: "\f31a"; }
 
 .ion-flash:before {
   content: "\f137"; }
@@ -1104,6 +1216,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-forward:before {
   content: "\f13a"; }
 
+.ion-funnel:before {
+  content: "\f31b"; }
+
 .ion-game-controller-a:before {
   content: "\f13b"; }
 
@@ -1122,11 +1237,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-hammer:before {
   content: "\f27b"; }
 
+.ion-happy:before {
+  content: "\f31c"; }
+
 .ion-headphone:before {
   content: "\f140"; }
 
 .ion-heart:before {
   content: "\f141"; }
+
+.ion-heart-broken:before {
+  content: "\f31d"; }
 
 .ion-help:before {
   content: "\f143"; }
@@ -1176,6 +1297,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-albums-outline:before {
   content: "\f14e"; }
 
+.ion-ios7-americanfootball:before {
+  content: "\f31f"; }
+
+.ion-ios7-americanfootball-outline:before {
+  content: "\f31e"; }
+
+.ion-ios7-analytics:before {
+  content: "\f321"; }
+
+.ion-ios7-analytics-outline:before {
+  content: "\f320"; }
+
 .ion-ios7-arrow-back:before {
   content: "\f150"; }
 
@@ -1211,6 +1344,24 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-at-outline:before {
   content: "\f156"; }
+
+.ion-ios7-barcode:before {
+  content: "\f323"; }
+
+.ion-ios7-barcode-outline:before {
+  content: "\f322"; }
+
+.ion-ios7-baseball:before {
+  content: "\f325"; }
+
+.ion-ios7-baseball-outline:before {
+  content: "\f324"; }
+
+.ion-ios7-basketball:before {
+  content: "\f327"; }
+
+.ion-ios7-basketball-outline:before {
+  content: "\f326"; }
 
 .ion-ios7-bell:before {
   content: "\f159"; }
@@ -1383,6 +1534,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-email-outline:before {
   content: "\f186"; }
 
+.ion-ios7-expand:before {
+  content: "\f30d"; }
+
 .ion-ios7-eye:before {
   content: "\f189"; }
 
@@ -1419,6 +1573,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-folder-outline:before {
   content: "\f192"; }
 
+.ion-ios7-football:before {
+  content: "\f329"; }
+
+.ion-ios7-football-outline:before {
+  content: "\f328"; }
+
 .ion-ios7-gear:before {
   content: "\f195"; }
 
@@ -1445,6 +1605,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-help-outline:before {
   content: "\f19b"; }
+
+.ion-ios7-home:before {
+  content: "\f32b"; }
+
+.ion-ios7-home-outline:before {
+  content: "\f32a"; }
 
 .ion-ios7-infinite:before {
   content: "\f19e"; }
@@ -1487,6 +1653,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-locked-outline:before {
   content: "\f1a7"; }
+
+.ion-ios7-loop:before {
+  content: "\f32d"; }
+
+.ion-ios7-loop-strong:before {
+  content: "\f32c"; }
 
 .ion-ios7-medkit:before {
   content: "\f289"; }
@@ -1542,6 +1714,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-navigate-outline:before {
   content: "\f1b7"; }
 
+.ion-ios7-paper:before {
+  content: "\f32f"; }
+
+.ion-ios7-paper-outline:before {
+  content: "\f32e"; }
+
 .ion-ios7-paperplane:before {
   content: "\f1ba"; }
 
@@ -1559,6 +1737,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-pause-outline:before {
   content: "\f1bd"; }
+
+.ion-ios7-paw:before {
+  content: "\f331"; }
+
+.ion-ios7-paw-outline:before {
+  content: "\f330"; }
 
 .ion-ios7-people:before {
   content: "\f1c0"; }
@@ -1611,11 +1795,23 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-pricetag-outline:before {
   content: "\f28c"; }
 
+.ion-ios7-pricetags:before {
+  content: "\f333"; }
+
+.ion-ios7-pricetags-outline:before {
+  content: "\f332"; }
+
 .ion-ios7-printer:before {
   content: "\f1cd"; }
 
 .ion-ios7-printer-outline:before {
   content: "\f1cc"; }
+
+.ion-ios7-pulse:before {
+  content: "\f335"; }
+
+.ion-ios7-pulse-strong:before {
+  content: "\f334"; }
 
 .ion-ios7-rainy:before {
   content: "\f1cf"; }
@@ -1647,6 +1843,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-reload:before, .ion-ios7-reloading:before {
   content: "\f28e"; }
 
+.ion-ios7-reverse-camera:before {
+  content: "\f337"; }
+
+.ion-ios7-reverse-camera-outline:before {
+  content: "\f336"; }
+
 .ion-ios7-rewind:before {
   content: "\f1d8"; }
 
@@ -1658,6 +1860,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-search-strong:before {
   content: "\f1d9"; }
+
+.ion-ios7-settings:before {
+  content: "\f339"; }
+
+.ion-ios7-settings-strong:before {
+  content: "\f338"; }
+
+.ion-ios7-shrink:before {
+  content: "\f30e"; }
 
 .ion-ios7-skipbackward:before {
   content: "\f1dc"; }
@@ -1683,6 +1894,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-star:before {
   content: "\f1e0"; }
 
+.ion-ios7-star-half:before {
+  content: "\f33a"; }
+
 .ion-ios7-star-outline:before {
   content: "\f1df"; }
 
@@ -1704,6 +1918,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-ios7-telephone-outline:before {
   content: "\f1e5"; }
 
+.ion-ios7-tennisball:before {
+  content: "\f33c"; }
+
+.ion-ios7-tennisball-outline:before {
+  content: "\f33b"; }
+
 .ion-ios7-thunderstorm:before {
   content: "\f1e8"; }
 
@@ -1721,6 +1941,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-ios7-timer-outline:before {
   content: "\f1e9"; }
+
+.ion-ios7-toggle:before {
+  content: "\f33e"; }
+
+.ion-ios7-toggle-outline:before {
+  content: "\f33d"; }
 
 .ion-ios7-trash:before {
   content: "\f1ec"; }
@@ -1845,6 +2071,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-medkit:before {
   content: "\f2a2"; }
 
+.ion-merge:before {
+  content: "\f33f"; }
+
 .ion-mic-a:before {
   content: "\f204"; }
 
@@ -1872,6 +2101,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-more:before {
   content: "\f20b"; }
 
+.ion-mouse:before {
+  content: "\f340"; }
+
 .ion-music-note:before {
   content: "\f20c"; }
 
@@ -1884,11 +2116,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-navigate:before {
   content: "\f2a3"; }
 
+.ion-network:before {
+  content: "\f341"; }
+
 .ion-no-smoking:before {
   content: "\f2c2"; }
 
 .ion-nuclear:before {
   content: "\f2a4"; }
+
+.ion-outlet:before {
+  content: "\f342"; }
 
 .ion-paper-airplane:before {
   content: "\f2c3"; }
@@ -1923,6 +2161,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-plane:before {
   content: "\f214"; }
 
+.ion-planet:before {
+  content: "\f343"; }
+
 .ion-play:before {
   content: "\f215"; }
 
@@ -1937,6 +2178,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-plus-round:before {
   content: "\f217"; }
+
+.ion-podium:before {
+  content: "\f344"; }
 
 .ion-pound:before {
   content: "\f219"; }
@@ -1953,6 +2197,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-printer:before {
   content: "\f21a"; }
 
+.ion-pull-request:before {
+  content: "\f345"; }
+
+.ion-qr-scanner:before {
+  content: "\f346"; }
+
+.ion-quote:before {
+  content: "\f347"; }
+
 .ion-radio-waves:before {
   content: "\f2ac"; }
 
@@ -1967,6 +2220,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-reply-all:before {
   content: "\f21d"; }
+
+.ion-ribbon-a:before {
+  content: "\f348"; }
+
+.ion-ribbon-b:before {
+  content: "\f349"; }
+
+.ion-sad:before {
+  content: "\f34a"; }
+
+.ion-scissors:before {
+  content: "\f34b"; }
 
 .ion-search:before {
   content: "\f21f"; }
@@ -2034,6 +2299,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-social-facebook-outline:before {
   content: "\f230"; }
 
+.ion-social-foursquare:before {
+  content: "\f34d"; }
+
+.ion-social-foursquare-outline:before {
+  content: "\f34c"; }
+
 .ion-social-freebsd-devil:before {
   content: "\f2c4"; }
 
@@ -2042,6 +2313,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-social-github-outline:before {
   content: "\f232"; }
+
+.ion-social-google:before {
+  content: "\f34f"; }
+
+.ion-social-google-outline:before {
+  content: "\f34e"; }
 
 .ion-social-googleplus:before {
   content: "\f235"; }
@@ -2054,6 +2331,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-social-hackernews-outline:before {
   content: "\f236"; }
+
+.ion-social-instagram:before {
+  content: "\f351"; }
+
+.ion-social-instagram-outline:before {
+  content: "\f350"; }
 
 .ion-social-linkedin:before {
   content: "\f239"; }
@@ -2099,6 +2382,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-social-twitter-outline:before {
   content: "\f242"; }
+
+.ion-social-usd:before {
+  content: "\f353"; }
+
+.ion-social-usd-outline:before {
+  content: "\f352"; }
 
 .ion-social-vimeo:before {
   content: "\f245"; }
@@ -2160,14 +2449,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .ion-thumbsup:before {
   content: "\f251"; }
 
+.ion-toggle:before {
+  content: "\f355"; }
+
+.ion-toggle-filled:before {
+  content: "\f354"; }
+
 .ion-trash-a:before {
   content: "\f252"; }
 
 .ion-trash-b:before {
   content: "\f253"; }
 
+.ion-trophy:before {
+  content: "\f356"; }
+
 .ion-umbrella:before {
   content: "\f2b7"; }
+
+.ion-university:before {
+  content: "\f357"; }
 
 .ion-unlocked:before {
   content: "\f254"; }
@@ -2192,6 +2493,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .ion-volume-mute:before {
   content: "\f25a"; }
+
+.ion-wand:before {
+  content: "\f358"; }
 
 .ion-waterdrop:before {
   content: "\f25b"; }
@@ -2415,6 +2719,7 @@ legend {
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  * 4. Remove any default :focus styles
  * 5. Make sure webkit font smoothing is being inherited
+ * 6. Remove default gradient in Android Firefox / FirefoxOS
  */
 button,
 input,
@@ -2433,7 +2738,9 @@ textarea {
   outline-width: 0;
   /* 4 */
   -webkit-font-smoothing: inherit;
-  /* 5 */ }
+  /* 5 */
+  background-image: none;
+  /* 6 */ }
 
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `importnt` in
@@ -2541,8 +2848,8 @@ table {
 
 html {
   overflow: hidden;
-  -ms-touch-action: none;
-  touch-action: none; }
+  -ms-touch-action: pan-y;
+  touch-action: pan-y; }
 
 body,
 .ionic-body {
@@ -2591,6 +2898,9 @@ body.grade-c {
   margin-top: -1px;
   width: auto;
   height: auto; }
+
+.scroll-content-false {
+  z-index: 10; }
 
 .scroll-view {
   position: relative;
@@ -2789,32 +3099,32 @@ ion-infinite-scroll.active .scroll-infinite {
 
 /* If you change these, change platform.scss as well */
 .has-header {
-  top: 50px; }
+  top: 44px; }
 
 .no-header {
   top: 0; }
 
 .has-subheader {
-  top: 100px; }
+  top: 88px; }
 
 .has-tabs-top {
-  top: 105px; }
+  top: 93px; }
 
 .has-header.has-subheader.has-tabs-top {
-  top: 155px; }
+  top: 137px; }
 
 .has-footer {
-  bottom: 50px; }
+  bottom: 44px; }
 
 .has-subfooter {
-  bottom: 100px; }
+  bottom: 88px; }
 
 .has-tabs,
 .bar-footer.has-tabs {
-  bottom: 55px; }
+  bottom: 49px; }
 
 .has-footer.has-tabs {
-  bottom: 105px; }
+  bottom: 93px; }
 
 .pane {
   -webkit-transform: translate3d(0, 0, 0);
@@ -3101,9 +3411,9 @@ a.subdued {
   left: 0;
   z-index: 10;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 5px 0px;
   width: 100%;
-  height: 50px;
+  height: 44px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -3206,12 +3516,12 @@ a.subdued {
     overflow: hidden;
     margin: 0 10px;
     min-width: 30px;
-    height: 49px;
+    height: 43px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 25px;
-    line-height: 50px; }
+    line-height: 44px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -3246,6 +3556,13 @@ a.subdued {
       .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before {
         font-size: 32px;
         line-height: 32px; }
+    .bar .button.back-button {
+      padding: 0;
+      opacity: 0.8; }
+      .bar .button.back-button .back-button-title {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 4px; }
     .bar .button.back-button.active, .bar .button.back-button.activated {
       opacity: 1; }
   .bar .button-bar > .button,
@@ -3475,11 +3792,11 @@ a.subdued {
   padding: 0; }
 
 .bar-subheader {
-  top: 50px;
+  top: 44px;
   display: block; }
 
 .bar-subfooter {
-  bottom: 50px;
+  bottom: 44px;
   display: block; }
 
 /**
@@ -3509,21 +3826,21 @@ a.subdued {
   -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   border-color: #b2b2b2;
-  background-color: #282828;
+  background-color: #f8f8f8;
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
   color: white;
   position: absolute;
   bottom: 0;
   z-index: 5;
   width: 100%;
-  height: 55px;
+  height: 49px;
   border-style: solid;
   border-top-width: 1px;
   background-size: 0;
-  line-height: 55px; }
+  line-height: 49px; }
   .tabs .tab-item .badge {
     background-color: white;
-    color: #282828; }
+    color: #f8f8f8; }
   @media (min--moz-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
     .tabs {
       padding-top: 2px;
@@ -3633,11 +3950,106 @@ a.subdued {
     background-color: white;
     color: #444444; }
 
+.tabs-striped .tabs {
+  background-color: white;
+  background-image: none;
+  border: none; }
+.tabs-striped.tabs-light .tab-item.tab-item-active,
+.tabs-striped.tabs-light .tab-item.active,
+.tabs-striped.tabs-light .tab-item.activated {
+  margin-top: -4px;
+  color: white;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: white; }
+.tabs-striped.tabs-stable .tab-item.tab-item-active,
+.tabs-striped.tabs-stable .tab-item.active,
+.tabs-striped.tabs-stable .tab-item.activated {
+  margin-top: -4px;
+  color: #f8f8f8;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #f8f8f8; }
+.tabs-striped.tabs-positive .tab-item.tab-item-active,
+.tabs-striped.tabs-positive .tab-item.active,
+.tabs-striped.tabs-positive .tab-item.activated {
+  margin-top: -4px;
+  color: #4a87ee;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #4a87ee; }
+.tabs-striped.tabs-calm .tab-item.tab-item-active,
+.tabs-striped.tabs-calm .tab-item.active,
+.tabs-striped.tabs-calm .tab-item.activated {
+  margin-top: -4px;
+  color: #43cee6;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #43cee6; }
+.tabs-striped.tabs-assertive .tab-item.tab-item-active,
+.tabs-striped.tabs-assertive .tab-item.active,
+.tabs-striped.tabs-assertive .tab-item.activated {
+  margin-top: -4px;
+  color: #ef4e3a;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #ef4e3a; }
+.tabs-striped.tabs-balanced .tab-item.tab-item-active,
+.tabs-striped.tabs-balanced .tab-item.active,
+.tabs-striped.tabs-balanced .tab-item.activated {
+  margin-top: -4px;
+  color: #66cc33;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #66cc33; }
+.tabs-striped.tabs-energized .tab-item.tab-item-active,
+.tabs-striped.tabs-energized .tab-item.active,
+.tabs-striped.tabs-energized .tab-item.activated {
+  margin-top: -4px;
+  color: #f0b840;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #f0b840; }
+.tabs-striped.tabs-royal .tab-item.tab-item-active,
+.tabs-striped.tabs-royal .tab-item.active,
+.tabs-striped.tabs-royal .tab-item.activated {
+  margin-top: -4px;
+  color: #8a6de9;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #8a6de9; }
+.tabs-striped.tabs-dark .tab-item.tab-item-active,
+.tabs-striped.tabs-dark .tab-item.active,
+.tabs-striped.tabs-dark .tab-item.activated {
+  margin-top: -4px;
+  color: #444444;
+  border-style: solid;
+  border-width: 4px 0 0 0;
+  border-color: #444444; }
+.tabs-striped .tab-item {
+  color: black;
+  opacity: 0.4; }
+.tabs-striped .tab-item + .tab-item:before {
+  border-left: 1px solid #ccc;
+  display: block;
+  float: left;
+  width: 2px;
+  height: 26px;
+  margin: 11px auto;
+  content: " "; }
+
+.tabs-top.tabs-striped .tab-item.tab-item-active,
+.tabs-top.tabs-striped .tab-item.active,
+.tabs-top.tabs-striped .tab-item.activated {
+  margin-top: 0;
+  margin-bottom: -4px;
+  border-width: 0px 0px 4px 0px !important; }
+
 /* Allow parent element to have tabs-top */
 /* If you change this, change platform.scss as well */
 .tabs-top > .tabs,
 .tabs.tabs-top {
-  top: 50px;
+  top: 44px;
   padding-top: 0;
   padding-bottom: 2px;
   background-position: bottom; }
@@ -3679,8 +4091,8 @@ a.subdued {
 .tab-item .icon {
   display: block;
   margin: 0 auto;
-  height: 35px;
-  font-size: 35px; }
+  height: 32px;
+  font-size: 32px; }
 
 .tabs-icon-left.tabs .tab-item,
 .tabs-icon-left > .tabs .tab-item,
@@ -3697,8 +4109,8 @@ a.subdued {
     .tabs-icon-left > .tabs .tab-item .icon:before,
     .tabs-icon-right.tabs .tab-item .icon:before,
     .tabs-icon-right > .tabs .tab-item .icon:before {
-      font-size: 27px;
-      line-height: 55px; }
+      font-size: 24px;
+      line-height: 49px; }
 
 .tabs-icon-left > .tabs .tab-item .icon,
 .tabs-icon-left.tabs .tab-item .icon {
@@ -3785,6 +4197,10 @@ a.subdued {
   cursor: default;
   pointer-events: none; }
 
+/** Platform styles **/
+.tab-item.tab-item-android {
+  border-top: 2px solid inherit; }
+
 /**
  * Menus
  * --------------------------------------------------
@@ -3800,6 +4216,10 @@ a.subdued {
   max-height: 100%;
   width: 275px;
   background-color: white; }
+  .menu .scroll-content {
+    z-index: 10; }
+  .menu .bar-header {
+    z-index: 11; }
 
 .menu-content {
   -webkit-transform: none;
@@ -4247,6 +4667,70 @@ a.item-content {
 .item-complex.item-text-wrap p {
   overflow: visible;
   white-space: normal; }
+
+.item-complex.item-light > .item-content {
+  border-color: #dddddd;
+  background-color: white;
+  color: #444444; }
+  .item-complex.item-light > .item-content.active, .item-complex.item-light > .item-content:active {
+    border-color: #cccccc;
+    background-color: #fafafa; }
+.item-complex.item-stable > .item-content {
+  border-color: #b2b2b2;
+  background-color: #f8f8f8;
+  color: white; }
+  .item-complex.item-stable > .item-content.active, .item-complex.item-stable > .item-content:active {
+    border-color: #a2a2a2;
+    background-color: #e5e5e5; }
+.item-complex.item-positive > .item-content {
+  border-color: #145dd7;
+  background-color: #4a87ee;
+  color: white; }
+  .item-complex.item-positive > .item-content.active, .item-complex.item-positive > .item-content:active {
+    border-color: #145dd7;
+    background-color: #145dd7; }
+.item-complex.item-calm > .item-content {
+  border-color: #1aaac3;
+  background-color: #43cee6;
+  color: white; }
+  .item-complex.item-calm > .item-content.active, .item-complex.item-calm > .item-content:active {
+    border-color: #1aaac3;
+    background-color: #1aaac3; }
+.item-complex.item-assertive > .item-content {
+  border-color: #cc2511;
+  background-color: #ef4e3a;
+  color: white; }
+  .item-complex.item-assertive > .item-content.active, .item-complex.item-assertive > .item-content:active {
+    border-color: #cc2511;
+    background-color: #cc2511; }
+.item-complex.item-balanced > .item-content {
+  border-color: #478f24;
+  background-color: #66cc33;
+  color: white; }
+  .item-complex.item-balanced > .item-content.active, .item-complex.item-balanced > .item-content:active {
+    border-color: #478f24;
+    background-color: #478f24; }
+.item-complex.item-energized > .item-content {
+  border-color: #d39511;
+  background-color: #f0b840;
+  color: white; }
+  .item-complex.item-energized > .item-content.active, .item-complex.item-energized > .item-content:active {
+    border-color: #d39511;
+    background-color: #d39511; }
+.item-complex.item-royal > .item-content {
+  border-color: #552bdf;
+  background-color: #8a6de9;
+  color: white; }
+  .item-complex.item-royal > .item-content.active, .item-complex.item-royal > .item-content:active {
+    border-color: #552bdf;
+    background-color: #552bdf; }
+.item-complex.item-dark > .item-content {
+  border-color: #111111;
+  background-color: #444444;
+  color: white; }
+  .item-complex.item-dark > .item-content.active, .item-complex.item-dark > .item-content:active {
+    border-color: black;
+    background-color: #262626; }
 
 /**
  * Item Icons
@@ -5090,6 +5574,25 @@ textarea {
   overflow: hidden;
   height: 46px; }
 
+.item-floating-label {
+  display: block;
+  background-color: transparent;
+  box-shadow: none; }
+  .item-floating-label .input-label {
+    position: relative;
+    padding: 5px 0 0 0;
+    opacity: 0;
+    top: 10px;
+    -webkit-transition: opacity 0.15s ease-in, top 0.2s linear;
+    -moz-transition: opacity 0.15s ease-in, top 0.2s linear;
+    transition: opacity 0.15s ease-in, top 0.2s linear; }
+    .item-floating-label .input-label.has-input {
+      opacity: 1;
+      top: 0;
+      -webkit-transition: opacity 0.15s ease-in, top 0.2s linear;
+      -moz-transition: opacity 0.15s ease-in, top 0.2s linear;
+      transition: opacity 0.15s ease-in, top 0.2s linear; }
+
 textarea,
 input[type="text"],
 input[type="password"],
@@ -5173,8 +5676,9 @@ input[type="file"] {
   left: -9999px;
   width: 200px; }
 
-input:-moz-placeholder,
-textarea:-moz-placeholder {
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  /* Firefox 19+ */
   color: #aaaaaa; }
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
@@ -6562,23 +7066,24 @@ a.button {
   right: -1px;
   bottom: 0;
   left: -1px;
-  width: auto; }
+  width: auto;
+  border-right: none;
+  border-left: none; }
   .slide-left-right-ios7 > .ng-enter:not(.bar), .slide-left-right-ios7.ng-enter:not(.bar),
   .slide-left-right-ios7 > .ng-leave:not(.bar), .slide-left-right-ios7.ng-leave:not(.bar),
   .slide-right-left-ios7.reverse > .ng-enter:not(.bar),
   .slide-right-left-ios7.reverse.ng-enter:not(.bar),
   .slide-right-left-ios7.reverse > .ng-leave:not(.bar),
   .slide-right-left-ios7.reverse.ng-leave:not(.bar) {
-    border-right: 1px solid #ddd;
-    border-left: 1px solid #ddd; }
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent; }
 .slide-left-right-ios7 > .ng-enter, .slide-left-right-ios7.ng-enter,
 .slide-right-left-ios7.reverse > .ng-enter,
 .slide-right-left-ios7.reverse.ng-enter {
   /* NEW content placed far RIGHT BEFORE it slides IN from the RIGHT */
   -webkit-transform: translate3d(100%, 0, 0);
   -moz-transform: translate3d(100%, 0, 0);
-  transform: translate3d(100%, 0, 0);
-  z-index: 2; }
+  transform: translate3d(100%, 0, 0); }
 .slide-left-right-ios7 > .ng-leave, .slide-left-right-ios7.ng-leave,
 .slide-right-left-ios7.reverse > .ng-leave,
 .slide-right-left-ios7.reverse.ng-leave {
@@ -6612,16 +7117,15 @@ a.button {
   bottom: 0;
   left: -1px;
   width: auto;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd; }
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent; }
 .slide-left-right-ios7.reverse > .ng-enter, .slide-left-right-ios7.reverse.ng-enter,
 .slide-right-left-ios7 > .ng-enter,
 .slide-right-left-ios7.ng-enter {
   /* NEW content placed far LEFT BEFORE it slides IN from the LEFT */
   -webkit-transform: translate3d(-15%, 0, 0);
   -moz-transform: translate3d(-15%, 0, 0);
-  transform: translate3d(-15%, 0, 0);
-  z-index: 1; }
+  transform: translate3d(-15%, 0, 0); }
 .slide-left-right-ios7.reverse > .ng-leave, .slide-left-right-ios7.reverse.ng-leave,
 .slide-right-left-ios7 > .ng-leave,
 .slide-right-left-ios7.ng-leave {
@@ -6641,6 +7145,164 @@ a.button {
   -moz-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0); }
 
+/**
+ * iPad doesn't like box shadows
+ */
+.grade-a:not(.platform-ipad) .slide-left-right-ios7 > .ng-enter, .grade-a:not(.platform-ipad) .slide-left-right-ios7.ng-enter, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse > .ng-enter, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse.ng-enter {
+  box-shadow: -200px 0px 200px rgba(0, 0, 0, 0), -5px 0px 5px rgba(0, 0, 0, 0.01); }
+.grade-a:not(.platform-ipad) .slide-left-right-ios7 > .ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-left-right-ios7.ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse > .ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse.ng-enter.ng-enter-active {
+  box-shadow: -200px 0px 200px rgba(0, 0, 0, 0.15), -5px 0px 5px rgba(0, 0, 0, 0.18); }
+
+.grade-a.platform-ipad .slide-left-right-ios7 > .ng-enter, .grade-a.platform-ipad .slide-left-right-ios7.ng-enter, .grade-a.platform-ipad .slide-right-left-ios7.reverse > .ng-enter, .grade-a.platform-ipad .slide-right-left-ios7.reverse.ng-enter {
+  border-left: 1px solid #ddd; }
+.grade-a.platform-ipad .slide-left-right-ios7.reverse > .ng-leave, .grade-a.platform-ipad .slide-left-right-ios7.reverse.ng-leave, .grade-a.platform-ipad .slide-right-left-ios7 > .ng-leave, .grade-a.platform-ipad .slide-right-left-ios7.ng-leave {
+  border-left: 1px solid #ddd; }
+
+/**
+ * Android style "pop in" with fade and scale
+ */
+.fade-explode > .ng-enter, .fade-explode.ng-enter,
+.fade-explode > .ng-leave, .fade-explode.ng-leave {
+  -webkit-transition: all ease-out 300ms;
+  -moz-transition: all ease-out 300ms;
+  transition: all ease-out 300ms;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  width: auto; }
+  .fade-explode > .ng-enter:not(.bar), .fade-explode.ng-enter:not(.bar),
+  .fade-explode > .ng-leave:not(.bar), .fade-explode.ng-leave:not(.bar) {
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
+.fade-explode > .ng-enter, .fade-explode.ng-enter {
+  /* NEW content placed far RIGHT BEFORE it slides IN from the RIGHT */
+  -webkit-transform: scale(1.6);
+  -moz-transform: scale(1.6);
+  transform: scale(1.6);
+  opacity: 0;
+  z-index: 2; }
+.fade-explode > .ng-leave, .fade-explode.ng-leave {
+  z-index: 1; }
+.fade-explode > .ng-enter.ng-enter-active, .fade-explode.ng-enter.ng-enter-active {
+  /* NEW content ACTIVELY sliding IN from the RIGHT */
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1; }
+.fade-explode > .ng-leave.ng-leave-active, .fade-explode.ng-leave.ng-leave-active {
+  /* OLD content ACTIVELY sliding OUT to the LEFT */
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  transform: scale(0.95); }
+
+.fade-explode.reverse > .ng-enter, .fade-explode.reverse.ng-enter, .fade-explode.reverse > .ng-leave, .fade-explode.reverse.ng-leave {
+  -webkit-transition: all ease-out 300ms;
+  -moz-transition: all ease-out 300ms;
+  transition: all ease-out 300ms;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  width: auto; }
+  .fade-explode.reverse > .ng-enter:not(.bar), .fade-explode.reverse.ng-enter:not(.bar), .fade-explode.reverse > .ng-leave:not(.bar), .fade-explode.reverse.ng-leave:not(.bar) {
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
+.fade-explode.reverse > .ng-enter, .fade-explode.reverse.ng-enter {
+  /* NEW content placed far LEFT BEFORE it slides IN from the LEFT */
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  transform: scale(0.95);
+  opacity: 0;
+  z-index: 1; }
+.fade-explode.reverse > .ng-leave, .fade-explode.reverse.ng-leave {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2; }
+.fade-explode.reverse > .ng-enter.ng-enter-active, .fade-explode.reverse.ng-enter.ng-enter-active {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1; }
+.fade-explode.reverse > .ng-leave.ng-leave-active, .fade-explode.reverse.ng-leave.ng-leave-active {
+  -webkit-transform: scale(1.6);
+  -moz-transform: scale(1.6);
+  transform: scale(1.6);
+  opacity: 0; }
+
+/**
+ * Android style "pop in" with fade and scale
+ */
+.fade-implode > .ng-enter, .fade-implode.ng-enter,
+.fade-implode > .ng-leave, .fade-implode.ng-leave {
+  -webkit-transition: all ease-out 200ms;
+  -moz-transition: all ease-out 200ms;
+  transition: all ease-out 200ms;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  width: auto; }
+  .fade-implode > .ng-enter:not(.bar), .fade-implode.ng-enter:not(.bar),
+  .fade-implode > .ng-leave:not(.bar), .fade-implode.ng-leave:not(.bar) {
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
+.fade-implode > .ng-enter, .fade-implode.ng-enter {
+  /* NEW content placed far RIGHT BEFORE it slides IN from the RIGHT */
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(0.8);
+  opacity: 0;
+  z-index: 2; }
+.fade-implode > .ng-leave, .fade-implode.ng-leave {
+  z-index: 1; }
+.fade-implode > .ng-enter.ng-enter-active, .fade-implode.ng-enter.ng-enter-active {
+  /* NEW content */
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1; }
+
+.fade-implode.reverse > .ng-enter, .fade-implode.reverse.ng-enter, .fade-implode.reverse > .ng-leave, .fade-implode.reverse.ng-leave {
+  -webkit-transition: all ease-out 200ms;
+  -moz-transition: all ease-out 200ms;
+  transition: all ease-out 200ms;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  width: auto;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd; }
+.fade-implode.reverse > .ng-enter, .fade-implode.reverse.ng-enter {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  z-index: 1; }
+.fade-implode.reverse > .ng-leave, .fade-implode.reverse.ng-leave {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2; }
+.fade-implode.reverse > .ng-enter.ng-enter-active, .fade-implode.reverse.ng-enter.ng-enter-active {
+  opacity: 1; }
+.fade-implode.reverse > .ng-leave.ng-leave-active, .fade-implode.reverse.ng-leave.ng-leave-active {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(0.8);
+  opacity: 0; }
+
+/**
+ * Simple slide-in animation
+ */
 .slide-in-left {
   -webkit-transform: translate3d(0%, 0, 0);
   -moz-transform: translate3d(0%, 0, 0);
@@ -6759,9 +7421,9 @@ a.button {
     -moz-animation-fill-mode: both;
     animation-fill-mode: both; }
   .slide-in-right.ng-leave, .slide-in-right > .ng-leave {
-    -webkit-animation-name: slideInFromRight;
-    -moz-animation-name: slideInFromRight;
-    animation-name: slideInFromRight;
+    -webkit-animation-name: slideOutToRight;
+    -moz-animation-name: slideOutToRight;
+    animation-name: slideOutToRight;
     -webkit-animation-duration: 250ms;
     -moz-animation-duration: 250ms;
     animation-duration: 250ms;
@@ -6961,6 +7623,35 @@ a.button {
   -webkit-transform: translate3d(100%, 0, 0);
   -moz-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);
+  opacity: 0; }
+
+.nav-title-android:not(.no-animation) .button.back-button {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear;
+  opacity: 1; }
+  .nav-title-android:not(.no-animation) .button.back-button.ng-hide {
+    opacity: 0; }
+  .nav-title-android:not(.no-animation) .button.back-button.ng-hide-add, .nav-title-android:not(.no-animation) .button.back-button.ng-hide-remove {
+    display: block !important; }
+  .nav-title-android:not(.no-animation) .button.back-button.ng-hide-add {
+    position: absolute; }
+.nav-title-android > .ng-enter, .nav-title-android.ng-enter,
+.nav-title-android > .ng-leave, .nav-title-android.ng-leave {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear; }
+.nav-title-android > .ng-enter, .nav-title-android.ng-enter {
+  opacity: 0; }
+.nav-title-android > .ng-enter.ng-enter-active, .nav-title-android.ng-enter.ng-enter-active {
+  opacity: 1; }
+.nav-title-android > .ng-leave.ng-leave-active, .nav-title-android.ng-leave.ng-leave-active {
   opacity: 0; }
 
 /**
@@ -7431,29 +8122,114 @@ a.button {
  * --------------------------------------------------
  * Platform specific tweaks
  */
-.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
-  height: 70px; }
-  .platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
+/**
+ * Apply roboto font
+ */
+.roboto {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+  .roboto input {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+
+  /*
+.platform-android {
+
+
+  .bar {
+    padding: 0;
+
+    line-height: 40px;
+
+    .button {
+      line-height: 40px;
+    }
+
+    .button-icon:before {
+      font-size: 24px;
+    }
+  }
+
+  .back-button {
+    &.button-icon:before {
+      line-height: 40px;
+    }
+    margin-left: -3px;
+    padding: 0px 2px !important;
+    &.ion-android-arrow-back:before {
+      font-size: 12px;
+    }
+
+    &.back-button.active,
+    &.back-button.activated {
+      background-color: rgba(0,0,0,0.1);
+    }
+  }
+
+  .item-divider {
+    background: none;
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .item {
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+
+  .item-divider ~ .item:not(.item-divider) {
+    border-bottom-width: 0;
+  }
+
+  .back-button:not(.ng-hide) + .left-buttons + .title {
+    // Don't allow normal titles in this mode
+    display: none;
+  }
+
+  .bar .title {
+    text-align: left;
+    font-weight: normal;
+  }
+
+  /*
+  font-family: 'Roboto';
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Roboto', $font-family-base;
+  }
+
+  .tab-item {
+    font-family: 'Roboto', $font-family-base;
+  }
+
+
+  input, button, select, textarea {
+    font-family: 'Roboto', $font-family-base;
+  }
+  */
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  height: 64px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
     margin-top: 19px !important; }
-  .platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
     margin-top: 20px; }
-.platform-ios7.platform-cordova:not(.fullscreen) .tabs-top > .tabs,
-.platform-ios7.platform-cordova:not(.fullscreen) .tabs.tabs-top {
-  top: 70px; }
-.platform-ios7.platform-cordova:not(.fullscreen) .has-header,
-.platform-ios7.platform-cordova:not(.fullscreen) .bar-subheader {
-  top: 70px; }
-.platform-ios7.platform-cordova:not(.fullscreen) .has-subheader {
-  top: 120px; }
-.platform-ios7.platform-cordova:not(.fullscreen) .has-tabs-top {
-  top: 125px; }
-.platform-ios7.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
-  top: 175px; }
-.platform-ios7.platform-cordova.status-bar-hide {
+.platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs,
+.platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+  top: 64px; }
+.platform-ios.platform-cordova:not(.fullscreen) .has-header,
+.platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
+  top: 64px; }
+.platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
+  top: 108px; }
+.platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
+  top: 113px; }
+.platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
+  top: 157px; }
+.platform-ios.platform-cordova.status-bar-hide {
   margin-bottom: 20px; }
 
 @media (orientation: landscape) {
-  .platform-ios7.platform-browser.platform-ipad {
+  .platform-ios.platform-browser.platform-ipad {
     position: fixed; } }
 .platform-c:not(.enable-transitions) * {
   -webkit-transition: none !important;

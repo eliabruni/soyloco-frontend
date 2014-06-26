@@ -15,7 +15,7 @@ angular.module('soyloco.directives', [])
 
     .directive('headerShrink', function($document) {
         var shrink = function(header, content, amt, max) {
-            amt = Math.min(270, amt);
+            amt = Math.min(500, amt);
 
             ionic.requestAnimationFrame(function() {
                 header.style[ionic.CSS.TRANSFORM] = 'translate3d(0, +' + amt + 'px, 0)';

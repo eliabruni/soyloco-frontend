@@ -98,17 +98,9 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('CategoryCtrl', function($rootScope, $scope, $stateParams, $ionicSlideBoxDelegate, $ionicNavBarDelegate,
-                                         $ionicLoading, $timeout, Crawler, Categories, GMap, Geo) {
+                                         $timeout, $cordovaToast, Crawler, Categories, GMap, Geo) {
 
         $scope.showMap = false;
-
-        $scope.loadingIndicator = $ionicLoading.show({
-            content: 'Loading Data',
-            animation: 'fade-in',
-            showBackdrop: false,
-            maxWidth: 200,
-            showDelay: 500
-        });
 
         var mapViews = [{title: 'WHO YOU LIKE'}, {title: 'WHO LIKES YOU'}, {title: 'MATCHES'}];
 
@@ -123,19 +115,31 @@ angular.module('soyloco.controllers', [])
             // device APIs are available
             function onDeviceReady() {
                 $rootScope.deviceReady = true;
-                displayMap();
+                if (Geo.isPositionAvailable()) {
+                    displayMap();
+                } else {
+                    // TODO: raw hack to get the toast, find better way
+                    $timeout(function () {
+                        if (!Geo.isPositionAvailable()) {
+                            $cordovaToast.show('GPS location not available', 'long', 'bottom');s
+                            obscureMap();
+                        }
+                    }, 5000);
+
+                }
             }
-          // TODO: this condition is possibly unnecessary
-        } else if (Geo.isPositionAvailable()) {
-            displayMap();
-        }
+            // TODO: this condition is possibly unnecessary
+        }/* else if (Geo.isPositionAvailable()) {
+         displayMap();
+         }*/
 
         $scope.Geo = Geo;
 
         $scope.$watch('Geo.isPositionAvailable()', function(status) {
-            if (status) {
+            if (status && $rootScope.deviceReady) {
                 displayMap();
-            } else if (!status) {
+            } else if (!status && $rootScope.deviceReady) {
+                $cordovaToast.show('GPS location not available', 'long', 'bottom');
                 obscureMap();
             }
         });
@@ -143,15 +147,6 @@ angular.module('soyloco.controllers', [])
 
         function obscureMap() {
             $scope.showMap = false;
-
-            $scope.loadingIndicator = $ionicLoading.show({
-                content: 'Loading Data',
-                animation: 'fade-in',
-                showBackdrop: false,
-                maxWidth: 200,
-                showDelay: 500,
-                duration: 2000
-            });
         }
 
         function displayMap() {
