@@ -67,39 +67,63 @@
 
 
 /*************************************
-*   MENU
+*   MENU BAR
 */
 
+
+/*
+BUTTONS
+*/
 .buttons.left-buttons .ion-navicon-round:before {
-    font-size:32px !important;
-    color:#999;margin-left:-20px;
-    padding-right: .0em;
+    font-size:35px !important;
+    color:#fff;margin-left:-20px;
+    border: 1px solid #111;
 }
 
-.menu.menu-left .item {
-    color:#FFF
+.buttons.left-buttons .ion-ios7-people:before {
+    font-size: 54px !important;
+/*
+    border: 1px solid #111;
+*/
+    border-bottom: 3px solid #fff;
+    text-decoration:underline;
 }
+
+.buttons.left-buttons .ion-person:before {
+    font-size: 40px !important;
+    border: 1px solid #111;
+}
+
+.buttons.left-buttons .ion-person-stalker:before {
+    font-size: 40px !important;
+    border: 1px solid #111;
+}
+
+
+
+
+/*************************************
+*   SIDE-MENU
+*/
 
 .menu.menu-left {
     background-color: #292929;
 }
+
 .menu.menu-left .item {
-    border: 1px solid  #111;
+    border: 1px solid #111;
+    color: #FFF;
     background-color: #292929;
+    font-size: 18px;
 }
 
-.menu-item-standard {
-    height: 60px;
-}
 
-/*
-Profile
-*/
 .menu-item-profile {
+
     height: 150px;
     padding-top:10%;
     padding-bottom:10%;
-    padding-left:8%;
+    padding-left:6%;
 }
 
 /*
@@ -111,27 +135,12 @@ Profile image circular
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
-    border: 3px solid #fff;
-
+    border: 4px solid #fff;
 }
 
-
-/*************************************
-*   TABS
-*//*
-.tab-item.tab-item-active,
-.tab-item.active,
-.tab-item.activated {
-    opacity: 1;
-    background:#000;
-    text-decoration: none;
-    border-bottom: 4px solid #cb2027;
-    *//*
-        background:#32506d;
-    *//*
-    height: 100%;
-
-}*/
+.ion-heart-specs {
+ font-size: 200px;
+}
 
 
 /*************************************

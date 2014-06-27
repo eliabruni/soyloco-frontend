@@ -21,18 +21,19 @@ $dark:                            #444 !default;
 // This is for the above bar
 $button-stable-text:              white;
 
-$bar-stable-bg:                   #32506d;
+$bar-stable-bg:                   #cb2027;
 $bar-stable-text:                 #ffffff;
-//$bar-height:                      50px !default;
+$bar-height:                      50px !default;
 $bar-title-font-size:             25px !default;
 $bar-padding-portrait:            5px 0px !default;
+$bar-transparency:                1 !default;
+
+// Size of the bar icons
+$button-large-icon-size:          42px !default;
 
 
 
-//$button-default-active-bg: red;
-/*$button-default-bg:               red;
-$button-default-text:             red;io
-$button-default-active-border:   white;*/
+
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
