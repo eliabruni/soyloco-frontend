@@ -3450,7 +3450,7 @@ a.subdued {
       color: #444444; }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #cb2027;
+    background-color: black;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: white; }
     .bar.bar-stable .title {
@@ -3606,7 +3606,7 @@ a.subdued {
 
 .bar-stable .button {
   border-color: #b2b2b2;
-  background-color: #cb2027;
+  background-color: black;
   color: white; }
   .bar-stable .button:hover {
     color: white;

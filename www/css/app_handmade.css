@@ -74,29 +74,55 @@
 /*
 BUTTONS
 */
-.buttons.left-buttons .ion-navicon-round:before {
-    font-size:35px !important;
-    color:#fff;margin-left:-20px;
-    border: 1px solid #111;
+
+
+ .ion-navicon-round:before {
+    font-size:30px !important;
+    color:#fff;margin-left:-30px !important;
+/*
+    padding-right: 30px !important;
+*/
+    border-right: 2px solid #666;
+    width: 60px !important;
+
+ }
+
+
+.button-icon {
+    color: #666 !important;
+    padding: 3px 3px !important;
+
+}
+
+.button-icon.button.active,button.activated {
+    color: #fff !important;
+    border-bottom: 3px solid #fff;
+    opacity: 1;
+}
+
+
+.buttons.left-buttons .ion-ios7-star:before {
+    font-size: 34px !important;
+    width: 45px;
+
 }
 
 .buttons.left-buttons .ion-ios7-people:before {
-    font-size: 54px !important;
-/*
-    border: 1px solid #111;
-*/
-    border-bottom: 3px solid #fff;
-    text-decoration:underline;
+    font-size: 44px !important;
+    width: 45px;
+
 }
 
 .buttons.left-buttons .ion-person:before {
-    font-size: 40px !important;
-    border: 1px solid #111;
+    font-size: 31px !important;
+    width: 45px;
+
 }
 
 .buttons.left-buttons .ion-person-stalker:before {
-    font-size: 40px !important;
-    border: 1px solid #111;
+    font-size: 31px !important;
+    width: 45px;
+
 }
 
 
@@ -275,18 +301,9 @@ SWIPE IN PLAY VIEW
 BUTTONS ABOVE
 */
 
-.button-bar{
-    /*
-        background: rgba(50, 80, 109,0.8) !important;
-    */
-    background: rgba(203, 32, 39,0.9) !important;
 
-    position: absolute;
-    z-index:1000;
-    height: 50px;
-    padding-left:10px;
-}
 
+/*
 .button-bar-view-title-container {
     width: 80%;
     font-size: 20px;
@@ -321,6 +338,7 @@ BUTTONS ABOVE
     color: #e59094;
     padding-right:10px;
     padding-left:10px;}
+*/
 
 /*.above-bar-icon-settings {
     font-size: 30px;

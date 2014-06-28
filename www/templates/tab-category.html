@@ -1,20 +1,22 @@
 <ion-view>
 
     <ion-nav-buttons side="left">
+
         <button menu-toggle="left" class="button button-icon icon ion-navicon-round"></button>
 
-        <button class="button button-icon button-clear" icon-on="icon ion-home" icon-off="icon ion-ios7-filing-outline" ng-click="toggleLeft()"></button>
+        <button  ng-if="true" class="button button-icon button-clear ion-ios7-star" ng-class="{'active' : slideIndex == 0}" ng-click="goToAll()"></button>
 
-        <button class="button button-icon button-clear ion-ios7-people" ng-click="goToWhoYouLike()"></button>
+        <button  ng-if="true" class="button button-icon button-clear ion-ios7-people" ng-class="{'active' : slideIndex == 1}" ng-click="goToWhoYouLike()"></button>
 
-        <button class="button button-icon button-clear ion-person" ng-click="goToWhoLikesYou()"></button>
+        <button ng-if="true" class="button button-icon button-clear ion-person" ng-class="{'active' : slideIndex == 2}"  ng-click="goToWhoLikesYou()"></button>
 
-        <button class="button button-icon button-clear ion-person-stalker" ng-click="goToMatches()"></button>
+        <button ng-if="true" class="button button-icon button-clear ion-person-stalker" ng-class="{'active' : slideIndex == 3}"  ng-click="goToMatches()"></button>
 
 <!--
         This is a hack to avoid last button to drop outside the menu bar (bug only in android?).
 -->
         <button class="button button-clear"></button>
+
     </ion-nav-buttons>
 
     <ion-content header-shrink scroll-event-interval="1">
@@ -32,9 +34,10 @@
                         icon="map.selfMarker.icon">
                 </marker>
 
-                <markers ng-if="slideIndex == 0" models="map.markersWhoYouLike" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
-                <markers ng-if="slideIndex == 1" models="map.markersWhoLikesYou" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
-                <markers ng-if="slideIndex == 2" models="map.markersMatches" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 0" models="map.markersAll" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 1" models="map.markersWhoYouLike" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 2" models="map.markersWhoLikesYou" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+                <markers ng-if="slideIndex == 3" models="map.markersMatches" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
 
                 <!--
                         <markers models="map.markers" coords="'self'" icon="'icon'"></markers>
@@ -46,6 +49,16 @@
         </div>
 
         <ion-slide-box ng-if="showMap" show-pager="false" does-continue="false" on-slide-changed="slideChanged(index)">
+            <ion-slide>
+                <ion-list>
+                    <ion-item ng-repeat="place in category.myPlaces"
+                              class="item item-thumbnail-left" ng-click="puOnTop(place)">
+                        <img ng-src="{{ place.image }}">
+                        <h2>{{place.name}}</h2>
+                        <p>{{place.address}}</p>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
             <ion-slide>
                 <ion-list>
                     <ion-item ng-repeat="place in category.otherPlaces"

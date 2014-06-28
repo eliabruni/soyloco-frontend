@@ -88,6 +88,36 @@ angular.module('soyloco.map', [])
                     mapTypeId: "roadmap",
                     disableDefaultUI: true
                 },
+                markersAll : [
+                    {
+                        id: 1,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.004,
+                        longitude:long+0.001,
+                        showWindow: false,
+                        place: {
+                            id: 1,
+                            name: 'Walthers',
+                            address: 'Piazza Walther',
+                            image: 'img/walthers.jpg'
+                        }
+                    },
+                    {
+                        id: 2,
+                        icon: 'img/maps/blue_marker.png',
+                        latitude:lat+0.002,
+                        longitude:long+0.004,
+                        showWindow: false,
+                        place: {
+                            id: 2,
+                            name: 'Nadamas',
+                            address: 'Piazza Erbe',
+                            image: 'img/nadamas.jpg'
+                        }
+
+
+                    }
+                ],
                 markersWhoYouLike : [
                     {
                         id: 1,

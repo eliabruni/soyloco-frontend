@@ -102,7 +102,7 @@ angular.module('soyloco.controllers', [])
 
         $scope.showMap = false;
 
-        var mapViews = [{title: 'WHO YOU LIKE'}, {title: 'WHO LIKES YOU'}, {title: 'MATCHES'}];
+        var mapViews = [{title: 'ALL'}, {title: 'WHO YOU LIKE'}, {title: 'WHO LIKES YOU'}, {title: 'MATCHES'}];
 
         // By default we set it to 'Who you like'
         $scope.viewName = mapViews[0].title;
@@ -179,7 +179,7 @@ angular.module('soyloco.controllers', [])
                     $scope.slideIndex = index;
                 };
 
-                $scope.goToWhoYouLike = function () {
+                $scope.goToAll = function () {
 
                     if ($scope.slideIndex == 1) {
                         $ionicSlideBoxDelegate.previous();
@@ -188,12 +188,17 @@ angular.module('soyloco.controllers', [])
                         $ionicSlideBoxDelegate.previous();
                         $ionicSlideBoxDelegate.previous();
                     }
+                    else if ($scope.slideIndex == 3) {
+                        $ionicSlideBoxDelegate.previous();
+                        $ionicSlideBoxDelegate.previous();
+                        $ionicSlideBoxDelegate.previous();
+                    }
                     $scope.slideIndex == 0;
                     $scope.viewName = mapViews[0].title;
 
                 };
 
-                $scope.goToWhoLikesYou = function () {
+                $scope.goToWhoYouLike = function () {
 
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();
@@ -201,8 +206,31 @@ angular.module('soyloco.controllers', [])
                     else if ($scope.slideIndex == 2) {
                         $ionicSlideBoxDelegate.previous();
                     }
+                    else if ($scope.slideIndex == 3) {
+                        $ionicSlideBoxDelegate.previous();
+                        $ionicSlideBoxDelegate.previous();
+                    }
                     $scope.slideIndex == 1;
                     $scope.viewName = mapViews[1].title;
+
+                };
+
+                $scope.goToWhoLikesYou = function () {
+
+                    if ($scope.slideIndex == 0) {
+                        $ionicSlideBoxDelegate.next();
+                        $ionicSlideBoxDelegate.next();
+
+                    }
+                    else if ($scope.slideIndex == 1) {
+                        $ionicSlideBoxDelegate.next();
+
+                    }
+                    else if ($scope.slideIndex == 3) {
+                        $ionicSlideBoxDelegate.previous();
+                    }
+                    $scope.slideIndex == 2;
+                    $scope.viewName = mapViews[2].title;
 
                 };
 
@@ -212,12 +240,18 @@ angular.module('soyloco.controllers', [])
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();
                         $ionicSlideBoxDelegate.next();
+                        $ionicSlideBoxDelegate.next();
+
                     }
                     else if ($scope.slideIndex == 1) {
                         $ionicSlideBoxDelegate.next();
+                        $ionicSlideBoxDelegate.next();
                     }
-                    $scope.slideIndex == 2;
-                    $scope.viewName = mapViews[2].title;
+                    else if ($scope.slideIndex == 2) {
+                        $ionicSlideBoxDelegate.next();
+                    }
+                    $scope.slideIndex == 3;
+                    $scope.viewName = mapViews[3].title;
 
 
                 };
@@ -231,18 +265,24 @@ angular.module('soyloco.controllers', [])
                 $scope.puOnTop = function(place) {
 
                     if ($scope.slideIndex == 0) {
-                        $scope.category.otherPlaces.splice($scope.category.otherPlaces.indexOf(place), 1);
-                        $scope.category.otherPlaces.splice(0,0,place);
-                        $scope.$apply();
-                    }
-
-                    else if ($scope.slideIndex == 1) {
                         $scope.category.myPlaces.splice($scope.category.myPlaces.indexOf(place), 1);
                         $scope.category.myPlaces.splice(0,0,place);
                         $scope.$apply();
                     }
 
+                    if ($scope.slideIndex == 1) {
+                        $scope.category.otherPlaces.splice($scope.category.otherPlaces.indexOf(place), 1);
+                        $scope.category.otherPlaces.splice(0,0,place);
+                        $scope.$apply();
+                    }
+
                     else if ($scope.slideIndex == 2) {
+                        $scope.category.myPlaces.splice($scope.category.myPlaces.indexOf(place), 1);
+                        $scope.category.myPlaces.splice(0,0,place);
+                        $scope.$apply();
+                    }
+
+                    else if ($scope.slideIndex == 3) {
                         $scope.category.otherPlaces.splice($scope.category.otherPlaces.indexOf(place), 1);
                         $scope.category.otherPlaces.splice(0,0,place);
                         $scope.$apply();
@@ -256,6 +296,15 @@ angular.module('soyloco.controllers', [])
                     $scope.puOnTop(marker.place);
                     $scope.$apply();
                 };
+
+                _.each($scope.map.markersAll, function (marker) {
+                    marker.onClicked = function () {
+                        onMarkerClicked(marker);
+
+                        //change marker (extract a function here)
+
+                    };
+                });
 
                 _.each($scope.map.markersWhoYouLike, function (marker) {
                     marker.onClicked = function () {
