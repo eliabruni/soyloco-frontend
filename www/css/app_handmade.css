@@ -76,53 +76,63 @@ BUTTONS
 */
 
 
- .ion-navicon-round:before {
-    font-size:30px !important;
-    color:#fff;margin-left:-30px !important;
-/*
-    padding-right: 30px !important;
-*/
-    border-right: 2px solid #666;
-    width: 60px !important;
 
- }
-
-
-.button-icon {
-    color: #666 !important;
-    padding: 3px 3px !important;
+.menu-bar{
+    top: 0 !important;
+    position: absolute;
+    vertical-align: middle;
 
 }
 
+.button-bar{
+    top: 0 !important;
+    position: absolute;
+    vertical-align: middle;
+    padding-left: 40px;
+}
+
+.buttons.left-buttons .ion-navicon-round:before {
+    font-size:30px !important;
+    color:#b2d7ff;margin-left:-25px !important;
+    border-right: 2px solid #b2d7ff;
+    width: 50px;
+}
+
+
+
+.button-icon {
+    color: #b2d7ff !important;
+    height: 50px !important;
+    /*
+    This is an invisible to border to not change size when one icon is active
+*/
+    border-bottom: 3px solid #007AFF !important;
+}
+
+
 .button-icon.button.active,button.activated {
     color: #fff !important;
-    border-bottom: 3px solid #fff;
+    border-bottom: 4px solid #fff !important;
     opacity: 1;
+
 }
 
 
 .buttons.left-buttons .ion-ios7-star:before {
-    font-size: 34px !important;
-    width: 45px;
+    font-size: 28px !important;
 
 }
 
 .buttons.left-buttons .ion-ios7-people:before {
-    font-size: 44px !important;
-    width: 45px;
-
+    font-size: 42px !important;
 }
 
 .buttons.left-buttons .ion-person:before {
     font-size: 31px !important;
-    width: 45px;
-
 }
 
 .buttons.left-buttons .ion-person-stalker:before {
     font-size: 31px !important;
-    width: 45px;
-
 }
 
 
@@ -165,7 +175,7 @@ Profile image circular
 }
 
 .ion-heart-specs {
- font-size: 200px;
+    font-size: 200px;
 }
 
 
