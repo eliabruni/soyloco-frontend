@@ -102,7 +102,7 @@ angular.module('soyloco.controllers', [])
 
         $scope.showMap = false;
 
-        var mapViews = [{title: 'ALL'}, {title: 'WHO YOU LIKE'}, {title: 'WHO LIKES YOU'}, {title: 'MATCHES'}];
+        var mapViews = [{title: 'All'}, {title: 'Who you like'}, {title: 'Who likes you'}, {title: 'Matches'}];
 
         // By default we set it to 'Who you like'
         $scope.viewName = mapViews[0].title;
