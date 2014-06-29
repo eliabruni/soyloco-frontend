@@ -77,50 +77,48 @@ BUTTONS
 
 
 
+
+
 .menu-bar{
     top: 0 !important;
     position: absolute;
     vertical-align: middle;
-
 }
 
 .button-bar{
     top: 0 !important;
     position: absolute;
     vertical-align: middle;
-    padding-left: 40px;
+    padding-left: 30px;
 }
 
 .buttons.left-buttons .ion-navicon-round:before {
     font-size:30px !important;
-    color:#b2d7ff;margin-left:-25px !important;
-    border-right: 2px solid #b2d7ff;
-    width: 50px;
+    color:#7fbcff;margin-left:-25px !important;
+    border-right: 2px solid #7fbcff;
+    width: 45px;
 }
 
 
-
 .button-icon {
-    color: #b2d7ff !important;
+    color: #7fbcff !important;
     height: 50px !important;
     /*
     This is an invisible to border to not change size when one icon is active
 */
+    border-top: 3px solid #007AFF !important;
     border-bottom: 3px solid #007AFF !important;
 }
 
 
 .button-icon.button.active,button.activated {
     color: #fff !important;
-    border-bottom: 4px solid #fff !important;
+    border-bottom: 3px solid #fff !important;
     opacity: 1;
-
 }
-
 
 .buttons.left-buttons .ion-ios7-star:before {
     font-size: 28px !important;
-
 }
 
 .buttons.left-buttons .ion-ios7-people:before {
@@ -134,6 +132,33 @@ BUTTONS
 .buttons.left-buttons .ion-person-stalker:before {
     font-size: 31px !important;
 }
+
+
+/*
+SUBHEADER
+*/
+
+.bar-subheader {
+    height: 30px;
+    background-color: rgba(127,188,255,0.8);
+    border:none !important;
+    text-align: center;
+
+}
+
+.subheader-viewname {
+    font-size: 18px;
+    color:#454545;
+    text-align: center;
+}
+
+/* .ion-pinpoint:before {
+    color: #454545;
+    font-size: 25px !important;
+    border-left: 2px solid red !important;
+    border:none !important;
+}*/
+
 
 
 
