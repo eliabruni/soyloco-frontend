@@ -88,6 +88,10 @@ BUTTONS
     position: absolute;
     vertical-align: middle;
     padding-left: 30px;
+/*
+* TODO: try this
+    width:50%;
+*/
 }
 
 .buttons.left-buttons .ion-navicon-round:before {

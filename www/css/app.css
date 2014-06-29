@@ -3448,6 +3448,8 @@ a.subdued {
     color: #444444; }
     .bar.bar-light .title {
       color: #444444; }
+    .bar.bar-light.bar-footer {
+      background-image: linear-gradient(180deg, #dddddd, #dddddd 50%, transparent 50%); }
   .bar.bar-stable {
     border-color: #b2b2b2;
     background-color: #007aff;
@@ -3455,6 +3457,8 @@ a.subdued {
     color: white; }
     .bar.bar-stable .title {
       color: white; }
+    .bar.bar-stable.bar-footer {
+      background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
     border-color: #145dd7;
     background-color: #4a87ee;
@@ -3462,6 +3466,8 @@ a.subdued {
     color: white; }
     .bar.bar-positive .title {
       color: white; }
+    .bar.bar-positive.bar-footer {
+      background-image: linear-gradient(180deg, #145dd7, #145dd7 50%, transparent 50%); }
   .bar.bar-calm {
     border-color: #1aaac3;
     background-color: #43cee6;
@@ -3469,6 +3475,8 @@ a.subdued {
     color: white; }
     .bar.bar-calm .title {
       color: white; }
+    .bar.bar-calm.bar-footer {
+      background-image: linear-gradient(180deg, #1aaac3, #1aaac3 50%, transparent 50%); }
   .bar.bar-assertive {
     border-color: #cc2511;
     background-color: #ef4e3a;
@@ -3476,6 +3484,8 @@ a.subdued {
     color: white; }
     .bar.bar-assertive .title {
       color: white; }
+    .bar.bar-assertive.bar-footer {
+      background-image: linear-gradient(180deg, #cc2511, #cc2511 50%, transparent 50%); }
   .bar.bar-balanced {
     border-color: #478f24;
     background-color: #66cc33;
@@ -3483,6 +3493,8 @@ a.subdued {
     color: white; }
     .bar.bar-balanced .title {
       color: white; }
+    .bar.bar-balanced.bar-footer {
+      background-image: linear-gradient(180deg, #478f24, #145dd7 50%, transparent 50%); }
   .bar.bar-energized {
     border-color: #d39511;
     background-color: #f0b840;
@@ -3490,6 +3502,8 @@ a.subdued {
     color: white; }
     .bar.bar-energized .title {
       color: white; }
+    .bar.bar-energized.bar-footer {
+      background-image: linear-gradient(180deg, #d39511, #d39511 50%, transparent 50%); }
   .bar.bar-royal {
     border-color: #552bdf;
     background-color: #8a6de9;
@@ -3497,6 +3511,8 @@ a.subdued {
     color: white; }
     .bar.bar-royal .title {
       color: white; }
+    .bar.bar-royal.bar-footer {
+      background-image: linear-gradient(180deg, #552bdf, #552bdf 50%, transparent 50%); }
   .bar.bar-dark {
     border-color: #111111;
     background-color: #444444;
@@ -3504,6 +3520,8 @@ a.subdued {
     color: white; }
     .bar.bar-dark .title {
       color: white; }
+    .bar.bar-dark.bar-footer {
+      background-image: linear-gradient(180deg, #111111, #111111 50%, transparent 50%); }
   .bar .title {
     position: absolute;
     top: 0;
@@ -4289,7 +4307,24 @@ a.subdued {
     width: 60%; }
 
   .modal.ng-leave-active {
-    bottom: 0; } }
+    bottom: 0; }
+
+  .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) {
+    height: 50px; }
+    .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) > * {
+      margin-top: 0; }
+  .platform-ios.platform-cordova .modal-wrapper .modal .tabs-top > .tabs,
+  .platform-ios.platform-cordova .modal-wrapper .modal .tabs.tabs-top {
+    top: 50px; }
+  .platform-ios.platform-cordova .modal-wrapper .modal .has-header,
+  .platform-ios.platform-cordova .modal-wrapper .modal .bar-subheader {
+    top: 50px; }
+  .platform-ios.platform-cordova .modal-wrapper .modal .has-subheader {
+    top: 100px; }
+  .platform-ios.platform-cordova .modal-wrapper .modal .has-tabs-top {
+    top: 99px; }
+  .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-subheader.has-tabs-top {
+    top: 149px; } }
 .modal-open {
   pointer-events: none; }
   .modal-open .modal,
@@ -4338,6 +4373,10 @@ a.subdued {
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     animation-fill-mode: both; }
+  .popup.popup-tall {
+    overflow: hidden; }
+    .popup.popup-tall .popup-body {
+      overflow: auto; }
 
 .popup-head {
   padding: 15px 0px;
@@ -7145,11 +7184,26 @@ a.button {
 /**
  * iPad doesn't like box shadows
  */
-.grade-a:not(.platform-ipad) .slide-left-right-ios7 > .ng-enter, .grade-a:not(.platform-ipad) .slide-left-right-ios7.ng-enter, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse > .ng-enter, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse.ng-enter {
-  box-shadow: -200px 0px 200px rgba(0, 0, 0, 0), -5px 0px 5px rgba(0, 0, 0, 0.01); }
-.grade-a:not(.platform-ipad) .slide-left-right-ios7 > .ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-left-right-ios7.ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse > .ng-enter.ng-enter-active, .grade-a:not(.platform-ipad) .slide-right-left-ios7.reverse.ng-enter.ng-enter-active {
-  box-shadow: -200px 0px 200px rgba(0, 0, 0, 0.15), -5px 0px 5px rgba(0, 0, 0, 0.18); }
-
+/*
+.grade-a:not(.platform-ipad) {
+  .slide-left-right-ios7, .slide-right-left-ios7.reverse {
+    > .ng-enter, &.ng-enter {
+      box-shadow: $ios-transition-box-shadow-start;
+    }
+    > .ng-enter.ng-enter-active, &.ng-enter.ng-enter-active {
+      box-shadow: $ios-transition-box-shadow-end;
+    }
+  }
+  .slide-left-right-ios7.reverse, .slide-right-left-ios7 {
+    > .ng-leave, &.ng-leave {
+      //box-shadow: $ios-transition-box-shadow-end;
+    }
+    > .ng-leave.ng-leave-active, &.ng-leave.ng-leave-active {
+      //box-shadow: $ios-transition-box-shadow-start;
+    }
+  }
+}
+*/
 .grade-a.platform-ipad .slide-left-right-ios7 > .ng-enter, .grade-a.platform-ipad .slide-left-right-ios7.ng-enter, .grade-a.platform-ipad .slide-right-left-ios7.reverse > .ng-enter, .grade-a.platform-ipad .slide-right-left-ios7.reverse.ng-enter {
   border-left: 1px solid #ddd; }
 .grade-a.platform-ipad .slide-left-right-ios7.reverse > .ng-leave, .grade-a.platform-ipad .slide-left-right-ios7.reverse.ng-leave, .grade-a.platform-ipad .slide-right-left-ios7 > .ng-leave, .grade-a.platform-ipad .slide-right-left-ios7.ng-leave {

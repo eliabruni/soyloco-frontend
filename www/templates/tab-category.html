@@ -23,7 +23,7 @@
          <!--   <button ng-if="true" class="button button-icon button-clear ion-pinpoint " >
 
             </button>-->
-            <a class="subheader-viewname">
+            <a ng-if="true" class="subheader-viewname">
                 {{viewName}}
 
             </a>
@@ -45,6 +45,7 @@
                         draggable="true"
                         control="googleMap"
                         mark-click="false"
+                        pan="true"
                         options="map.options">
                 <marker ng-if="map.selfMarker.isReady" coords="map.selfMarker"
                         icon="map.selfMarker.icon">

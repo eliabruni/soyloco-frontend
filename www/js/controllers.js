@@ -181,6 +181,12 @@ angular.module('soyloco.controllers', [])
 
                 $scope.goToAll = function () {
 
+                    // Recenter map
+                    if($scope.slideIndex != 0) {
+
+                        $scope.map.center = GMap.getCenter();
+                    }
+
                     if ($scope.slideIndex == 1) {
                         $ionicSlideBoxDelegate.previous();
                     }
@@ -196,9 +202,15 @@ angular.module('soyloco.controllers', [])
                     $scope.slideIndex == 0;
                     $scope.viewName = mapViews[0].title;
 
+
                 };
 
                 $scope.goToWhoYouLike = function () {
+
+                    // Recenter map
+                    if($scope.slideIndex != 1) {
+                        $scope.map.center = GMap.getCenter();
+                    }
 
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();
@@ -216,6 +228,11 @@ angular.module('soyloco.controllers', [])
                 };
 
                 $scope.goToWhoLikesYou = function () {
+
+                    // Recenter map
+                    if($scope.slideIndex != 2) {
+                        $scope.map.center = GMap.getCenter();
+                    }
 
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();
@@ -236,6 +253,11 @@ angular.module('soyloco.controllers', [])
 
                 // Called each time the slide changes
                 $scope.goToMatches = function () {
+
+                    // Recenter map
+                    if($scope.slideIndex != 3) {
+                        $scope.map.center = GMap.getCenter();
+                    }
 
                     if ($scope.slideIndex == 0) {
                         $ionicSlideBoxDelegate.next();

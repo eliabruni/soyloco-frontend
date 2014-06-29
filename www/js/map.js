@@ -8,6 +8,8 @@ angular.module('soyloco.map', [])
 
         var position,
             map,
+            originalLat,
+            originalLong,
             mapInitialized = false,
             mapInitStop,
             needToReloadView = false,
@@ -22,8 +24,8 @@ angular.module('soyloco.map', [])
                 if((Geo.isPositionAvailable())
                     && navigator.network.connection.type != Connection.NONE) {
 
-                    var actualPosition = localStorageService.get('position');
-                    createMap(actualPosition);
+                    var originalPosition = localStorageService.get('position');
+                    createMap(originalPosition);
 
                 } else {
 
@@ -36,8 +38,8 @@ angular.module('soyloco.map', [])
                                 $interval.cancel(mapInitStop);
                                 mapInitStop = undefined;
                             }
-                            var actualPosition = localStorageService.get('position');
-                            createMap(actualPosition);
+                            var originalPosition = localStorageService.get('position');
+                            createMap(originalPosition);
                             //needToReloadView = true;
                         }
                     }, 3000);
@@ -48,8 +50,8 @@ angular.module('soyloco.map', [])
             }
 
             // Utility to create map
-            function createMap(actualPosition) {
-                map = constructMap(actualPosition);
+            function createMap(originalPosition) {
+                map = constructMap(originalPosition);
                 watchPosition();
                 deferred.resolve(map);
                 mapInitialized = true;
@@ -63,11 +65,12 @@ angular.module('soyloco.map', [])
          HELPER FUNCTIONS
          */
 
-        function constructMap(position) {
+        function constructMap(originalPosition) {
 
-            var lat = position.lat;
-            var long = position.long;
+            localStorageService.add('originalPosition', originalPosition);
 
+            var lat = originalPosition.lat;
+            var long = originalPosition.long;
             map = {
                 center : {
                     latitude: lat,
@@ -237,6 +240,21 @@ angular.module('soyloco.map', [])
             map.selfMarker.longitude = position.long;
         }
 
+        function getCenter() {
+            var originalPosition = localStorageService.get('originalPosition');
+
+            var originalLat = originalPosition.lat;
+            var originalLong = originalPosition.long;
+
+            var newCenter = {
+                latitude: originalLat,
+                longitude: originalLong
+            }
+
+            return newCenter;
+
+        }
+
 
         /*
          GETTERS AND SETTERS
@@ -263,7 +281,8 @@ angular.module('soyloco.map', [])
             getSelfMarker: getSelfMarker,
             isMapInitialized: isMapInitialized,
             getViewToReload:getViewToReload,
-            setViewToReload:setViewToReload
+            setViewToReload:setViewToReload,
+            getCenter:getCenter
         }
 
     })
