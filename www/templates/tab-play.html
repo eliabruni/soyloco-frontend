@@ -9,8 +9,10 @@
 
     </ion-nav-buttons>
     <div class="play-slider">
+<!--
         <ion-slide-box class="slide-test" does-continue="false" show-pager="false" slide-interval="5000" on-slide-changed="">
-            <ion-slide>
+-->
+            <!--<ion-slide>
                 <ion-pane>
                         <div class="loading clearfix">
                             <div class="loading-block">
@@ -23,13 +25,31 @@
                         </div>
 
                 </ion-pane>
-            </ion-slide>
+            </ion-slide>-->
 
-            <ion-slide>
+            <!--<ion-slide>-->
 
                 <ion-pane>
 
-                    <swipe-cards on-swipe="onSwipe($event)">
+                    <swipe-cards>
+                        <swipe-card on-swipe="cardSwiped()" id="start-card">
+                            Swipe down for a new card
+                        </swipe-card>
+                        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+                                <div class="title">
+                                    {{card.title}}
+                                </div>
+                                <div class="image">
+                                    <img ng-src="{{card.image}}">
+                                </div>
+                                <div class="button-bar">
+                                    <button class="button button-clear button-positive" ng-click="reject()">No</button>
+                                    <button class="button button-clear button-positive" ng-click="accept()">Yes</button>
+                                </div>
+                        </swipe-card>
+                    </swipe-cards>
+
+                    <!--<swipe-cards on-swipe="onSwipe($event)">
                         <swipe-cards>
                             <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index, cards[$index].userId)">
 
@@ -50,11 +70,11 @@
 
                     <div class="swipe-button-right">
                         <button class="button ion-ios7-heart icon-heart-soyloco" ng-click="goAway(userId)"></button>
-                    </div>
+                    </div>-->
 
                 </ion-pane>
-            </ion-slide>
-        </ion-slide-box>
+<!--            </ion-slide>
+        </ion-slide-box>-->
 
 
     </div>

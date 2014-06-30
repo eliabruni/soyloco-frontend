@@ -31,7 +31,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
                 StatusBar.styleDefault();
             }
 
-           $rootScope.$on('$stateChangeStart', function(event, toState) {
+          /* $rootScope.$on('$stateChangeStart', function(event, toState) {
                 if (toState.name !== "login" && toState.name !== "logout" &&
                     (localStorageService.get('fbtoken') === null) ) {
                     $state.go('login');
@@ -41,7 +41,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
 
             $rootScope.$on('OAuthException', function() {
                 $state.go('login');
-            });
+            });*/
 
         });
     })

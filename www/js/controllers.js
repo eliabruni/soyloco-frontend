@@ -371,10 +371,56 @@ angular.module('soyloco.controllers', [])
  *          Play controller
  *
  * */
-    .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
+    .controller('PlayCtrl', function($rootScope, $scope, $timeout, $ionicSlideBoxDelegate,
                                      $ionicSwipeCardDelegate, Users) {
 
-        // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
+
+
+        $rootScope.accepted = 0;
+        $rootScope.rejected = 0;
+
+        var cardTypes = [
+            { title: 'Swipe down to clear the card', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png' },
+            { title: 'Where is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png' },
+            { title: 'What kind of grass is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png' },
+            { title: 'What beach is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png' },
+            { title: 'What kind of clouds are these?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png' }
+        ];
+
+        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+
+        $scope.cardSwiped = function(index) {
+            $scope.addCard();
+        };
+
+        $scope.cardDestroyed = function(index) {
+            if (this.swipeCard.positive === true) {
+                $scope.$root.accepted++;
+            } else {
+                $scope.$root.rejected++;
+            }
+            $scope.cards.splice(index, 1);
+        };
+
+        $scope.addCard = function() {
+            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+            newCard.id = Math.random();
+            $scope.cards.push(angular.extend({}, newCard));
+        }
+
+        $scope.accept = function () {
+            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+            $rootScope.accepted++;
+            card.swipe(true);
+        }
+        $scope.reject = function() {
+            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+            $rootScope.rejected++;
+            card.swipe();
+        };
+
+
+      /*  // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
         $timeout(function () {
             $ionicSlideBoxDelegate.enableSlide(false);
         }, 0);
@@ -456,7 +502,7 @@ angular.module('soyloco.controllers', [])
             $scope.nextUser(1);
         };
         // and fire it after definition
-        init();
+        init();*/
 
 
     })
