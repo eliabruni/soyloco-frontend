@@ -364,7 +364,7 @@ angular.module('soyloco.controllers', [])
     })
 
 
-    .controller('ProfileCtrl', function($scope) {
+    .controller('ProfileCtrl', function() {
     })
 
 /*************************************
@@ -372,8 +372,7 @@ angular.module('soyloco.controllers', [])
  *
  * */
     .controller('PlayCtrl', function($rootScope, $scope, $timeout, $ionicSlideBoxDelegate,
-                                     $ionicSwipeCardDelegate, Users) {
-
+                                     $ionicSwipeCardDelegate, $ionicSideMenuDelegate, Users) {
 
 
         $rootScope.accepted = 0;
@@ -511,7 +510,8 @@ angular.module('soyloco.controllers', [])
  *          Invite controller
  *
  * */
-    .controller('InviteCtrl', function($scope) {
+    .controller('InviteCtrl', function() {
+
     })
 
 
