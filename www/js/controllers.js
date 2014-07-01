@@ -375,6 +375,9 @@ angular.module('soyloco.controllers', [])
                                      $ionicSwipeCardDelegate, $ionicSideMenuDelegate, Users) {
 
 
+
+        $ionicSideMenuDelegate.canDragContent(false);
+
         $rootScope.accepted = 0;
         $rootScope.rejected = 0;
 

@@ -31,7 +31,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
                 StatusBar.styleDefault();
             }
 
-          /* $rootScope.$on('$stateChangeStart', function(event, toState) {
+           $rootScope.$on('$stateChangeStart', function(event, toState) {
                 if (toState.name !== "login" && toState.name !== "logout" &&
                     (localStorageService.get('fbtoken') === null) ) {
                     $state.go('login');
@@ -41,7 +41,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
 
             $rootScope.$on('OAuthException', function() {
                 $state.go('login');
-            });*/
+            });
 
         });
     })
@@ -78,7 +78,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
             .state('tab.category', {
                 url: '/category',
                 views: {
-                    'menuContent' :{
+                    'tab-category': {
                         templateUrl: 'templates/tab-category.html',
                         controller: 'CategoryCtrl'
                     }
@@ -88,7 +88,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
             .state('tab.profile', {
                 url: '/profile',
                 views: {
-                    'menuContent' :{
+                    'tab-profile': {
                         templateUrl: 'templates/tab-profile.html',
                         controller: 'ProfileCtrl'
                     }
@@ -98,7 +98,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
             .state('tab.play', {
                 url: '/play',
                 views: {
-                    'menuContent' :{
+                    'tab-play': {
                         templateUrl: 'templates/tab-play.html',
                         controller: 'PlayCtrl'
                     }
@@ -108,7 +108,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
             .state('tab.invite', {
                 url: '/invite',
                 views: {
-                    'menuContent' :{
+                    'tab-invite': {
                         templateUrl: 'templates/tab-invite.html',
                         controller: 'InviteCtrl'
                     }
@@ -118,7 +118,7 @@ angular.module('soyloco', ['ionic', 'openfb', 'ngCordova', 'soyloco.controllers'
             .state('tab.settings', {
                 url: '/settings',
                 views: {
-                    'menuContent' :{
+                    'tab-settings': {
                         templateUrl: 'templates/tab-settings.html',
                         controller: 'SettingsCtrl'
                     }
