@@ -13,12 +13,11 @@
             <ion-pane no-scroll>
 
                     <swipe-cards>
-                        <swipe-card on-swipe="cardSwiped()" id="start-card">
-                            Swipe down for a new card
+                        <swipe-card on-swipe="cardSwiped()">
                         </swipe-card>
                         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
                                 <div class="title">
-                                    {{card.title}}
+                                    {{card.name}}
                                 </div>
                                 <div class="image">
                                     <img ng-src="{{card.image}}">
@@ -45,13 +44,15 @@
                         </swipe-cards>
                     </swipe-cards>
 
+                    -->
+
                     <div class="swipe-button-left">
-                        <button class="button ion-close-round icon-cancel-soyloco" ng-click="goAway(userId)"></button>
+                        <button class="button ion-close-round icon-cancel-soyloco" ng-click="reject()"></button>
                     </div>
 
                     <div class="swipe-button-right">
-                        <button class="button ion-ios7-heart icon-heart-soyloco" ng-click="goAway(userId)"></button>
-                    </div>-->
+                        <button class="button ion-ios7-heart icon-heart-soyloco" ng-click="accept()"></button>
+                    </div>
 
                 </ion-pane>
 

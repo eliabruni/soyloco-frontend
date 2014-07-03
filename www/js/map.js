@@ -8,8 +8,7 @@ angular.module('soyloco.map', [])
 
         var position,
             map,
-            originalLat,
-            originalLong,
+            defaultZoom,
             mapInitialized = false,
             mapInitStop,
             needToReloadView = false,
@@ -68,6 +67,7 @@ angular.module('soyloco.map', [])
         function constructMap(originalPosition) {
 
             localStorageService.add('originalPosition', originalPosition);
+            defaultZoom = 14;
 
             var lat = originalPosition.lat;
             var long = originalPosition.long;
@@ -83,7 +83,7 @@ angular.module('soyloco.map', [])
                     fit:true,
                     isReady:true
                 },
-                zoom: 14,
+                zoom: defaultZoom,
                 draggable: true,
                 options: {
                     streetViewControl: false,
@@ -255,6 +255,9 @@ angular.module('soyloco.map', [])
 
         }
 
+        function getDefaultZoom() {
+            return defaultZoom;
+        }
 
         /*
          GETTERS AND SETTERS
@@ -282,7 +285,8 @@ angular.module('soyloco.map', [])
             isMapInitialized: isMapInitialized,
             getViewToReload:getViewToReload,
             setViewToReload:setViewToReload,
-            getCenter:getCenter
+            getCenter:getCenter,
+            getDefaultZoom:getDefaultZoom
         }
 
     })

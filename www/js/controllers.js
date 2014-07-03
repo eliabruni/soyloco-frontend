@@ -183,8 +183,8 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 0) {
-
                         $scope.map.center = GMap.getCenter();
+                        $scope.map.zoom = GMap.getDefaultZoom();
                     }
 
                     if ($scope.slideIndex == 1) {
@@ -210,6 +210,7 @@ angular.module('soyloco.controllers', [])
                     // Recenter map
                     if($scope.slideIndex != 1) {
                         $scope.map.center = GMap.getCenter();
+                        $scope.map.zoom = GMap.getDefaultZoom();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -232,6 +233,7 @@ angular.module('soyloco.controllers', [])
                     // Recenter map
                     if($scope.slideIndex != 2) {
                         $scope.map.center = GMap.getCenter();
+                        $scope.map.zoom = GMap.getDefaultZoom();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -257,6 +259,7 @@ angular.module('soyloco.controllers', [])
                     // Recenter map
                     if($scope.slideIndex != 3) {
                         $scope.map.center = GMap.getCenter();
+                        $scope.map.zoom = GMap.getDefaultZoom();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -375,24 +378,18 @@ angular.module('soyloco.controllers', [])
                                      $ionicSwipeCardDelegate, $ionicSideMenuDelegate, Users) {
 
 
-
+        var users;
         $ionicSideMenuDelegate.canDragContent(false);
 
         $rootScope.accepted = 0;
         $rootScope.rejected = 0;
 
-        var cardTypes = [
-            { title: 'Swipe down to clear the card', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png' },
-            { title: 'Where is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png' },
-            { title: 'What kind of grass is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png' },
-            { title: 'What beach is this?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png' },
-            { title: 'What kind of clouds are these?', image: 'http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png' }
-        ];
-
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+        users = Users.all();
+        $scope.cards = Array.prototype.slice.call(users, 0, 0);
 
         $scope.cardSwiped = function(index) {
-            $scope.addCard();
+            $scope.addCard(index);
+
         };
 
         $scope.cardDestroyed = function(index) {
@@ -404,9 +401,9 @@ angular.module('soyloco.controllers', [])
             $scope.cards.splice(index, 1);
         };
 
-        $scope.addCard = function() {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            newCard.id = Math.random();
+        $scope.addCard = function(index) {
+            var newCard = users[index];
+            newCard.id = index;
             $scope.cards.push(angular.extend({}, newCard));
         }
 
@@ -420,6 +417,18 @@ angular.module('soyloco.controllers', [])
             $rootScope.rejected++;
             card.swipe();
         };
+
+        // Start with first card
+        // TODO: put this into directive?
+        var init = function () {
+            $scope.addCard(0);
+            $scope.addCard(1);
+            $scope.addCard(2);
+        };
+        // and fire it after definition
+        init();
+
+
 
 
       /*  // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.

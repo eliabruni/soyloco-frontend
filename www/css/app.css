@@ -3452,7 +3452,7 @@ a.subdued {
       background-image: linear-gradient(180deg, #dddddd, #dddddd 50%, transparent 50%); }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #007aff;
+    background-color: #292929;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: white; }
     .bar.bar-stable .title {
@@ -3624,7 +3624,7 @@ a.subdued {
 
 .bar-stable .button {
   border-color: #b2b2b2;
-  background-color: #007aff;
+  background-color: #292929;
   color: white; }
   .bar-stable .button:hover {
     color: white;

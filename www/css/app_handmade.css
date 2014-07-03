@@ -66,10 +66,10 @@
 }
 
 
+
 /*************************************
 *   MENU BAR
 */
-
 
 /*
 BUTTONS
@@ -96,26 +96,26 @@ BUTTONS
 
 .buttons.left-buttons .ion-navicon-round:before {
     font-size:30px !important;
-    color:#7fbcff;margin-left:-25px !important;
-    border-right: 2px solid #7fbcff;
+    color:#A9A9A9;margin-left:-25px !important;
+    border-right: 2px solid #A9A9A9;
     width: 45px;
 }
 
 
 .button-icon {
-    color: #7fbcff !important;
+    color: #B5B5B5 !important;
     height: 50px !important;
     /*
     This is an invisible to border to not change size when one icon is active
 */
-    border-top: 3px solid #007AFF !important;
-    border-bottom: 3px solid #007AFF !important;
+    border-top: 5px solid #292929 !important;
+    border-bottom: 5px solid #292929 !important;
 }
 
 
-.button-icon.button.active,button.activated {
+.button-icon.button.active {
     color: #fff !important;
-    border-bottom: 3px solid #fff !important;
+    border-bottom: 5px solid #406582 !important;
     opacity: 1;
 }
 
@@ -135,7 +135,6 @@ BUTTONS
     font-size: 31px !important;
 }
 
-
 /*
 SUBHEADER
 */
@@ -143,9 +142,9 @@ SUBHEADER
 .bar-subheader {
 
     height: 30px;
-    background-color: rgba(127,188,255,0.8);
+    background-color: rgba(255,255,255,0.7);
     border:none !important;
-    border-top: 1px solid #0061cc !important;
+    border-top: 1px solid #080808 !important;
     vertical-align: middle;
     text-align: left;
     padding-left: 10%;
@@ -154,9 +153,7 @@ SUBHEADER
 
 .subheader-viewname {
     font-size: 18px;
-    color:#454545;
-
-
+    color:#406582;
 }
 
 /* .ion-pinpoint:before {
@@ -164,10 +161,7 @@ SUBHEADER
     font-size: 25px !important;
     border-left: 2px solid red !important;
     border:none !important;
-}*/
-
-
-
+}*
 
 
 /*************************************
@@ -339,73 +333,11 @@ SWIPE IN PLAY VIEW
 *   CATEGORY VIEW
 */
 
-/*
-BUTTONS ABOVE
-*/
-
-
-
-/*
-.button-bar-view-title-container {
-    width: 80%;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    margin:auto;
-}
-
-.button-bar-container {
-    width: 100%;
-    margin:auto;
-}
-
-.above-bar-icon-people {
-    font-size: 39px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;
-    border-right: 1px solid #e59094;
-}
-
-.above-bar-icon-person {
-    font-size: 30px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;    border-right: 1px solid #e59094;
-
-}
-
-.above-bar-icon-stalker {
-    font-size: 30px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;}
-*/
-
-/*.above-bar-icon-settings {
-    font-size: 30px;
-    color: #ccc;
-    padding-left:20px;
-}*/
-
-
 
 /*
 MAP
 */
 
-
-.who-you-like-icon {
-    font-size:25px;
-}
-
-.who-likes-you-icon {
-    font-size:23px;
-}
-
-.both-like-icon {
-    font-size:20px;
-}
 
 
 .scroll-content{
@@ -413,9 +345,6 @@ MAP
     background-color:white;
 }
 
-.item{
-    /*  visibility: hidden;*/
-}
 
 .map {
     position: relative;

@@ -151,6 +151,13 @@ angular.module('soyloco.services', [])
  * A simple example service that returns some categories.
  */
     .factory('Users', function() {
+
+        var users = [
+            {id:1, name: 'Emilia', image: 'img/emilia.jpg' },
+            {id:2, name: 'Emma', image: 'img/emma.jpg' },
+            {id:3, name: 'Jennifer', image: 'img/jennifer.jpg' }
+        ];
+/*
         var users = [
 
             {id:1, name:'emilia', photos:[
@@ -171,7 +178,7 @@ angular.module('soyloco.services', [])
                 {id: 3, userId: 3,image: 'img/jennifer.jpg'}
             ]}
 
-        ];
+        ];*/
 
         return {
             all: function () {
