@@ -180,7 +180,7 @@
                 // Fly right
                 var rotateTo = (this.rotationAngle + (this.rotationDirection * 0.6)) || (Math.random() * -0.4);
                 var duration = this.rotationAngle ? 0.2 : 0.5;
-                this.el.style[TRANSITION] = '-webkit-transform ' + duration*2 + 's ease-in-out';
+                this.el.style[TRANSITION] = '-webkit-transform ' + duration + 's ease-in-out';
                 this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + (window.innerWidth * 1.5) + 'px,' + this.y + 'px, 0) rotate(' + rotateTo + 'rad)';
                 this.onSwipe && this.onSwipe();
 
@@ -193,7 +193,7 @@
                 // Fly left
                 var rotateTo = (this.rotationAngle + (this.rotationDirection * 0.6)) || (Math.random() * 0.4);
                 var duration = this.rotationAngle ? 0.2 : 0.5;
-                this.el.style[TRANSITION] = '-webkit-transform ' + duration*2 + 's ease-in-out';
+                this.el.style[TRANSITION] = '-webkit-transform ' + duration + 's ease-in-out';
                 this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + (window.innerWidth * -1.5) + 'px,' + this.y + 'px, 0) rotate(' + rotateTo + 'rad)';
                 this.onSwipe && this.onSwipe();
 

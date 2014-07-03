@@ -6,12 +6,29 @@ angular.module('soyloco.directives', [])
             restrict: 'A',
             link: function($scope, $element, $attr) {
 
-                $document.on('touchmove', function(e) {
+                $document.bind('touchmove', function(e) {
                     e.preventDefault();
                 });
+                /*$document.on('touchmove', function(e) {
+                    e.preventDefault();
+                });*/
             }
         }
     })
+
+
+    .directive('scroll', function($document) {
+
+        return {
+            restrict: 'A',
+            link: function($scope, $element, $attr) {
+
+                $document.unbind('touchmove');
+
+            }
+        }
+    })
+
 
     .directive('headerShrink', function($document) {
         var shrink = function(header, content, amt, max) {
