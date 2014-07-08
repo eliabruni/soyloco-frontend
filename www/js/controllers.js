@@ -183,8 +183,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 0) {
-                        $scope.map.center = GMap.getCenter();
-                        $scope.map.zoom = GMap.getDefaultZoom();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 1) {
@@ -209,8 +208,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 1) {
-                        $scope.map.center = GMap.getCenter();
-                        $scope.map.zoom = GMap.getDefaultZoom();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -232,8 +230,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 2) {
-                        $scope.map.center = GMap.getCenter();
-                        $scope.map.zoom = GMap.getDefaultZoom();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -258,8 +255,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 3) {
-                        $scope.map.center = GMap.getCenter();
-                        $scope.map.zoom = GMap.getDefaultZoom();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -314,8 +310,13 @@ angular.module('soyloco.controllers', [])
                     }
                 }
 
-                // FUNCTIONS FOR MARKERS CLICKING
 
+                $scope.recenterDefault = function() {
+                    $scope.map.center = GMap.getCenter();
+                    $scope.map.zoom = GMap.getDefaultZoom();
+                }
+
+                // FUNCTIONS FOR MARKERS CLICKING
                 var onMarkerClicked = function (marker) {
 
                     $scope.puOnTop(marker.place);
