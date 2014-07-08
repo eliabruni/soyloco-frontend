@@ -1,6 +1,6 @@
 angular.module('soyloco.controllers', [])
 
-    .controller('TabsCtrl', function ($scope, $state, OpenFB) {
+    .controller('TabsCtrl', function ($scope, $state, $ionicModal, OpenFB) {
 
         $scope.logout = function () {
             OpenFB.logout();
@@ -16,6 +16,24 @@ angular.module('soyloco.controllers', [])
                     //alert('Revoke permissions failed');
                 });
         };
+
+
+        // This part for the invite/share modal on sidemenu
+        $ionicModal.fromTemplateUrl('templates/tab-invite.html', function(modal) {
+            $scope.modal = modal;
+        }, {
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        });
+
+        $scope.openModal = function() {
+            $scope.modal.show()
+        }
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
 
     })
 
@@ -432,89 +450,89 @@ angular.module('soyloco.controllers', [])
 
 
 
-      /*  // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
-        $timeout(function () {
-            $ionicSlideBoxDelegate.enableSlide(false);
-        }, 0);
+        /*  // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
+         $timeout(function () {
+         $ionicSlideBoxDelegate.enableSlide(false);
+         }, 0);
 
-        //TODO: This is just a plcaeholder for a call to the server
-        var timer = $timeout(function () {
-            $ionicSlideBoxDelegate.next();
-            //$ionicSlideBoxDelegate.enableSlide(false);
+         //TODO: This is just a plcaeholder for a call to the server
+         var timer = $timeout(function () {
+         $ionicSlideBoxDelegate.next();
+         //$ionicSlideBoxDelegate.enableSlide(false);
 
-        }, 2000);
+         }, 2000);
 
-        // When the DOM element is removed from the page,
-        // AngularJS will trigger the $destroy event on
-        // the scope. This gives us a chance to cancel any
-        // pending timer that we may have.
-        $scope.$on(
-            "$destroy",
-            function(event) {
-                $timeout.cancel(timer);
-            }
-        );
-
-
-        var users = Users.all();
+         // When the DOM element is removed from the page,
+         // AngularJS will trigger the $destroy event on
+         // the scope. This gives us a chance to cancel any
+         // pending timer that we may have.
+         $scope.$on(
+         "$destroy",
+         function(event) {
+         $timeout.cancel(timer);
+         }
+         );
 
 
-        $scope.nextUser = function(nextUserId) {
-
-            $scope.userId = nextUserId;
-
-            var photos = users[nextUserId-1].photos;
-            $scope.cards = Array.prototype.slice.call(photos, 0, 0);
-            $scope.userName = users[nextUserId-1].name;
-
-            var photoIdx, photo;
-            for (photoIdx in photos) {
-                photo = photos[photoIdx];
-                $scope.addUserCard(photo);
-            }
-
-            // Add first card again
-            $scope.addUserCard(photos[0]);
-        };
+         var users = Users.all();
 
 
-        $scope.addUserCard = function(userCard) {
-            $scope.cards.push(angular.extend({}, userCard));
-        };
+         $scope.nextUser = function(nextUserId) {
 
-        $scope.cardSwiped = function(index, userId) {
+         $scope.userId = nextUserId;
 
-            $scope.userId = userId;
+         var photos = users[nextUserId-1].photos;
+         $scope.cards = Array.prototype.slice.call(photos, 0, 0);
+         $scope.userName = users[nextUserId-1].name;
 
-            // Index goes in decreasing order,
-            // We need to update at one before last, i.e. index == 1
-            if (index == 1) {
-                $scope.nextUser(userId);
-            }
+         var photoIdx, photo;
+         for (photoIdx in photos) {
+         photo = photos[photoIdx];
+         $scope.addUserCard(photo);
+         }
 
-        };
+         // Add first card again
+         $scope.addUserCard(photos[0]);
+         };
 
-        $scope.cardDestroyed = function(index) {
-            $scope.cards.splice(index, 1);
-        };
 
-        $scope.goAway = function(userId) {
+         $scope.addUserCard = function(userCard) {
+         $scope.cards.push(angular.extend({}, userCard));
+         };
 
-            // This is just for infinite user loop
-            if(userId == 3) {
-                $scope.nextUser(1);
-            } else {
-                $scope.nextUser(userId + 1);
-            }
-        };
+         $scope.cardSwiped = function(index, userId) {
 
-        // Start with first card
-        // TODO: put this into directive?
-        var init = function () {
-            $scope.nextUser(1);
-        };
-        // and fire it after definition
-        init();*/
+         $scope.userId = userId;
+
+         // Index goes in decreasing order,
+         // We need to update at one before last, i.e. index == 1
+         if (index == 1) {
+         $scope.nextUser(userId);
+         }
+
+         };
+
+         $scope.cardDestroyed = function(index) {
+         $scope.cards.splice(index, 1);
+         };
+
+         $scope.goAway = function(userId) {
+
+         // This is just for infinite user loop
+         if(userId == 3) {
+         $scope.nextUser(1);
+         } else {
+         $scope.nextUser(userId + 1);
+         }
+         };
+
+         // Start with first card
+         // TODO: put this into directive?
+         var init = function () {
+         $scope.nextUser(1);
+         };
+         // and fire it after definition
+         init();*/
 
 
     })
@@ -523,7 +541,56 @@ angular.module('soyloco.controllers', [])
  *          Invite controller
  *
  * */
-    .controller('InviteCtrl', function() {
+    .controller('InviteCtrl', function($scope, $cordovaSocialSharing) {
+
+
+        var message = "Chekcout Soyloco... it helps you finding facebook events with people who are " +
+            "interested in you! www.soyloco.com/app";
+
+        var image = "";
+
+        $scope.shareViaTwitter = function() {
+
+            alert('inside share via twitter')
+
+            $cordovaSocialSharing.shareViaTwitter(message, image, link).then(function (result) {
+                // Success!
+                alert('sharing via twitter')
+            }, function (err) {
+                alert('error sharing via twitter')
+
+                // An error occurred. Show a message to the user
+            });
+        }
+
+
+        $cordovaSocialSharing.shareViaWhatsApp(message, image, link).then(function(result) {
+            // Success!
+        }, function(err) {
+            // An error occured. Show a message to the user
+        });
+
+
+        $cordovaSocialSharing.shareViaFacebook(message, image, link).then(function(result) {
+            // Success!
+        }, function(err) {
+            // An error occured. Show a message to the user
+        });
+
+        // access multiple numbers in a string like: '0612345678,0687654321'
+        $cordovaSocialSharing.shareViaSMS(message, number).then(function(result) {
+            // Success!
+        }, function(err) {
+            // An error occured. Show a message to the user
+        });
+
+        // TO, CC, BCC must be an array, Files can be either null, string or array
+        $cordovaSocialSharing.shareViaEmail(message, subject, toArr, bccArr, file).then(
+            function(result) {
+                // Success!
+            }, function(err) {
+                // An error occured. Show a message to the user
+            });
 
     })
 
