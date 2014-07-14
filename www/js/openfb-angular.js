@@ -235,7 +235,7 @@ angular.module('openfb', [])
             post: post,
             get: get,
             oauthCallback: oauthCallback,
-            getWithHeaders: getWithHeaders
+            getWithHeaders: getWithHeaders,
         }
 
     });

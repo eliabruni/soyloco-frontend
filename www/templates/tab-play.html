@@ -11,53 +11,50 @@
 
     <ion-pane no-scroll>
 
-    <div class="row">
-
-        <div class="col">
 
 
 
-                <swipe-cards>
 
-                    <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
-                        <div class="title">
-                            {{card.name}}
-                        </div>
-<!--
-
-                        <div class="image">
--->
-                        <div class="image responsive" grid-image="{{grid.src}}" ></div>
-
-                        <img ng-src="{{card.image}}">
-<!--
-                        </div>
--->
-                        <div class="button-bar">
-                            <button class="button button-clear button-positive" ng-click="reject()">No</button>
-                            <button class="button button-clear button-positive" ng-click="accept()">Yes</button>
-                        </div>
-                    </swipe-card>
-                </swipe-cards>
-
-                <!--<swipe-cards on-swipe="onSwipe($event)">
-                    <swipe-cards>
-                        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index, cards[$index].userId)">
-
-                            <div class="image">
-                                <img ng-src="{{card.image}}">
-                                <a class="subdued">{{userName}}</a>
+        <swipe-cards>
 
 
-                            </div>
+            <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+                <div class="title">
+                    {{card.name}}
+                </div>
+                <!--
 
-                        </swipe-card>
-                    </swipe-cards>
-                </swipe-cards>
-
+                                        <div class="image">
                 -->
-        </div>
-    </div>
+                <div class="image">
+                    <img ng-src="{{card.image}}">
+                </div>
+                <!--
+                                        </div>
+                -->
+                <div class="button-bar">
+                    <button class="button button-clear button-positive" ng-click="reject()">No</button>
+                    <button class="button button-clear button-positive" ng-click="accept()">Yes</button>
+                </div>
+            </swipe-card>
+        </swipe-cards>
+
+        <!--<swipe-cards on-swipe="onSwipe($event)">
+            <swipe-cards>
+                <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index, cards[$index].userId)">
+
+                    <div class="image">
+                        <img ng-src="{{card.image}}">
+                        <a class="subdued">{{userName}}</a>
+
+
+                    </div>
+
+                </swipe-card>
+            </swipe-cards>
+        </swipe-cards>
+
+        -->
 
     </ion-pane>
 

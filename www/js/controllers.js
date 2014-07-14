@@ -386,7 +386,147 @@ angular.module('soyloco.controllers', [])
     })
 
 
-    .controller('ProfileCtrl', function() {
+    .controller('ProfileCtrl', function($q, OpenFB, GMap) {
+
+        var events, event, users, user;
+        var center = GMap.getCenter();
+
+        var testCounter = 0;
+        var eventIdx = 0;
+        var numEvents = 0;
+
+
+
+
+
+        var getAttendees = function(event) {
+
+            var deferred = $q.defer();
+
+            alert('4a')
+
+
+            var eventId, eventName, eventStartTime;
+
+            eventId = event.id;
+
+            alert(eventId)
+
+            alert('4b')
+
+
+
+            // Call the $http method
+            OpenFB.get('/'+eventId+'/attending')
+
+                .success(function (data, status, headers, config) {
+
+                    alert('5')
+
+                    users = data['data'];
+                    deferred.resolve(users);
+                })
+
+                .error(function (data, status, headers, config){
+                    alert('error in getting attendees')
+                    deferred.reject();
+                });
+
+        }
+
+        var getEvents = function(events) {
+
+            for (var tmpIdx in events) {
+                alert(tmpIdx)
+            }
+
+            event = events[eventIdx];
+            eventIdx++;
+
+
+
+            alert('3a')
+
+            alert(event.id)
+
+            alert('3b')
+
+
+            getAttendees(event).then(function (users) {
+
+                alert('Count: '+testCounter+', place: '+event.venue+
+                    ', event: '+event.name+', N users: '+users.length);
+                testCounter++;
+
+                if(eventIdx <= numEvents) {
+                    getEvents(events);
+                }
+
+            }, function (err) {
+                // An error occurred. Show a message to the user
+                if(eventIdx <= numEvents) {
+                    getEvents(events);
+                }
+
+            });
+
+        }
+
+        // Call the $http method
+        OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=5000')
+
+
+            .success(function (data, status, headers, config) {
+                var place, places, placeIdx, placeName, placeId;
+                places = data['data'];
+
+                /*
+                 for (placeIdx in places) {
+                 */
+
+
+                place = places[2];
+
+                // Call the $http method
+                OpenFB.get('/'+place.id+'/events')
+
+
+                    .success(function (data, status, headers, config) {
+
+                        alert('1')
+
+                        var eventIdx, eventId, eventName, eventStartTime;
+                        events = data['data'];
+
+                        if (events.length > 0) {
+                            alert(events.length)
+
+                            for (var tmpIdx in events) {
+                                alert(tmpIdx)
+                                alert(events[tmpIdx])
+                            }
+                            numEvents = events.length;
+                            alert('2')
+
+                            getEvents(events);
+                        }
+
+
+
+
+                    })
+
+                    .error(function (data, status, headers, config){
+                        alert('error in get place with id')
+                    });
+
+                /*}*/
+
+            })
+
+            .error(function (data, status, headers, config){
+                alert('error in searching')
+            });
     })
 
 /*************************************
@@ -544,14 +684,20 @@ angular.module('soyloco.controllers', [])
     .controller('InviteCtrl', function($scope, $cordovaSocialSharing) {
 
 
+        alert('invite conrtolr')
+
         var message = "Chekcout Soyloco... it helps you finding facebook events with people who are " +
             "interested in you! www.soyloco.com/app";
 
         var image = "";
 
+        $scope.testFunc = function() {
+            alert('button pressed')
+        }
+
         $scope.shareViaTwitter = function() {
 
-            alert('inside share via twitter')
+            $scope.modal.hide();
 
             $cordovaSocialSharing.shareViaTwitter(message, image, link).then(function (result) {
                 // Success!
@@ -564,33 +710,58 @@ angular.module('soyloco.controllers', [])
         }
 
 
-        $cordovaSocialSharing.shareViaWhatsApp(message, image, link).then(function(result) {
-            // Success!
-        }, function(err) {
-            // An error occured. Show a message to the user
-        });
+        /*       $cordovaSocialSharing.shareViaWhatsApp(message, image, link).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
 
 
-        $cordovaSocialSharing.shareViaFacebook(message, image, link).then(function(result) {
-            // Success!
-        }, function(err) {
-            // An error occured. Show a message to the user
-        });
+         $cordovaSocialSharing.shareViaFacebook(message, image, link).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
 
-        // access multiple numbers in a string like: '0612345678,0687654321'
-        $cordovaSocialSharing.shareViaSMS(message, number).then(function(result) {
-            // Success!
-        }, function(err) {
-            // An error occured. Show a message to the user
-        });
+         // access multiple numbers in a string like: '0612345678,0687654321'
+         $cordovaSocialSharing.shareViaSMS(message, number).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
 
-        // TO, CC, BCC must be an array, Files can be either null, string or array
-        $cordovaSocialSharing.shareViaEmail(message, subject, toArr, bccArr, file).then(
-            function(result) {
-                // Success!
-            }, function(err) {
-                // An error occured. Show a message to the user
-            });
+         // TO, CC, BCC must be an array, Files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         can be either null, string or array
+         $cordovaSocialSharing.shareViaEmail(message, subject, toArr, bccArr, file).then(
+         function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });*/
 
     })
 
