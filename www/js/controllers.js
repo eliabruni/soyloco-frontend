@@ -386,142 +386,81 @@ angular.module('soyloco.controllers', [])
     })
 
 
-    .controller('ProfileCtrl', function($q, OpenFB, GMap) {
+    .controller('ProfileCtrl', function($scope, $q, OpenFB, GMap) {
 
-        var events, event, users, user;
+        var places, place, events, event, users, user;
         var center = GMap.getCenter();
 
+        // New York
+        //var center = {latitude: 40.7127, longitude: 74.0059}
         var testCounter = 0;
         var eventIdx = 0;
         var numEvents = 0;
-
-
-
+        var placeIdx = 0;
 
 
         var getAttendees = function(event) {
 
-            var deferred = $q.defer();
-
-            alert('4a')
-
-
-            var eventId, eventName, eventStartTime;
-
-            eventId = event.id;
-
-            alert(eventId)
-
-            alert('4b')
-
-
-
             // Call the $http method
-            OpenFB.get('/'+eventId+'/attending')
+            OpenFB.get('/'+event.id+'/attending')
 
                 .success(function (data, status, headers, config) {
-
-                    alert('5')
-
                     users = data['data'];
-                    deferred.resolve(users);
+                    if(eventIdx < numEvents) {
+                        nextEvent();
+                    } else {
+                        nextPlace();
+                    }
                 })
 
                 .error(function (data, status, headers, config){
-                    alert('error in getting attendees')
-                    deferred.reject();
+                    alert('error in getting attendees');
+                });
+        };
+
+        var nextEvent = function() {
+            event = events[eventIdx];
+            $scope.eventIdx = eventIdx++;
+            getAttendees(event);
+        };
+
+        var nextPlace = function() {
+
+            place = places[placeIdx];
+            $scope.placeIdx = placeIdx++;
+            eventIdx = 0;
+
+            // Call the $http method
+            OpenFB.get('/'+place.id+'/events')
+
+                .success(function (data, status, headers, config) {
+
+                    events = data['data'];
+                    numEvents = events.length;
+                    if (numEvents > 0) {
+                        nextEvent();
+                    } else {
+                        if (placeIdx < places.length) {
+                            nextPlace();
+                        } else {
+                            alert('all done!')
+                        }
+                    }
+
+                })
+
+                .error(function (data, status, headers, config){
+                    alert('error in get place with id')
                 });
 
-        }
-
-        var getEvents = function(events) {
-
-            for (var tmpIdx in events) {
-                alert(tmpIdx)
-            }
-
-            event = events[eventIdx];
-            eventIdx++;
-
-
-
-            alert('3a')
-
-            alert(event.id)
-
-            alert('3b')
-
-
-            getAttendees(event).then(function (users) {
-
-                alert('Count: '+testCounter+', place: '+event.venue+
-                    ', event: '+event.name+', N users: '+users.length);
-                testCounter++;
-
-                if(eventIdx <= numEvents) {
-                    getEvents(events);
-                }
-
-            }, function (err) {
-                // An error occurred. Show a message to the user
-                if(eventIdx <= numEvents) {
-                    getEvents(events);
-                }
-
-            });
-
-        }
+        };
 
         // Call the $http method
-        OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=5000')
-
+        OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=1000')
 
             .success(function (data, status, headers, config) {
-                var place, places, placeIdx, placeName, placeId;
                 places = data['data'];
-
-                /*
-                 for (placeIdx in places) {
-                 */
-
-
-                place = places[2];
-
-                // Call the $http method
-                OpenFB.get('/'+place.id+'/events')
-
-
-                    .success(function (data, status, headers, config) {
-
-                        alert('1')
-
-                        var eventIdx, eventId, eventName, eventStartTime;
-                        events = data['data'];
-
-                        if (events.length > 0) {
-                            alert(events.length)
-
-                            for (var tmpIdx in events) {
-                                alert(tmpIdx)
-                                alert(events[tmpIdx])
-                            }
-                            numEvents = events.length;
-                            alert('2')
-
-                            getEvents(events);
-                        }
-
-
-
-
-                    })
-
-                    .error(function (data, status, headers, config){
-                        alert('error in get place with id')
-                    });
-
-                /*}*/
-
+                nextPlace();
             })
 
             .error(function (data, status, headers, config){
