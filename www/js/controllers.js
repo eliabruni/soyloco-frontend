@@ -388,84 +388,327 @@ angular.module('soyloco.controllers', [])
 
     .controller('ProfileCtrl', function($scope, $q, OpenFB, GMap) {
 
-        var places, place, events, event, users, user;
-        var center = GMap.getCenter();
-
-        // New York
-        //var center = {latitude: 40.7127, longitude: 74.0059}
-        var testCounter = 0;
-        var eventIdx = 0;
-        var numEvents = 0;
-        var placeIdx = 0;
 
 
-        var getAttendees = function(event) {
 
-            // Call the $http method
-            OpenFB.get('/'+event.id+'/attending')
+        var method1 = function() {
 
-                .success(function (data, status, headers, config) {
-                    users = data['data'];
-                    if(eventIdx < numEvents) {
-                        nextEvent();
-                    } else {
-                        nextPlace();
-                    }
-                })
+            var places, place, events, event, users, user;
 
-                .error(function (data, status, headers, config){
-                    alert('error in getting attendees');
-                });
-        };
+            var testCounter = 0;
+            var eventIdx = 0;
+            var numEvents = 0;
+            var placeIdx = 0;
 
-        var nextEvent = function() {
-            event = events[eventIdx];
-            $scope.eventIdx = eventIdx++;
-            getAttendees(event);
-        };
 
-        var nextPlace = function() {
+            var getAttendees = function(event) {
 
-            place = places[placeIdx];
-            $scope.placeIdx = placeIdx++;
-            eventIdx = 0;
+                // Call the $http method
+                OpenFB.get('/'+event.id+'/attending')
 
-            // Call the $http method
-            OpenFB.get('/'+place.id+'/events')
-
-                .success(function (data, status, headers, config) {
-
-                    events = data['data'];
-                    numEvents = events.length;
-                    if (numEvents > 0) {
-                        nextEvent();
-                    } else {
-                        if (placeIdx < places.length) {
-                            nextPlace();
+                    .success(function (data, status, headers, config) {
+                        users = data['data'];
+                        if(eventIdx < numEvents) {
+                            nextEvent();
                         } else {
-                            alert('all done!')
+                            nextPlace();
                         }
-                    }
+                    })
 
+                    .error(function (data, status, headers, config){
+                        alert('error in getting attendees');
+                    });
+            };
+
+            var nextEvent = function() {
+                event = events[eventIdx];
+                $scope.eventIdx = eventIdx++;
+                getAttendees(event);
+            };
+
+            var nextPlace = function() {
+
+                place = places[placeIdx];
+                $scope.placeIdx = placeIdx++;
+                eventIdx = 0;
+
+                // Call the $http method
+                OpenFB.get('/'+place.id+'/events')
+
+                    .success(function (data, status, headers, config) {
+
+                        events = data['data'];
+                        numEvents = events.length;
+                        if (numEvents > 0) {
+                            nextEvent();
+                        } else {
+                            if (placeIdx < places.length) {
+                                nextPlace();
+                            } else {
+                                alert('all done!')
+                            }
+                        }
+
+                    })
+
+                    .error(function (data, status, headers, config){
+                        alert('error in get place with id')
+                    });
+
+            };
+
+            // Call the $http method
+            OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=5000')
+
+                .success(function (data, status, headers, config) {
+                    places = data['data'];
+                    nextPlace();
                 })
 
                 .error(function (data, status, headers, config){
-                    alert('error in get place with id')
+                    alert('error in searching')
+                });
+        }
+
+
+        //method1();
+
+
+        var method2 = function() {
+
+            var places;
+
+            var getAttendees = function(events){
+
+                var promises = events.map(function(event) {
+
+                    var deferred  = $q.defer();
+
+                    OpenFB.get('/'+event.id+'/attending')
+                        .success(function (data, status, headers, config) {
+                            deferred.resolve(data['data']);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
                 });
 
-        };
+                return $q.all(promises);
+            };
 
-        // Call the $http method
-        OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=1000')
 
-            .success(function (data, status, headers, config) {
-                places = data['data'];
-                nextPlace();
-            })
+            var getEvents = function(places){
 
-            .error(function (data, status, headers, config){
-                alert('error in searching')
-            });
+                //test
+                var eventCounter = 0;
+                var eventWitAttendeesCounter = 0;
+                //test
+
+                var promises = places.map(function(place) {
+
+                    var deferred  = $q.defer();
+
+
+                    OpenFB.get('/'+place.id+'/events')
+                        .success(function (data, status, headers, config) {
+
+                            var events = data['data'];
+
+                            //test
+                            if(events.length > 0) {
+                                eventCounter++;
+                                $scope.eventCounter = eventCounter;
+                            }
+                            //test
+
+                            var eventPlusAttendees = [];
+                            getAttendees(events).then(function(attendees) {
+
+                                //test
+                                if(events.length > 0 && attendees.length > 0) {
+                                    var round = 0;
+
+                                    for (idx in attendees) {
+                                        alert(attendees[idx])
+                                    }
+
+                                    //test
+
+                                    for (var eventIdx in events) {
+                                        var event =  events[eventIdx];
+                                        var eventAttendees = attendees[eventIdx];
+
+                                        if (eventAttendees.length > 0 && round < 1) {
+                                            eventWitAttendeesCounter++;
+                                            $scope.eventWitAttendeesCounter = eventWitAttendeesCounter;
+                                            //eventPlusAttendees.push({ 'event':event,'attendees':eventAttendees});
+                                            round++;
+
+                                        }
+
+                                        eventPlusAttendees.push({ 'event':event,'attendees':eventAttendees});
+                                    }
+                                } else {
+                                    eventPlusAttendees.push({});
+
+                                }
+                            })
+
+                            deferred.resolve(eventPlusAttendees);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+            // Call the $http method
+            OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=1000')
+
+                .success(function (data, status, headers, config) {
+                    places = data['data'];
+                    var placeWithEventsCount = 0;
+                    getEvents(places).then(function(allEvents) {
+                        for (var placeIdx in places) {
+                            var round = 0;
+                            $scope.placeIdx = placeIdx;
+
+                            var placeEvents = allEvents[placeIdx];
+
+                            for (var tmpIdx in placeEvents) {
+
+                                var placeEvent = placeEvents[tmpIdx];
+
+
+                                for (var tmpIdx2 in placeEvent) {
+
+                                }
+
+
+                            }
+
+
+
+
+                        }
+                        $scope.placeWithEventsCount = placeWithEventsCount;
+                    })
+                })
+
+                .error(function (data, status, headers, config){
+                    alert('error in searching')
+                });
+        }
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////////////
+
+
+
+
+        //var center = GMap.getCenter();
+        var center = {latitude:37.780, longitude:-122.414};
+
+        var method3 = function() {
+
+            var places;
+
+            var getAttendees = function(events){
+
+                var promises = events.map(function(event) {
+
+                    var deferred  = $q.defer();
+
+                    OpenFB.get('/'+event.id+'/attending')
+                        .success(function (data, status, headers, config) {
+                            deferred.resolve(data['data']);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+
+            var getEvents = function(places){
+
+                //test
+                var eventCounter = 0;
+                var eventWitAttendeesCounter = 0;
+                //test
+
+                var promises = places.map(function(place) {
+
+                    var deferred  = $q.defer();
+
+
+                    OpenFB.get('/'+place.id+'/events')
+                        .success(function (data, status, headers, config) {
+
+                            var events = data['data'];
+                            deferred.resolve(events);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+            // Call the $http method
+            OpenFB.get('/search?q=party&type=place&center='+center.latitude+','+center.longitude+'&distance=15000'+'&limit=1000')
+
+
+                .success(function (data, status, headers, config) {
+                    places = data['data'];
+                    var placeWithEventsCount = 0;
+
+                    getEvents(places).then(function(events) {
+                        for (var placeIdx in places) {
+
+                            $scope.placeIdx = placeIdx;
+
+                            var placeEvents = events[placeIdx];
+
+                            if (placeEvents.length > 0) {
+                                placeWithEventsCount++;
+                                $scope.placeWithEventsCount = placeWithEventsCount;
+
+                                /*var event = placeEvents[0];
+                                alert(event.name)
+                                alert(event.id)*/
+
+                            }
+                        }
+                    })
+                })
+
+                .error(function (data, status, headers, config){
+                    alert('error in searching')
+                });
+        }
+
+
+
+        method3();
     })
 
 /*************************************
