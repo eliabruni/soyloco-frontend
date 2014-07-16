@@ -391,89 +391,6 @@ angular.module('soyloco.controllers', [])
 
 
 
-        var method1 = function() {
-
-            var places, place, events, event, users, user;
-
-            var testCounter = 0;
-            var eventIdx = 0;
-            var numEvents = 0;
-            var placeIdx = 0;
-
-
-            var getAttendees = function(event) {
-
-                // Call the $http method
-                OpenFB.get('/'+event.id+'/attending')
-
-                    .success(function (data, status, headers, config) {
-                        users = data['data'];
-                        if(eventIdx < numEvents) {
-                            nextEvent();
-                        } else {
-                            nextPlace();
-                        }
-                    })
-
-                    .error(function (data, status, headers, config){
-                        alert('error in getting attendees');
-                    });
-            };
-
-            var nextEvent = function() {
-                event = events[eventIdx];
-                $scope.eventIdx = eventIdx++;
-                getAttendees(event);
-            };
-
-            var nextPlace = function() {
-
-                place = places[placeIdx];
-                $scope.placeIdx = placeIdx++;
-                eventIdx = 0;
-
-                // Call the $http method
-                OpenFB.get('/'+place.id+'/events')
-
-                    .success(function (data, status, headers, config) {
-
-                        events = data['data'];
-                        numEvents = events.length;
-                        if (numEvents > 0) {
-                            nextEvent();
-                        } else {
-                            if (placeIdx < places.length) {
-                                nextPlace();
-                            } else {
-                                alert('all done!')
-                            }
-                        }
-
-                    })
-
-                    .error(function (data, status, headers, config){
-                        alert('error in get place with id')
-                    });
-
-            };
-
-            // Call the $http method
-            OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=5000')
-
-                .success(function (data, status, headers, config) {
-                    places = data['data'];
-                    nextPlace();
-                })
-
-                .error(function (data, status, headers, config){
-                    alert('error in searching')
-                });
-        }
-
-
-        //method1();
-
-
         var method2 = function() {
 
             var places;
@@ -609,16 +526,15 @@ angular.module('soyloco.controllers', [])
 
 
 
-
-
-
+        /////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////
 
 
 
 
         //var center = GMap.getCenter();
-        var center = {latitude:37.780, longitude:-122.414};
+        var center = {latitude:40.67, longitude:-73.94};
 
         var method3 = function() {
 
@@ -657,7 +573,7 @@ angular.module('soyloco.controllers', [])
                     var deferred  = $q.defer();
 
 
-                    OpenFB.get('/'+place.id+'/events')
+                    OpenFB.get('/'+place.id+'/events?since=now&until=2014-07-17 ')
                         .success(function (data, status, headers, config) {
 
                             var events = data['data'];
@@ -673,37 +589,95 @@ angular.module('soyloco.controllers', [])
                 return $q.all(promises);
             };
 
-            // Call the $http method
-            OpenFB.get('/search?q=party&type=place&center='+center.latitude+','+center.longitude+'&distance=15000'+'&limit=1000')
 
+            var getQueryPlaces = function(queries){
 
-                .success(function (data, status, headers, config) {
-                    places = data['data'];
-                    var placeWithEventsCount = 0;
+                var promises = queries.map(function(query) {
 
-                    getEvents(places).then(function(events) {
-                        for (var placeIdx in places) {
+                    var deferred  = $q.defer();
 
-                            $scope.placeIdx = placeIdx;
+                    OpenFB.get('/search?q='+query+'&type=place&center='+center.latitude+','+center.longitude+'&distance=15000'+'&limit=5000')
+                        .success(function (data, status, headers, config) {
 
-                            var placeEvents = events[placeIdx];
+                            places = data['data'];
+                            deferred.resolve(places);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
 
-                            if (placeEvents.length > 0) {
-                                placeWithEventsCount++;
-                                $scope.placeWithEventsCount = placeWithEventsCount;
-
-                                /*var event = placeEvents[0];
-                                alert(event.name)
-                                alert(event.id)*/
-
-                            }
-                        }
-                    })
-                })
-
-                .error(function (data, status, headers, config){
-                    alert('error in searching')
+                    return deferred.promise;
                 });
+
+                return $q.all(promises);
+            };
+
+            var getUniquePlaces = function(places){
+                var u = {}, a = [];
+                for(var i = 0, l = places.length; i < l; ++i){
+                    if(u.hasOwnProperty(places[i].id)) {
+                        continue;
+                    }
+                    a.push(places[i]);
+                    u[places[i].id] = 1;
+                }
+                return a;
+            }
+
+            var placeWithEventsCount = 0;
+            var queries = ['bar','pub','club','theatre', 'restaurant',
+                'show','performance','spectacle','exhibition','party','nightclub','coffee',
+                'local','tavern','beer house', 'wine bar', 'nightlife', 'cinema', 'theatre',
+                'entertainment', 'play', 'concert', 'music'];
+
+            getQueryPlaces(queries).then(function(queryPlaces) {
+
+                var places = [];
+                for (var queryIdx in queries) {
+                    var tmpPlaces = queryPlaces[queryIdx];
+
+                    if (queryIdx == 0) {
+                        places = tmpPlaces;
+                    } else {
+                        places = places.concat(tmpPlaces)
+                        // Remove duplicate places
+                        places = getUniquePlaces(places);
+                    }
+                }
+
+                alert(places.length)
+
+                getEvents(places).then(function(events) {
+                    for (var placeIdx in places) {
+
+                        $scope.placeIdx = placeIdx;
+
+                        var placeEvents = events[placeIdx];
+
+                        if (placeEvents.length > 0) {
+
+                           /* for (var tmpIdx1 in placeEvents) {
+                                var placeEvent = placeEvents[tmpIdx1];
+                                for (var tmpIdx2 in placeEvent) {
+                                    alert(tmpIdx2)
+                                    alert(placeEvent[tmpIdx2])
+                                }
+                            }*/
+
+                            placeWithEventsCount++;
+                            $scope.placeWithEventsCount = placeWithEventsCount;
+
+                           /* var event = placeEvents[0];
+                            alert(event.name)
+                            alert(event.id)*/
+
+                        }
+                    }
+                })
+            })
+
+
+
         }
 
 
