@@ -24,16 +24,17 @@ life saver of a command line process that saved my day. So whatever goes forward
 4. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
 5. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
 6. cd platforms/android/
-7. ant clean
-8. cd com.phonegap.plugins.facebookconnect/FacebookLib
-9. ant clean
-10. open -e AndroidManifest.xml  (It worked without this for me)
+6. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
+8. ant clean
+9. cd com.phonegap.plugins.facebookconnect/FacebookLib
+10. ant clean
+12. open -e AndroidManifest.xml  (It worked without this for me)
 // change your minSdkVersion and your targetSdkVersion to your environment settings for me it was:
 // <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
-11. ant release
-12. cd ../../../.. (this should bring you back to the project root)
+12. ant release
+13. cd ../../../.. (this should bring you back to the project root)
 
-13. ionic build android
+14. ionic build android
 
 ## Facebook login
 
