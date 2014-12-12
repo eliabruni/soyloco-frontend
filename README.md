@@ -29,8 +29,8 @@ life saver of a command line process that saved my day. So whatever goes forward
 9. cd com.phonegap.plugins.facebookconnect/FacebookLib
 10. ant clean
 12. open -e AndroidManifest.xml  (It worked without this for me)
-// change your minSdkVersion and your targetSdkVersion to your environment settings for me it was:
-// <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
+ change your minSdkVersion and your targetSdkVersion to your environment settings for me it was:
+ <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
 13. mkdir ant-build
 13. ant release
 14. cd ../../../.. (this should bring you back to the project root)
