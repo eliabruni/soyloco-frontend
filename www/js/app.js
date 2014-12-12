@@ -4,69 +4,67 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic.contrib.ui.tinderCards'])
+angular.module('soyloco', ['ionic', 'soyloco.controllers', 'soyloco.directives', 'ionic.contrib.ui.tinderCards'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('app', {
-      url: "/app",
-      abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'LoginCtrl'
-    })
-    .state('app.login', {
-        url: "/login",
-        views: {
-         'menuContent' :{
-          templateUrl: "templates/login.html",
-          controller: 'LoginCtrl'
-          }
+    .run(function($ionicPlatform) {
+      $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if(window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
-    })
-
-    .state('app.me', {
-      url: "/me",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/me.html",
-          controller: 'CardsCtrl'
+        if(window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.styleDefault();
         }
-      }
+      });
     })
 
+    .config(function($stateProvider, $urlRouterProvider) {
+      $stateProvider
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
-})
+          .state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'LoginCtrl'
+          })
+
+          .state('app.login', {
+            url: "/login",
+            views: {
+              'menuContent' :{
+                templateUrl: "templates/login.html",
+                controller: 'LoginCtrl'
+              }
+            }
+          })
+
+          .state('app.swipe', {
+            url: "/swipe",
+            views: {
+              'menuContent' :{
+                templateUrl: "templates/swipe.html",
+                controller: 'CardsCtrl'
+              }
+            }
+          })
+
+          .state('app.events', {
+            url: "/events",
+            views: {
+              'menuContent' :{
+                templateUrl: "templates/events.html",
+                controller: 'EventsCtrl'
+              }
+            }
+          })
 
 
-    .directive('noScroll', function($document) {
-
-      return {
-        restrict: 'A',
-        link: function($scope, $element, $attr) {
-
-          $document.on('touchmove', function(e) {
-            e.preventDefault();
-          });
-        }
-      }
+      // if none of the above states are matched, use this as the fallback
+      $urlRouterProvider.otherwise('/app/login');
     })
+
 
 
 

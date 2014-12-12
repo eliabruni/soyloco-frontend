@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('soyloco.controllers', [])
 
 .controller('LoginCtrl', function($scope, $ionicModal, $state) {
   // Form data for the login modal
@@ -15,13 +15,13 @@ angular.module('starter.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
       facebookConnectPlugin.getAccessToken(function(result){
-          $state.go('app.me')
+          $state.go('app.swipe')
       },function(){
           facebookConnectPlugin.login(["email"], function(response) {
 
               if (response.authResponse) {
                   facebookConnectPlugin.getAccessToken(function(result){
-                      $state.go('app.me')
+                      $state.go('app.swipe')
                   })
               } else {
                   facebookConnectPlugin.showDialog(["email"],function(response){
@@ -95,5 +95,40 @@ angular.module('starter.controllers', [])
             console.log('RIGHT SWIPE');
             $scope.addCard();
         };
+    })
+
+
+    .controller('EventsCtrl', function($scope, $ionicSideMenuDelegate) {
+        // don't be scared by the image value, its just datauri
+
+        $ionicSideMenuDelegate.canDragContent(true);
+
+
+        $scope.items = [
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
+            {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'}
+        ];
     });
+
 
