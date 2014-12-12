@@ -1,41 +1,42 @@
 angular.module('soyloco.controllers', [])
 
-.controller('LoginCtrl', function($scope, $ionicModal, $state) {
-  // Form data for the login modal
-  $scope.loginData = {};
+    .controller('LoginCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal, $state, $cordovaFacebook) {
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+        $ionicSideMenuDelegate.canDragContent(false);
 
+        // Form data for the login modal
+        $scope.loginData = {};
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-      facebookConnectPlugin.getAccessToken(function(result){
-          $state.go('app.swipe')
-      },function(){
-          facebookConnectPlugin.login(["email"], function(response) {
+        // Create the login modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/login.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        })
 
-              if (response.authResponse) {
-                  facebookConnectPlugin.getAccessToken(function(result){
-                      $state.go('app.swipe')
-                  })
-              } else {
-                  facebookConnectPlugin.showDialog(["email"],function(response){
-                  })
-              }
-          },function(response){
-              $state.go('app.login')
+        // Perform the login action when the user submits the login form
+        $scope.doLogin = function() {
 
-          });
-      })
-  };
-})
+            $cordovaFacebook.getAccessToken()
+                .then(function (success) {
+                    // success
+                    $state.go('app.swipe')
+                }, function (error) {
+                    // error
+                    $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+                        .then(function(success) {
+                            //success
+                            $state.go('app.swipe')
 
-.controller('MeCtrl', function($scope,$ionicLoading) {
+                        }, function (error) {
+                            // error
+                            $state.go('app.login')
+                        });
+                });
+        }
+    })
+
+    .controller('MeCtrl', function($scope,$ionicLoading) {
         $ionicLoading.show({
             template: 'Loading...'
         });
@@ -50,17 +51,19 @@ angular.module('soyloco.controllers', [])
 
         })
 
-})
+    })
 
     .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate) {
-        console.log('CARDS CTRL');
-        var cardTypes = [
-            { image: 'templates/max.jpg' },
-            { image: 'templates/ben.png' },
-            { image: 'templates/perry.jpg' },
-        ];
 
         $ionicSideMenuDelegate.canDragContent(false);
+
+        console.log('CARDS CTRL');
+        var cardTypes = [
+            { image: 'img/max.jpg' },
+            { image: 'img/ben.png' },
+            { image: 'img/perry.jpg' },
+        ];
+
         $scope.cards = Array.prototype.slice.call(cardTypes, 0);
 
         $scope.cardDestroyed = function(index) {
@@ -83,26 +86,7 @@ angular.module('soyloco.controllers', [])
         };
     })
 
-
-
-
-    .controller('CardCtrl', function($scope, TDCardDelegate) {
-        $scope.cardSwipedLeft = function(index) {
-            console.log('LEFT SWIPE');
-            $scope.addCard();
-        };
-        $scope.cardSwipedRight = function(index) {
-            console.log('RIGHT SWIPE');
-            $scope.addCard();
-        };
-    })
-
-
-    .controller('EventsCtrl', function($scope, $ionicSideMenuDelegate) {
-        // don't be scared by the image value, its just datauri
-
-        $ionicSideMenuDelegate.canDragContent(true);
-
+    .controller('EventsCtrl', function($scope) {
 
         $scope.items = [
             {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
@@ -129,6 +113,19 @@ angular.module('soyloco.controllers', [])
             {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'},
             {id: 1, name: 'Workshop photography', date: 'DIC 14', image: 'img/workshop_photography.jpg'}
         ];
+    })
+
+    .controller('SettingsCtrl', function($scope, $state, $cordovaFacebook) {
+
+        $scope.doLogout = function() {
+
+            $cordovaFacebook.logout()
+                .then(function(success) {
+                    // success
+                    $state.go('app.login')
+                }, function (error) {
+                    // error
+                });
+        }
+
     });
-
-

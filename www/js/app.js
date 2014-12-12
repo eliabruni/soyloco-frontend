@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('soyloco', ['ionic', 'soyloco.controllers', 'soyloco.directives', 'ionic.contrib.ui.tinderCards'])
+angular.module('soyloco', ['ionic', 'soyloco.controllers', 'soyloco.directives', 'ngCordova', 'ionic.contrib.ui.tinderCards'])
 
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
@@ -56,6 +56,16 @@ angular.module('soyloco', ['ionic', 'soyloco.controllers', 'soyloco.directives',
               'menuContent' :{
                 templateUrl: "templates/events.html",
                 controller: 'EventsCtrl'
+              }
+            }
+          })
+
+          .state('app.settings', {
+            url: "/settings",
+            views: {
+              'menuContent' :{
+                templateUrl: "templates/settings.html",
+                controller: 'SettingsCtrl'
               }
             }
           })

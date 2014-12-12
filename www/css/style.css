@@ -1,5 +1,71 @@
 
+/*************************************
+*   LOGIN
+*/
 
+.login-page {
+    background-color: #FFDB4C;
+
+}
+
+.login-slider {
+    height: 75%;
+}
+
+.slider {
+    height: 100%;
+}
+.slider-slide {
+    padding-top: 40px;
+    background-color: #FFDB4C;
+    text-align: center;
+    font-size: 28px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+#facebook-logo {
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+    background-color:#ffffff;
+
+}
+
+.facebook-button {
+    background-color: #3b5998;
+    color: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 19px;
+}
+
+
+#facebook-disclaimer {
+    color: #000000;
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+#list {
+    width: 170px;
+    margin: 30px auto;
+    font-size: 20px;
+}
+#list ol {
+    margin-top: 30px;
+}
+#list ol li {
+    text-align: left;
+    list-style: decimal;
+    margin: 10px 0px;
+}
+
+.facebook-login-loader {
+    font-size: 40px;
+    color: #ffffff;
+
+}
 
 
 /*************************************

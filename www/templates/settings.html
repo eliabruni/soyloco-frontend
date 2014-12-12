@@ -1,0 +1,38 @@
+<ion-view title="Settings"  hide-back-button="true" scroll>
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content>
+
+    <button class="button button-block button-positive">
+      Show me boys
+    </button>
+    <button class="button button-block button-positive">
+      Show me girls
+    </button>
+    <button class="button button-full button-positive">
+      Show me boys and girls
+    </button>
+    <form ng-submit="doLogout()">
+      <div class="list" style="vertical-align: middle">
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Log in with facebook</button>
+        </label>
+      </div>
+    </form>
+    <form ng-submit="doLogout()">
+      <div class="list" style="vertical-align: middle">
+        <label class="item">
+          <button class="button icon-left ion-social-facebook button-positive" type="submit">Logout</button>
+        </label>
+      </div>
+    </form>
+
+
+  </ion-content>
+
+</ion-view>
+
+
+
+<!--href="#/{{item.id}}"-->
