@@ -7,16 +7,49 @@
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
-    </header>
-    <ion-content class="has-header">
-      <ion-list>
-        <ion-item nav-clear menu-close href="#/app/me">
-          Tinder
-        </ion-item>
-      </ion-list>
-    </ion-content>
+
+  <ion-side-menu side="left" class="left-menu" >
+
+    <ul class="list">
+      <a class="item item-icon-left menu-item-profile" href="#/tab/profile" nav-clear menu-close>
+
+        <!-- circular image -->
+        <img style="vertical-align:middle" src="http://i.imgur.com/jZN7xit.jpg" class="circular">
+        Elia
+      </a>
+      <a class="item item-icon-left" href="#/app/me" nav-clear menu-close>
+        <i class="icon ion-android-earth ion-heart-specs"></i>
+        Explore new places
+      </a>
+      <a class="item item-icon-left" href="#/app/me" nav-clear menu-close>
+        <i class="icon ion-heart ion-heart-specs"></i>
+        Find who you like
+      </a>
+      <a class="item item-icon-left" href="#/app/me" nav-clear menu-close>
+        <i class="icon ion-ios7-gear"></i>
+        Settings
+      </a>
+      <a class="item item-icon-left" href="#/app/me" nav-clear menu-close>
+        <i class="icon ion-android-share"></i>
+        Share Soyloco
+      </a>
+
+    </ul>
+
   </ion-side-menu>
+
+
+
+  <!--<ion-side-menu side="left">-->
+    <!--<header class="bar bar-header bar-stable">-->
+      <!--<h1 class="title">Left</h1>-->
+    <!--</header>-->
+    <!--<ion-content class="has-header">-->
+      <!--<ion-list>-->
+        <!--<ion-item nav-clear menu-close href="#/app/me">-->
+          <!--Tinder-->
+        <!--</ion-item>-->
+      <!--</ion-list>-->
+    <!--</ion-content>-->
+  <!--</ion-side-menu>-->
 </ion-side-menus>
