@@ -20,12 +20,30 @@ angular.module('soyloco.controllers', [])
             $cordovaFacebook.getAccessToken()
                 .then(function (success) {
                     // success
+
+
                     $state.go('app.swipe')
                 }, function (error) {
                     // error
                     $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                         .then(function(success) {
                             //success
+
+                            $cordovaFacebook.api("me/picture?redirect=false&type=large", ["public_profile"])
+                                .then(function (success) {
+                                    alert('success')
+                                    $scope.foto = success.data;
+
+                                    
+
+                                    alert(success.data.url)
+                                    // console.log(success.data);
+                                }, function (error) {
+                                    alert('error')
+
+                                    console.log(error);
+                                });
+
                             $state.go('app.swipe')
 
                         }, function (error) {
@@ -36,33 +54,44 @@ angular.module('soyloco.controllers', [])
         }
     })
 
-    .controller('MeCtrl', function($scope,$ionicLoading) {
-        $ionicLoading.show({
-            template: 'Loading...'
-        });
-        $scope.fbProfile = {}
-        facebookConnectPlugin.api('/me', undefined, function (result) {
-            $scope.$apply(function(){
-                $ionicLoading.hide();
-                $scope.fbProfile = result;
-            })
-        }, function (response) {
-            alert('Error->' + JSON.stringify(response))
+    .controller('MenuCtrll', function($scope,$ionicLoading, $cordovaFacebook) {
 
-        })
+        $scope.getMe = function () {
+            $scope.me = ["refreshing..."];
+            $cordovaFacebook.api("me", null).then(function (success) {
+                $scope.me = success;
+            }, function (error) {
+                $scope.error = error;
+            })
+        };
 
     })
 
-    .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate) {
+    .controller('MenuCtrl', ['$scope', '$cordovaFacebook', function ($scope, $cordovaFacebook) {
+        $cordovaFacebook.api("me/picture?width=400&height=400&redirect=false", ["public_profile"])
+            .then(function (success) {
+                $scope.foto = success.data;
+                // console.log(success.data);
+            }, function (error) {
+                console.log(error);
+            });
+
+        $cordovaFacebook.api("me", ["public_profile"])
+            .then(function(success) {
+                $scope.me = success;
+                // console.log(success);
+            }, function (error) {
+                console.log(error);
+            });
+    }])
+
+    .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate, Users) {
 
         $ionicSideMenuDelegate.canDragContent(false);
 
         console.log('CARDS CTRL');
-        var cardTypes = [
-            { image: 'img/max.jpg' },
-            { image: 'img/ben.png' },
-            { image: 'img/perry.jpg' },
-        ];
+
+        var cardTypes = Users.all();
 
         $scope.cards = Array.prototype.slice.call(cardTypes, 0);
 

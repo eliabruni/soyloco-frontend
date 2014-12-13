@@ -3,11 +3,6 @@
 *   LOGIN
 */
 
-.login-page {
-    background-color: #FFDB4C;
-
-}
-
 .login-slider {
     height: 75%;
 }
@@ -17,7 +12,7 @@
 }
 .slider-slide {
     padding-top: 40px;
-    background-color: #FFDB4C;
+    background-color: #ffffff;
     text-align: center;
     font-size: 28px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -66,7 +61,6 @@
     color: #ffffff;
 
 }
-
 
 /*************************************
 *   SIDE-MENU
