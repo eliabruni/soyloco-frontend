@@ -19,31 +19,16 @@ angular.module('soyloco.controllers', [])
 
             $cordovaFacebook.getAccessToken()
                 .then(function (success) {
+
                     // success
-
-
                     $state.go('app.swipe')
                 }, function (error) {
+
                     // error
                     $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                         .then(function(success) {
+
                             //success
-
-                            $cordovaFacebook.api("me/picture?redirect=false&type=large", ["public_profile"])
-                                .then(function (success) {
-                                    alert('success')
-                                    $scope.foto = success.data;
-
-                                    
-
-                                    alert(success.data.url)
-                                    // console.log(success.data);
-                                }, function (error) {
-                                    alert('error')
-
-                                    console.log(error);
-                                });
-
                             $state.go('app.swipe')
 
                         }, function (error) {
@@ -54,38 +39,38 @@ angular.module('soyloco.controllers', [])
         }
     })
 
-    .controller('MenuCtrll', function($scope,$ionicLoading, $cordovaFacebook) {
+    .controller('TestCtrl', function($scope, $ionicLoading, $cordovaFacebook) {
 
-        $scope.getMe = function () {
-            $scope.me = ["refreshing..."];
-            $cordovaFacebook.api("me", null).then(function (success) {
-                $scope.me = success;
+        $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
+            .then(function (success) {
+                $scope.foto = success.data;
+
+                // Debugging
+                alert('success')
+                var idx;
+                for (idx in success.data)
+                {
+                    alert(idx);
+                    alert(success.data[idx]);
+                }
+
             }, function (error) {
-                $scope.error = error;
-            })
-        };
+                alert('error')
+
+                console.log(error);
+            });
 
     })
 
-    .controller('MenuCtrl', ['$scope', '$cordovaFacebook', function ($scope, $cordovaFacebook) {
-        $cordovaFacebook.api("me/picture?width=400&height=400&redirect=false", ["public_profile"])
-            .then(function (success) {
-                $scope.foto = success.data;
-                // console.log(success.data);
-            }, function (error) {
-                console.log(error);
-            });
 
-        $cordovaFacebook.api("me", ["public_profile"])
-            .then(function(success) {
-                $scope.me = success;
-                // console.log(success);
-            }, function (error) {
-                console.log(error);
-            });
-    }])
+    .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate, Users, Crawler) {
 
-    .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate, Users) {
+        // Crwaling starts here becuse it's the fallback route.
+        // If fallback route is changed, remeber to move Crawler.init().
+        if (!Crawler.getInit()) {
+            Crawler.init();
+        }
+
 
         $ionicSideMenuDelegate.canDragContent(false);
 
@@ -144,13 +129,15 @@ angular.module('soyloco.controllers', [])
         ];
     })
 
-    .controller('SettingsCtrl', function($scope, $state, $cordovaFacebook) {
+    .controller('SettingsCtrl', function($scope, $state, $cordovaFacebook, Crawler) {
 
         $scope.doLogout = function() {
 
             $cordovaFacebook.logout()
                 .then(function(success) {
                     // success
+                    Crawler.stop();
+                    Crawler.setInit(false);
                     $state.go('app.login')
                 }, function (error) {
                     // error

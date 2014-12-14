@@ -51,6 +51,10 @@ angular.module('soyloco.services', [])
 
     })
 
+
+
+
+
 // Call this function *after* the page is completely loaded!
 function resize_images(maxht, maxwt, minht, minwt) {
     var imgs = document.getElementsByTagName('img');

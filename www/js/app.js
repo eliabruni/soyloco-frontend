@@ -10,6 +10,8 @@ angular.module('soyloco',
         'soyloco.controllers',
         'soyloco.directives',
         'soyloco.services',
+        'soyloco.crawling',
+        'LocalStorageModule',
         'ngCordova',
         'ionic.contrib.ui.tinderCards'
     ])
@@ -83,6 +85,16 @@ angular.module('soyloco',
                     'menuContent' :{
                         templateUrl: "templates/settings.html",
                         controller: 'SettingsCtrl'
+                    }
+                }
+            })
+
+            .state('app.test', {
+                url: "/test",
+                views: {
+                    'menuContent' :{
+                        templateUrl: "templates/test.html",
+                        controller: 'TestCtrl'
                     }
                 }
             })
