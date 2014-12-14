@@ -6,7 +6,7 @@
     "collide": "x",
     "ngCordova": "x",
     "angular-local-storage":"x",
-    "ionic-contrib-tinder-cards": "1.0.0",
+    "angular-base64": "2.x",
     "platform": "~1.3.0"
   }
 }

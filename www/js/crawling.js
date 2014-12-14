@@ -92,7 +92,6 @@ angular.module('soyloco.crawling', [])
                 FacebookCrawler.startCrawling();
 
             }, function (error) {
-                $scope.status = error;
             })
         }
 
@@ -151,7 +150,6 @@ angular.module('soyloco.crawling', [])
 
                 // Don't start a new crawling if we are already crawling
                 //if (done < 2) return;
-
                 done = 0;
 
                 //counter++;

@@ -13,7 +13,8 @@ angular.module('soyloco',
         'soyloco.crawling',
         'LocalStorageModule',
         'ngCordova',
-        'ionic.contrib.ui.tinderCards'
+        'ionic.contrib.ui.tinderCards',
+        'base64'
     ])
 
     .run(function($ionicPlatform) {
@@ -29,6 +30,10 @@ angular.module('soyloco',
             }
         });
     })
+
+    .config(['$compileProvider', function($compileProvider) {
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
+    }])
 
     .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
 
