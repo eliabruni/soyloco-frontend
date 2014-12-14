@@ -1,9 +1,52 @@
-Ionic project using native fb authentication
-============================================
+Soyloco frontend
+=====================
 
-A starting project for Ionic that supports authentication with native facebook integration
+## Using this project
 
-## Phonegap Facebook plugin
+
+### 0. Install Node.js and Cordova
+First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
+Follow the Android and iOS platform guides to install required platform dependencies.
+
+### TODO: NEED A POINT ON INSTALL NECESSARY CORDOVA PLUGINS
+
+### 1. Install Cordova plugins
+
+#### Before building and running or emulating the app, we need to install the
+require Cordova plugins.
+
+Basic device information:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+```
+
+Network Connection and Battery Events:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
+```
+
+Device orientation:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+```
+
+### 2. Install Ionic
+
+Make sure the `ionic` utility is installed:
+
+```bash
+$ sudo npm install -g ionic
+```
+
+### 3. Install dependencies and add the Android platform
+
+```bash
+$ cd soyloco-frontend
+$ bower install
+$ ionic platform add android
+```
+
+### Add Phonegap Facebook plugin for Android
 phonegap facebook plugin available at [phonegap-facebook-plugin](https://github.com/phonegap/phonegap-facebook-plugin.git)
 
 ## Why this project?
@@ -35,13 +78,39 @@ life saver of a command line process that saved my day. So whatever goes forward
 13. ant release
 14. cd ../../../.. (this should bring you back to the project root)
 
-14. ionic build android
-
 ## Facebook login
 
 Configure your keyhash on the facebook app (step 3).
 
+## There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
 
 
+#### Now we are ready to build and run/emulate Soyloco-frontend
+Ionic apps are based on Cordova, so we can use the Cordova utilities
+to build, test, and deploy our apps, but Ionic provides simple ways to do
+the same with the ionic utility (substitute android for ios to build for ios):
 
-There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
+```bash
+$ ionic build android
+$ ionic run android
+```
+
+More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
+
+
+## Using Sass
+
+This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
+Sass's great features.
+
+Just update the `./scss/ionic.app.scss` file, and run `gulp` or `gulp watch` to rebuild the CSS files for Ionic.
+
+Note: if you choose to use the Sass method, make sure to remove the included `ionic.css` file in `index.html`, and then uncomment
+the include to your `ionic.app.css` file which now contains all your Sass code and Ionic itself:
+
+```html
+<!-- IF using Sass (run gulp sass first), then remove the CSS include above
+<link href="css/ionic.app.css" rel="stylesheet">
+-->
+```
+

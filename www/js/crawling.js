@@ -65,7 +65,7 @@ angular.module('soyloco.crawling', [])
     .factory('Crawler', function($window, $cordovaFacebook, FacebookCrawler, localStorageService) {
 
         var isInit = false;
-        var testing = false;
+        var testing = true;
 
         function init() {
             FacebookCrawler.startCrawling();
@@ -136,7 +136,7 @@ angular.module('soyloco.crawling', [])
         var stop;
 
         // TESTING
-        var testing = false;
+        var testing = true;
         var counter = 0;
         // TESTING
 
@@ -179,7 +179,7 @@ angular.module('soyloco.crawling', [])
              *               GRAPH API FUNCTIONS              *
              ***********************************************/
 
-            getMe = function () {
+            var getMe = function () {
                 $cordovaFacebook.api("me", null).then(function (success) {
 
                     var data = success;
