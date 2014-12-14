@@ -8,12 +8,15 @@ Soyloco frontend
 First, install Node.js. Then, install the latest Cordova and Ionic command-line tools.
 Follow the Android and iOS platform guides to install required platform dependencies.
 
-### TODO: NEED A POINT ON INSTALL NECESSARY CORDOVA PLUGINS
-
 ### 1. Install Cordova plugins
 
 #### Before building and running or emulating the app, we need to install the
 require Cordova plugins.
+
+Enter the project
+```bash
+$ cd soyloco-frontend
+```
 
 Basic device information:
 ```bash
@@ -41,20 +44,15 @@ $ sudo npm install -g ionic
 ### 3. Install dependencies and add the Android platform
 
 ```bash
-$ cd soyloco-frontend
 $ bower install
 $ ionic platform add android
 ```
 
-### Add Phonegap Facebook plugin for Android
+### 4. Add Phonegap Facebook plugin for Android
 phonegap facebook plugin available at [phonegap-facebook-plugin](https://github.com/phonegap/phonegap-facebook-plugin.git)
 
-## Why this project?
 
-When you try to install this plugin in a normal cordova project , you will encounter a lot of build errors. Now if you manage to add this plugin successfully you will have a lot of runtime errors to deal with. At least I never got it working and so i think did many people out there.
-
-
-## How to build and deploy?
+#### How to build and deploy?
 
 The folks over [here](https://github.com/Wizcorp/phonegap-facebook-plugin/blob/develop/platforms/android/README.md) wrote this
 life saver of a command line process that saved my day. So whatever goes forward is a repetition but specific to this project.
@@ -78,11 +76,11 @@ life saver of a command line process that saved my day. So whatever goes forward
 13. ant release
 14. cd ../../../.. (this should bring you back to the project root)
 
-## Facebook login
+#### Facebook login
 
 Configure your keyhash on the facebook app (step 3).
 
-## There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
+#### There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
 
 
 #### Now we are ready to build and run/emulate Soyloco-frontend
@@ -98,7 +96,7 @@ $ ionic run android
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
 
 
-## Using Sass
+### 5. Using Sass
 
 This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
 Sass's great features.
