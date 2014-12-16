@@ -13,8 +13,7 @@ angular.module('soyloco',
         'soyloco.crawling',
         'LocalStorageModule',
         'ngCordova',
-        'ionic.contrib.ui.tinderCards',
-        'base64'
+        'ionic.contrib.ui.tinderCards'
     ])
 
     .run(function($ionicPlatform) {
@@ -28,7 +27,7 @@ angular.module('soyloco',
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-        });
+    });
     })
 
     .config(['$compileProvider', function($compileProvider) {
