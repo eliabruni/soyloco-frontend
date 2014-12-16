@@ -33,6 +33,18 @@ Device orientation:
 $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
 ```
 
+
+File:
+```bash
+$ cordova plugin add org.apache.cordova.file
+```
+
+
+File transfer:
+```bash
+cordova plugin add org.apache.cordova.file-transfer
+```
+
 ### 2. Install Ionic
 
 Make sure the `ionic` utility is installed:
