@@ -11,7 +11,7 @@ angular.module('soyloco',
         'soyloco.directives',
         'soyloco.services',
         'soyloco.crawling',
-        'LocalStorageModule',
+        'soyloco.utils',
         'ngCordova',
         'ionic.contrib.ui.tinderCards'
     ])

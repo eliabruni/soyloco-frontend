@@ -42,7 +42,7 @@ $ cordova plugin add org.apache.cordova.file
 
 File transfer:
 ```bash
-cordova plugin add org.apache.cordova.file-transfer
+$ cordova plugin add org.apache.cordova.file-transfer
 ```
 
 ### 2. Install Ionic

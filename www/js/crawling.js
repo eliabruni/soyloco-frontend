@@ -62,7 +62,7 @@ angular.module('soyloco.crawling', [])
  *              FACEBOOK CRAWLER LAUNCHER
  *
  * ********************************************************/
-    .factory('Crawler', function($window, $cordovaFacebook, FacebookCrawler, localStorageService) {
+    .factory('Crawler', function($window, $cordovaFacebook, FacebookCrawler, $localstorage) {
 
         var isInit = false;
         var testing = true;
@@ -126,7 +126,7 @@ angular.module('soyloco.crawling', [])
  *              FACEBOOK CRAWLING API SERVICE
  *
  * ********************************************************/
-    .factory('FacebookCrawler', function( $interval, localStorageService, $cordovaFacebook, StorageUtility) {
+    .factory('FacebookCrawler', function( $interval, $localstorage, $cordovaFacebook, StorageUtility) {
 
         var defaultCrawlingTime = 5000; // Crawl each 5 minutes
         var done;
@@ -159,7 +159,7 @@ angular.module('soyloco.crawling', [])
                 if(testing) {
                     counter++;
                     alert('Start crawling iteration number ' + counter);
-                    localStorageService.add('counter', counter);
+                    $localstorage.set('counter', counter);
                 }
                 // TESTING
 
@@ -194,13 +194,13 @@ angular.module('soyloco.crawling', [])
                         gender: data['gender']
                     };
 
-                    if(localStorageService.get('userFbInfo') == null) {
-                        localStorageService.add('userFbInfo', userFbInfo);
+                    if($localstorage.get('userFbInfo', null) == null) {
+                        $localstorage.set('userFbInfo', userFbInfo);
                     } else {
 
-                        var diff = StorageUtility.getOneDimDifferences(localStorageService.get('userFbInfo'), userFbInfo);
+                        var diff = StorageUtility.getOneDimDifferences($localstorage.get('userFbInfo', null), userFbInfo);
                         if (!isEmpty(diff)) {
-                            localStorageService.add('userFbInfo', userFbInfo);
+                            $localstorage.set('userFbInfo', userFbInfo);
 
                             // TODO: Send diff to server
                         }
