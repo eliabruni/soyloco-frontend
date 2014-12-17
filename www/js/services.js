@@ -1,50 +1,72 @@
 angular.module('soyloco.services', [])
 
     .factory('Users', function() {
-        var users = [
+
+        var cardIdxCounter = 0;
+        function nextCardIdx() {
+            return cardIdxCounter++;
+        };
+
+        var initUsers = [
             {
-                id:1,
+                idx:1,
                 fbId:123,
                 name:'emilia',
                 gender: 'woman',
                 image: 'img/emilia.jpg',
-                photos:[
-                    {id: 1, userId: 1, image: 'img/emilia.jpg'},
-                    {id: 2,userId: 1, image: 'img/emilia.jpg'},
-                    {id: 3,userId: 1, image: 'img/emilia.jpg'}
-                ],
                 events: [1, 2, 3]
             },
             {
-                id:1,
+                idx:2,
                 fbId:213,
                 name:'emma',
                 gender: 'woman',
                 image: 'img/emma.jpg',
-                photos:[
-                    {id: 1, userId: 1, image: 'img/emma.jpg'},
-                    {id: 2,userId: 1, image: 'img/emma.jpg'},
-                    {id: 3,userId: 1, image: 'img/emma.jpg'}
-                ],
                 events: [1, 2, 3]
             },
             {
-                id:1,
+                idx:3,
                 fbId:312,
                 name:'jennifer',
                 gender: 'woman',
                 image: 'img/jennifer.jpg',
-                photos:[
-                    {id: 1, userId: 1, image: 'img/jennifer.jpg'},
-                    {id: 2,userId: 1, image: 'img/jennifer.jpg'},
-                    {id: 3,userId: 1, image: 'img/jennifer.jpg'}
-                ],
+                events: [1, 2, 3]
+            }
+        ];
+
+        var users = [
+            {
+                idx:4,
+                fbId:313,
+                name:'kristen',
+                gender: 'woman',
+                image: 'img/kristen.jpg',
+                events: [1, 2, 3]
+            },
+            {
+                idx:5,
+                fbId:314,
+                name:'frieda',
+                gender: 'woman',
+                image: 'img/frieda.jpg',
+                events: [1, 2, 3]
+            },
+            {
+                idx:6,
+                fbId:315,
+                name:'olga',
+                gender: 'woman',
+                image: 'img/olga.jpg',
                 events: [1, 2, 3]
             }
         ];
 
         return {
-            all: function () {
+            nextCardIdx : nextCardIdx,
+            initUsers: function () {
+                return initUsers;
+            },
+            users: function () {
                 return users;
             }
         }

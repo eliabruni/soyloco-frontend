@@ -75,6 +75,10 @@ angular.module('soyloco.controllers', [])
 
     .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate, Users, Crawler) {
 
+
+        // TODO:
+        // 1) Recover left/right logic values which need to be assigned the the swiped cards;
+
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
         if (!Crawler.getInit()) {
@@ -86,29 +90,35 @@ angular.module('soyloco.controllers', [])
 
         console.log('CARDS CTRL');
 
-        var cardTypes = Users.all();
+        var initCardTypes = Users.initUsers();
+        var cardTypes = Users.users();
 
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0);
+
+        $scope.cards = Array.prototype.slice.call(initCardTypes, 0);
 
         $scope.cardDestroyed = function(index) {
             $scope.cards.splice(index, 1);
+            $scope.addCard();
         };
 
         $scope.addCard = function() {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+
+            // TODO: need a counter for destroyed images connected to service
+            var idx = Users.nextCardIdx();
+            var newCard = cardTypes[idx];
             newCard.id = Math.random();
-            $scope.cards.push(angular.extend({}, newCard));
+            $scope.cards.unshift(angular.extend({}, newCard));
         }
 
         $scope.cardSwipedLeft = function(index) {
             console.log('LEFT SWIPE');
-            $scope.addCard();
         };
         $scope.cardSwipedRight = function(index) {
             console.log('RIGHT SWIPE');
-            $scope.addCard();
         };
+
     })
+
 
     .controller('EventsCtrl', function($scope) {
 
