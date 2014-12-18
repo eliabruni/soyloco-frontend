@@ -45,18 +45,17 @@ angular.module('soyloco.controllers', [])
 
         $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
             .then(function (success) {
-                var foto = success.data;
-                var filename = foto.url.replace(/^.*[\\\/]/, '');
+                var photo = success.data;
                 var fileTransferDir = cordova.file.externalDataDirectory;
 
-                var hostPath = foto.url;
+                var hostPath = photo.url;
                 var clientPath = fileTransferDir + 'test.jpg';
                 var fileTransferOptions = {};
 
                 $cordovaFile.downloadFile(hostPath, clientPath, true, fileTransferOptions).then (function(result) {
                     // Success!
                     alert('image saved')
-                    $scope.downloadedFoto = clientPath;
+                    $scope.downloadedPhoto = clientPath;
                 }, function(err) {
                     // Error
                     alert(err)
