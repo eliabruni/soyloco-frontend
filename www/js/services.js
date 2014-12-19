@@ -1,73 +1,208 @@
 angular.module('soyloco.services', [])
 
-    .factory('Users', function() {
+    .factory('Users', function($localstorage)
+    {
 
-        var cardIdxCounter = 0;
-        function nextCardIdx() {
-            return cardIdxCounter++;
-        };
-
-        var initUsers = [
-            {
-                idx:1,
-                fbId:123,
-                name:'emilia',
-                gender: 'woman',
-                image: 'img/emilia.jpg',
-                events: [1, 2, 3]
-            },
-            {
-                idx:2,
-                fbId:213,
-                name:'emma',
-                gender: 'woman',
-                image: 'img/emma.jpg',
-                events: [1, 2, 3]
-            },
-            {
-                idx:3,
-                fbId:312,
-                name:'jennifer',
-                gender: 'woman',
-                image: 'img/jennifer.jpg',
-                events: [1, 2, 3]
+        var init = false;
+        function setUser(fbid, user)
+        {
+            var users = {};
+            if ($localstorage.getObject('users') != null) {
+                users = $localstorage.getObject('users');
             }
-        ];
+            users[fbid] = user;
 
-        var users = [
-            {
-                idx:4,
-                fbId:313,
+            $localstorage.setObject('users', users);
+
+            alert('1')
+            setFbid(fbid);
+            alert('2')
+
+
+
+        }
+
+        function getUser(fbid)
+        {
+            if ($localstorage.getObject('users') != null) {
+                var users = $localstorage.getObject('users');
+                return users[fbid];
+            } else {
+                return null;
+            }
+        }
+
+        function setFbid(fbid)
+        {
+            var fbids = [];
+            if ($localstorage.getObject('fbids') != null) {
+                fbids = $localstorage.get('fbids');
+            }
+            fbids.push(fbid);
+            $localstorage.setObject('fbids', fbids);
+            setUserToSwipe(fbid);
+        }
+
+        function setUserToSwipe(fbid)
+        {
+            var usersToSwipe = [];
+            if ($localstorage.getObject('usersToSwipe') != null) {
+                usersToSwipe = $localstorage.get('usersToSwipe');
+                alert('1: ' + usersToSwipe.length)
+            }
+            usersToSwipe.push(fbid);
+            $localstorage.setObject('usersToSwipe', usersToSwipe);
+            alert('2: ' + usersToSwipe.length)
+        }
+
+        function getUserToSwipe()
+        {
+            if ($localstorage.getObject('usersToSwipe') != null) {
+                var usersToSwipe = $localstorage.get('usersToSwipe');
+                var randomIdx = Math.floor(Math.random() * usersToSwipe.length);
+                var fbid = usersToSwipe[randomIdx];
+
+
+                alert('getting user fbid: ' + fbid);
+
+
+                return getUser(fbid);
+            }
+
+            else {
+                return null;
+            }
+        }
+
+        function removeUserToSwipe(fbid)
+        {
+            if ($localstorage.getObject('usersToSwipe') != null) {
+                var usersToSwipe = $localstorage.get('usersToSwipe');
+                var index = usersToSwipe.indexOf(fbid);
+                if (index > -1) {
+                    alert('removing!')
+                    usersToSwipe.splice(index, 1);
+                }
+                $localstorage.setObject('usersToSwipe', usersToSwipe);
+            }
+        }
+
+        function setSwipedUser(fbid)
+        {
+            var swipedUsers = [];
+            if ($localstorage.getObject('swipedUsers') != null) {
+                swipedUsers = $localstorage.get('swipedUsers');
+            }
+            swipedUsers.push(fbid);
+            removeUserToSwipe(fbid);
+        }
+
+        function mokeInit()
+        {
+            var user1 = {
+                fbid:313,
                 name:'kristen',
                 gender: 'woman',
                 image: 'img/kristen.jpg',
+                swipe: '-1',
                 events: [1, 2, 3]
-            },
-            {
-                idx:5,
-                fbId:314,
+            };
+
+            var user2 = {
+                fbid:314,
                 name:'frieda',
                 gender: 'woman',
                 image: 'img/frieda.jpg',
+                swipe: '-1',
                 events: [1, 2, 3]
-            },
-            {
-                idx:6,
-                fbId:315,
+            };
+
+            var user3 = {
+                fbid:315,
                 name:'olga',
                 gender: 'woman',
                 image: 'img/olga.jpg',
+                swipe: '-1',
+                events: [1, 2, 3]
+            };
+
+            alert('in mokking')
+
+            setUser(user1.fbid, user1);
+            setUser(user2.fbid, user2);
+            setUser(user3.fbid, user3);
+
+            init = true;
+
+        }
+
+        function getInit()
+
+        {
+            return init;
+        }
+
+        var initUsers = [
+            {
+                fbid:310,
+                name:'emilia',
+                gender: 'woman',
+                image: 'img/emilia.jpg',
+                swipe: '-1',
+                events: [1, 2, 3]
+            },
+            {
+                fbid:311,
+                name:'emma',
+                gender: 'woman',
+                image: 'img/emma.jpg',
+                swipe: '-1',
+                events: [1, 2, 3]
+            },
+            {
+                fbid:312,
+                name:'jennifer',
+                gender: 'woman',
+                image: 'img/jennifer.jpg',
+                swipe: '-1',
                 events: [1, 2, 3]
             }
         ];
 
+        /*        var users = [
+         {
+         fbId:313,
+         name:'kristen',
+         gender: 'woman',
+         image: 'img/kristen.jpg',
+         swipe: '-1',
+         events: [1, 2, 3]
+         },
+         {
+         fbId:314,
+         name:'frieda',
+         gender: 'woman',
+         image: 'img/frieda.jpg',
+         swipe: '-1',
+         events: [1, 2, 3]
+         },
+         {
+         fbId:315,
+         name:'olga',
+         gender: 'woman',
+         image: 'img/olga.jpg',
+         swipe: '-1',
+         events: [1, 2, 3]
+         }
+         ];*/
+
         return {
-            nextCardIdx : nextCardIdx,
+            getInit : getInit,
+            mokeInit : mokeInit,
+            getUserToSwipe : getUserToSwipe,
+            setSwipedUser : setSwipedUser,
             initUsers: function () {
                 return initUsers;
-            },
-            users: function () {
-                return users;
             }
         }
 

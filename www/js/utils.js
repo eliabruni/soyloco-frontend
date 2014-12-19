@@ -1,18 +1,10 @@
 angular.module('soyloco.utils', [])
 
-    .factory('$localstorage', ['$window', function($window) {
+    .factory('$arrayUtils', function() {
         return {
-            set: function(key, value) {
-                $window.localStorage[key] = value;
-            },
-            get: function(key, defaultValue) {
-                return $window.localStorage[key] || defaultValue;
-            },
-            setObject: function(key, value) {
-                $window.localStorage[key] = JSON.stringify(value);
-            },
-            getObject: function(key) {
-                return JSON.parse($window.localStorage[key] || '{}');
+            shuffle: function shuffle(o){ //v1.0
+                for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+                return o;
             }
         }
-    }]);
+    });

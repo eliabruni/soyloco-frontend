@@ -11,12 +11,13 @@ angular.module('soyloco',
         'soyloco.directives',
         'soyloco.services',
         'soyloco.crawling',
+        'soyloco.storage',
         'soyloco.utils',
         'ngCordova',
         'ionic.contrib.ui.tinderCards'
     ])
 
-    .run(function($ionicPlatform) {
+    .run(function($ionicPlatform, Users) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -27,7 +28,9 @@ angular.module('soyloco',
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-    });
+
+
+        });
     })
 
     .config(['$compileProvider', function($compileProvider) {

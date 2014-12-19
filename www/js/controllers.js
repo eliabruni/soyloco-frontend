@@ -72,16 +72,20 @@ angular.module('soyloco.controllers', [])
     })
 
 
-    .controller('CardsCtrl', function($scope, TDCardDelegate, $ionicSideMenuDelegate, Users, Crawler) {
-
-
-        // TODO:
-        // 1) Recover left/right logic values which need to be assigned the the swiped cards;
+    .controller('CardsCtrl', function($rootScope, $scope, TDCardDelegate, $ionicSideMenuDelegate, Users, Crawler) {
 
         // Crwaling starts here becuse it's the fallback route.
         // If fallback route is changed, remeber to move Crawler.init().
         if (!Crawler.getInit()) {
             //Crawler.init();
+        }
+
+        // DEBUGGING
+
+        if (!Users.getInit())
+        {
+            alert('initialiing moke')
+            Users.mokeInit();
         }
 
 
@@ -90,21 +94,30 @@ angular.module('soyloco.controllers', [])
         console.log('CARDS CTRL');
 
         var initCardTypes = Users.initUsers();
-        var cardTypes = Users.users();
-
 
         $scope.cards = Array.prototype.slice.call(initCardTypes, 0);
 
         $scope.cardDestroyed = function(index) {
+
+            // TODO: now we got the card vote, need to attach it to the user in the service
+
+            if ($rootScope.amt < 0) {
+                alert('NOPE');
+                alert($scope.cards[index].name)
+            } else {
+                alert('YES');
+                alert($scope.cards[index].name)
+            }
+            // Remove card form array
+            Users.setSwipedUser(($scope.cards[index].fbid).toString());
             $scope.cards.splice(index, 1);
+            // Add new card
             $scope.addCard();
         };
 
         $scope.addCard = function() {
 
-            // TODO: need a counter for destroyed images connected to service
-            var idx = Users.nextCardIdx();
-            var newCard = cardTypes[idx];
+            var newCard = Users.getUserToSwipe();
             newCard.id = Math.random();
             $scope.cards.unshift(angular.extend({}, newCard));
         }
@@ -114,6 +127,10 @@ angular.module('soyloco.controllers', [])
         };
         $scope.cardSwipedRight = function(index) {
             console.log('RIGHT SWIPE');
+        };
+
+        $scope.cardPartialSwipe = function(amt) {
+            $rootScope.amt = amt;
         };
 
     })

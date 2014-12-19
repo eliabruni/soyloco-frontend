@@ -194,11 +194,11 @@ angular.module('soyloco.crawling', [])
                         gender: data['gender']
                     };
 
-                    if($localstorage.get('userFbInfo', null) == null) {
+                    if($localstorage.get('userFbInfo') == null) {
                         $localstorage.set('userFbInfo', userFbInfo);
                     } else {
 
-                        var diff = StorageUtility.getOneDimDifferences($localstorage.get('userFbInfo', null), userFbInfo);
+                        var diff = StorageUtility.getOneDimDifferences($localstorage.get('userFbInfo'), userFbInfo);
                         if (!isEmpty(diff)) {
                             $localstorage.set('userFbInfo', userFbInfo);
 
