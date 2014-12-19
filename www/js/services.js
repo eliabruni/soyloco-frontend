@@ -11,15 +11,9 @@ angular.module('soyloco.services', [])
                 users = $localstorage.getObject('users');
             }
             users[fbid] = user;
-
             $localstorage.setObject('users', users);
 
-            alert('1')
-            setFbid(fbid);
-            alert('2')
-
-
-
+            addFbid(fbid);
         }
 
         function getUser(fbid)
@@ -32,40 +26,43 @@ angular.module('soyloco.services', [])
             }
         }
 
-        function setFbid(fbid)
+        function addFbid(fbid)
         {
             var fbids = [];
             if ($localstorage.getObject('fbids') != null) {
-                fbids = $localstorage.get('fbids');
+                fbids = $localstorage.getObject('fbids');
             }
             fbids.push(fbid);
             $localstorage.setObject('fbids', fbids);
+
             setUserToSwipe(fbid);
+
         }
 
         function setUserToSwipe(fbid)
         {
             var usersToSwipe = [];
             if ($localstorage.getObject('usersToSwipe') != null) {
-                usersToSwipe = $localstorage.get('usersToSwipe');
-                alert('1: ' + usersToSwipe.length)
+                usersToSwipe = $localstorage.getObject('usersToSwipe');
             }
             usersToSwipe.push(fbid);
             $localstorage.setObject('usersToSwipe', usersToSwipe);
-            alert('2: ' + usersToSwipe.length)
         }
 
         function getUserToSwipe()
         {
+            alert('adding!')
             if ($localstorage.getObject('usersToSwipe') != null) {
-                var usersToSwipe = $localstorage.get('usersToSwipe');
+                var usersToSwipe = $localstorage.getObject('usersToSwipe');
                 var randomIdx = Math.floor(Math.random() * usersToSwipe.length);
                 var fbid = usersToSwipe[randomIdx];
 
-
-                alert('getting user fbid: ' + fbid);
-
-
+                // TODO: the problem with calling here addSwipedUser(fbid) is
+                // that we remove a user to swipe before being sure it was swiped
+                // need to create a tmp array to store not yet swiped users which
+                // has to be checked at every app init, if a user is found, put
+                // it back via setUserToSwipe(fbid)
+                addSwipedUser(fbid);
                 return getUser(fbid);
             }
 
@@ -77,30 +74,33 @@ angular.module('soyloco.services', [])
         function removeUserToSwipe(fbid)
         {
             if ($localstorage.getObject('usersToSwipe') != null) {
-                var usersToSwipe = $localstorage.get('usersToSwipe');
+                var usersToSwipe = $localstorage.getObject('usersToSwipe');
                 var index = usersToSwipe.indexOf(fbid);
                 if (index > -1) {
                     alert('removing!')
                     usersToSwipe.splice(index, 1);
+                    $localstorage.setObject('usersToSwipe', usersToSwipe);
                 }
-                $localstorage.setObject('usersToSwipe', usersToSwipe);
             }
         }
 
-        function setSwipedUser(fbid)
+        function addSwipedUser(fbid)
         {
             var swipedUsers = [];
             if ($localstorage.getObject('swipedUsers') != null) {
-                swipedUsers = $localstorage.get('swipedUsers');
+                swipedUsers = $localstorage.getObject('swipedUsers');
             }
             swipedUsers.push(fbid);
+
             removeUserToSwipe(fbid);
         }
 
         function mokeInit()
         {
+
+            $localstorage.clear();
             var user1 = {
-                fbid:313,
+                fbid:'313',
                 name:'kristen',
                 gender: 'woman',
                 image: 'img/kristen.jpg',
@@ -109,7 +109,7 @@ angular.module('soyloco.services', [])
             };
 
             var user2 = {
-                fbid:314,
+                fbid:'314',
                 name:'frieda',
                 gender: 'woman',
                 image: 'img/frieda.jpg',
@@ -118,15 +118,13 @@ angular.module('soyloco.services', [])
             };
 
             var user3 = {
-                fbid:315,
+                fbid:'315',
                 name:'olga',
                 gender: 'woman',
                 image: 'img/olga.jpg',
                 swipe: '-1',
                 events: [1, 2, 3]
             };
-
-            alert('in mokking')
 
             setUser(user1.fbid, user1);
             setUser(user2.fbid, user2);
@@ -144,7 +142,7 @@ angular.module('soyloco.services', [])
 
         var initUsers = [
             {
-                fbid:310,
+                fbid:'310',
                 name:'emilia',
                 gender: 'woman',
                 image: 'img/emilia.jpg',
@@ -152,7 +150,7 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             },
             {
-                fbid:311,
+                fbid:'311',
                 name:'emma',
                 gender: 'woman',
                 image: 'img/emma.jpg',
@@ -160,7 +158,7 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             },
             {
-                fbid:312,
+                fbid:'312',
                 name:'jennifer',
                 gender: 'woman',
                 image: 'img/jennifer.jpg',
@@ -168,33 +166,6 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             }
         ];
-
-        /*        var users = [
-         {
-         fbId:313,
-         name:'kristen',
-         gender: 'woman',
-         image: 'img/kristen.jpg',
-         swipe: '-1',
-         events: [1, 2, 3]
-         },
-         {
-         fbId:314,
-         name:'frieda',
-         gender: 'woman',
-         image: 'img/frieda.jpg',
-         swipe: '-1',
-         events: [1, 2, 3]
-         },
-         {
-         fbId:315,
-         name:'olga',
-         gender: 'woman',
-         image: 'img/olga.jpg',
-         swipe: '-1',
-         events: [1, 2, 3]
-         }
-         ];*/
 
         return {
             getInit : getInit,

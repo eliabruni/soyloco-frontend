@@ -109,7 +109,7 @@ angular.module('soyloco.controllers', [])
                 alert($scope.cards[index].name)
             }
             // Remove card form array
-            Users.setSwipedUser(($scope.cards[index].fbid).toString());
+            //Users.addSwipedUser($scope.cards[index].fbid);
             $scope.cards.splice(index, 1);
             // Add new card
             $scope.addCard();
