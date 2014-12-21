@@ -13,10 +13,9 @@ angular.module('soyloco.services', [])
             if ($localstorage.getObject('users') != null) {
                 users = $localstorage.getObject('users');
             }
-            alert('2a')
 
             if (users[fbid] == null) {
-                alert('adding new user fbid: ' + fbid)
+                //alert('adding new user fbid: ' + fbid)
                 users[fbid] = user;
                 $localstorage.setObject('users', users);
 
@@ -110,7 +109,7 @@ angular.module('soyloco.services', [])
             if (index == -1) {
                 tmpNotSwipedUsers.push(fbid);
                 $localstorage.setObject('tmpNotSwipedUsers', tmpNotSwipedUsers);
-                alert('adding tmp not swiped fbid: ' + fbid)
+                //alert('adding tmp not swiped fbid: ' + fbid)
             }
 
         }
@@ -121,7 +120,7 @@ angular.module('soyloco.services', [])
                 var tmpNotSwipedUsers = $localstorage.getObject('tmpNotSwipedUsers');
                 var index = tmpNotSwipedUsers.indexOf(fbid);
                 if (index > -1) {
-                    alert('removing tmp not swiped fbid: ' + fbid)
+                    //alert('removing tmp not swiped fbid: ' + fbid)
                     tmpNotSwipedUsers.splice(index, 1);
                     $localstorage.setObject('tmpNotSwipedUsers', tmpNotSwipedUsers);
                 }
@@ -151,9 +150,7 @@ angular.module('soyloco.services', [])
         //DEBUG
         function mokeInit()
         {
-            alert('1')
-
-            //$localstorage.clear();
+            $localstorage.clear();
             var user1 = {
                 fbid:'313',
                 name:'kristen',
@@ -181,12 +178,7 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             };
 
-            alert('2')
-
-
             setUser(user1.fbid, user1);
-            alert('3')
-
             setUser(user2.fbid, user2);
             setUser(user3.fbid, user3);
 

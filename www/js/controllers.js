@@ -84,7 +84,7 @@ angular.module('soyloco.controllers', [])
 
         if (!Users.getInit())
         {
-            alert('initialiing moke')
+            //alert('initialiing moke')
             Users.mokeInit();
         }
 
@@ -107,11 +107,9 @@ angular.module('soyloco.controllers', [])
             // TODO: now we got the card vote, need to attach it to the user in the service
 
             if ($rootScope.amt < 0) {
-                alert('NOPE');
-                alert($scope.cards[index].name)
+                //alert($scope.cards[index].name)
             } else {
-                alert('YES');
-                alert($scope.cards[index].name)
+                //alert($scope.cards[index].name)
             }
             // Remove card form array
             Users.removeTmpNotSwipedUser($scope.cards[index].fbid);
