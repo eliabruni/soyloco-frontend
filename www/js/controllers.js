@@ -88,6 +88,11 @@ angular.module('soyloco.controllers', [])
             Users.mokeInit();
         }
 
+        if (!Users.getTmpSwipeChecked())
+        {
+            Users.tmpSwipeCheck();
+        }
+
 
         $ionicSideMenuDelegate.canDragContent(false);
 
@@ -109,7 +114,7 @@ angular.module('soyloco.controllers', [])
                 alert($scope.cards[index].name)
             }
             // Remove card form array
-            //Users.addSwipedUser($scope.cards[index].fbid);
+            Users.removeTmpNotSwipedUser($scope.cards[index].fbid);
             $scope.cards.splice(index, 1);
             // Add new card
             $scope.addCard();

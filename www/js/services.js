@@ -2,18 +2,27 @@ angular.module('soyloco.services', [])
 
     .factory('Users', function($localstorage)
     {
-
+        //DEBUG
         var init = false;
+        //DEBUG
+        var tmpSwipeChecked = false;
+
         function setUser(fbid, user)
         {
             var users = {};
             if ($localstorage.getObject('users') != null) {
                 users = $localstorage.getObject('users');
             }
-            users[fbid] = user;
-            $localstorage.setObject('users', users);
+            alert('2a')
 
-            addFbid(fbid);
+            if (users[fbid] == null) {
+                alert('adding new user fbid: ' + fbid)
+                users[fbid] = user;
+                $localstorage.setObject('users', users);
+
+                setUserToSwipe(fbid);
+                //addFbid(fbid);
+            }
         }
 
         function getUser(fbid)
@@ -26,18 +35,17 @@ angular.module('soyloco.services', [])
             }
         }
 
-        function addFbid(fbid)
-        {
-            var fbids = [];
-            if ($localstorage.getObject('fbids') != null) {
-                fbids = $localstorage.getObject('fbids');
-            }
-            fbids.push(fbid);
-            $localstorage.setObject('fbids', fbids);
+        /*        function addFbid(fbid)
+         {
+         var fbids = [];
+         if ($localstorage.getObject('fbids') != null) {
+         fbids = $localstorage.getObject('fbids');
+         }
+         fbids.push(fbid);
+         $localstorage.setObject('fbids', fbids);
 
-            setUserToSwipe(fbid);
-
-        }
+         setUserToSwipe(fbid);
+         }*/
 
         function setUserToSwipe(fbid)
         {
@@ -45,24 +53,24 @@ angular.module('soyloco.services', [])
             if ($localstorage.getObject('usersToSwipe') != null) {
                 usersToSwipe = $localstorage.getObject('usersToSwipe');
             }
-            usersToSwipe.push(fbid);
-            $localstorage.setObject('usersToSwipe', usersToSwipe);
+            var index = usersToSwipe.indexOf(fbid);
+            if (index == -1) {
+                usersToSwipe.push(fbid);
+                $localstorage.setObject('usersToSwipe', usersToSwipe);
+            }
         }
 
         function getUserToSwipe()
         {
-            alert('adding!')
             if ($localstorage.getObject('usersToSwipe') != null) {
                 var usersToSwipe = $localstorage.getObject('usersToSwipe');
                 var randomIdx = Math.floor(Math.random() * usersToSwipe.length);
                 var fbid = usersToSwipe[randomIdx];
+                usersToSwipe.splice(randomIdx, 1);
+                $localstorage.setObject('usersToSwipe', usersToSwipe);
 
-                // TODO: the problem with calling here addSwipedUser(fbid) is
-                // that we remove a user to swipe before being sure it was swiped
-                // need to create a tmp array to store not yet swiped users which
-                // has to be checked at every app init, if a user is found, put
-                // it back via setUserToSwipe(fbid)
-                addSwipedUser(fbid);
+                //addSwipedUser(fbid);
+                addTmpNotSwipedUser(fbid);
                 return getUser(fbid);
             }
 
@@ -71,34 +79,81 @@ angular.module('soyloco.services', [])
             }
         }
 
-        function removeUserToSwipe(fbid)
+        /*        function addSwipedUser(fbid)
+         {
+         var swipedUsers = [];
+         if ($localstorage.getObject('swipedUsers') != null) {
+         swipedUsers = $localstorage.getObject('swipedUsers');
+         }
+         swipedUsers.push(fbid);
+         }
+
+         function removeSwipedUser(fbid)
+         {
+         if ($localstorage.getObject('swipedUsers') != null) {
+         var swipedUsers = $localstorage.getObject('swipedUsers');
+         var index = swipedUsers.indexOf(fbid);
+         if (index > -1) {
+         swipedUsers.splice(index, 1);
+         $localstorage.setObject('swipedUsers', swipedUsers);
+         }
+         }
+         }*/
+
+        function addTmpNotSwipedUser(fbid)
         {
-            if ($localstorage.getObject('usersToSwipe') != null) {
-                var usersToSwipe = $localstorage.getObject('usersToSwipe');
-                var index = usersToSwipe.indexOf(fbid);
+            var tmpNotSwipedUsers = [];
+            if ($localstorage.getObject('tmpNotSwipedUsers') != null) {
+                tmpNotSwipedUsers = $localstorage.getObject('tmpNotSwipedUsers');
+            }
+            var index = tmpNotSwipedUsers.indexOf(fbid);
+            if (index == -1) {
+                tmpNotSwipedUsers.push(fbid);
+                $localstorage.setObject('tmpNotSwipedUsers', tmpNotSwipedUsers);
+                alert('adding tmp not swiped fbid: ' + fbid)
+            }
+
+        }
+
+        function removeTmpNotSwipedUser(fbid)
+        {
+            if ($localstorage.getObject('tmpNotSwipedUsers') != null) {
+                var tmpNotSwipedUsers = $localstorage.getObject('tmpNotSwipedUsers');
+                var index = tmpNotSwipedUsers.indexOf(fbid);
                 if (index > -1) {
-                    alert('removing!')
-                    usersToSwipe.splice(index, 1);
-                    $localstorage.setObject('usersToSwipe', usersToSwipe);
+                    alert('removing tmp not swiped fbid: ' + fbid)
+                    tmpNotSwipedUsers.splice(index, 1);
+                    $localstorage.setObject('tmpNotSwipedUsers', tmpNotSwipedUsers);
                 }
             }
         }
 
-        function addSwipedUser(fbid)
+        function tmpSwipeCheck()
         {
-            var swipedUsers = [];
-            if ($localstorage.getObject('swipedUsers') != null) {
-                swipedUsers = $localstorage.getObject('swipedUsers');
-            }
-            swipedUsers.push(fbid);
+            if ($localstorage.getObject('tmpNotSwipedUsers') != null) {
+                var tmpNotSwipedUsers = $localstorage.getObject('tmpNotSwipedUsers');
 
-            removeUserToSwipe(fbid);
+                for (var idx in tmpNotSwipedUsers)
+                {
+                    var fbid = tmpNotSwipedUsers[idx];
+                    setUserToSwipe(fbid);
+                    //removeSwipedUser(fbid);
+                }
+            }
+            tmpSwipeChecked = true;
         }
 
+        function getTmpSwipeChecked()
+        {
+            return tmpSwipeChecked;
+        }
+
+        //DEBUG
         function mokeInit()
         {
+            alert('1')
 
-            $localstorage.clear();
+            //$localstorage.clear();
             var user1 = {
                 fbid:'313',
                 name:'kristen',
@@ -126,16 +181,19 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             };
 
+            alert('2')
+
+
             setUser(user1.fbid, user1);
+            alert('3')
+
             setUser(user2.fbid, user2);
             setUser(user3.fbid, user3);
 
             init = true;
-
         }
 
         function getInit()
-
         {
             return init;
         }
@@ -166,12 +224,17 @@ angular.module('soyloco.services', [])
                 events: [1, 2, 3]
             }
         ];
+        //DEBUG
 
         return {
+            //DEBUG
             getInit : getInit,
             mokeInit : mokeInit,
+            //DEBUG
+            tmpSwipeCheck: tmpSwipeCheck,
+            getTmpSwipeChecked : getTmpSwipeChecked,
             getUserToSwipe : getUserToSwipe,
-            setSwipedUser : setSwipedUser,
+            removeTmpNotSwipedUser : removeTmpNotSwipedUser,
             initUsers: function () {
                 return initUsers;
             }

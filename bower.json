@@ -2,7 +2,7 @@
   "name": "phonegap-native-fb-ionic",
   "private": "true",
   "devDependencies": {
-    "ionic": "1.0.0-beta.13",
+    "ionic": "driftyco/ionic-bower#master",
     "collide": "x",
     "ngCordova": "x",
     "platform": "~1.3.0"

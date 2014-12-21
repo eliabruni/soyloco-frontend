@@ -33,9 +33,9 @@ angular.module('soyloco',
         });
     })
 
-    .config(['$compileProvider', function($compileProvider) {
+ /*   .config(['$compileProvider', function($compileProvider) {
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
-    }])
+    }])*/
 
     .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
 
