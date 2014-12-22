@@ -13,6 +13,7 @@ angular.module('soyloco',
         'soyloco.crawling',
         'soyloco.storage',
         'soyloco.utils',
+        'soyloco.geo',
         'ngCordova',
         'ionic.contrib.ui.tinderCards'
     ])

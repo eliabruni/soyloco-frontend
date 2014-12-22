@@ -150,7 +150,7 @@ angular.module('soyloco.services', [])
         //DEBUG
         function mokeInit()
         {
-            $localstorage.clear();
+            //$localstorage.clear();
             var user1 = {
                 fbid:'313',
                 name:'kristen',

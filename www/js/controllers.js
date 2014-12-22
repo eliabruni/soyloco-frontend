@@ -39,9 +39,23 @@ angular.module('soyloco.controllers', [])
         }
     })
 
-    .controller('TestCtrl', function($scope, $ionicLoading, $cordovaFacebook, $cordovaFile) {
+    .controller('TestCtrl', function($scope, $ionicLoading, $cordovaFacebook, $cordovaFile, $cordovaGeolocation, $localstorage, Geo) {
 
-        // TODO: generalize file system management as explained here: http://forum.ionicframework.com/t/how-to-write-data-to-a-file-using-ngcordova/10943/7
+        $cordovaGeolocation
+            .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
+            .then(function (position) {
+
+                Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 1000, function(yourCity) {
+                    alert('Your city is: ' + yourCity);
+                    $localstorage.set('yourCity', yourCity);
+                });
+
+            }, function (err) {
+                console.log("unable to find location");
+                $scope.errorMsg = "Error : " + err.message;
+            });
+
+
 
         $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
             .then(function (success) {
@@ -168,7 +182,7 @@ angular.module('soyloco.controllers', [])
         ];
     })
 
-    .controller('SettingsCtrl', function($scope, $state, $cordovaFacebook, Crawler) {
+    .controller('SettingsCtrl', function($scope, $state, $cordovaFacebook, $localstorage, Crawler) {
 
         $scope.doLogout = function() {
 
@@ -177,6 +191,11 @@ angular.module('soyloco.controllers', [])
                     // success
                     Crawler.stop();
                     Crawler.setInit(false);
+
+                    // DEBUG
+                    $localstorage.clear();
+                    // DEBUG
+
                     $state.go('app.login')
                 }, function (error) {
                     // error
