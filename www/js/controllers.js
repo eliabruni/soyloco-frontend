@@ -54,8 +54,7 @@ angular.module('soyloco.controllers', [])
                 console.log("unable to find location");
                 $scope.errorMsg = "Error : " + err.message;
             });
-
-
+        
 
         $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
             .then(function (success) {

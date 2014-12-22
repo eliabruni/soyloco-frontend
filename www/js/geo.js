@@ -10,7 +10,6 @@ angular.module('soyloco.geo', [])
                     var CENTER = "&center=" + latitude + "," + longitude;
                     var DIST = "&distance=" + radius;
                     var FIELDS = "&fields=location";
-                    // var ACCESS_TOKEN = "&access_token=" + access_token;
 
                     return BASE_URL + CENTER + DIST + FIELDS;
                 };
@@ -59,10 +58,6 @@ angular.module('soyloco.geo', [])
                 }, function (error) {
 
                 })
-
-                /* $cordovaFacebook.api(getPlacesURL(latitude, longitude, radius), function(error, response, body) {
-                 return requestHandler(error, response, body, callback);
-                 });*/
             }
         }
     })
