@@ -60,8 +60,4 @@ angular.module('soyloco.geo', [])
                 })
             }
         }
-    })
-
-
-
-
+    });

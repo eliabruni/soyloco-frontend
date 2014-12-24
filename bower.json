@@ -1,5 +1,5 @@
 {
-  "name": "phonegap-native-fb-ionic",
+  "name": "myApp",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#master",
