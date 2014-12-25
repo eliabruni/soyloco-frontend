@@ -12,7 +12,9 @@ angular.module('starter',
       'starter.services',
       'soyloco.events',
       'soyloco.storage',
-      'ngCordova'
+      'ngCordova',
+      'ionic.contrib.ui.cards',
+      'ionic.contrib.ui.cards2'
     ])
 
     .run(function($ionicPlatform) {
