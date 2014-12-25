@@ -3,38 +3,35 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 angular.module('starter',
     [
       'ionic',
       'starter.controllers',
-      'starter.services',
-      'soyloco.events',
-      'soyloco.storage',
-      'ngCordova',
       'ionic.contrib.ui.cards',
-      'ionic.contrib.ui.cards2'
+      'ionic.contrib.ui.cards2',
+      'starter.services',
+      'soyloco.storage',
+      'soyloco.geo',
+      'soyloco.crawling',
+      'ngCordova',
+      'soyloco.events'
     ])
 
-    .run(function($ionicPlatform) {
-      $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-        }
-      });
-    })
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+})
 
-    .config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
 
-      $ionicConfigProvider.tabs.style("standard")
-      $ionicConfigProvider.tabs.position("bottom")
+    .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
 
       // This block is only for web debugging
       if (!window.cordova) {
@@ -42,8 +39,6 @@ angular.module('starter',
         var version = "v2.0"; // or leave blank and default is v2.0
         $cordovaFacebookProvider.setAppID(appID, version);
       }
-      //
-
 
       // Ionic uses AngularUI Router which uses the concept of states
       // Learn more here: https://github.com/angular-ui/ui-router
@@ -56,10 +51,6 @@ angular.module('starter',
             templateUrl: 'templates/sign-in.html',
             controller: 'SignInCtrl'
           })
-          .state('forgotpassword', {
-            url: '/forgot-password',
-            templateUrl: 'templates/forgot-password.html'
-          })
 
         // setup an abstract state for the tabs directive
           .state('tab', {
@@ -70,7 +61,6 @@ angular.module('starter',
 
         // Each tab has its own nav history stack:
 
-
           .state('tab.dash', {
             url: '/dash',
             views: {
@@ -80,7 +70,6 @@ angular.module('starter',
               }
             }
           })
-
           .state('tab.chats', {
             url: '/chats',
             views: {
@@ -132,4 +121,56 @@ angular.module('starter',
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/sign-in');
 
-    });
+    })
+
+
+.directive('noScroll', function($document) {
+
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+
+      $document.on('touchmove', function(e) {
+        e.preventDefault();
+      });
+    }
+  }
+})
+
+
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+  var cardTypes = [{
+    title: 'Swipe down to clear the card',
+    image: 'img/pic.png'
+  }, {
+    title: 'Where is this?',
+    image: 'img/pic.png'
+  }, {
+    title: 'What kind of grass is this?',
+    image: 'img/pic2.png'
+  }, {
+    title: 'What beach is this?',
+    image: 'img/pic3.png'
+  }, {
+    title: 'What kind of clouds are these?',
+    image: 'img/pic4.png'
+  }];
+
+  $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+
+  $scope.cardSwiped = function(index) {
+    $scope.addCard();
+  };
+
+  $scope.cardDestroyed = function(index) {
+    $scope.cards.splice(index, 1);
+  };
+
+  $scope.addCard = function() {
+    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+    newCard.id = Math.random();
+    $scope.cards.push(angular.extend({}, newCard));
+  }
+})
+
+

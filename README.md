@@ -44,6 +44,11 @@ File transfer:
 ```bash
 $ cordova plugin add org.apache.cordova.file-transfer
 ```
+Geolocation:
+```bash
+$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+```
+
 
 ### 2. Install Ionic
 

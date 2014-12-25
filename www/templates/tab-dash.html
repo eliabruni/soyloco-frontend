@@ -1,28 +1,33 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
+  <ion-pane>
+
+    <swipe-cards>
+      <swipe-card on-card-swipe="cardSwiped()" id="start-card">
+        Swipe down for a new card
+      </swipe-card>
+      <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+        <div ng-controller="CardCtrl">
+          <div class="image"  ng-click="goAway()">
+            <img ng-src="{{card.image}}">
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
+      </swipe-card>
+    </swipe-cards>
+
+
+    <swipe-cards2>
+      <swipe-card2 on-card-swipe="cardSwiped()" id="start-card2">
+        Swipe down for a new card
+      </swipe-card2>
+      <swipe-card2 ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+        <div ng-controller="CardCtrl">
+          <div class="image" ng-click="goAway()">
+            <img ng-src="{{card.image}}"  >
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
-  </ion-content>
+      </swipe-card2>
+    </swipe-cards2>
+
+  </ion-pane>
+
 </ion-view>

@@ -1,165 +1,96 @@
-/* Empty. Add your own CSS if you like */
-
-/*************************************
-*   LOGIN
-*/
-
-.login-slider {
-    height: 75%;
-}
-
-.slider {
-    height: 100%;
-}
-.slider-slide {
-    padding-top: 40px;
-    background-color: #ffffff;
-    text-align: center;
-    font-size: 28px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-}
-
-#facebook-logo {
-    width: 90% ;
-    margin-left: auto ;
-    margin-right: auto ;
-    background-color:#ffffff;
-
-}
-
-.facebook-button {
-    background-color: #3b5998;
-    color: #ffffff;
-    border-radius: 10px 10px 10px 10px;
-    font-size: 19px;
-}
-
-
-#facebook-disclaimer {
-    color: #000000;
-    width: 90% ;
-    margin-left: auto ;
-    margin-right: auto ;
-}
-
-#list {
-    width: 170px;
-    margin: 30px auto;
-    font-size: 20px;
-}
-#list ol {
-    margin-top: 30px;
-}
-#list ol li {
-    text-align: left;
-    list-style: decimal;
-    margin: 10px 0px;
-}
-
-.facebook-login-loader {
-    font-size: 40px;
-    color: #ffffff;
-
-}
-
-
-
-/*************************************
-*   SWIPE
-*/
+/* Your app's CSS, go crazy, make it your own */
 
 .pane {
-    background-color: #333;
+  background-color: #333;
 }
 
 .bar.bar-transparent {
-    background-color: transparent;
-    background-image: none;
-    border: none;
+  background-color: transparent;
+  background-image: none;
+  border: none;
 }
 
 .bar .title {
-    color: #eee;
+  color: #eee;
 }
 
 .swipe-cards {
-    position: fixed;
+  position: fixed;
 }
 
 .swipe-card {
-    display: none;
-    position: fixed;
-    -webkit-transform: scale(1,1);
-    left: 50%;
-    top: 25%;
-    width: 300px;
-    height: 300px;
-    margin-left: -150px;
-    margin-top: -150px;
-    box-sizing: border-box;
-    background-color: rgb(255,255,255);
-    border-radius: 4px;
-    overflow: hidden;
-    -webkit-animation-fill-mode: forwards;
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1,1);
+  left: 50%;
+  top: 25%;
+  width: 250px;
+  height: 250px;
+  margin-left: -125px;
+  margin-top: -125px;
+  box-sizing: border-box;
+  background-color: rgb(255,255,255);
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
 }
 
 .swipe-card .title {
-    height: 40px;
-    padding: 5px;
-    line-height: 30px;
-    color: #444;
+  height: 40px;
+  padding: 5px;
+  line-height: 30px;
+  color: #444;
 }
 .swipe-card .image {
-    overflow: hidden;
-    max-height: 300px;
+  overflow: hidden;
+  max-height: 250px;
 }
 .swipe-card .button {
-    border: none;
+  border: none;
 }
 .swipe-card .image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 0px 0px 4px 4px;
+  width: 250px;
+  height: 250px;
+  border-radius: 0px 0px 4px 4px;
 }
 
 #start-card {
-    color: #fff;
-    background-color: #30BD8A;
-    line-height: 300px;
-    word-wrap: break-word;
-    border: 6px solid #4CD68E;
-    text-align: center;
+  color: #fff;
+  background-color: #30BD8A;
+  line-height: 250px;
+  word-wrap: break-word;
+  border: 6px solid #4CD68E;
+  text-align: center;
 }
 #start-card span {
-    display: inline-block;
-    line-height: 40px;
-    width: 200px;
-    font-size: 30px;
-    vertical-align: middle;
+  display: inline-block;
+  line-height: 40px;
+  width: 200px;
+  font-size: 30px;
+  vertical-align: middle;
 }
 
 #footer .button {
-    color: #fff;
+  color: #fff;
 }
 
 @-webkit-keyframes bounceIn {
-    0% {
-        -webkit-transform: scale(0,0);
-    }
-    70% {
-        -webkit-transform: scale(1.2,1.2);
-    }
-    100% {
-        -webkit-transform: scale(1,1);
-    }
+  0% {
+    -webkit-transform: scale(0,0);
+  }
+  70% {
+    -webkit-transform: scale(1.2,1.2);
+  }
+  100% {
+    -webkit-transform: scale(1,1);
+  }
 }
 
 .swipe-card.pop-in-start {
-    -webkit-transform: scale(0,0);
+  -webkit-transform: scale(0,0);
 }
 .swipe-card.pop-in {
-    -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.4s ease-out;
 }
 
 
@@ -175,82 +106,80 @@
 
 
 .swipe-cards2 {
-    position: fixed;
+  position: fixed;
 }
 
 .swipe-card2 {
-    display: none;
-    position: fixed;
-    -webkit-transform: scale(1,1);
-    left: 50%;
-    top: 75%;
-    width: 300px;
-    height: 300px;
-    margin-left: -150px;
-    margin-top: -150px;
-    box-sizing: border-box;
-    background-color: rgb(255,255,255);
-    border-radius: 4px;
-    overflow: hidden;
-    -webkit-animation-fill-mode: forwards;
+  display: none;
+  position: fixed;
+  -webkit-transform: scale(1,1);
+  left: 50%;
+  top: 75%;
+  width: 250px;
+  height: 250px;
+  margin-left: -125px;
+  margin-top: -125px;
+  box-sizing: border-box;
+  background-color: rgb(255,255,255);
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-fill-mode: forwards;
 }
 
 .swipe-card2 .title {
-    height: 40px;
-    padding: 5px;
-    line-height: 30px;
-    color: #444;
+  height: 40px;
+  padding: 5px;
+  line-height: 30px;
+  color: #444;
 }
 .swipe-card2 .image {
-    overflow: hidden;
-    max-height: 300px;
+  overflow: hidden;
+  max-height: 250px;
 }
 .swipe-card2 .button {
-    border: none;
+  border: none;
 }
 .swipe-card2 .image img {
-    width: 300px;
-    height: 300px;
-    border-radius: 0px 0px 4px 4px;
+  width: 250px;
+  height: 250px;
+  border-radius: 0px 0px 4px 4px;
 }
 
 #start-card2 {
-    color: #fff;
-    background-color: #30BD8A;
-    line-height: 300px;
-    word-wrap: break-word;
-    border: 6px solid #4CD68E;
-    text-align: center;
+  color: #fff;
+  background-color: #30BD8A;
+  line-height: 250px;
+  word-wrap: break-word;
+  border: 6px solid #4CD68E;
+  text-align: center;
 }
 #start-card2 span {
-    display: inline-block;
-    line-height: 40px;
-    width: 200px;
-    font-size: 30px;
-    vertical-align: middle;
+  display: inline-block;
+  line-height: 40px;
+  width: 200px;
+  font-size: 30px;
+  vertical-align: middle;
 }
 
 #footer .button {
-    color: #fff;
+  color: #fff;
 }
 
 @-webkit-keyframes bounceIn {
-    0% {
-        -webkit-transform: scale(0,0);
-    }
-    70% {
-        -webkit-transform: scale(1.2,1.2);
-    }
-    100% {
-        -webkit-transform: scale(1,1);
-    }
+  0% {
+    -webkit-transform: scale(0,0);
+  }
+  70% {
+    -webkit-transform: scale(1.2,1.2);
+  }
+  100% {
+    -webkit-transform: scale(1,1);
+  }
 }
 
 .swipe-card2.pop-in-start {
-    -webkit-transform: scale(0,0);
+  -webkit-transform: scale(0,0);
 }
 .swipe-card2.pop-in {
-    -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.4s ease-out;
 }
-
-

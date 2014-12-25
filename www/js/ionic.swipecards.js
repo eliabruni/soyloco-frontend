@@ -3,7 +3,7 @@
   // Get transform origin poly
   var d = document.createElement('div');
   var transformKeys = ['webkitTransformOrigin', 'transform-origin', '-webkit-transform-origin', 'webkit-transform-origin',
-    '-moz-transform-origin', 'moz-transform-origin', 'MozTransformOrigin', 'mozTransformOrigin'];
+              '-moz-transform-origin', 'moz-transform-origin', 'MozTransformOrigin', 'mozTransformOrigin'];
 
   var TRANSFORM_ORIGIN = 'webkitTransformOrigin';
   for(var i = 0; i < transformKeys.length; i++) {
@@ -14,7 +14,7 @@
   }
 
   var transitionKeys = ['webkitTransition', 'transition', '-webkit-transition', 'webkit-transition',
-    '-moz-transition', 'moz-transition', 'MozTransition', 'mozTransition'];
+              '-moz-transition', 'moz-transition', 'MozTransition', 'mozTransition'];
   var TRANSITION = 'webkitTransition';
   for(var i = 0; i < transitionKeys.length; i++) {
     if(d.style[transitionKeys[i]] !== undefined) {
@@ -263,73 +263,73 @@
 
   angular.module('ionic.contrib.ui.cards', ['ionic'])
 
-      .directive('swipeCard', ['$timeout', function($timeout) {
-        return {
-          restrict: 'E',
-          template: '<div class="swipe-card" ng-transclude></div>',
-          require: '^swipeCards',
-          replace: true,
-          transclude: true,
-          scope: {
-            onCardSwipe: '&',
-            onDestroy: '&'
-          },
-          compile: function(element, attr) {
-            return function($scope, $element, $attr, swipeCards) {
-              var el = $element[0];
+  .directive('swipeCard', ['$timeout', function($timeout) {
+    return {
+      restrict: 'E',
+      template: '<div class="swipe-card" ng-transclude></div>',
+      require: '^swipeCards',
+      replace: true,
+      transclude: true,
+      scope: {
+        onCardSwipe: '&',
+        onDestroy: '&'
+      },
+      compile: function(element, attr) {
+        return function($scope, $element, $attr, swipeCards) {
+          var el = $element[0];
 
-              // Instantiate our card view
-              var swipeableCard = new SwipeableCardView({
-                el: el,
-                onSwipe: function() {
-                  $timeout(function() {
-                    $scope.onCardSwipe();
-                  });
-                },
-                onDestroy: function() {
-                  $timeout(function() {
-                    $scope.onDestroy();
-                  });
-                },
+          // Instantiate our card view
+          var swipeableCard = new SwipeableCardView({
+            el: el,
+            onSwipe: function() {
+              $timeout(function() {
+                $scope.onCardSwipe();
               });
-              $scope.$parent.swipeCard = swipeableCard;
+            },
+            onDestroy: function() {
+              $timeout(function() {
+                $scope.onDestroy();
+              });
+            },
+          });
+          $scope.$parent.swipeCard = swipeableCard;
 
-              swipeCards.pushCard(swipeableCard);
+          swipeCards.pushCard(swipeableCard);
 
-            }
-          }
         }
-      }])
+      }
+    }
+  }])
 
-      .directive('swipeCards', ['$rootScope', function($rootScope) {
-        return {
-          restrict: 'E',
-          template: '<div class="swipe-cards" ng-transclude></div>',
-          replace: true,
-          transclude: true,
-          scope: {},
-          controller: function($scope, $element) {
-            var swipeController = new SwipeableCardController({
-            });
+  .directive('swipeCards', ['$rootScope', function($rootScope) {
+    return {
+      restrict: 'E',
+      template: '<div class="swipe-cards" ng-transclude></div>',
+      replace: true,
+      transclude: true,
+      scope: {},
+      controller: function($scope, $element) {
+        var swipeController = new SwipeableCardController({
+        });
 
-            $rootScope.$on('swipeCard.pop', function(isAnimated) {
-              swipeController.popCard(isAnimated);
-            });
+        $rootScope.$on('swipeCard.pop', function(isAnimated) {
+          swipeController.popCard(isAnimated);
+        });
 
-            return swipeController;
-          }
-        }
-      }])
+        return swipeController;
+      }
+    }
+  }])
 
-      .factory('$ionicSwipeCardDelegate', ['$rootScope', function($rootScope) {
-        return {
-          popCard: function($scope, isAnimated) {
-            $rootScope.$emit('swipeCard.pop', isAnimated);
-          },
-          getSwipebleCard: function($scope) {
-            return $scope.$parent.swipeCard;
-          }
-        }
-      }]);
+  .factory('$ionicSwipeCardDelegate', ['$rootScope', function($rootScope) {
+    return {
+      popCard: function($scope, isAnimated) {
+        $rootScope.$emit('swipeCard.pop', isAnimated);
+      },
+      getSwipebleCard: function($scope) {
+        return $scope.$parent.swipeCard;
+      }
+    }
+  }]);
 
 })(window.ionic);

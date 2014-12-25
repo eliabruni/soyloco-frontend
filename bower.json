@@ -1,10 +1,8 @@
 {
-  "name": "myApp",
+  "name": "tmp",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#master",
-    "collide": "x",
-    "ngCordova": "x",
-    "platform": "~1.3.0"
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+    "ngCordova": "x"
   }
 }
