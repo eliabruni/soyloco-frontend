@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('splash.controllers', [])
 
 
     .controller('SignInCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal, $state, $cordovaFacebook) {
@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
             .then(function (success) {
 
               // success
-              $state.go('tab.dash')
+              $state.go('tab.play')
             }, function (error) {
 
               // error
@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
                   .then(function(success) {
 
                     //success
-                    $state.go('tab.dash')
+                    $state.go('tab.play')
 
                   }, function (error) {
                     // error
@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
     })
 
 
-    .controller('DashCtrl', function($scope, $ionicSwipeCardDelegate) {
+    .controller('PlayCtrl', function($scope, $ionicSwipeCardDelegate) {
       var cardTypes = [{
         title: 'Swipe down to clear the card',
         image: 'img/pic.png'
@@ -85,24 +85,58 @@ angular.module('starter.controllers', [])
       };
     })
 
-    .controller('AccountCtrl', function($scope, $ionicLoading, $cordovaFacebook, $cordovaFile, $cordovaGeolocation, $localstorage, Geo) {
+    .controller('AccountCtrl', function($scope, $ionicLoading, $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaGeolocation, $localstorage, Geo) {
       $scope.settings = {
         enableFriends: true
       };
 
-        $cordovaGeolocation
-            .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
-            .then(function (position) {
+        // Wait for device API libraries to load
+        document.addEventListener("deviceready", onDeviceReady, false);
 
-                Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 1000, function(yourCity) {
-                    alert('Your city is: ' + yourCity);
-                    $localstorage.set('yourCity', yourCity);
+        // device APIs are available
+        function onDeviceReady() {
+
+            $cordovaGeolocation
+                .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
+                .then(function (position) {
+
+
+                    Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 1000, function (yourCity) {
+                        showConfirm(yourCity);
+                        $localstorage.set('yourCity', yourCity);
+                    });
+
+                }, function (err) {
+                    console.log("unable to find location");
+                    $scope.errorMsg = "Error : " + err.message;
+                    alert($scope.errorMsg)
                 });
+        }
 
-            }, function (err) {
-                console.log("unable to find location");
-                $scope.errorMsg = "Error : " + err.message;
+        // A confirm dialog
+        var showConfirm = function(yourCity) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Location detected: <b>' + yourCity + '<b>',
+                template: 'Is it your city?',
+                buttons: [
+                    {  text: '<b>Yes</b>',
+                        type: 'button-positive'},
+                    {
+                        text: '<b>Change</b>',
+                        onTap: function(e) {
+                            /*if (!$scope.data.wifi) {
+                                //don't allow the user to close unless he enters wifi password
+                                e.preventDefault();
+                            } else {
+                                return $scope.data.wifi;
+                            }*/
+                        }
+                    },
+                ]
             });
+            
+        };
+
 
     })
 

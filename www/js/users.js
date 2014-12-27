@@ -1,4 +1,4 @@
-angular.module('soyloco.users', [])
+angular.module('splash.users', [])
 
     .factory('Users', function($localstorage)
     {

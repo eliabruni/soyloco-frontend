@@ -1,4 +1,4 @@
-angular.module('soyloco.crawling', [])
+angular.module('splash.crawling', [])
 
 
 /**********************************************************

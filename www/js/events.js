@@ -1,4 +1,4 @@
-angular.module('soyloco.events', [])
+angular.module('splash.events', [])
 
     .factory('Events', function($localstorage)
     {

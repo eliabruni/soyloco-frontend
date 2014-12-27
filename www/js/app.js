@@ -6,15 +6,17 @@
 angular.module('starter',
     [
       'ionic',
-      'starter.controllers',
+      'splash.controllers',
       'ionic.contrib.ui.cards',
       'ionic.contrib.ui.cards2',
-      'starter.services',
-      'soyloco.storage',
-      'soyloco.geo',
-      'soyloco.crawling',
+      'splash.services',
+      'splash.directives',
+      'splash.storage',
+      'splash.geo',
+      'splash.crawling',
+      'splash.users',
       'ngCordova',
-      'soyloco.events'
+      'splash.events'
     ])
 
 .run(function($ionicPlatform) {
@@ -27,6 +29,8 @@ angular.module('starter',
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+
   });
 })
 
@@ -61,12 +65,12 @@ angular.module('starter',
 
         // Each tab has its own nav history stack:
 
-          .state('tab.dash', {
-            url: '/dash',
+          .state('tab.play', {
+            url: '/play',
             views: {
               'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+                templateUrl: 'templates/tab-play.html',
+                controller: 'PlayCtrl'
               }
             }
           })

@@ -1,4 +1,4 @@
-angular.module('soyloco.geo', [])
+angular.module('splash.geo', [])
 
     .factory('Geo', function($localstorage, $cordovaFacebook) {
         return {

@@ -1,4 +1,4 @@
-angular.module('soyloco.storage', [])
+angular.module('splash.storage', [])
 
     .factory('$localstorage', ['$window', function($window) {
         return {

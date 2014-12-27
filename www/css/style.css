@@ -1,4 +1,96 @@
-/* Your app's CSS, go crazy, make it your own */
+/*************************************
+*   LOGIN
+*/
+
+.login-slider {
+  height: 75%;
+}
+
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  padding-top: 40px;
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 28px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+#facebook-logo {
+  width: 90% ;
+  margin-left: auto ;
+  margin-right: auto ;
+  background-color:#ffffff;
+
+}
+
+.facebook-button {
+  background-color: #3b5998;
+  color: #ffffff;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 19px;
+}
+
+
+#facebook-disclaimer {
+  color: #000000;
+  width: 90% ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.facebook-login-loader {
+  font-size: 40px;
+  color: #ffffff;
+
+}
+
+
+/*************************************
+*   ACCOUNT
+*/
+
+
+.transparent {
+  background-color: transparent !important;
+}
+
+.close-modal {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+  font-size: 1.8em;
+  text-align: center;
+  z-index: 10;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+  width: 26px;
+  cursor: pointer;
+  line-height: 0px;
+  border: 1px solid #ddd;
+}
+
+
+
+/*************************************
+*   SWIPE
+*/
 
 .pane {
   background-color: #333;
@@ -23,11 +115,11 @@
   position: fixed;
   -webkit-transform: scale(1,1);
   left: 50%;
-  top: 25%;
-  width: 250px;
-  height: 250px;
-  margin-left: -125px;
-  margin-top: -125px;
+  top: 28.5%;
+  width: 230px;
+  height: 230px;
+  margin-left: -115px;
+  margin-top: -115px;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -35,22 +127,22 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-.swipe-card .title {
+/*.swipe-card .title {
   height: 40px;
   padding: 5px;
   line-height: 30px;
   color: #444;
-}
+}*/
 .swipe-card .image {
   overflow: hidden;
   max-height: 250px;
 }
-.swipe-card .button {
+/*.swipe-card .button {
   border: none;
-}
+}*/
 .swipe-card .image img {
-  width: 250px;
-  height: 250px;
+  width: 230px;
+  height: 230px;
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -70,9 +162,10 @@
   vertical-align: middle;
 }
 
+/*
 #footer .button {
   color: #fff;
-}
+}*/
 
 @-webkit-keyframes bounceIn {
   0% {
@@ -114,11 +207,11 @@
   position: fixed;
   -webkit-transform: scale(1,1);
   left: 50%;
-  top: 75%;
-  width: 250px;
-  height: 250px;
-  margin-left: -125px;
-  margin-top: -125px;
+  top: 70%;
+  width: 230px;
+  height: 230px;
+  margin-left: -115px;
+  margin-top: -115px;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -126,12 +219,12 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-.swipe-card2 .title {
+/*.swipe-card2 .title {
   height: 40px;
   padding: 5px;
   line-height: 30px;
   color: #444;
-}
+}*/
 .swipe-card2 .image {
   overflow: hidden;
   max-height: 250px;
@@ -140,8 +233,8 @@
   border: none;
 }
 .swipe-card2 .image img {
-  width: 250px;
-  height: 250px;
+  width: 230px;
+  height: 230px;
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -161,9 +254,11 @@
   vertical-align: middle;
 }
 
+/*
 #footer .button {
   color: #fff;
 }
+*/
 
 @-webkit-keyframes bounceIn {
   0% {
