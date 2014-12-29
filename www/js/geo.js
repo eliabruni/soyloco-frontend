@@ -39,18 +39,35 @@ angular.module('splash.geo', [])
                         cities[city] = counter / total;
                     }
 
+                    alert('here')
+
+                    Object.keys(cities).sort(function(a, b) {return -(cities[a] - cities[b])});
+                    //cities.sort(compare);
+
+
                     var maxP = 0;
-                    var yourCity;
+                    var myPlace;
                     for (var city in cities) {
                         var p = cities[city];
+                        alert('city: ' + city + ', p: ' + p)
                         if (p > maxP) {
                             maxP = p;
-                            yourCity = city;
+                            myPlace = city;
                         }
                     }
 
-                    return callback(yourCity);
-                };
+                    return callback(myPlace);
+                }
+
+                var compare = function(city1, city2)
+                {
+                    if (city1 < city2)
+                        return -1;
+                    if (city1 > city2)
+                        return 1;
+                    return 0;
+                }
+
 
                 $cordovaFacebook.api(getPlacesURL(latitude, longitude, radius), null).then(function (success) {
                     return requestHandler(success, callback);

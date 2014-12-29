@@ -1,0 +1,24 @@
+<ion-view view-title="Your location">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">New Contact</h1>
+      <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content class="padding">
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Location
+          </div>
+          <select>
+            <option>{{myPlace}}</option>
+            <option selected>Green</option>
+            <option>Red</option>
+          </select>
+        </label>
+
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</ion-view>

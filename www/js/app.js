@@ -19,20 +19,20 @@ angular.module('starter',
       'splash.events'
     ])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+    .run(function($ionicPlatform) {
+      $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+          StatusBar.styleDefault();
+        }
 
 
-  });
-})
+      });
+    })
 
 
     .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
@@ -120,7 +120,14 @@ angular.module('starter',
                 controller: 'AccountCtrl'
               }
             }
-          });
+          })
+
+          .state('account-pickcity', {
+            url: '/pickcity',
+            templateUrl: 'templates/pick-city.html',
+            controller: 'PickCityCtrl'
+
+          })
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/sign-in');
@@ -128,53 +135,53 @@ angular.module('starter',
     })
 
 
-.directive('noScroll', function($document) {
+    .directive('noScroll', function($document) {
 
-  return {
-    restrict: 'A',
-    link: function($scope, $element, $attr) {
+      return {
+        restrict: 'A',
+        link: function($scope, $element, $attr) {
 
-      $document.on('touchmove', function(e) {
-        e.preventDefault();
-      });
-    }
-  }
-})
+          $document.on('touchmove', function(e) {
+            e.preventDefault();
+          });
+        }
+      }
+    })
 
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
-  var cardTypes = [{
-    title: 'Swipe down to clear the card',
-    image: 'img/pic.png'
-  }, {
-    title: 'Where is this?',
-    image: 'img/pic.png'
-  }, {
-    title: 'What kind of grass is this?',
-    image: 'img/pic2.png'
-  }, {
-    title: 'What beach is this?',
-    image: 'img/pic3.png'
-  }, {
-    title: 'What kind of clouds are these?',
-    image: 'img/pic4.png'
-  }];
+    .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+      var cardTypes = [{
+        title: 'Swipe down to clear the card',
+        image: 'img/pic.png'
+      }, {
+        title: 'Where is this?',
+        image: 'img/pic.png'
+      }, {
+        title: 'What kind of grass is this?',
+        image: 'img/pic2.png'
+      }, {
+        title: 'What beach is this?',
+        image: 'img/pic3.png'
+      }, {
+        title: 'What kind of clouds are these?',
+        image: 'img/pic4.png'
+      }];
 
-  $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+      $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
-  $scope.cardSwiped = function(index) {
-    $scope.addCard();
-  };
+      $scope.cardSwiped = function(index) {
+        $scope.addCard();
+      };
 
-  $scope.cardDestroyed = function(index) {
-    $scope.cards.splice(index, 1);
-  };
+      $scope.cardDestroyed = function(index) {
+        $scope.cards.splice(index, 1);
+      };
 
-  $scope.addCard = function() {
-    var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-    newCard.id = Math.random();
-    $scope.cards.push(angular.extend({}, newCard));
-  }
-})
+      $scope.addCard = function() {
+        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+        newCard.id = Math.random();
+        $scope.cards.push(angular.extend({}, newCard));
+      }
+    })
 
 
