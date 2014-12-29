@@ -39,24 +39,20 @@ angular.module('splash.geo', [])
                         cities[city] = counter / total;
                     }
 
-                    alert('here')
+                    var sortable = [];
+                    for (var city in cities)
+                        sortable.push([city, cities[city]])
+                    sortable.sort(function(a, b) {return - (a[1] - b[1])})
 
-                    Object.keys(cities).sort(function(a, b) {return -(cities[a] - cities[b])});
-                    //cities.sort(compare);
-
-
-                    var maxP = 0;
-                    var myPlace;
-                    for (var city in cities) {
-                        var p = cities[city];
-                        alert('city: ' + city + ', p: ' + p)
-                        if (p > maxP) {
-                            maxP = p;
-                            myPlace = city;
-                        }
+                    var sortedCities = [];
+                    for (var idx in sortable) {
+                        var city = {};
+                        city['name'] =  sortable[idx][0];
+                        city['p'] =  sortable[idx][1];
+                        sortedCities[idx] = city;
                     }
 
-                    return callback(myPlace);
+                    return callback(sortedCities);
                 }
 
                 var compare = function(city1, city2)

@@ -122,13 +122,6 @@ angular.module('starter',
             }
           })
 
-          .state('account-pickcity', {
-            url: '/pickcity',
-            templateUrl: 'templates/pick-city.html',
-            controller: 'PickCityCtrl'
-
-          })
-
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/sign-in');
 

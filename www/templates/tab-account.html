@@ -16,16 +16,11 @@
             </div>
             <div class="list">
 
-                <label class="item item-input item-select">
+                <div class="item item-input item-select">
                     <div class="input-label">
-                        Location
+                        Select city
                     </div>
-                    <select>
-                        <option>{{myPlace}}</option>
-                        <option selected>Green</option>
-                        <option>Red</option>
-                    </select>
-                </label>
+                    <select ng-model="city" ng-init="city=cities[0]" ng-options="city.name for city in cities"></select></div>
 
             </div>
             <!--<ion-list>

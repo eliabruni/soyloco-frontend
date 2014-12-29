@@ -101,9 +101,9 @@ angular.module('splash.controllers', [])
                 .then(function (position) {
 
 
-                    Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (myPlace) {
-                        $scope.myPlace = myPlace;
-                        $localstorage.set('myPlace', myPlace);
+                    Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (sortedCities) {
+                        $scope.cities = sortedCities;
+                        //$localstorage.set('myPlace', myPlace);
                     });
 
                 }, function (err) {
@@ -115,66 +115,6 @@ angular.module('splash.controllers', [])
 
 
 
-    })
-
-    .controller('PickCityCtrl', function($scope, $cordovaGeolocation, Geo) {
-
-
-
-        // Wait for device API libraries to load
-        document.addEventListener("deviceready", onDeviceReady, false);
-
-        // device APIs are available
-        function onDeviceReady() {
-
-
-
-            $cordovaGeolocation
-                .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
-                .then(function (position) {
-                    var myPlaces = {};
-                    var radii = [1000, 5000, 10000, 25000, 50000, 150000];
-                    var radius;
-                    for (var idx in radii) {
-                        radius = radii[idx];
-                        alert(radius)
-                        Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, radius, function (myPlace) {
-                            alert(myPlace)
-                            myPlaces[radius] = myPlace;
-                        });
-                    }
-
-                }, function (err) {
-                    console.log("unable to find location");
-                    $scope.errorMsg = "Error : " + err.message;
-                    alert($scope.errorMsg)
-
-                })
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        $scope.clientSideList = [
-            { text: "Backbone", value: "bb" },
-            { text: "Angular", value: "ng" },
-            { text: "Ember", value: "em" },
-            { text: "Knockout", value: "ko" }
-        ];
-
-
-        $scope.data = {
-            clientSide: 'ng'
-        };
     })
 
 
