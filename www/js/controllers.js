@@ -86,9 +86,14 @@ angular.module('splash.controllers', [])
     })
 
     .controller('AccountCtrl', function($scope, $state, $ionicModal, $ionicLoading, $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaGeolocation, $localstorage, Geo) {
-        $scope.settings = {
-            enableFriends: true
-        };
+
+
+        $scope.showView = false;
+
+        $ionicLoading.show({
+            template: 'loading'
+        });
+
 
         // Wait for device API libraries to load
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -103,6 +108,8 @@ angular.module('splash.controllers', [])
 
                     Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (sortedCities) {
                         $scope.cities = sortedCities;
+                        $ionicLoading.hide();
+                        $scope.showView = true;
                         //$localstorage.set('myPlace', myPlace);
                     });
 

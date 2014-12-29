@@ -122,6 +122,15 @@ angular.module('starter',
             }
           })
 
+          .state('loading', {
+            url: '/loading',
+            views: {
+              'tab-account': {
+                templateUrl: 'templates/loading.html'
+              }
+            }
+          })
+
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/sign-in');
 
