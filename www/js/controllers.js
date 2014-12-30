@@ -136,6 +136,13 @@ angular.module('splash.controllers', [])
             { text: "Bars", checked: false }
         ];
 
+        // set localStorage when function is called after a value is changed
+        $scope.updateStorage = function(item, $localstorage){
+
+            $localstorage.setObject(item.text, item.checked);
+            alert($localstorage.getObject(item.text))
+        };
+
     })
 
 
