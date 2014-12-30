@@ -87,40 +87,54 @@ angular.module('splash.controllers', [])
 
     .controller('AccountCtrl', function($scope, $state, $ionicModal, $ionicLoading, $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaGeolocation, $localstorage, Geo) {
 
+        $scope.showView = true;
 
-        $scope.showView = false;
+        if ($localstorage.get('myPlace') == null) {
+            $scope.showView = false;
 
-        $ionicLoading.show({
-            template: 'loading'
-        });
-
-
-        // Wait for device API libraries to load
-        document.addEventListener("deviceready", onDeviceReady, false);
-
-        // device APIs are available
-        function onDeviceReady() {
-
-            $cordovaGeolocation
-                .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
-                .then(function (position) {
+            $ionicLoading.show({
+                template: 'loading'
+            });
 
 
-                    Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (sortedCities) {
-                        $scope.cities = sortedCities;
-                        $ionicLoading.hide();
-                        $scope.showView = true;
-                        //$localstorage.set('myPlace', myPlace);
+            // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // device APIs are available
+            function onDeviceReady() {
+
+                $cordovaGeolocation
+                    .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
+                    .then(function (position) {
+
+
+                        Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (cities) {
+                            $scope.cities = cities;
+                            $ionicLoading.hide();
+                            $scope.showView = true;
+                            $localstorage.set('myPlace', cities[0]);
+                            $localstorage.setObject('cities', cities);
+                        });
+
+                    }, function (err) {
+                        console.log("unable to find location");
+                        $scope.errorMsg = "Error : " + err.message;
+                        alert($scope.errorMsg)
                     });
-
-                }, function (err) {
-                    console.log("unable to find location");
-                    $scope.errorMsg = "Error : " + err.message;
-                    alert($scope.errorMsg)
-                });
+            }
+        } else {
+            $scope.cities = $localstorage.getObject('cities');
         }
 
+    })
 
+
+    .controller('SelectEvetTypesCtrl', function($scope) {
+        $scope.devList = [
+            { text: "Clubs", checked: true },
+            { text: "Parties", checked: false },
+            { text: "Bars", checked: false }
+        ];
 
     })
 

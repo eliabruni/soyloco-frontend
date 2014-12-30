@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter',
+angular.module('splash',
     [
       'ionic',
       'splash.controllers',
@@ -122,11 +122,12 @@ angular.module('starter',
             }
           })
 
-          .state('loading', {
-            url: '/loading',
+          .state('tab.select-event-types', {
+            url: '/select-event-types',
             views: {
               'tab-account': {
-                templateUrl: 'templates/loading.html'
+                templateUrl: 'templates/select-event-types.html',
+                controller: 'SelectEvetTypesCtrl'
               }
             }
           })
@@ -135,55 +136,3 @@ angular.module('starter',
       $urlRouterProvider.otherwise('/sign-in');
 
     })
-
-
-    .directive('noScroll', function($document) {
-
-      return {
-        restrict: 'A',
-        link: function($scope, $element, $attr) {
-
-          $document.on('touchmove', function(e) {
-            e.preventDefault();
-          });
-        }
-      }
-    })
-
-
-    .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
-      var cardTypes = [{
-        title: 'Swipe down to clear the card',
-        image: 'img/pic.png'
-      }, {
-        title: 'Where is this?',
-        image: 'img/pic.png'
-      }, {
-        title: 'What kind of grass is this?',
-        image: 'img/pic2.png'
-      }, {
-        title: 'What beach is this?',
-        image: 'img/pic3.png'
-      }, {
-        title: 'What kind of clouds are these?',
-        image: 'img/pic4.png'
-      }];
-
-      $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-
-      $scope.cardSwiped = function(index) {
-        $scope.addCard();
-      };
-
-      $scope.cardDestroyed = function(index) {
-        $scope.cards.splice(index, 1);
-      };
-
-      $scope.addCard = function() {
-        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-        newCard.id = Math.random();
-        $scope.cards.push(angular.extend({}, newCard));
-      }
-    })
-
-
