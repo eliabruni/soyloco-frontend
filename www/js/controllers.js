@@ -89,7 +89,7 @@ angular.module('splash.controllers', [])
 
         $scope.showView = true;
 
-        if ($localstorage.get('myPlace') == null) {
+        if ($localstorage.getObject('myCity') == null) {
             $scope.showView = false;
 
             $ionicLoading.show({
@@ -110,9 +110,10 @@ angular.module('splash.controllers', [])
 
                         Geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (cities) {
                             $scope.cities = cities;
+                            $scope.myCity = cities[0];
                             $ionicLoading.hide();
                             $scope.showView = true;
-                            $localstorage.set('myPlace', cities[0]);
+                            $localstorage.setObject('myCity', cities[0]);
                             $localstorage.setObject('cities', cities);
                         });
 
@@ -124,23 +125,40 @@ angular.module('splash.controllers', [])
             }
         } else {
             $scope.cities = $localstorage.getObject('cities');
+            $scope.myCity = $localstorage.getObject('myCity');
         }
+
+
+        // set localStorage when function is called after a value is changed
+        $scope.updateStorage = function(city){
+
+            $localstorage.setObject('cities', $scope.cities);
+            $localstorage.setObject('myCity', city);
+            //$scope.myCity = $localstorage.getObject('myCity');
+        };
 
     })
 
 
-    .controller('SelectEvetTypesCtrl', function($scope) {
-        $scope.devList = [
-            { text: "Clubs", checked: true },
-            { text: "Parties", checked: false },
-            { text: "Bars", checked: false }
-        ];
+    .controller('SelectCategoriesCtrl', function($scope, $localstorage) {
+
+        var categories = $localstorage.getObject('categories');
+        if (categories == null) {
+            $scope.categories = [
+                {id:0, name: "Clubs", checked: true },
+                {id:1, name: "Parties", checked: true },
+                {id:2, name: "Bars", checked: true }
+            ];
+            $localstorage.setObject('categories', $scope.categories);
+        } else {
+            $scope.categories = categories;
+        }
 
         // set localStorage when function is called after a value is changed
-        $scope.updateStorage = function(item, $localstorage){
-
-            $localstorage.setObject(item.text, item.checked);
-            alert($localstorage.getObject(item.text))
+        $scope.updateStorage = function(category){
+            var categories = $localstorage.getObject('categories');
+            categories[category.id] = category;
+            $localstorage.setObject('categories', categories);
         };
 
     })

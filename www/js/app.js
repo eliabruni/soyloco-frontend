@@ -122,12 +122,12 @@ angular.module('splash',
             }
           })
 
-          .state('tab.select-event-types', {
-            url: '/select-event-types',
+          .state('tab.select-categories', {
+            url: '/select-categories',
             views: {
               'tab-account': {
-                templateUrl: 'templates/select-event-types.html',
-                controller: 'SelectEvetTypesCtrl'
+                templateUrl: 'templates/select-categories.html',
+                controller: 'SelectCategoriesCtrl'
               }
             }
           })

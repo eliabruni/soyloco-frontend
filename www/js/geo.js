@@ -47,6 +47,7 @@ angular.module('splash.geo', [])
                     var sortedCities = [];
                     for (var idx in sortable) {
                         var city = {};
+                        city['id'] = idx;
                         city['name'] =  sortable[idx][0];
                         city['p'] =  sortable[idx][1];
                         sortedCities[idx] = city;

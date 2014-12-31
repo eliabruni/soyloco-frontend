@@ -21,9 +21,9 @@
                     <div class="input-label">
                         City
                     </div>
-                    <select ng-model="city" ng-init="city=cities[0]" ng-options="city.name for city in cities"></select>
+                    <select ng-model="city" ng-init="city=cities[myCity.id]" ng-options="city.name for city in cities" ng-change="updateStorage(city)"></select>
                 </div>
-                <a class="item" href="#/tab/select-event-types">
+                <a class="item" href="#/tab/select-categories">
                         Event categories
                 </a>
 
