@@ -30,7 +30,6 @@ angular.module('splash',
           StatusBar.styleDefault();
         }
 
-
       });
     })
 
