@@ -6,6 +6,12 @@
 angular.module('splash',
     [
       'ionic',
+
+
+      'splash.signin.ctrl',
+      'splash.tabAccount.ctrl',
+      'splash.tabPlay.ctrl',
+
       'splash.controllers',
       'ionic.contrib.ui.cards',
       'ionic.contrib.ui.cards2',
@@ -50,9 +56,9 @@ angular.module('splash',
       $stateProvider
 
           .state('signin', {
-            url: '/sign-in',
-            templateUrl: 'templates/sign-in.html',
-            controller: 'SignInCtrl'
+            url: '/signin',
+            templateUrl: 'templates/signin.html',
+            controller: 'SigninCtrl'
           })
 
         // setup an abstract state for the tabs directive
@@ -69,7 +75,7 @@ angular.module('splash',
             views: {
               'tab-dash': {
                 templateUrl: 'templates/tab-play.html',
-                controller: 'PlayCtrl'
+                controller: 'TabPlayCtrl'
               }
             }
           })
@@ -116,7 +122,7 @@ angular.module('splash',
             views: {
               'tab-account': {
                 templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
+                controller: 'TabAccountCtrl'
               }
             }
           })
@@ -132,6 +138,6 @@ angular.module('splash',
           })
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/sign-in');
+      $urlRouterProvider.otherwise('/signin');
 
     })
