@@ -1,4 +1,4 @@
-// Ionic Starter App
+// Ionic Splash App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -11,8 +11,10 @@ angular.module('splash',
       'splash.signin.ctrl',
       'splash.tabAccount.ctrl',
       'splash.tabPlay.ctrl',
+      'splash.tabEvents.ctrl',
+      'splash.selectCategories.ctrl',
+      'splash.eventDetail.ctrl',
 
-      'splash.controllers',
       'ionic.contrib.ui.cards',
       'ionic.contrib.ui.cards2',
       'splash.services',
@@ -79,39 +81,21 @@ angular.module('splash',
               }
             }
           })
-          .state('tab.chats', {
-            url: '/chats',
-            views: {
-              'tab-chats': {
-                templateUrl: 'templates/tab-chats.html',
-                controller: 'ChatsCtrl'
-              }
-            }
-          })
-          .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-              'tab-chats': {
-                templateUrl: 'templates/chat-detail.html',
-                controller: 'ChatDetailCtrl'
-              }
-            }
-          })
 
           .state('tab.events', {
             url: '/events',
             views: {
               'tab-events': {
                 templateUrl: 'templates/tab-events.html',
-                controller: 'EventsCtrl'
+                controller: 'TabEventsCtrl'
               }
             }
           })
-          .state('tab.event-detail', {
+          .state('tab.eventDetail', {
             url: '/event/:eventId',
             views: {
               'tab-events': {
-                templateUrl: 'templates/event-detail.html',
+                templateUrl: 'templates/eventDetail.html',
                 controller: 'EventDetailCtrl'
               }
             }
@@ -127,11 +111,11 @@ angular.module('splash',
             }
           })
 
-          .state('tab.select-categories', {
-            url: '/select-categories',
+          .state('tab.selectCategories', {
+            url: '/selectCategories',
             views: {
               'tab-account': {
-                templateUrl: 'templates/select-categories.html',
+                templateUrl: 'templates/selectCategories.html',
                 controller: 'SelectCategoriesCtrl'
               }
             }
