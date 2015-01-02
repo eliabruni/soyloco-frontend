@@ -42,7 +42,13 @@ angular.module('splash',
     })
 
 
-    .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+    .config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+
+      // note that you can also chain conf
+      $ionicConfigProvider.tabs.position('bottom');
+      $ionicConfigProvider.tabs.style('standard');
+      $ionicConfigProvider.views.transition('none');
+      $ionicConfigProvider.backButton.icon('ion-arrow-left-c');
 
       // This block is only for web debugging
       if (!window.cordova) {
