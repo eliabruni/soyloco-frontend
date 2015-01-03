@@ -19,6 +19,35 @@ angular.module('splash.tabAccount.ctrl', [])
             // device APIs are available
             function onDeviceReady() {
 
+                $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
+                    .then(function (success) {
+                        var photo = success.data;
+                        var fileTransferDir = cordova.file.externalDataDirectory;
+
+                        var hostPath = photo.url;
+                        var clientPath = fileTransferDir + 'test.jpg';
+                        var fileTransferOptions = {};
+
+                        $cordovaFile.downloadFile(hostPath, clientPath, true, fileTransferOptions).then (function(result) {
+                            // Success!
+                            alert('image download success!')
+                            $scope.profilePhoto = clientPath;
+                            $localstorage.set('profilePhoto', $scope.profilePhoto)
+
+                        }, function(err) {
+                            // Error
+                            //alert(err)
+                        }, function (progress) {
+                            // constant progress updates
+                        });
+
+                    }, function (error) {
+                        alert('error')
+
+                        console.log(error);
+                    });
+
+
                 $cordovaGeolocation
                     .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
                     .then(function (position) {
@@ -42,6 +71,8 @@ angular.module('splash.tabAccount.ctrl', [])
         } else {
             $scope.cities = $localstorage.getObject('cities');
             $scope.myCity = $localstorage.getObject('myCity');
+            $scope.profilePhoto = $localstorage.get('profilePhoto');
+
         }
 
 
