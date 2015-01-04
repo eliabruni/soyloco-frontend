@@ -7,21 +7,26 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.showView = true;
 
-        if ($localstorage.getObject('myCity') == null || $localstorage.getObject('profilePhoto') == null) {
+        if ($localstorage.getObject('profilePhoto') == null || $localstorage.getObject('myCity') == null) {
             $scope.showView = false;
 
             $ionicLoading.show({
                 template: 'loading'
             });
 
+            if ($localstorage.getObject('profilePhoto') == null) {
+                $scope.profilePhotoReady = false;
+            }
+
+            if ($localstorage.getObject('myCity') == null) {
+                $scope.profileInfoReady = false;
+            }
+
             // Wait for device API libraries to load
             document.addEventListener("deviceready", onDeviceReady, false);
 
             // device APIs are available
             function onDeviceReady() {
-
-                $scope.profilePhotoReady = false;
-                $scope.profileInfoReady = false;
 
                 $scope.$watchGroup(['profilePhotoReady', 'profileInfoReady'], function(newValues, oldValues) {
                     if (newValues[0] && newValues[1]) {
@@ -30,19 +35,23 @@ angular.module('splash.tabAccount.ctrl', [])
                     }
                 });
 
-                getProfilePhoto()
-                    .then(function(success) {
-                        $scope.profilePhotoReady = true;
-                    }, function (error) {
-                        // error
-                    });
+                if(!$scope.profilePhotoReady) {
+                    getProfilePhoto()
+                        .then(function(success) {
+                            $scope.profilePhotoReady = true;
+                        }, function (error) {
+                            // error
+                        });
+                }
 
-                getCities()
-                    .then(function(success) {
-                        $scope.profileInfoReady = true;
-                    }, function (error) {
-                        // error
-                    });
+                if (!$scope.profileInfoReady) {
+                    getCities()
+                        .then(function(success) {
+                            $scope.profileInfoReady = true;
+                        }, function (error) {
+                            // error
+                        })
+                }
             }
         } else {
             $scope.cities = $localstorage.getObject('cities');
