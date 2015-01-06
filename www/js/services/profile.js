@@ -3,19 +3,30 @@ angular.module('splash.profile', [])
     .factory('$profile', ['$window', '$q', '$cordovaFacebook', '$cordovaFile', '$localstorage', '$cordovaGeolocation', '$geo',
         function($window, $q, $cordovaFacebook, $cordovaFile, $localstorage, $cordovaGeolocation, $geo) {
 
-            function getProfilePhoto() {
-
-                alert('profile 0')
+            function getBasicInfo() {
 
                 var q = $q.defer();
 
-                alert('profile 1')
+                $cordovaFacebook.api("me", ["public_profile"])
+                    .then(function (success) {
+
+                        var user = success;
+                        q.resolve(user);
+
+                    }, function (err) {
+                        // Error
+                        q.reject();
+                    });
+
+                return q.promise;
+            }
+
+            function getProfilePhoto() {
+
+                var q = $q.defer();
 
                 $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
                     .then(function (success) {
-
-                        alert('profile 2')
-
 
                         var photo = success.data;
                         var fileTransferDir = cordova.file.externalDataDirectory;
@@ -26,8 +37,6 @@ angular.module('splash.profile', [])
 
                         $cordovaFile.downloadFile(hostPath, clientPath, true, fileTransferOptions).then(function (result) {
                             // Success!
-                            alert('profile 3')
-
                             q.resolve(clientPath);
 
                         }, function (err) {
@@ -46,17 +55,11 @@ angular.module('splash.profile', [])
 
             function getCities() {
 
-                alert('0b')
-
                 var d = $q.defer();
-
-                alert('1b')
 
                 $cordovaGeolocation
                     .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
                     .then(function (position) {
-
-                        alert('location obtained')
 
                         $geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (cities) {
                             d.resolve(cities);
@@ -70,8 +73,6 @@ angular.module('splash.profile', [])
             }
 
             function retrieveProfileInfo() {
-
-                alert('0x')
 
                 var d = $q.defer();
 
@@ -90,7 +91,6 @@ angular.module('splash.profile', [])
 
                     $info.getProfilePhoto()
                         .then(function (success) {
-                            alert(success)
                             var profilePhoto = success;
                         }, function (error) {
                             // error
@@ -110,6 +110,7 @@ angular.module('splash.profile', [])
             }
 
             return {
+                getBasicInfo : getBasicInfo,
                 getProfilePhoto :getProfilePhoto,
                 getCities : getCities
             }

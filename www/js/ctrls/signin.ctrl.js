@@ -37,21 +37,24 @@ angular.module('splash.signin.ctrl', [])
                              *
                              * ********************************************************/
 
+                            // TODO: refactor this as a $profile function
+
                             // Wait for device API libraries to load
                             document.addEventListener("deviceready", onDeviceReady, false);
 
                             // device APIs are available
                             function onDeviceReady() {
 
+                                $scope.cityInfoReady = false;
+                                $scope.basicProfileReady = false;
                                 $scope.profilePhotoReady = false;
-                                $scope.profileInfoReady = false;
 
                                 $ionicLoading.show({
                                     template: 'loading'
                                 });
 
-                                $scope.$watchGroup(['profilePhotoReady', 'profileInfoReady'], function(newValues, oldValues) {
-                                    if (newValues[0] && newValues[1]) {
+                                $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
+                                    if (newValues[0] && newValues[1] && newValues[2]) {
                                         $ionicLoading.hide();
                                         $scope.showView = true;
                                         $state.go('tab.play');
@@ -63,16 +66,30 @@ angular.module('splash.signin.ctrl', [])
                                         var cities = success;
                                         $localstorage.setObject('myCity', cities[0]);
                                         $localstorage.setObject('cities', cities);
-                                        $scope.profileInfoReady = true;
+                                        $scope.cityInfoReady = true;
+                                        
 
-                                        $profile.getProfilePhoto()
+                                        $profile.getBasicInfo()
                                             .then(function(success) {
-                                                var profilePhoto = success;
-                                                $localstorage.set('profilePhoto', profilePhoto);
-                                                $scope.profilePhotoReady = true;
+                                                var basicInfo = success;
+                                                $localstorage.setObject('basicInfo', basicInfo);
+                                                $scope.basicProfileReady = true;
+
+
+                                                $profile.getProfilePhoto()
+                                                    .then(function(success) {
+                                                        var profilePhoto = success;
+                                                        $localstorage.set('profilePhoto', profilePhoto);
+                                                        $scope.profilePhotoReady = true;
+
+                                                    }, function (error) {
+                                                        // error
+                                                    });
+
                                             }, function (error) {
                                                 // error
                                             });
+
 
                                     }, function (error) {
                                         // error

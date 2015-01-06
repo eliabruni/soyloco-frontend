@@ -7,11 +7,11 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.showView = true;
 
-        if ($localstorage.get('profilePhoto') == null || $localstorage.getObject('myCity') == null) {
+        if ($localstorage.get('profilePhoto') == null ||  $localstorage.getObject('basicInfo') == null || $localstorage.getObject('myCity') == null) {
 
-            alert('inside check')
 
-            $scope.showView = false;
+            alert('Profile info problems, need to deal with this case')
+           /* $scope.showView = false;
 
             $ionicLoading.show({
                 template: 'loading'
@@ -63,10 +63,11 @@ angular.module('splash.tabAccount.ctrl', [])
                             // error
                         })
                 }
-            }
+            }*/
         } else {
             $scope.cities = $localstorage.getObject('cities');
             $scope.myCity = $localstorage.getObject('myCity');
+            $scope.basicInfo = $localstorage.getObject('basicInfo');
             $scope.profilePhoto = $localstorage.get('profilePhoto');
         }
 
