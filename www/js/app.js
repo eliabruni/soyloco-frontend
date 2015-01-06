@@ -7,7 +7,6 @@ angular.module('splash',
     [
       'ionic',
 
-
       'splash.signin.ctrl',
       'splash.tabAccount.ctrl',
       'splash.tabPlay.ctrl',
@@ -17,17 +16,17 @@ angular.module('splash',
 
       'ionic.contrib.ui.cards',
       'ionic.contrib.ui.cards2',
-      'splash.services',
       'splash.directives',
       'splash.storage',
       'splash.geo',
       'splash.crawling',
       'splash.users',
       'ngCordova',
-      'splash.events'
+      'splash.events',
+      'splash.profile'
     ])
 
-    .run(function($ionicPlatform) {
+    .run(function($rootScope, $ionicPlatform, $ionicLoading, $profile) {
       $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -37,6 +36,8 @@ angular.module('splash',
         if (window.StatusBar) {
           StatusBar.styleDefault();
         }
+
+
 
       });
     })
