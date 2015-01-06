@@ -78,4 +78,13 @@ angular.module('splash.tabAccount.ctrl', [])
             $localstorage.setObject('myCity', city);
         };
 
+        $scope.logout = function() {
+            $cordovaFacebook.logout().then(function (success) {
+                // success
+                $state.go('signin');
+            }, function (error) {
+                // error
+            })
+        }
+
     })

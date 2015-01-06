@@ -50,7 +50,7 @@ angular.module('splash.signin.ctrl', [])
                                 $scope.profilePhotoReady = false;
 
                                 $ionicLoading.show({
-                                    template: 'loading'
+                                    template: 'Connecting with Facebook...'
                                 });
 
                                 $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
@@ -67,7 +67,7 @@ angular.module('splash.signin.ctrl', [])
                                         $localstorage.setObject('myCity', cities[0]);
                                         $localstorage.setObject('cities', cities);
                                         $scope.cityInfoReady = true;
-                                        
+
 
                                         $profile.getBasicInfo()
                                             .then(function(success) {
