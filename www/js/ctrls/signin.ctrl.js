@@ -56,7 +56,6 @@ angular.module('splash.signin.ctrl', [])
                                 $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
                                     if (newValues[0] && newValues[1] && newValues[2]) {
                                         $ionicLoading.hide();
-                                        $scope.showView = true;
                                         $state.go('tab.play');
                                     }
                                 });

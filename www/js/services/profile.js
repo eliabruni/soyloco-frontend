@@ -32,7 +32,7 @@ angular.module('splash.profile', [])
                         var fileTransferDir = cordova.file.externalDataDirectory;
 
                         var hostPath = photo.url;
-                        var clientPath = fileTransferDir + 'test.jpg';
+                        var clientPath = fileTransferDir + 'profilePhoto.jpg';
                         var fileTransferOptions = {};
 
                         $cordovaFile.downloadFile(hostPath, clientPath, true, fileTransferOptions).then(function (result) {
@@ -87,7 +87,6 @@ angular.module('splash.profile', [])
                             d.resolve();
                         }
                     });
-
 
                     $info.getProfilePhoto()
                         .then(function (success) {
