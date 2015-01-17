@@ -122,14 +122,14 @@ ant release
 ```bash
 cd ../../../.. (this should bring you back to the project root)
 ```
-#### Facebook login
 
-Configure your keyhash on the facebook app (step 3).
+##### Keyhash
 
-#### There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
+Configure your keyhash on the facebook app (already done).
 
+### 5. Run/emulate Soyloco-frontend
 
-#### Now we are ready to build and run/emulate Soyloco-frontend
+Now we are ready to build and run/emulate Soyloco-frontend
 Ionic apps are based on Cordova, so we can use the Cordova utilities
 to build, test, and deploy our apps, but Ionic provides simple ways to do
 the same with the ionic utility (substitute android for ios to build for ios):
@@ -142,7 +142,7 @@ $ ionic run android
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
 
 
-### 5. Using Sass
+### 6. Using Sass
 
 This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
 Sass's great features.
