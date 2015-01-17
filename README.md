@@ -42,7 +42,7 @@ cordova plugin add org.apache.cordova.file
 
 File transfer:
 ```bash
-$ cordova plugin add org.apache.cordova.file-transfer
+cordova plugin add org.apache.cordova.file-transfer
 ```
 Geolocation:
 ```bash
@@ -77,7 +77,7 @@ cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git -
 
 #### Android
 ```bash
-$ ionic platform add android
+ionic platform add android
 ```
 
 ##### Build and deploy
@@ -93,10 +93,10 @@ cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git -
 android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
 ```
 ```bash
-android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
+android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/splash-FacebookLib"
 ```
 ```bash
-android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
+android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/splash-FacebookLib" --target android-19
 ```
 ```bash
 cd platforms/android/
