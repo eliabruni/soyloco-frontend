@@ -66,35 +66,62 @@ $ bower install
 
 ### 4. Add Phonegap Facebook plugin
 
+#### IOS
+```bash
+$ ionic platform add ios
+```
+
+```bash
+cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
+```
+
 #### Android
 ```bash
 $ ionic platform add android
 ```
 
-#### Add Phonegap Facebook plugin for Android
-phonegap facebook plugin available at [phonegap-facebook-plugin](https://github.com/phonegap/phonegap-facebook-plugin.git)
-
-
-#### How to build and deploy?
+##### Build and deploy
 
 The folks over [here](https://github.com/Wizcorp/phonegap-facebook-plugin/blob/develop/platforms/android/README.md) wrote this
 life saver of a command line process that saved my day. So whatever goes forward is a repetition but specific to this project.
 (The steps below are for ionic and android. The ios version works with a regular plugin add)
 
+```bash
 1. cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
-   (replace the app_id and app_name with an app that you have created on facebook)
+```
+```bash
 2. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
+```
+```bash
 3. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
+```
+```bash
 4. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
+```
+```bash
 5. cd platforms/android/
+```
+```bash
 6. ant clean
+```
+```bash
 7. cd com.phonegap.plugins.facebookconnect/FacebookLib
+```
+```bash
 8. ant clean
+```
+```bash
 9. open -e AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
+```
+```bash
 10. mkdir ant-build
+```
+```bash
 11. ant release
+```
+```bash
 12. cd ../../../.. (this should bring you back to the project root)
-
+```
 #### Facebook login
 
 Configure your keyhash on the facebook app (step 3).
