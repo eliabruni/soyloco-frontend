@@ -15,28 +15,28 @@ require Cordova plugins.
 
 Enter the project
 ```bash
-$ cd soyloco-frontend
+cd soyloco-frontend
 ```
 
 Basic device information:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 ```
 
 Network Connection and Battery Events:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
 ```
 
 Device orientation:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
 ```
 
 
 File:
 ```bash
-$ cordova plugin add org.apache.cordova.file
+cordova plugin add org.apache.cordova.file
 ```
 
 
@@ -46,7 +46,7 @@ $ cordova plugin add org.apache.cordova.file-transfer
 ```
 Geolocation:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
 ```
 
 
@@ -55,20 +55,20 @@ $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geol
 Make sure the `ionic` utility is installed:
 
 ```bash
-$ sudo npm install -g ionic
+sudo npm install -g ionic
 ```
 
 ### 3. Install dependencies and add the Android platform
 
 ```bash
-$ bower install
+bower install
 ```
 
 ### 4. Add Phonegap Facebook plugin
 
 #### IOS
 ```bash
-$ ionic platform add ios
+ionic platform add ios
 ```
 
 ```bash
@@ -87,40 +87,40 @@ life saver of a command line process that saved my day. So whatever goes forward
 (The steps below are for ionic and android. The ios version works with a regular plugin add)
 
 ```bash
-1. cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
+cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
 ```
 ```bash
-2. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
+android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
 ```
 ```bash
-3. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
+android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
 ```
 ```bash
-4. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
+android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
 ```
 ```bash
-5. cd platforms/android/
+cd platforms/android/
 ```
 ```bash
-6. ant clean
+ant clean
 ```
 ```bash
-7. cd com.phonegap.plugins.facebookconnect/FacebookLib
+cd com.phonegap.plugins.facebookconnect/FacebookLib
 ```
 ```bash
-8. ant clean
+ant clean
 ```
 ```bash
-9. open -e AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
+open -e AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
 ```
 ```bash
-10. mkdir ant-build
+mkdir ant-build
 ```
 ```bash
-11. ant release
+ant release
 ```
 ```bash
-12. cd ../../../.. (this should bring you back to the project root)
+cd ../../../.. (this should bring you back to the project root)
 ```
 #### Facebook login
 
