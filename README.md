@@ -125,7 +125,22 @@ cd ../../../.. (this should bring you back to the project root)
 
 ##### Keyhash
 
-Configure your keyhash on the facebook app (already done).
+I used following steps to generate a Key Hash for my app in facebook: (I am using Mac OSX 10.8)
+
+First open a terminal (open a command prompt in windows).
+Navigate in the terminal to the directory where your Android debug.keystore is stored.
+Mostly it will located under “/Users/user_name/.android/” (In Windows will be C:\Documents and Settings\.android).
+Once you are in the “.android” directory, run the following command.
+
+```bash
+keytool -exportcert -alias androiddebugkey -keystore debug.keystore | openssl sha1 -binary | openssl base64
+```
+When it prompts you for a password, type android and hit Enter
+
+Copy the value printed in the terminal that ends with an “=” and paste it in the Key Hash field in Facebook.
+Then click the Save Changes button.
+
+
 
 ### 5. Run/emulate Soyloco-frontend
 
