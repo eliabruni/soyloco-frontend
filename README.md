@@ -64,12 +64,14 @@ $ sudo npm install -g ionic
 $ bower install
 ```
 
-## 4. Android
+### 4. Add Phonegap Facebook plugin
+
+#### Android
 ```bash
 $ ionic platform add android
 ```
 
-### 4. Add Phonegap Facebook plugin for Android
+#### Add Phonegap Facebook plugin for Android
 phonegap facebook plugin available at [phonegap-facebook-plugin](https://github.com/phonegap/phonegap-facebook-plugin.git)
 
 
@@ -88,7 +90,7 @@ life saver of a command line process that saved my day. So whatever goes forward
 6. ant clean
 7. cd com.phonegap.plugins.facebookconnect/FacebookLib
 8. ant clean
-9. open -e AndroidManifest.xml  (<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />)
+9. open -e AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
 10. mkdir ant-build
 11. ant release
 12. cd ../../../.. (this should bring you back to the project root)
