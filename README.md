@@ -72,7 +72,7 @@ ionic platform add ios
 ```
 
 ```bash
-cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
+cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
 ```
 
 #### Android
@@ -105,13 +105,13 @@ cd platforms/android/
 ant clean
 ```
 ```bash
-cd com.phonegap.plugins.facebookconnect/FacebookLib
+cd com.phonegap.plugins.facebookconnect/splash-FacebookLib
 ```
 ```bash
 ant clean
 ```
 ```bash
-open -e AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
+vim AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
 ```
 ```bash
 mkdir ant-build
