@@ -62,6 +62,10 @@ $ sudo npm install -g ionic
 
 ```bash
 $ bower install
+```
+
+## 4. Android
+```bash
 $ ionic platform add android
 ```
 
@@ -75,23 +79,19 @@ The folks over [here](https://github.com/Wizcorp/phonegap-facebook-plugin/blob/d
 life saver of a command line process that saved my day. So whatever goes forward is a repetition but specific to this project.
 (The steps below are for ionic and android. The ios version works with a regular plugin add)
 
-1. Checkout this project
-2. ionic platform add android
-3. cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="YOUR_APP_ID" --variable APP_NAME="YOUR_APP_NAME"
+1. cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
    (replace the app_id and app_name with an app that you have created on facebook)
-4. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
-5. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
-6. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
-7. cd platforms/android/
+2. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
+3. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
+4. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
+5. cd platforms/android/
+6. ant clean
+7. cd com.phonegap.plugins.facebookconnect/FacebookLib
 8. ant clean
-9. cd com.phonegap.plugins.facebookconnect/FacebookLib
-10. ant clean
-12. open -e AndroidManifest.xml  (It worked without this for me)
- change your minSdkVersion and your targetSdkVersion to your environment settings for me it was:
- <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
-13. mkdir ant-build
-13. ant release
-14. cd ../../../.. (this should bring you back to the project root)
+9. open -e AndroidManifest.xml  (<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />)
+10. mkdir ant-build
+11. ant release
+12. cd ../../../.. (this should bring you back to the project root)
 
 #### Facebook login
 
