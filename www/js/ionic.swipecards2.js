@@ -261,13 +261,13 @@
   });
 
 
-  angular.module('ionic.contrib.ui.cards', ['ionic'])
+  angular.module('ionic.contrib.ui.cards2', ['ionic'])
 
-  .directive('swipeCard', ['$timeout', function($timeout) {
+  .directive('swipeCard2', ['$timeout', function($timeout) {
     return {
       restrict: 'E',
-      template: '<div class="swipe-card" ng-transclude></div>',
-      require: '^swipeCards',
+      template: '<div class="swipe-card2" ng-transclude></div>',
+      require: '^swipeCards2',
       replace: true,
       transclude: true,
       scope: {
@@ -301,10 +301,10 @@
     }
   }])
 
-  .directive('swipeCards', ['$rootScope', function($rootScope) {
+  .directive('swipeCards2', ['$rootScope', function($rootScope) {
     return {
       restrict: 'E',
-      template: '<div class="swipe-cards" ng-transclude></div>',
+      template: '<div class="swipe-cards2" ng-transclude></div>',
       replace: true,
       transclude: true,
       scope: {},

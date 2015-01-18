@@ -1,0 +1,16 @@
+<ion-view view-title="Categories">
+
+    <ion-content>
+
+        <div class="list">
+
+            <ion-checkbox ng-repeat="category in categories"
+                          ng-model="category.checked"
+                          ng-checked="category.checked"
+                          ng-change="updateStorage(category)">
+                {{ category.name }}
+            </ion-checkbox>
+        </div>
+
+    </ion-content>
+</ion-view>

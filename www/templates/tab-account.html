@@ -1,0 +1,34 @@
+<ion-view view-title="Account">
+    <div class="bar bar-header bar-danger">
+        <button class="button button-icon"><i class="icon-person-add"></i></button>
+        <h1 class="title">Me</h1>
+        <button class="button button-icon"><i class="icon-gear-b"></i></button>
+    </div>
+
+    <ion-content has-header="true" ng-if="showView">
+        <div id="profile-bg"></div>
+        <div id="content">
+            <div id="profile-info">
+                <img id="profile-image" ng-src="{{profilePhoto}}">
+                <h3 id="profile-name">{{basicInfo.name}}</h3>
+            </div>
+
+            <div class="list">
+
+                <div class="item item-input item-select">
+                    <div class="input-label">
+                        City
+                    </div>
+                    <select ng-model="city" ng-init="city=cities[myCity.id]" ng-options="city.name for city in cities" ng-change="updateStorage(city)"></select>
+                </div>
+                <a class="item" href="#/tab/selectCategories">
+                        Event categories
+                </a>
+
+            </div>
+
+            <button class="button button-block button-assertive" ng-click="logout()">Logout</button>
+
+        </div>
+    </ion-content>
+</ion-view>
