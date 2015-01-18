@@ -84,7 +84,6 @@ ionic platform add android
 
 The folks over [here](https://github.com/Wizcorp/phonegap-facebook-plugin/blob/develop/platforms/android/README.md) wrote this
 life saver of a command line process that saved my day. So whatever goes forward is a repetition but specific to this project.
-(The steps below are for ionic and android. The ios version works with a regular plugin add)
 
 ```bash
 cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
@@ -111,7 +110,7 @@ cd com.phonegap.plugins.facebookconnect/splash-FacebookLib
 ant clean
 ```
 ```bash
-vim AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" /\>)
+vim AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" /\>)
 ```
 ```bash
 mkdir ant-build
@@ -150,8 +149,8 @@ to build, test, and deploy our apps, but Ionic provides simple ways to do
 the same with the ionic utility (substitute android for ios to build for ios):
 
 ```bash
-$ ionic build android
-$ ionic run android
+ionic build android
+ionic run android
 ```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
@@ -172,4 +171,3 @@ the include to your `ionic.app.css` file which now contains all your Sass code a
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 ```
-

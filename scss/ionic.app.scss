@@ -18,8 +18,17 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+
+$tabs-height:                     55px;
+$tabs-icon-size:                  35px;
+//$tabs-default-bg:                 #282828;
+//$tabs-default-text:               #ffffff;
+
+
+
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+
+@import "www/components/ionic/scss/ionic";
 
 
 
