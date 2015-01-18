@@ -141,34 +141,43 @@
 *   SWIPE
 */
 
-/*.pane {
-  background-color: #333;
-}*/
 
-/*.bar.bar-transparent {
+
+.pane {
+  background-color: #333 !important
+}
+
+.bar.bar-transparent {
   background-color: transparent;
   background-image: none;
   border: none;
 }
 
+
 .bar .title {
   color: #eee;
-}*/
+}
+
+.swipe-cards {
+  position: fixed;
+}
 
 .swipe-cards {
   position: fixed;
 }
 
 .swipe-card {
-  display: none;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  /*display: none;*/
   position: fixed;
   -webkit-transform: scale(1,1);
   left: 50%;
-  top: 28.5%;
-  width: 230px;
-  height: 230px;
-  margin-left: -115px;
-  margin-top: -115px;
+  top: 15%;
+  width: 80%;
+  height: 50%;
+  margin-left: -40%;
+  margin-top: -20%;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -176,45 +185,46 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-/*.swipe-card .title {
-  height: 40px;
-  padding: 5px;
-  line-height: 30px;
-  color: #444;
-}*/
-.swipe-card .image {
-  overflow: hidden;
-  max-height: 250px;
+.swipe-card .title {
+height: 40px;
+padding: 5px;
+line-height: 30px;
+color: #444;
 }
-/*.swipe-card .button {
-  border: none;
-}*/
+.swipe-card .image {
+overflow: hidden;
+max-height: 100%;
+}
+.swipe-card .button {
+border: none;
+}
 .swipe-card .image img {
-  width: 230px;
-  height: 230px;
-  border-radius: 0px 0px 4px 4px;
+width: 100%;
+height: 100%;
+border-radius: 0px 0px 4px 4px;
 }
 
 #start-card {
-  color: #fff;
-  background-color: #30BD8A;
-  line-height: 250px;
-  word-wrap: break-word;
-  border: 6px solid #4CD68E;
-  text-align: center;
+color: #fff;
+background-color: #30BD8A;
+line-height: 100%;
+word-wrap: break-word;
+border: 6px solid #4CD68E;
+text-align: center;
 }
 #start-card span {
-  display: inline-block;
-  line-height: 40px;
-  width: 200px;
-  font-size: 30px;
-  vertical-align: middle;
+display: inline-block;
+line-height: 40px;
+width: 200px;
+font-size: 30px;
+vertical-align: middle;
 }
 
-/*
+
+
 #footer .button {
   color: #fff;
-}*/
+}
 
 @-webkit-keyframes bounceIn {
   0% {
@@ -232,18 +242,8 @@
   -webkit-transform: scale(0,0);
 }
 .swipe-card.pop-in {
-  -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.3s ease-out;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -252,15 +252,17 @@
 }
 
 .swipe-card2 {
-  display: none;
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  /*display: none;*/
   position: fixed;
   -webkit-transform: scale(1,1);
   left: 50%;
-  top: 70%;
-  width: 230px;
-  height: 230px;
-  margin-left: -115px;
-  margin-top: -115px;
+  top: 60%;
+  width: 80%;
+  height: 50%;
+  margin-left: -40%;
+  margin-top: -20%;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -268,46 +270,45 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-/*.swipe-card2 .title {
-  height: 40px;
-  padding: 5px;
-  line-height: 30px;
-  color: #444;
-}*/
+
+.swipe-card2 .title {
+height: 40px;
+padding: 5px;
+line-height: 30px;
+color: #444;
+}
 .swipe-card2 .image {
-  overflow: hidden;
-  max-height: 250px;
+overflow: hidden;
+max-height: 100%;;
 }
 .swipe-card2 .button {
-  border: none;
+border: none;
 }
 .swipe-card2 .image img {
-  width: 230px;
-  height: 230px;
-  border-radius: 0px 0px 4px 4px;
+width: 100%;
+height: 100%;
+border-radius: 0px 0px 4px 4px;
 }
 
 #start-card2 {
-  color: #fff;
-  background-color: #30BD8A;
-  line-height: 250px;
-  word-wrap: break-word;
-  border: 6px solid #4CD68E;
-  text-align: center;
+color: #fff;
+background-color: #30BD8A;
+line-height: 100%;
+word-wrap: break-word;
+border: 6px solid #4CD68E;
+text-align: center;
 }
 #start-card2 span {
-  display: inline-block;
-  line-height: 40px;
-  width: 200px;
-  font-size: 30px;
-  vertical-align: middle;
+display: inline-block;
+line-height: 40px;
+width: 200px;
+font-size: 30px;
+vertical-align: middle;
 }
 
-/*
 #footer .button {
   color: #fff;
 }
-*/
 
 @-webkit-keyframes bounceIn {
   0% {
@@ -325,5 +326,204 @@
   -webkit-transform: scale(0,0);
 }
 .swipe-card2.pop-in {
-  -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.3s ease-out;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.pane {*/
+  /*background-color: #333;*/
+/*}*/
+
+/*.bar.bar-transparent {*/
+  /*background-color: transparent;*/
+  /*background-image: none;*/
+  /*border: none;*/
+/*}*/
+
+/*.bar .title {*/
+  /*color: #eee;*/
+/*}*/
+
+/*.swipe-cards {*/
+  /*position: fixed;*/
+/*}*/
+
+/*.swipe-card {*/
+  /*display: none;*/
+  /*position: fixed;*/
+  /*-webkit-transform: scale(1,1);*/
+  /*left: 50%;*/
+  /*top: 28.5%;*/
+  /*width: 230px;*/
+  /*height: 230px;*/
+  /*margin-left: -115px;*/
+  /*margin-top: -115px;*/
+  /*box-sizing: border-box;*/
+  /*background-color: rgb(255,255,255);*/
+  /*border-radius: 4px;*/
+  /*overflow: hidden;*/
+  /*-webkit-animation-fill-mode: forwards;*/
+/*}*/
+
+/*.swipe-card .title {*/
+  /*height: 40px;*/
+  /*padding: 5px;*/
+  /*line-height: 30px;*/
+  /*color: #444;*/
+/*}*/
+/*.swipe-card .image {*/
+  /*overflow: hidden;*/
+  /*max-height: 250px;*/
+/*}*/
+/*.swipe-card .button {*/
+  /*border: none;*/
+/*}*/
+/*.swipe-card .image img {*/
+  /*width: 230px;*/
+  /*height: 230px;*/
+  /*border-radius: 0px 0px 4px 4px;*/
+/*}*/
+
+/*#start-card {*/
+  /*color: #fff;*/
+  /*background-color: #30BD8A;*/
+  /*line-height: 250px;*/
+  /*word-wrap: break-word;*/
+  /*border: 6px solid #4CD68E;*/
+  /*text-align: center;*/
+/*}*/
+/*#start-card span {*/
+  /*display: inline-block;*/
+  /*line-height: 40px;*/
+  /*width: 200px;*/
+  /*font-size: 30px;*/
+  /*vertical-align: middle;*/
+/*}*/
+
+/**/
+/*#footer .button {*/
+  /*color: #fff;*/
+/*}*/
+
+/*@-webkit-keyframes bounceIn {*/
+  /*0% {*/
+    /*-webkit-transform: scale(0,0);*/
+  /*}*/
+  /*70% {*/
+    /*-webkit-transform: scale(1.2,1.2);*/
+  /*}*/
+  /*100% {*/
+    /*-webkit-transform: scale(1,1);*/
+  /*}*/
+/*}*/
+
+/*.swipe-card.pop-in-start {*/
+  /*-webkit-transform: scale(0,0);*/
+/*}*/
+/*.swipe-card.pop-in {*/
+  /*-webkit-animation: bounceIn 0.4s ease-out;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.swipe-cards2 {*/
+  /*position: fixed;*/
+/*}*/
+
+/*.swipe-card2 {*/
+  /*display: none;*/
+  /*position: fixed;*/
+  /*-webkit-transform: scale(1,1);*/
+  /*left: 50%;*/
+  /*top: 70%;*/
+  /*width: 230px;*/
+  /*height: 230px;*/
+  /*margin-left: -115px;*/
+  /*margin-top: -115px;*/
+  /*box-sizing: border-box;*/
+  /*background-color: rgb(255,255,255);*/
+  /*border-radius: 4px;*/
+  /*overflow: hidden;*/
+  /*-webkit-animation-fill-mode: forwards;*/
+/*}*/
+
+/*.swipe-card2 .title {*/
+  /*height: 40px;*/
+  /*padding: 5px;*/
+  /*line-height: 30px;*/
+  /*color: #444;*/
+/*}*/
+/*.swipe-card2 .image {*/
+  /*overflow: hidden;*/
+  /*max-height: 250px;*/
+/*}*/
+/*.swipe-card2 .button {*/
+  /*border: none;*/
+/*}*/
+/*.swipe-card2 .image img {*/
+  /*width: 230px;*/
+  /*height: 230px;*/
+  /*border-radius: 0px 0px 4px 4px;*/
+/*}*/
+
+/*#start-card2 {*/
+  /*color: #fff;*/
+  /*background-color: #30BD8A;*/
+  /*line-height: 250px;*/
+  /*word-wrap: break-word;*/
+  /*border: 6px solid #4CD68E;*/
+  /*text-align: center;*/
+/*}*/
+/*#start-card2 span {*/
+  /*display: inline-block;*/
+  /*line-height: 40px;*/
+  /*width: 200px;*/
+  /*font-size: 30px;*/
+  /*vertical-align: middle;*/
+/*}*/
+
+/**/
+/*#footer .button {*/
+  /*color: #fff;*/
+/*}*/
+/**/
+
+/*@-webkit-keyframes bounceIn {*/
+  /*0% {*/
+    /*-webkit-transform: scale(0,0);*/
+  /*}*/
+  /*70% {*/
+    /*-webkit-transform: scale(1.2,1.2);*/
+  /*}*/
+  /*100% {*/
+    /*-webkit-transform: scale(1,1);*/
+  /*}*/
+/*}*/
+
+/*.swipe-card2.pop-in-start {*/
+  /*-webkit-transform: scale(0,0);*/
+/*}*/
+/*.swipe-card2.pop-in {*/
+  /*-webkit-animation: bounceIn 0.4s ease-out;*/
+/*}*/
