@@ -26,13 +26,14 @@
     var SwipeableCardController = ionic.controllers.ViewController.inherit({
         initialize: function(opts) {
             this.cards = [];
+
             var ratio = window.innerWidth / window.innerHeight;
 
             this.maxWidth = window.innerWidth - (opts.cardGutterWidth || 0);
             this.maxHeight = opts.height || 300;
             this.cardGutterWidth = opts.cardGutterWidth || 10;
-            this.cardPopInDuration = opts.cardPopInDuration || 4000;
-            this.cardAnimation = opts.cardAnimation;
+            this.cardPopInDuration = opts.cardPopInDuration || 400;
+            this.cardAnimation = opts.cardAnimation || 'pop-in';
         },
         /**
          * Push a new card onto the stack.
@@ -42,8 +43,10 @@
 
             this.cards.push(card);
             this.beforeCardShow(card);
+            setTimeout(function() {
+                card.transitionIn(this.cardAnimation);
+            }, 500);
 
-            card.transitionIn(this.cardAnimation);
             setTimeout(function() {
                 card.disableTransition(self.cardAnimation);
             }, this.cardPopInDuration + 100);
@@ -116,7 +119,7 @@
          * Set the Z-Index of the card
          */
         setZIndex: function(index) {
-            this.el.style.zIndex = 1;
+            this.el.style.zIndex = index;
         },
 
         /**
@@ -164,29 +167,41 @@
         /**
          * Swipe a card out programtically
          */
-        swipe: function() {
-            this.transitionOut();
+        swipe: function(positive) {
+            this.transitionOut(positive);
         },
 
         /**
-         * Fly the card out or animate back into resting position.
+         * Fly the card up or down.
          */
-        transitionOut: function() {
+        transitionOut: function(positive) {
             var self = this;
+            if((positive === true) || (this.x > 0)) {
+                // Fly right
+                var rotateTo = (this.rotationAngle + (this.rotationDirection * 0.6)) || (Math.random() * -0.4);
+                var duration = this.rotationAngle ? 0.2 : 0.5;
+                this.el.style[TRANSITION] = '-webkit-transform ' + duration + 's ease-in-out';
+                this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + (window.innerWidth * 1.5) + 'px,' + this.y + 'px, 0) rotate(' + rotateTo + 'rad)';
+                this.onSwipe && this.onSwipe();
 
-            if(this.y < 0) {
-                this.el.style[TRANSITION] = '-webkit-transform 0.2s ease-in-out';
-                this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + this.x + ',' + (this.startY) + 'px, 0)';
+                self.positive = true;
+                // Trigger destroy after card has swiped out
                 setTimeout(function() {
-                    self.el.style[TRANSITION] = 'none';
-                }, 200);
+                    self.onDestroy && self.onDestroy(true);
+                }, duration * 1000);
             } else {
-                // Fly out
+                // Fly left
                 var rotateTo = (this.rotationAngle + (this.rotationDirection * 0.6)) || (Math.random() * 0.4);
                 var duration = this.rotationAngle ? 0.2 : 0.5;
                 this.el.style[TRANSITION] = '-webkit-transform ' + duration + 's ease-in-out';
-                this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + this.x + ',' + (window.innerHeight * 1.5) + 'px, 0) rotate(' + rotateTo + 'rad)';
+                this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + (window.innerWidth * -1.5) + 'px,' + this.y + 'px, 0) rotate(' + rotateTo + 'rad)';
                 this.onSwipe && this.onSwipe();
+
+                self.positive = false;
+                // Trigger destroy after card has swiped out
+                setTimeout(function() {
+                    self.onDestroy && self.onDestroy();
+                }, duration * 1000);
             }
         },
 
@@ -202,15 +217,15 @@
                 } else {
                     self._transformOriginLeft();
                 }
-                ionic.requestAnimationFrame(function() { self._doDragStart(e) });
+                window._rAF(function() { self._doDragStart(e) });
             }, this.el);
 
             ionic.onGesture('drag', function(e) {
-                ionic.requestAnimationFrame(function() { self._doDrag(e) });
+                window._rAF(function() { self._doDrag(e) });
             }, this.el);
 
             ionic.onGesture('dragend', function(e) {
-                ionic.requestAnimationFrame(function() { self._doDragEnd(e) });
+                window._rAF(function() { self._doDragEnd(e) });
             }, this.el);
         },
 
@@ -237,15 +252,27 @@
         },
 
         _doDrag: function(e) {
-            var o = e.gesture.deltaY / 3;
+            var o = e.gesture.deltaX / 3;
 
-            this.rotationAngle = Math.atan(o/this.touchDistance) * this.rotationDirection;
+            this.rotationAngle = Math.atan(o/this.touchDistance) * this.rotationDirection * 2 ;
 
-            if(e.gesture.deltaY < 0) {
-                this.rotationAngle = 0;
+            var thresh = 1;
+
+
+            if(this.rotationAngle < 0) {
+                // need to add sign
+                this.rotationAngle = - Math.min(Math.abs(this.rotationAngle), thresh)
+            } else {
+                this.rotationAngle = Math.min(Math.abs(this.rotationAngle), thresh)
+
             }
 
-            this.y = this.startY + (e.gesture.deltaY * 0.4);
+
+            if(e.gesture.deltaX < 0) {
+                this.rotationAngle = -this.rotationAngle;
+            }
+
+            this.x = this.startX + (e.gesture.deltaX * 0.4);
 
             this.el.style[ionic.CSS.TRANSFORM] = 'translate3d(' + this.x + 'px, ' + this.y  + 'px, 0) rotate(' + (this.rotationAngle || 0) + 'rad)';
         },
@@ -253,6 +280,7 @@
             this.transitionOut(e);
         }
     });
+
 
 
     angular.module('ionic.contrib.ui.cards', ['ionic'])
@@ -265,7 +293,8 @@
                 replace: true,
                 transclude: true,
                 scope: {
-                    onSwipe: '&'
+                    onSwipe: '&',
+                    onDestroy: '&'
                 },
                 compile: function(element, attr) {
                     return function($scope, $element, $attr, swipeCards) {
@@ -277,6 +306,11 @@
                             onSwipe: function() {
                                 $timeout(function() {
                                     $scope.onSwipe();
+                                });
+                            },
+                            onDestroy: function() {
+                                $timeout(function() {
+                                    $scope.onDestroy();
                                 });
                             }
                         });
@@ -299,7 +333,6 @@
                 controller: function($scope, $element) {
                     var swipeController = new SwipeableCardController({
                     });
-
                     $rootScope.$on('swipeCard.pop', function(isAnimated) {
                         swipeController.popCard(isAnimated);
                     });

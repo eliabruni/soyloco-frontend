@@ -1,6 +1,6 @@
 <ion-side-menus>
 
-    <ion-pane ion-side-menu-content>
+    <ion-pane ion-side-menu-content xw>
         <ion-nav-bar class="bar-stable nav-title-slide-ios7">
 <!--            <ion-nav-back-button class="button-icon ion-arrow-left-c">
             </ion-nav-back-button>-->
@@ -42,14 +42,14 @@
                     Explore new places
                 </a>
                 <a class="item item-icon-left" href="#/tab/play" nav-clear menu-close>
-                    <i class="icon ion-heart ion-heart-specs"></i>
+                    <i class="icon ion-fireball ion-heart-specs"></i>
                     Find who you like
                 </a>
                 <a class="item item-icon-left" href="#/tab/settings" nav-clear menu-close>
                     <i class="icon ion-ios7-gear"></i>
                     Settings
                 </a>
-                <a class="item item-icon-left" href="#/tab/invite" nav-clear menu-close>
+                <a class="item item-icon-left" ng-click="openModal()" nav-clear menu-close>
                     <i class="icon ion-android-share"></i>
                     Share Soyloco
                 </a>

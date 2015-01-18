@@ -66,97 +66,106 @@
 }
 
 
-/*************************************
-*   MENU BAR
-*/
 
+/*************************************
+*  TOP BAR
+*/
 
 /*
 BUTTONS
 */
 
 
+/*
+Side menu button
+*/
 .menu-bar{
     top: 0 !important;
     position: absolute;
-    vertical-align: middle;
-
 }
 
-.button-bar{
-    top: 0 !important;
-    position: absolute;
-    vertical-align: middle;
-    padding-left: 30px;
-/*
-* TODO: try this
-    width:50%;
-*/
+.menu-bar .button-icon {
+    color: #B5B5B5 !important;
+    height: 50px !important;
 }
 
 .buttons.left-buttons .ion-navicon-round:before {
     font-size:30px !important;
-    color:#7fbcff;margin-left:-25px !important;
-    border-right: 2px solid #7fbcff;
+    color:#A9A9A9;margin-left:-25px !important;
+    border-right: 2px solid #A9A9A9;
     width: 45px;
 }
 
 
-.button-icon {
-    color: #7fbcff !important;
-    height: 50px !important;
-    /*
-    This is an invisible to border to not change size when one icon is active
+/*
+Map views buttons
 */
-    border-top: 3px solid #007AFF !important;
-    border-bottom: 3px solid #007AFF !important;
+.button-bar{
+    top: 0 !important;
+    position: absolute;
+    margin-left: 8%;
+    width:50%;
+    text-align: center !important;
+}
+
+.button-bar .button-icon {
+    height: 50px !important;
+
+    color: #B5B5B5 !important;
+    padding: 0px !important;
+    /*
+        letter-spacing:20px !important;
+    */
 }
 
 
-.button-icon.button.active,button.activated {
+.button-bar .button-icon.button.active {
     color: #fff !important;
-    border-bottom: 3px solid #fff !important;
     opacity: 1;
 }
 
-.buttons.left-buttons .ion-ios7-star:before {
-    font-size: 28px !important;
+
+.buttons.left-buttons .ion-home:before {
+    font-size: 35px !important;
+    width:50px !important;
 }
 
-.buttons.left-buttons .ion-ios7-people:before {
-    font-size: 42px !important;
+.buttons.left-buttons .ion-android-social:before {
+    font-size: 35px !important;
+    width:50px !important;
 }
 
-.buttons.left-buttons .ion-person:before {
-    font-size: 31px !important;
+.buttons.left-buttons .ion-android-social-user:before {
+    font-size: 25px !important;
+    width:50px !important;
 }
 
-.buttons.left-buttons .ion-person-stalker:before {
-    font-size: 31px !important;
+.buttons.left-buttons .ion-heart:before {
+    font-size: 33px !important;
+    width:50px !important;
 }
-
 
 /*
 SUBHEADER
 */
 
 .bar-subheader {
-
-    height: 30px;
-    background-color: rgba(127,188,255,0.8);
-    border:none !important;
-    border-top: 1px solid #0061cc !important;
+    color:red !important;
     vertical-align: middle;
-    text-align: left;
-    padding-left: 10%;
-
+    /*    padding-top:0px !important;
+        background-color: rgba(255,255,255,0.7);
+        border:none !important;
+        border-top: 1px solid #000 !important;
+        vertical-align: middle;
+        text-align: left;
+        padding-left: 10%;*/
 }
+
+
 
 .subheader-viewname {
     font-size: 18px;
-    color:#454545;
-
-
+    color:#406582;
 }
 
 /* .ion-pinpoint:before {
@@ -164,8 +173,7 @@ SUBHEADER
     font-size: 25px !important;
     border-left: 2px solid red !important;
     border:none !important;
-}*/
-
+}*
 
 
 
@@ -211,13 +219,70 @@ Profile image circular
 }
 
 
+
 /*************************************
 *   PLAY VIEW
 */
 
-.play-slider {
-    height: 100%;
+/*
+SWIPE IN PLAY VIEW
+*/
+
+/*.pane {
+    background-color: #fff !important;
+
+}*/
+
+
+.swipe-cards {
+    position: absolute;
+    z-index: 2;
+    vertical-align: middle;
 }
+
+.swipe-card {
+    height: 65%;
+    width: 90%;
+    margin: auto;
+    position: absolute;
+/*
+    TODO: need to find a better way for top
+*/
+    bottom: 0; left: 0; top: -10%; right: 0;
+
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    display: none;
+    position: fixed;
+    -webkit-transform: scale(1,1);
+
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-animation-fill-mode: forwards;
+    border-color: #e59094;
+    border: 1px solid;
+}
+
+.swipe-card .image {
+
+    position: absolute;
+    width: 100% !important;
+    height:100% !important;
+    overflow: hidden !important;
+    /* width: 20% !important;
+     height: 20% !important;*/
+
+}
+
+.swipe-card .image img {
+    width: 100% !important;
+    height:100% !important;
+}
+
+
+
+
 
 
 /*BUTTONS*/
@@ -284,53 +349,6 @@ Profile image circular
     */
 }
 
-/*
-SWIPE IN PLAY VIEW
-*/
-
-.pane {
-    background-color: #fff !important;
-
-}
-
-.swipe-cards {
-    position: fixed;
-    z-index: 2;
-}
-
-.swipe-card {
-    -webkit-perspective: 1000;
-    -webkit-backface-visibility: hidden;
-    display: none;
-    position: fixed;
-    -webkit-transform: scale(1,1);
-    left: 50%;
-    top: 40%;
-    width: 343px;
-    height: 335px;
-    margin-left: -171.5px;
-    margin-top: -167.5px;
-    box-sizing: border-box;
-    background-color: rgb(255,255,255);
-    border-radius: 4px;
-    overflow: hidden;
-    -webkit-animation-fill-mode: forwards;
-    border-color: #e59094;
-    border: 1px solid;
-}
-
-.swipe-card .image {
-    overflow: hidden;
-    width: 343px;
-    height: 335px;
-
-}
-
-.swipe-card .image img {
-    width: 100%;
-    height:85%;
-    border-radius: 0px 0px 0px 0px;
-}
 
 
 
@@ -339,73 +357,10 @@ SWIPE IN PLAY VIEW
 *   CATEGORY VIEW
 */
 
-/*
-BUTTONS ABOVE
-*/
-
-
-
-/*
-.button-bar-view-title-container {
-    width: 80%;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    margin:auto;
-}
-
-.button-bar-container {
-    width: 100%;
-    margin:auto;
-}
-
-.above-bar-icon-people {
-    font-size: 39px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;
-    border-right: 1px solid #e59094;
-}
-
-.above-bar-icon-person {
-    font-size: 30px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;    border-right: 1px solid #e59094;
-
-}
-
-.above-bar-icon-stalker {
-    font-size: 30px;
-    color: #e59094;
-    padding-right:10px;
-    padding-left:10px;}
-*/
-
-/*.above-bar-icon-settings {
-    font-size: 30px;
-    color: #ccc;
-    padding-left:20px;
-}*/
-
-
 
 /*
 MAP
 */
-
-
-.who-you-like-icon {
-    font-size:25px;
-}
-
-.who-likes-you-icon {
-    font-size:23px;
-}
-
-.both-like-icon {
-    font-size:20px;
-}
 
 
 .scroll-content{
@@ -413,9 +368,6 @@ MAP
     background-color:white;
 }
 
-.item{
-    /*  visibility: hidden;*/
-}
 
 .map {
     position: relative;
@@ -432,4 +384,3 @@ MAP
     width: 100%;
     height: 100%;
 }
-

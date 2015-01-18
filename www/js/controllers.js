@@ -1,6 +1,6 @@
 angular.module('soyloco.controllers', [])
 
-    .controller('TabsCtrl', function ($scope, $state, OpenFB) {
+    .controller('TabsCtrl', function ($scope, $state, $ionicModal, OpenFB) {
 
         $scope.logout = function () {
             OpenFB.logout();
@@ -16,6 +16,24 @@ angular.module('soyloco.controllers', [])
                     //alert('Revoke permissions failed');
                 });
         };
+
+
+        // This part for the invite/share modal on sidemenu
+        $ionicModal.fromTemplateUrl('templates/tab-invite.html', function(modal) {
+            $scope.modal = modal;
+        }, {
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        });
+
+        $scope.openModal = function() {
+            $scope.modal.show()
+        }
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
 
     })
 
@@ -183,8 +201,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 0) {
-
-                        $scope.map.center = GMap.getCenter();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 1) {
@@ -209,7 +226,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 1) {
-                        $scope.map.center = GMap.getCenter();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -231,7 +248,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 2) {
-                        $scope.map.center = GMap.getCenter();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -256,7 +273,7 @@ angular.module('soyloco.controllers', [])
 
                     // Recenter map
                     if($scope.slideIndex != 3) {
-                        $scope.map.center = GMap.getCenter();
+                        $scope.recenterDefault();
                     }
 
                     if ($scope.slideIndex == 0) {
@@ -311,8 +328,13 @@ angular.module('soyloco.controllers', [])
                     }
                 }
 
-                // FUNCTIONS FOR MARKERS CLICKING
 
+                $scope.recenterDefault = function() {
+                    $scope.map.center = GMap.getCenter();
+                    $scope.map.zoom = GMap.getDefaultZoom();
+                }
+
+                // FUNCTIONS FOR MARKERS CLICKING
                 var onMarkerClicked = function (marker) {
 
                     $scope.puOnTop(marker.place);
@@ -364,99 +386,449 @@ angular.module('soyloco.controllers', [])
     })
 
 
-    .controller('ProfileCtrl', function($scope) {
+    .controller('ProfileCtrl', function($scope, $q, OpenFB, GMap) {
+
+
+
+
+        var method2 = function() {
+
+            var places;
+
+            var getAttendees = function(events){
+
+                var promises = events.map(function(event) {
+
+                    var deferred  = $q.defer();
+
+                    OpenFB.get('/'+event.id+'/attending')
+                        .success(function (data, status, headers, config) {
+                            deferred.resolve(data['data']);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+
+            var getEvents = function(places){
+
+                //test
+                var eventCounter = 0;
+                var eventWitAttendeesCounter = 0;
+                //test
+
+                var promises = places.map(function(place) {
+
+                    var deferred  = $q.defer();
+
+
+                    OpenFB.get('/'+place.id+'/events')
+                        .success(function (data, status, headers, config) {
+
+                            var events = data['data'];
+
+                            //test
+                            if(events.length > 0) {
+                                eventCounter++;
+                                $scope.eventCounter = eventCounter;
+                            }
+                            //test
+
+                            var eventPlusAttendees = [];
+                            getAttendees(events).then(function(attendees) {
+
+                                //test
+                                if(events.length > 0 && attendees.length > 0) {
+                                    var round = 0;
+
+                                    for (idx in attendees) {
+                                        alert(attendees[idx])
+                                    }
+
+                                    //test
+
+                                    for (var eventIdx in events) {
+                                        var event =  events[eventIdx];
+                                        var eventAttendees = attendees[eventIdx];
+
+                                        if (eventAttendees.length > 0 && round < 1) {
+                                            eventWitAttendeesCounter++;
+                                            $scope.eventWitAttendeesCounter = eventWitAttendeesCounter;
+                                            //eventPlusAttendees.push({ 'event':event,'attendees':eventAttendees});
+                                            round++;
+
+                                        }
+
+                                        eventPlusAttendees.push({ 'event':event,'attendees':eventAttendees});
+                                    }
+                                } else {
+                                    eventPlusAttendees.push({});
+
+                                }
+                            })
+
+                            deferred.resolve(eventPlusAttendees);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+            // Call the $http method
+            OpenFB.get('/search?q=*&type=place&center='+center.latitude+','+center.longitude+'&distance=1000')
+
+                .success(function (data, status, headers, config) {
+                    places = data['data'];
+                    var placeWithEventsCount = 0;
+                    getEvents(places).then(function(allEvents) {
+                        for (var placeIdx in places) {
+                            var round = 0;
+                            $scope.placeIdx = placeIdx;
+
+                            var placeEvents = allEvents[placeIdx];
+
+                            for (var tmpIdx in placeEvents) {
+
+                                var placeEvent = placeEvents[tmpIdx];
+
+
+                                for (var tmpIdx2 in placeEvent) {
+
+                                }
+
+
+                            }
+
+
+
+
+                        }
+                        $scope.placeWithEventsCount = placeWithEventsCount;
+                    })
+                })
+
+                .error(function (data, status, headers, config){
+                    alert('error in searching')
+                });
+        }
+
+
+
+
+        /////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
+
+
+
+
+        //var center = GMap.getCenter();
+        var center = {latitude:40.67, longitude:-73.94};
+
+        var method3 = function() {
+
+            var places;
+
+            var getAttendees = function(events){
+
+                var promises = events.map(function(event) {
+
+                    var deferred  = $q.defer();
+
+                    OpenFB.get('/'+event.id+'/attending')
+                        .success(function (data, status, headers, config) {
+                            deferred.resolve(data['data']);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+
+            var getEvents = function(places){
+
+                //test
+                var eventCounter = 0;
+                var eventWitAttendeesCounter = 0;
+                //test
+
+                var promises = places.map(function(place) {
+
+                    var deferred  = $q.defer();
+
+
+                    OpenFB.get('/'+place.id+'/events?since=now&until=2014-07-17 ')
+                        .success(function (data, status, headers, config) {
+
+                            var events = data['data'];
+                            deferred.resolve(events);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+
+            var getQueryPlaces = function(queries){
+
+                var promises = queries.map(function(query) {
+
+                    var deferred  = $q.defer();
+
+                    OpenFB.get('/search?q='+query+'&type=place&center='+center.latitude+','+center.longitude+'&distance=15000'+'&limit=5000')
+                        .success(function (data, status, headers, config) {
+
+                            places = data['data'];
+                            deferred.resolve(places);
+                        })
+                        .error(function(error){
+                            deferred.reject();
+                        });
+
+                    return deferred.promise;
+                });
+
+                return $q.all(promises);
+            };
+
+            var getUniquePlaces = function(places){
+                var u = {}, a = [];
+                for(var i = 0, l = places.length; i < l; ++i){
+                    if(u.hasOwnProperty(places[i].id)) {
+                        continue;
+                    }
+                    a.push(places[i]);
+                    u[places[i].id] = 1;
+                }
+                return a;
+            }
+
+            var placeWithEventsCount = 0;
+            var queries = ['bar','pub','club','theatre', 'restaurant',
+                'show','performance','spectacle','exhibition','party','nightclub','coffee',
+                'local','tavern','beer house', 'wine bar', 'nightlife', 'cinema', 'theatre',
+                'entertainment', 'play', 'concert', 'music'];
+
+            getQueryPlaces(queries).then(function(queryPlaces) {
+
+                var places = [];
+                for (var queryIdx in queries) {
+                    var tmpPlaces = queryPlaces[queryIdx];
+
+                    if (queryIdx == 0) {
+                        places = tmpPlaces;
+                    } else {
+                        places = places.concat(tmpPlaces)
+                        // Remove duplicate places
+                        places = getUniquePlaces(places);
+                    }
+                }
+
+                alert(places.length)
+
+                getEvents(places).then(function(events) {
+                    for (var placeIdx in places) {
+
+                        $scope.placeIdx = placeIdx;
+
+                        var placeEvents = events[placeIdx];
+
+                        if (placeEvents.length > 0) {
+
+                           /* for (var tmpIdx1 in placeEvents) {
+                                var placeEvent = placeEvents[tmpIdx1];
+                                for (var tmpIdx2 in placeEvent) {
+                                    alert(tmpIdx2)
+                                    alert(placeEvent[tmpIdx2])
+                                }
+                            }*/
+
+                            placeWithEventsCount++;
+                            $scope.placeWithEventsCount = placeWithEventsCount;
+
+                           /* var event = placeEvents[0];
+                            alert(event.name)
+                            alert(event.id)*/
+
+                        }
+                    }
+                })
+            })
+
+
+
+        }
+
+
+
+        method3();
     })
 
 /*************************************
  *          Play controller
  *
  * */
-    .controller('PlayCtrl', function($scope, $timeout, $ionicSlideBoxDelegate,
-                                     $ionicSwipeCardDelegate, Users) {
-
-        // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
-        $timeout(function () {
-            $ionicSlideBoxDelegate.enableSlide(false);
-        }, 0);
-
-        //TODO: This is just a plcaeholder for a call to the server
-        var timer = $timeout(function () {
-            $ionicSlideBoxDelegate.next();
-            //$ionicSlideBoxDelegate.enableSlide(false);
-
-        }, 2000);
-
-        // When the DOM element is removed from the page,
-        // AngularJS will trigger the $destroy event on
-        // the scope. This gives us a chance to cancel any
-        // pending timer that we may have.
-        $scope.$on(
-            "$destroy",
-            function(event) {
-                $timeout.cancel(timer);
-            }
-        );
+    .controller('PlayCtrl', function($rootScope, $scope, $timeout, $ionicSlideBoxDelegate,
+                                     $ionicSwipeCardDelegate, $ionicSideMenuDelegate, Users) {
 
 
-        var users = Users.all();
+        var users;
+        $ionicSideMenuDelegate.canDragContent(false);
 
+        $rootScope.accepted = 0;
+        $rootScope.rejected = 0;
 
-        $scope.nextUser = function(nextUserId) {
+        users = Users.all();
+        $scope.cards = Array.prototype.slice.call(users, 0, 0);
 
-            $scope.userId = nextUserId;
-
-            var photos = users[nextUserId-1].photos;
-            $scope.cards = Array.prototype.slice.call(photos, 0, 0);
-            $scope.userName = users[nextUserId-1].name;
-
-            var photoIdx, photo;
-            for (photoIdx in photos) {
-                photo = photos[photoIdx];
-                $scope.addUserCard(photo);
-            }
-
-            // Add first card again
-            $scope.addUserCard(photos[0]);
-        };
-
-
-        $scope.addUserCard = function(userCard) {
-            $scope.cards.push(angular.extend({}, userCard));
-        };
-
-        $scope.cardSwiped = function(index, userId) {
-
-            $scope.userId = userId;
-
-            // Index goes in decreasing order,
-            // We need to update at one before last, i.e. index == 1
-            if (index == 1) {
-                $scope.nextUser(userId);
-            }
+        $scope.cardSwiped = function(index) {
+            $scope.addCard(index);
 
         };
 
         $scope.cardDestroyed = function(index) {
+            if (this.swipeCard.positive === true) {
+                $scope.$root.accepted++;
+            } else {
+                $scope.$root.rejected++;
+            }
             $scope.cards.splice(index, 1);
         };
 
-        $scope.goAway = function(userId) {
+        $scope.addCard = function(index) {
+            var newCard = users[index];
+            newCard.id = index;
+            $scope.cards.push(angular.extend({}, newCard));
+        }
 
-            // This is just for infinite user loop
-            if(userId == 3) {
-                $scope.nextUser(1);
-            } else {
-                $scope.nextUser(userId + 1);
-            }
+        $scope.accept = function () {
+            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+            $rootScope.accepted++;
+            card.swipe(true);
+        }
+        $scope.reject = function() {
+            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+            $rootScope.rejected++;
+            card.swipe();
         };
 
         // Start with first card
         // TODO: put this into directive?
         var init = function () {
-            $scope.nextUser(1);
+            $scope.addCard(0);
+            $scope.addCard(1);
+            $scope.addCard(2);
         };
         // and fire it after definition
         init();
+
+
+
+
+        /*  // TODO: change the nonsense timeout. The problem is that without it, it doesn't work.
+         $timeout(function () {
+         $ionicSlideBoxDelegate.enableSlide(false);
+         }, 0);
+
+         //TODO: This is just a plcaeholder for a call to the server
+         var timer = $timeout(function () {
+         $ionicSlideBoxDelegate.next();
+         //$ionicSlideBoxDelegate.enableSlide(false);
+
+         }, 2000);
+
+         // When the DOM element is removed from the page,
+         // AngularJS will trigger the $destroy event on
+         // the scope. This gives us a chance to cancel any
+         // pending timer that we may have.
+         $scope.$on(
+         "$destroy",
+         function(event) {
+         $timeout.cancel(timer);
+         }
+         );
+
+
+         var users = Users.all();
+
+
+         $scope.nextUser = function(nextUserId) {
+
+         $scope.userId = nextUserId;
+
+         var photos = users[nextUserId-1].photos;
+         $scope.cards = Array.prototype.slice.call(photos, 0, 0);
+         $scope.userName = users[nextUserId-1].name;
+
+         var photoIdx, photo;
+         for (photoIdx in photos) {
+         photo = photos[photoIdx];
+         $scope.addUserCard(photo);
+         }
+
+         // Add first card again
+         $scope.addUserCard(photos[0]);
+         };
+
+
+         $scope.addUserCard = function(userCard) {
+         $scope.cards.push(angular.extend({}, userCard));
+         };
+
+         $scope.cardSwiped = function(index, userId) {
+
+         $scope.userId = userId;
+
+         // Index goes in decreasing order,
+         // We need to update at one before last, i.e. index == 1
+         if (index == 1) {
+         $scope.nextUser(userId);
+         }
+
+         };
+
+         $scope.cardDestroyed = function(index) {
+         $scope.cards.splice(index, 1);
+         };
+
+         $scope.goAway = function(userId) {
+
+         // This is just for infinite user loop
+         if(userId == 3) {
+         $scope.nextUser(1);
+         } else {
+         $scope.nextUser(userId + 1);
+         }
+         };
+
+         // Start with first card
+         // TODO: put this into directive?
+         var init = function () {
+         $scope.nextUser(1);
+         };
+         // and fire it after definition
+         init();*/
 
 
     })
@@ -465,7 +837,88 @@ angular.module('soyloco.controllers', [])
  *          Invite controller
  *
  * */
-    .controller('InviteCtrl', function($scope) {
+    .controller('InviteCtrl', function($scope, $cordovaSocialSharing) {
+
+
+        alert('invite conrtolr')
+
+        var message = "Chekcout Soyloco... it helps you finding facebook events with people who are " +
+            "interested in you! www.soyloco.com/app";
+
+        var image = "";
+
+        $scope.testFunc = function() {
+            alert('button pressed')
+        }
+
+        $scope.shareViaTwitter = function() {
+
+            $scope.modal.hide();
+
+            $cordovaSocialSharing.shareViaTwitter(message, image, link).then(function (result) {
+                // Success!
+                alert('sharing via twitter')
+            }, function (err) {
+                alert('error sharing via twitter')
+
+                // An error occurred. Show a message to the user
+            });
+        }
+
+
+        /*       $cordovaSocialSharing.shareViaWhatsApp(message, image, link).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
+
+
+         $cordovaSocialSharing.shareViaFacebook(message, image, link).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
+
+         // access multiple numbers in a string like: '0612345678,0687654321'
+         $cordovaSocialSharing.shareViaSMS(message, number).then(function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });
+
+         // TO, CC, BCC must be an array, Files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         can be either null, string or array
+         $cordovaSocialSharing.shareViaEmail(message, subject, toArr, bccArr, file).then(
+         function(result) {
+         // Success!
+         }, function(err) {
+         // An error occured. Show a message to the user
+         });*/
+
     })
 
 
