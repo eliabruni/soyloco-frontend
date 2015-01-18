@@ -17,6 +17,5 @@ angular.module('splash.storage', [])
             clear : function() {
                 window.localStorage.clear();
             }
-
         }
     }]);

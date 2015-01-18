@@ -1,6 +1,6 @@
 angular.module('splash.geo', [])
 
-    .factory('Geo', function($localstorage, $cordovaFacebook) {
+    .factory('$geo', ['$localstorage', '$cordovaFacebook', function($localstorage, $cordovaFacebook) {
         return {
 
             facebookGeoLocation : function(latitude, longitude, radius, callback) {
@@ -74,4 +74,4 @@ angular.module('splash.geo', [])
                 })
             }
         }
-    });
+    }]);

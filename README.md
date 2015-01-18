@@ -15,38 +15,38 @@ require Cordova plugins.
 
 Enter the project
 ```bash
-$ cd soyloco-frontend
+cd soyloco-frontend
 ```
 
 Basic device information:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 ```
 
 Network Connection and Battery Events:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
 ```
 
 Device orientation:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
 ```
 
 
 File:
 ```bash
-$ cordova plugin add org.apache.cordova.file
+cordova plugin add org.apache.cordova.file
 ```
 
 
 File transfer:
 ```bash
-$ cordova plugin add org.apache.cordova.file-transfer
+cordova plugin add org.apache.cordova.file-transfer
 ```
 Geolocation:
 ```bash
-$ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
 ```
 
 
@@ -55,65 +55,108 @@ $ cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-geol
 Make sure the `ionic` utility is installed:
 
 ```bash
-$ sudo npm install -g ionic
+sudo npm install -g ionic
 ```
 
 ### 3. Install dependencies and add the Android platform
 
 ```bash
-$ bower install
-$ ionic platform add android
+bower install
 ```
 
-### 4. Add Phonegap Facebook plugin for Android
-phonegap facebook plugin available at [phonegap-facebook-plugin](https://github.com/phonegap/phonegap-facebook-plugin.git)
+### 4. Add Phonegap Facebook plugin
 
+#### IOS
+```bash
+ionic platform add ios
+```
 
-#### How to build and deploy?
+```bash
+cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
+```
+
+#### Android
+```bash
+ionic platform add android
+```
+
+##### Build and deploy
 
 The folks over [here](https://github.com/Wizcorp/phonegap-facebook-plugin/blob/develop/platforms/android/README.md) wrote this
 life saver of a command line process that saved my day. So whatever goes forward is a repetition but specific to this project.
-(The steps below are for ionic and android. The ios version works with a regular plugin add)
 
-1. Checkout this project
-2. ionic platform add android
-3. cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="YOUR_APP_ID" --variable APP_NAME="YOUR_APP_NAME"
-   (replace the app_id and app_name with an app that you have created on facebook)
-4. android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
-5. android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/FacebookLib"
-6. android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib" --target android-19
-7. cd platforms/android/
-8. ant clean
-9. cd com.phonegap.plugins.facebookconnect/FacebookLib
-10. ant clean
-12. open -e AndroidManifest.xml  (It worked without this for me)
- change your minSdkVersion and your targetSdkVersion to your environment settings for me it was:
- <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
-13. mkdir ant-build
-13. ant release
-14. cd ../../../.. (this should bring you back to the project root)
+```bash
+cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="738982816123885" --variable APP_NAME="Splash"
+```
+```bash
+android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"
+```
+```bash
+android update project --subprojects --path "platforms/android" --target android-19 --library "com.phonegap.plugins.facebookconnect/splash-FacebookLib"
+```
+```bash
+android update project --path "platforms/android/com.phonegap.plugins.facebookconnect/splash-FacebookLib" --target android-19
+```
+```bash
+cd platforms/android/
+```
+```bash
+ant clean
+```
+```bash
+cd com.phonegap.plugins.facebookconnect/splash-FacebookLib
+```
+```bash
+ant clean
+```
+```bash
+vim AndroidManifest.xml  (\<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" /\>)
+```
+```bash
+mkdir ant-build
+```
+```bash
+ant release
+```
+```bash
+cd ../../../.. (this should bring you back to the project root)
+```
 
-#### Facebook login
+##### Keyhash
 
-Configure your keyhash on the facebook app (step 3).
+I used following steps to generate a Key Hash for my app in facebook: (I am using Mac OSX 10.8)
 
-#### There are still bugs on the plugin for android when we remove the app from the permissions list, which already has a patch.
+First open a terminal (open a command prompt in windows).
+Navigate in the terminal to the directory where your Android debug.keystore is stored.
+Mostly it will located under “/Users/user_name/.android/” (In Windows will be C:\Documents and Settings\.android).
+Once you are in the “.android” directory, run the following command.
+
+```bash
+keytool -exportcert -alias androiddebugkey -keystore debug.keystore | openssl sha1 -binary | openssl base64
+```
+When it prompts you for a password, type android and hit Enter
+
+Copy the value printed in the terminal that ends with an “=” and paste it in the Key Hash field in Facebook.
+Then click the Save Changes button.
 
 
-#### Now we are ready to build and run/emulate Soyloco-frontend
+
+### 5. Run/emulate Soyloco-frontend
+
+Now we are ready to build and run/emulate Soyloco-frontend
 Ionic apps are based on Cordova, so we can use the Cordova utilities
 to build, test, and deploy our apps, but Ionic provides simple ways to do
 the same with the ionic utility (substitute android for ios to build for ios):
 
 ```bash
-$ ionic build android
-$ ionic run android
+ionic build android
+ionic run android
 ```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
 
 
-### 5. Using Sass
+### 6. Using Sass
 
 This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
 Sass's great features.
@@ -128,4 +171,3 @@ the include to your `ionic.app.css` file which now contains all your Sass code a
 <link href="css/ionic.app.css" rel="stylesheet">
 -->
 ```
-

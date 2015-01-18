@@ -1,0 +1,131 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'sass' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose cache add [ 'sass', null ]
+5 verbose cache add name=undefined spec="sass" args=["sass",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'sass',
+6 verbose parsed url   path: 'sass',
+6 verbose parsed url   href: 'sass' }
+7 silly lockFile 5d7463cd-sass sass
+8 verbose lock sass /Users/elia/.npm/5d7463cd-sass.lock
+9 silly lockFile 5d7463cd-sass sass
+10 silly lockFile 5d7463cd-sass sass
+11 verbose addNamed [ 'sass', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile abea0ec1-sass sass@
+14 verbose lock sass@ /Users/elia/.npm/abea0ec1-sass.lock
+15 silly addNameRange { name: 'sass', range: '*', hasData: false }
+16 verbose request where is /sass
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id fb80a5d686eacf24
+19 verbose url raw /sass
+20 verbose url resolving [ 'https://registry.npmjs.org/', './sass' ]
+21 verbose url resolved https://registry.npmjs.org/sass
+22 verbose request where is https://registry.npmjs.org/sass
+23 info trying registry request attempt 1 at 10:06:07
+24 http GET https://registry.npmjs.org/sass
+25 http 200 https://registry.npmjs.org/sass
+26 silly registry.get cb [ 200,
+26 silly registry.get   { date: 'Sun, 18 Jan 2015 09:06:07 GMT',
+26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+26 silly registry.get     etag: '"A8YH2I2BXEW8P4D5J90T1WZ7X"',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'cache-control': 'max-age=60',
+26 silly registry.get     'content-length': '2877',
+26 silly registry.get     'accept-ranges': 'bytes',
+26 silly registry.get     via: '1.1 varnish',
+26 silly registry.get     age: '0',
+26 silly registry.get     'x-served-by': 'cache-ams4147-AMS',
+26 silly registry.get     'x-cache': 'MISS',
+26 silly registry.get     'x-cache-hits': '0',
+26 silly registry.get     'x-timer': 'S1421571967.429430,VS0,VE90',
+26 silly registry.get     vary: 'Accept',
+26 silly registry.get     'keep-alive': 'timeout=10, max=50',
+26 silly registry.get     connection: 'Keep-Alive' } ]
+27 silly addNameRange number 2 { name: 'sass', range: '*', hasData: true }
+28 silly addNameRange versions [ 'sass', [ '0.4.0', '0.4.1', '0.4.2', '0.4.3', '0.5.0' ] ]
+29 verbose addNamed [ 'sass', '0.5.0' ]
+30 verbose addNamed [ '0.5.0', '0.5.0' ]
+31 silly lockFile 69745589-sass-0-5-0 sass@0.5.0
+32 verbose lock sass@0.5.0 /Users/elia/.npm/69745589-sass-0-5-0.lock
+33 silly lockFile f65119f2-ry-npmjs-org-sass-sass-0-5-0-tgz https://registry.npmjs.org/sass/-/sass-0.5.0.tgz
+34 verbose lock https://registry.npmjs.org/sass/-/sass-0.5.0.tgz /Users/elia/.npm/f65119f2-ry-npmjs-org-sass-sass-0-5-0-tgz.lock
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/sass/-/sass-0.5.0.tgz',
+35 verbose addRemoteTarball   '9dee1183a0f400361f2c5d3453bf2e54705e03f9' ]
+36 info retry fetch attempt 1 at 10:06:07
+37 verbose fetch to= /var/folders/vq/4ghv1d9d4sj9jnmkc3xx_hmw0000gn/T/npm-1716-nkyrJGfS/registry.npmjs.org/sass/-/sass-0.5.0.tgz
+38 http GET https://registry.npmjs.org/sass/-/sass-0.5.0.tgz
+39 http 200 https://registry.npmjs.org/sass/-/sass-0.5.0.tgz
+40 silly lockFile f65119f2-ry-npmjs-org-sass-sass-0-5-0-tgz https://registry.npmjs.org/sass/-/sass-0.5.0.tgz
+41 silly lockFile f65119f2-ry-npmjs-org-sass-sass-0-5-0-tgz https://registry.npmjs.org/sass/-/sass-0.5.0.tgz
+42 silly lockFile 69745589-sass-0-5-0 sass@0.5.0
+43 silly lockFile 69745589-sass-0-5-0 sass@0.5.0
+44 silly lockFile abea0ec1-sass sass@
+45 silly lockFile abea0ec1-sass sass@
+46 silly resolved [ { name: 'sass',
+46 silly resolved     description: 'Syntactically Awesome Stylesheets (compiles to css)',
+46 silly resolved     version: '0.5.0',
+46 silly resolved     keywords: [ 'sass', 'template', 'css', 'view' ],
+46 silly resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+46 silly resolved     contributors: [ [Object] ],
+46 silly resolved     main: './lib/sass',
+46 silly resolved     _id: 'sass@0.5.0',
+46 silly resolved     engines: { node: '*' },
+46 silly resolved     _nodeSupported: true,
+46 silly resolved     _npmVersion: '0.2.7-2',
+46 silly resolved     _nodeVersion: 'v0.3.1-pre',
+46 silly resolved     dist:
+46 silly resolved      { tarball: 'http://registry.npmjs.org/sass/-/sass-0.5.0.tgz',
+46 silly resolved        shasum: '9dee1183a0f400361f2c5d3453bf2e54705e03f9' },
+46 silly resolved     directories: {},
+46 silly resolved     _shasum: '9dee1183a0f400361f2c5d3453bf2e54705e03f9',
+46 silly resolved     _from: 'sass@',
+46 silly resolved     _resolved: 'https://registry.npmjs.org/sass/-/sass-0.5.0.tgz' } ]
+47 info install sass@0.5.0 into /usr/local/lib
+48 info installOne sass@0.5.0
+49 verbose lib/node_modules/sass unbuild
+50 verbose tar unpack /Users/elia/.npm/sass/0.5.0/package.tgz
+51 silly lockFile 586e5f95--usr-local-lib-node-modules-sass tar:///usr/local/lib/node_modules/sass
+52 verbose lock tar:///usr/local/lib/node_modules/sass /Users/elia/.npm/586e5f95--usr-local-lib-node-modules-sass.lock
+53 silly lockFile 09fc28ba--elia-npm-sass-0-5-0-package-tgz tar:///Users/elia/.npm/sass/0.5.0/package.tgz
+54 verbose lock tar:///Users/elia/.npm/sass/0.5.0/package.tgz /Users/elia/.npm/09fc28ba--elia-npm-sass-0-5-0-package-tgz.lock
+55 silly gunzTarPerm modes [ '755', '644' ]
+56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/sass'
+56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/sass']
+56 error   errno: 3,
+56 error   code: 'EACCES',
+56 error   path: '/usr/local/lib/node_modules/sass',
+56 error   fstream_type: 'Directory',
+56 error   fstream_path: '/usr/local/lib/node_modules/sass',
+56 error   fstream_class: 'DirWriter',
+56 error   fstream_stack:
+56 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+56 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+56 error      'Object.oncomplete (fs.js:108:15)' ] }
+57 error Please try running this command again as root/Administrator.
+58 error System Darwin 14.0.0
+59 error command "node" "/usr/local/bin/npm" "install" "-g" "sass"
+60 error cwd /Users/elia/workspace/ionic/soyloco-frontend
+61 error node -v v0.10.35
+62 error npm -v 1.4.28
+63 error path /usr/local/lib/node_modules/sass
+64 error fstream_path /usr/local/lib/node_modules/sass
+65 error fstream_type Directory
+66 error fstream_class DirWriter
+67 error code EACCES
+68 error errno 3
+69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/sass'
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+70 error fstream_stack Object.oncomplete (fs.js:108:15)
+71 verbose exit [ 3, true ]

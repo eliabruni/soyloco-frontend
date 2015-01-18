@@ -120,8 +120,6 @@ angular.module('splash.crawling', [])
     })
 
 
-
-
 /**********************************************************
  *              FACEBOOK CRAWLING API SERVICE
  *

@@ -1,4 +1,4 @@
-// Ionic Starter App
+// Ionic Splash App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -6,20 +6,27 @@
 angular.module('splash',
     [
       'ionic',
-      'splash.controllers',
+
+      'splash.signin.ctrl',
+      'splash.tabAccount.ctrl',
+      'splash.tabPlay.ctrl',
+      'splash.tabEvents.ctrl',
+      'splash.selectCategories.ctrl',
+      'splash.eventDetail.ctrl',
+
       'ionic.contrib.ui.cards',
       'ionic.contrib.ui.cards2',
-      'splash.services',
       'splash.directives',
       'splash.storage',
       'splash.geo',
       'splash.crawling',
       'splash.users',
       'ngCordova',
-      'splash.events'
+      'splash.events',
+      'splash.profile'
     ])
 
-    .run(function($ionicPlatform) {
+    .run(function($rootScope, $ionicPlatform, $ionicLoading, $profile) {
       $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -30,11 +37,19 @@ angular.module('splash',
           StatusBar.styleDefault();
         }
 
+
+
       });
     })
 
 
-    .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+    .config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+
+      // note that you can also chain conf
+      $ionicConfigProvider.tabs.position('bottom');
+      $ionicConfigProvider.tabs.style('standard');
+      $ionicConfigProvider.views.transition('none');
+      $ionicConfigProvider.backButton.icon('ion-arrow-left-c');
 
       // This block is only for web debugging
       if (!window.cordova) {
@@ -50,9 +65,9 @@ angular.module('splash',
       $stateProvider
 
           .state('signin', {
-            url: '/sign-in',
-            templateUrl: 'templates/sign-in.html',
-            controller: 'SignInCtrl'
+            url: '/signin',
+            templateUrl: 'templates/signin.html',
+            controller: 'SigninCtrl'
           })
 
         // setup an abstract state for the tabs directive
@@ -69,25 +84,7 @@ angular.module('splash',
             views: {
               'tab-dash': {
                 templateUrl: 'templates/tab-play.html',
-                controller: 'PlayCtrl'
-              }
-            }
-          })
-          .state('tab.chats', {
-            url: '/chats',
-            views: {
-              'tab-chats': {
-                templateUrl: 'templates/tab-chats.html',
-                controller: 'ChatsCtrl'
-              }
-            }
-          })
-          .state('tab.chat-detail', {
-            url: '/chats/:chatId',
-            views: {
-              'tab-chats': {
-                templateUrl: 'templates/chat-detail.html',
-                controller: 'ChatDetailCtrl'
+                controller: 'TabPlayCtrl'
               }
             }
           })
@@ -97,15 +94,15 @@ angular.module('splash',
             views: {
               'tab-events': {
                 templateUrl: 'templates/tab-events.html',
-                controller: 'EventsCtrl'
+                controller: 'TabEventsCtrl'
               }
             }
           })
-          .state('tab.event-detail', {
+          .state('tab.eventDetail', {
             url: '/event/:eventId',
             views: {
               'tab-events': {
-                templateUrl: 'templates/event-detail.html',
+                templateUrl: 'templates/eventDetail.html',
                 controller: 'EventDetailCtrl'
               }
             }
@@ -116,22 +113,22 @@ angular.module('splash',
             views: {
               'tab-account': {
                 templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
+                controller: 'TabAccountCtrl'
               }
             }
           })
 
-          .state('tab.select-categories', {
-            url: '/select-categories',
+          .state('tab.selectCategories', {
+            url: '/selectCategories',
             views: {
               'tab-account': {
-                templateUrl: 'templates/select-categories.html',
+                templateUrl: 'templates/selectCategories.html',
                 controller: 'SelectCategoriesCtrl'
               }
             }
           })
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/sign-in');
+      $urlRouterProvider.otherwise('/signin');
 
     })

@@ -9,10 +9,8 @@
         <div id="profile-bg"></div>
         <div id="content">
             <div id="profile-info">
-                <img id="profile-image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
-                <h3 id="profile-name">Max</h3>
-          <span id="profile-description">Co-creator of <a href="http://twitter.com/ionicframework">@ionicframework</a>, founder of
-            <a href="http://twitter.com/driftyco">@driftyco</a></span>
+                <img id="profile-image" ng-src="{{profilePhoto}}">
+                <h3 id="profile-name">{{basicInfo.name}}</h3>
             </div>
 
             <div class="list">
@@ -23,11 +21,13 @@
                     </div>
                     <select ng-model="city" ng-init="city=cities[myCity.id]" ng-options="city.name for city in cities" ng-change="updateStorage(city)"></select>
                 </div>
-                <a class="item" href="#/tab/select-categories">
+                <a class="item" href="#/tab/selectCategories">
                         Event categories
                 </a>
 
             </div>
+
+            <button class="button button-block button-assertive" ng-click="logout()">Logout</button>
 
         </div>
     </ion-content>
