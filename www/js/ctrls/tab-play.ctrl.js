@@ -32,8 +32,53 @@ angular.module('splash.tabPlay.ctrl', [])
         $scope.addCard = function() {
             var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
             newCard.id = Math.random();
-            $scope.cards.push(angular.extend({}, newCard));
+            $scope.cards.unshift(angular.extend({}, newCard));
         };
+
+
+        /***************
+         * CSS stuff
+         */
+
+
+        var  height = document.getElementsByTagName('ion-pane')[0].clientHeight;
+        var width = document.getElementsByTagName('ion-pane')[0].clientWidth;
+        var size = Math.min(height,width);
+
+
+        /***************
+         * CARD 1
+         */
+
+        $scope.height = 300 + "px";
+        $scope.width = 300 + "px";
+
+        // These two values need simply to be
+        // -1/2 * (height or weight).
+        $scope.marginTop = -150 + "px";
+        $scope.marginLeft = -150 + "px";
+
+        // Top needs to be
+        //  -1/2 * (height or weight) + something
+        $scope.top = 150 + "px";
+        $scope.left = 50 + "%";
+
+
+        /***************
+         * CARD 2
+         */
+
+        $scope.height2 = 300 + "px";
+        $scope.width2 = 300 + "px";
+
+
+        $scope.marginTop2 =  10 + "px";
+        $scope.marginLeft2 = -150 + "px";
+
+        // Top needs to be
+        //  1/2 * (height or weight) + something
+        $scope.top2 = 150+150 + "px";
+        $scope.left2 = 50 + "%";
 
 
     })

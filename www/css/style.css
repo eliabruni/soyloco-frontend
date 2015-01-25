@@ -167,17 +167,8 @@
 }
 
 .swipe-card {
-  -webkit-perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  /*display: none;*/
   position: fixed;
   -webkit-transform: scale(1,1);
-  left: 50%;
-  top: 15%;
-  width: 80%;
-  height: 50%;
-  margin-left: -40%;
-  margin-top: -20%;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -185,46 +176,25 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-.swipe-card .title {
-height: 40px;
-padding: 5px;
-line-height: 30px;
-color: #444;
-}
+
 .swipe-card .image {
 overflow: hidden;
-max-height: 100%;
 }
-.swipe-card .button {
-border: none;
-}
+
+
 .swipe-card .image img {
-width: 100%;
-height: 100%;
-border-radius: 0px 0px 4px 4px;
+  border-radius: 0px 0px 4px 4px;
+
 }
 
 #start-card {
-color: #fff;
-background-color: #30BD8A;
-line-height: 100%;
-word-wrap: break-word;
-border: 6px solid #4CD68E;
-text-align: center;
-}
-#start-card span {
-display: inline-block;
-line-height: 40px;
-width: 200px;
-font-size: 30px;
-vertical-align: middle;
-}
-
-
-
-#footer .button {
   color: #fff;
+  background-color: #30BD8A;
+  word-wrap: break-word;
+  border: 6px solid #4CD68E;
+  text-align: center;
 }
+
 
 @-webkit-keyframes bounceIn {
   0% {
