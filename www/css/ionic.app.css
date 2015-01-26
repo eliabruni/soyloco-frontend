@@ -18,12 +18,15 @@ $dark:                            #444 !default;
   background-color: #32506d; }
 .tabs-positive .tab-item {
   opacity: 0.3;
-  color: #fff; }
+  color: #fff;
+  background-color: #32506d; }
   .tabs-positive .tab-item.tab-item-active, .tabs-positive .tab-item.active, .tabs-positive .tab-item.activated {
-    color: #fff; }
+    color: #fff;
+    background-color: #32506d; }
     .tabs-positive .tab-item.tab-item-active .badge, .tabs-positive .tab-item.active .badge, .tabs-positive .tab-item.activated .badge {
       opacity: 1;
-      color: #fff; }
+      color: #fff;
+      background-color: #32506d; }
 
 /*!
   Ionicons, v2.0.1

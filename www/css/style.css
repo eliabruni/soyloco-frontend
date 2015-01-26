@@ -1,21 +1,11 @@
 
 /**************************************/
-/**   TABS*/
+/**   HEADER
 /**/
-
-/*.tabs-positive > .tabs{*/
-    /*background-color: #32506d !important;*/
-/*}*/
-
-/*.tabs-positive .tab-item {*/
-    /*color: #fff;*/
-    /*opacity: 0.3;*/
-/*}*/
-
-/*.tabs-positive .tab-item-active {*/
-    /*color: #fff;*/
-/*}*/
-
+.bar.bar-positive {
+    height:48px;
+    vertical-align: middle;
+}
 
 /*************************************
 *   LOGIN
