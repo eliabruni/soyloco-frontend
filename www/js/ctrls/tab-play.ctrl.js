@@ -1,7 +1,65 @@
 angular.module('splash.tabPlay.ctrl', [])
 
 
-    .controller('TabPlayCtrl', function($scope, $ionicSwipeCardDelegate) {
+    .controller('TabPlayCtrl', function($rootScope, $scope, $ionicSwipeCardDelegate) {
+
+
+        /***************
+         * CSS stuff
+         ***************/
+
+
+            //var  height = document.getElementsByTagName('ion-pane')[0].clientHeight;
+            //var width = document.getElementsByTagName('ion-pane')[0].clientWidth;
+        $rootScope.height = document.getElementsByTagName('ion-pane')[0].clientHeight;
+        $rootScope.width = document.getElementsByTagName('ion-pane')[0].clientWidth;
+        //$rootScope.tabsHeight = document.getElementsByTagName('ion-tabs')[0].clientHeight;
+
+        //alert($rootScope.height)
+        //  alert($rootScope.tabsHeight)
+
+        var size = ($rootScope.height * 0.85) / 2;
+
+
+        /***************
+         * CARD 1
+         */
+
+        $scope.height = size + "px";
+        $scope.width = size + "px";
+
+        // These two values need simply to be
+        // -1/2 * (height or weight).
+        $scope.marginTop = -(size * 0.5) + "px";
+        $scope.marginLeft = -(size * 0.5) + "px";
+
+        // Top needs to be
+        //  -1/2 * (height or weight) + something
+        $scope.top = (size * 0.5 + size * 0.0) + "px";
+        $scope.left = 50 + "%";
+
+
+        /***************
+         * CARD 2
+         */
+
+        $scope.height2 = (size) + "px";
+        $scope.width2 = (size) + "px";
+
+
+        $scope.marginTop2 =  (size * 0.0) + "px";
+        $scope.marginLeft2 = -(size * 0.5) + "px";
+
+        // Top needs to be
+        //  1/2 * (height or weight) + something
+        $scope.top2 = (size) + "px";
+        $scope.left2 = 50 + "%";
+
+
+        /***************
+         * MOKE DATA
+         ***************/
+
         var cardTypes = [{
             title: 'Swipe down to clear the card',
             image: 'img/pic.png'
@@ -19,6 +77,11 @@ angular.module('splash.tabPlay.ctrl', [])
             image: 'img/pic4.png'
         }];
 
+
+        /***************
+         * LOGIC
+         ***************/
+
         $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
         $scope.cardSwiped = function(index) {
@@ -34,51 +97,6 @@ angular.module('splash.tabPlay.ctrl', [])
             newCard.id = Math.random();
             $scope.cards.unshift(angular.extend({}, newCard));
         };
-
-
-        /***************
-         * CSS stuff
-         */
-
-
-        var  height = document.getElementsByTagName('ion-pane')[0].clientHeight;
-        var width = document.getElementsByTagName('ion-pane')[0].clientWidth;
-        var size = Math.min(height,width);
-
-
-        /***************
-         * CARD 1
-         */
-
-        $scope.height = 300 + "px";
-        $scope.width = 300 + "px";
-
-        // These two values need simply to be
-        // -1/2 * (height or weight).
-        $scope.marginTop = -150 + "px";
-        $scope.marginLeft = -150 + "px";
-
-        // Top needs to be
-        //  -1/2 * (height or weight) + something
-        $scope.top = 150 + "px";
-        $scope.left = 50 + "%";
-
-
-        /***************
-         * CARD 2
-         */
-
-        $scope.height2 = 300 + "px";
-        $scope.width2 = 300 + "px";
-
-
-        $scope.marginTop2 =  10 + "px";
-        $scope.marginLeft2 = -150 + "px";
-
-        // Top needs to be
-        //  1/2 * (height or weight) + something
-        $scope.top2 = 150+150 + "px";
-        $scope.left2 = 50 + "%";
 
 
     })

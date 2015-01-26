@@ -19,10 +19,40 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
-$tabs-height:                     55px;
+$tabs-height: 55px;
+$bar-height: 100px;
 $tabs-icon-size:                  35px;
 //$tabs-default-bg:                 #282828;
 //$tabs-default-text:               #ffffff;
+
+$positive:                        #32506d !default;
+
+.tabs-positive {
+  .tabs {
+    background-color: #32506d;
+  }
+  .tab-item {
+    // default android tab
+    opacity: 0.3;
+    color:#fff;
+
+    &.tab-item-active,
+    &.active,
+    &.activated {
+      color: #fff;
+      //margin-top: -$tabs-striped-border-width;
+      //border-style: solid;
+      //border-width: $tabs-striped-border-width 0 0 0;
+      //border-color: $dark;
+      .badge {
+        //top: $tabs-striped-border-width;
+        opacity: 1;
+        color: #fff;
+
+      }
+    }
+  }
+}
 
 
 
