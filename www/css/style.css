@@ -1,15 +1,11 @@
 
 /**************************************/
-/**   TABS*/
+/**   HEADER
 /**/
-/*.tab-item.active,*/
-/*.tab-item.activated {*/
-  /*opacity: 1;*/
-  /*background-color:#000;*/
-  /*color: red;*/
-  /*height:90%;*/
-/*}*/
-
+.bar.bar-positive {
+    height:48px;
+    vertical-align: middle;
+}
 
 /*************************************
 *   LOGIN
@@ -134,41 +130,42 @@
 
 
 
-
-
-
 /*************************************
 *   SWIPE
 */
 
-/*.pane {
-  background-color: #333;
-}*/
 
-/*.bar.bar-transparent {
+
+/*.pane {*/
+  /*background-color: #32506d !important*/
+/*}*/
+
+.play-div {
+    background-color: #32506d !important
+}
+
+.bar.bar-transparent {
   background-color: transparent;
   background-image: none;
   border: none;
 }
 
-.bar .title {
-  color: #eee;
-}*/
+.swipe-cards {
+  position: fixed;
+}
 
 .swipe-cards {
   position: fixed;
 }
 
+
+/***************
+ * CARD 1
+ */
+
 .swipe-card {
-  display: none;
   position: fixed;
   -webkit-transform: scale(1,1);
-  left: 50%;
-  top: 28.5%;
-  width: 230px;
-  height: 230px;
-  margin-left: -115px;
-  margin-top: -115px;
   box-sizing: border-box;
   background-color: rgb(255,255,255);
   border-radius: 4px;
@@ -176,45 +173,25 @@
   -webkit-animation-fill-mode: forwards;
 }
 
-/*.swipe-card .title {
-  height: 40px;
-  padding: 5px;
-  line-height: 30px;
-  color: #444;
-}*/
+
 .swipe-card .image {
-  overflow: hidden;
-  max-height: 250px;
+overflow: hidden;
 }
-/*.swipe-card .button {
-  border: none;
-}*/
+
+
 .swipe-card .image img {
-  width: 230px;
-  height: 230px;
   border-radius: 0px 0px 4px 4px;
+
 }
 
 #start-card {
   color: #fff;
   background-color: #30BD8A;
-  line-height: 250px;
   word-wrap: break-word;
   border: 6px solid #4CD68E;
   text-align: center;
 }
-#start-card span {
-  display: inline-block;
-  line-height: 40px;
-  width: 200px;
-  font-size: 30px;
-  vertical-align: middle;
-}
 
-/*
-#footer .button {
-  color: #fff;
-}*/
 
 @-webkit-keyframes bounceIn {
   0% {
@@ -232,82 +209,48 @@
   -webkit-transform: scale(0,0);
 }
 .swipe-card.pop-in {
-  -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.3s ease-out;
 }
 
-
-
-
-
-
-
-
-
-
-
-
+/***************
+ * CARD 2
+ */
 
 .swipe-cards2 {
   position: fixed;
 }
 
 .swipe-card2 {
-  display: none;
-  position: fixed;
-  -webkit-transform: scale(1,1);
-  left: 50%;
-  top: 70%;
-  width: 230px;
-  height: 230px;
-  margin-left: -115px;
-  margin-top: -115px;
-  box-sizing: border-box;
-  background-color: rgb(255,255,255);
-  border-radius: 4px;
-  overflow: hidden;
-  -webkit-animation-fill-mode: forwards;
+    position: fixed;
+    -webkit-transform: scale(1,1);
+    box-sizing: border-box;
+    background-color: rgb(255,255,255);
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-animation-fill-mode: forwards;
 }
 
-/*.swipe-card2 .title {
-  height: 40px;
-  padding: 5px;
-  line-height: 30px;
-  color: #444;
-}*/
+
 .swipe-card2 .image {
-  overflow: hidden;
-  max-height: 250px;
+overflow: hidden;
+max-height: 100%;;
 }
-.swipe-card2 .button {
-  border: none;
-}
+
+
 .swipe-card2 .image img {
-  width: 230px;
-  height: 230px;
-  border-radius: 0px 0px 4px 4px;
+width: 100%;
+height: 100%;
+border-radius: 0px 0px 4px 4px;
 }
 
 #start-card2 {
-  color: #fff;
-  background-color: #30BD8A;
-  line-height: 250px;
-  word-wrap: break-word;
-  border: 6px solid #4CD68E;
-  text-align: center;
-}
-#start-card2 span {
-  display: inline-block;
-  line-height: 40px;
-  width: 200px;
-  font-size: 30px;
-  vertical-align: middle;
+    color: #fff;
+    background-color: #30BD8A;
+    word-wrap: break-word;
+    border: 6px solid #4CD68E;
+    text-align: center;
 }
 
-/*
-#footer .button {
-  color: #fff;
-}
-*/
 
 @-webkit-keyframes bounceIn {
   0% {
@@ -325,5 +268,5 @@
   -webkit-transform: scale(0,0);
 }
 .swipe-card2.pop-in {
-  -webkit-animation: bounceIn 0.4s ease-out;
+  -webkit-animation: bounceIn 0.3s ease-out;
 }

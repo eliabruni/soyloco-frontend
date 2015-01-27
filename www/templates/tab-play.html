@@ -1,35 +1,78 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <ion-view view-title="Dashboard">
   <ion-pane no-scroll>
+=======
+<ion-view view-title="Play" hide-back-button="true" hide-nav-bar="true">
+>>>>>>> tabs
 
-    <swipe-cards>
-      <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-        Swipe down for a new card
-      </swipe-card>
-      <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div ng-controller="CardCtrl">
-          <div class="image"  ng-click="goAway()">
-            <img ng-src="{{card.image}}">
-          </div>
-        </div>
-      </swipe-card>
-    </swipe-cards>
+<ion-pane no-scroll ng-style="{'background-color':'#32506d'}">
+
+      <div class="play-div">
+
+      <swipe-cards on-card-swipe="onSwipe($event)">
 
 
-    <swipe-cards2>
-      <swipe-card2 on-card-swipe="cardSwiped()" id="start-card2">
-        Swipe down for a new card
-      </swipe-card2>
-      <swipe-card2 ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div ng-controller="CardCtrl">
+      <!-- CARD 1 -->
+
+      <div class="card">
+
+        <swipe-card on-card-swipe="cardSwiped()"
+                    id="start-card"
+                    ng-style="{'background-color':'red', 'left' : left, 'top': top,
+                    'width': width, 'height': height, 'margin-left': marginLeft,
+                    'margin-top' : marginTop}" >
+          Swipe down for a new card
+        </swipe-card>
+
+      </div>
+
+      <swipe-card ng-repeat="card in cards"
+                  on-destroy="cardDestroyed($index)"
+                  on-card-swipe="cardSwiped($index)"
+                  ng-style="{'left' : left, 'top': top, 'width': width, 'height': height,
+                  'margin-left': marginLeft, 'margin-top' : marginTop}" >
+
+        <div ng-controller="CardCtrl" >
           <div class="image" ng-click="goAway()">
-            <img ng-src="{{card.image}}"  >
+            <img ng-src="{{card.image}}"
+                 ng-style="{'width':width, 'height':height}">
           </div>
         </div>
-      </swipe-card2>
-    </swipe-cards2>
+      </swipe-card>
+
+
+      <!-- CARD 2 -->
+
+      <div class="card">
+
+        <swipe-card on-card-swipe="cardSwiped()"
+                    id="start-card2"
+                    ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
+                    'width': width2, 'height': height2, 'margin-left': marginLeft2,
+                    'margin-top' : marginTop2}" >
+          Swipe down for a new card
+        </swipe-card>
+
+      </div>
+
+      <swipe-card ng-repeat="card in cards"
+                  on-destroy="cardDestroyed($index)"
+                  on-card-swipe="cardSwiped($index)"
+                  ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
+                  'width': width2, 'height': height2, 'margin-left': marginLeft2,
+                  'margin-top' : marginTop2}" >
+
+        <div ng-controller="CardCtrl" >
+          <div class="image" ng-click="goAway()">
+            <img ng-src="{{card.image}}"
+                 ng-style="{'width':width, 'height':height}">
+          </div>
+        </div>
+      </swipe-card>
 
   </ion-pane>
+<<<<<<< HEAD
 =======
 <ion-view>
 
@@ -100,5 +143,8 @@
         <button class="button ion-ios7-heart icon-heart-soyloco" ng-click="accept()"></button>
     </div>
 
+=======
+</div>
+>>>>>>> tabs
 
 </ion-view>
