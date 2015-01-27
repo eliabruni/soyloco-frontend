@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "Splash",
   "private": "true",
   "devDependencies": {
@@ -6,3 +7,32 @@
     "ngCordova": "x"
   }
 }
+=======
+    "name": "y",
+    "version": "0.09",
+    "homepage": "n",
+    "authors": [
+        "y"
+    ],
+    "description": "Frontend for Soyloco",
+    "main": "[www/index.html|www/oauthcallback.html|www/css/*|www/js/*|www/templates/*|scss/*]",
+    "moduleType": [
+        "globals"
+    ],
+    "license": "n",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "ionic": "driftyco/ionic-bower#master",
+        "angular-google-maps":"x",
+        "angular-local-storage":"x",
+        "ngCordova":"x"
+    }
+}
+>>>>>>> nightly

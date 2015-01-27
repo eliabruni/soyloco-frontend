@@ -1,0 +1,386 @@
+/* Your app's CSS, go crazy, make it your own */
+
+
+/*************************************
+*   LOGIN
+*/
+
+.login-slider {
+    height: 80%;
+}
+
+.slider {
+    height: 100%;
+}
+.slider-slide {
+    padding-top: 0px;
+    color: #000;
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 28px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+#facebook-logo {
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+    background-color:#ffffff;
+
+}
+
+.facebook-button {
+    background-color: #3b5998;
+    color: #ffffff;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 19px;
+}
+
+
+#facebook-disclaimer {
+    color: #000000;
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+#list {
+    width: 170px;
+    margin: 30px auto;
+    font-size: 20px;
+}
+#list ol {
+    margin-top: 30px;
+}
+#list ol li {
+    text-align: left;
+    list-style: decimal;
+    margin: 10px 0px;
+}
+
+.facebook-login-loader {
+    font-size: 40px;
+    color: #ffffff;
+
+}
+
+
+
+/*************************************
+*  TOP BAR
+*/
+
+/*
+BUTTONS
+*/
+
+
+/*
+Side menu button
+*/
+.menu-bar{
+    top: 0 !important;
+    position: absolute;
+}
+
+.menu-bar .button-icon {
+    color: #B5B5B5 !important;
+    height: 50px !important;
+}
+
+.buttons.left-buttons .ion-navicon-round:before {
+    font-size:30px !important;
+    color:#A9A9A9;margin-left:-25px !important;
+    border-right: 2px solid #A9A9A9;
+    width: 45px;
+}
+
+
+/*
+Map views buttons
+*/
+.button-bar{
+    top: 0 !important;
+    position: absolute;
+    margin-left: 8%;
+    width:50%;
+    text-align: center !important;
+}
+
+.button-bar .button-icon {
+    height: 50px !important;
+
+    color: #B5B5B5 !important;
+    padding: 0px !important;
+    /*
+        letter-spacing:20px !important;
+    */
+}
+
+
+.button-bar .button-icon.button.active {
+    color: #fff !important;
+    opacity: 1;
+}
+
+
+.buttons.left-buttons .ion-home:before {
+    font-size: 35px !important;
+    width:50px !important;
+}
+
+.buttons.left-buttons .ion-android-social:before {
+    font-size: 35px !important;
+    width:50px !important;
+}
+
+.buttons.left-buttons .ion-android-social-user:before {
+    font-size: 25px !important;
+    width:50px !important;
+}
+
+.buttons.left-buttons .ion-heart:before {
+    font-size: 33px !important;
+    width:50px !important;
+}
+
+/*
+SUBHEADER
+*/
+
+.bar-subheader {
+    color:red !important;
+    vertical-align: middle;
+    /*    padding-top:0px !important;
+        background-color: rgba(255,255,255,0.7);
+        border:none !important;
+        border-top: 1px solid #000 !important;
+        vertical-align: middle;
+        text-align: left;
+        padding-left: 10%;*/
+}
+
+
+
+.subheader-viewname {
+    font-size: 18px;
+    color:#406582;
+}
+
+/* .ion-pinpoint:before {
+    color: #454545;
+    font-size: 25px !important;
+    border-left: 2px solid red !important;
+    border:none !important;
+}*
+
+
+
+
+/*************************************
+*   SIDE-MENU
+*/
+
+.menu.menu-left {
+    background-color: #292929;
+}
+
+.menu.menu-left .item {
+    border: 1px solid #111;
+    color: #FFF;
+    background-color: #292929;
+    font-size: 18px;
+}
+
+
+.menu-item-profile {
+
+    height: 150px;
+    padding-top:10%;
+    padding-bottom:10%;
+    padding-left:6%;
+}
+
+/*
+Profile image circular
+*/
+.circular {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border: 4px solid #fff;
+}
+
+.ion-heart-specs {
+    font-size: 200px;
+}
+
+
+
+/*************************************
+*   PLAY VIEW
+*/
+
+/*
+SWIPE IN PLAY VIEW
+*/
+
+/*.pane {
+    background-color: #fff !important;
+
+}*/
+
+
+.swipe-cards {
+    position: absolute;
+    z-index: 2;
+    vertical-align: middle;
+}
+
+.swipe-card {
+    height: 65%;
+    width: 90%;
+    margin: auto;
+    position: absolute;
+/*
+    TODO: need to find a better way for top
+*/
+    bottom: 0; left: 0; top: -10%; right: 0;
+
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    display: none;
+    position: fixed;
+    -webkit-transform: scale(1,1);
+
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-animation-fill-mode: forwards;
+    border-color: #e59094;
+    border: 1px solid;
+}
+
+.swipe-card .image {
+
+    position: absolute;
+    width: 100% !important;
+    height:100% !important;
+    overflow: hidden !important;
+    /* width: 20% !important;
+     height: 20% !important;*/
+
+}
+
+.swipe-card .image img {
+    width: 100% !important;
+    height:100% !important;
+}
+
+
+
+
+
+
+/*BUTTONS*/
+
+
+.swipe-button-left {
+    margin-top: 385px;
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+    margin-left: 0px;
+    z-index: 1;
+}
+
+.swipe-button-right {
+    margin-top: 385px;
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+    margin-left: 0px;
+    z-index: 1;
+}
+
+
+.icon-cancel-soyloco {
+    font-size: 2.7em;
+    font-weight: bold;
+    color:#cb2027;
+    display: block;
+    /*
+        background-color: #f7f7f7;
+    */
+    margin: 22.5px;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    line-height: 83.75px;
+    border-radius: 50%;
+    vertical-align:middle;
+    /*
+        box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
+    */
+}
+
+
+
+.icon-heart-soyloco {
+    font-size: 2.7em;
+    color:#76EE00;
+    display: block;
+    background-color: #f7f7f7;
+    margin: 22.5px;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    text-align: center;
+    line-height: 83.75px;
+    border-radius: 50%;
+    vertical-align:middle;
+
+    /*
+        box-shadow: 0px 1px 1px #aaa, inset 0px 2px 3px #fff;
+    */
+}
+
+
+
+
+
+/*************************************
+*   CATEGORY VIEW
+*/
+
+
+/*
+MAP
+*/
+
+
+.scroll-content{
+    z-index: 11;
+    background-color:white;
+}
+
+
+.map {
+    position: relative;
+    padding-bottom: 100%;
+    padding-top: 60px; height: 0; overflow: hidden;
+    background-color: #ccc;
+}
+
+
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

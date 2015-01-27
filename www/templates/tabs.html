@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 <!--
 Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-only  tabs-color-dark">
+=======
+<ion-side-menus>
+>>>>>>> nightly
 
+    <ion-pane ion-side-menu-content xw>
+        <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+<!--            <ion-nav-back-button class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button>-->
+        </ion-nav-bar>
 
+<<<<<<< HEAD
   <!-- Dashboard Tab -->
   <ion-tab title="Play" icon-off="ion-heart" icon-on="ion-ios7-pulse-strong" href="#/tab/dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
@@ -20,6 +30,60 @@ navigation history that also transitions its views in and out.
   <ion-tab title="Account" icon-off="ion-android-person" icon-on="ion-ios7-gear" href="#/tab/account">
     <ion-nav-view name="tab-account"></ion-nav-view>
   </ion-tab>
+=======
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
 
 
-</ion-tabs>
+    <script id="tabs.html" type="text/ng-template">
+        <ion-tabs class=" tabs-icon-only tabs-positive tabs-top slide-left-right-ios7">
+
+            <ion-tab icon="ion-home" href="#/tab/home">
+                <ion-nav-view name="home-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab  icon="ion-ios7-information" href="#/tab/about">
+                <ion-nav-view name="about-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab  icon="ion-ios7-world" ui-sref="tabs.contact">
+                <ion-nav-view name="contact-tab"></ion-nav-view>
+            </ion-tab>
+
+        </ion-tabs>
+    </script>
+
+    <ion-side-menu side="left" class="left-menu" >
+
+            <ul class="list">
+                <a class="item item-icon-left menu-item-profile" href="#/tab/profile" nav-clear menu-close>
+
+                    <!-- circular image -->
+                    <img style="vertical-align:middle" src="http://i.imgur.com/jZN7xit.jpg" class="circular">
+                    Elia
+                </a>
+                <a class="item item-icon-left" href="#/tab/category" nav-clear menu-close>
+                    <i class="icon ion-android-earth ion-heart-specs"></i>
+                    Explore new places
+                </a>
+                <a class="item item-icon-left" href="#/tab/play" nav-clear menu-close>
+                    <i class="icon ion-fireball ion-heart-specs"></i>
+                    Find who you like
+                </a>
+                <a class="item item-icon-left" href="#/tab/settings" nav-clear menu-close>
+                    <i class="icon ion-ios7-gear"></i>
+                    Settings
+                </a>
+                <a class="item item-icon-left" ng-click="openModal()" nav-clear menu-close>
+                    <i class="icon ion-android-share"></i>
+                    Share Soyloco
+                </a>
+
+            </ul>
+
+    </ion-side-menu>
+
+</ion-side-menus>
+>>>>>>> nightly
+
+

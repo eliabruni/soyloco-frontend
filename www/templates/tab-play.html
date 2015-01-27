@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-view view-title="Dashboard">
   <ion-pane no-scroll>
 
@@ -29,5 +30,75 @@
     </swipe-cards2>
 
   </ion-pane>
+=======
+<ion-view>
+
+    <ion-nav-buttons side="left">
+
+        <div class="menu-bar">
+            <button menu-toggle="left" class="button button-icon ion-navicon-round"></button>
+        </div>
+
+
+    </ion-nav-buttons>
+
+    <ion-pane no-scroll>
+
+
+
+
+
+        <swipe-cards>
+
+
+            <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+                <div class="title">
+                    {{card.name}}
+                </div>
+                <!--
+
+                                        <div class="image">
+                -->
+                <div class="image">
+                    <img ng-src="{{card.image}}">
+                </div>
+                <!--
+                                        </div>
+                -->
+                <div class="button-bar">
+                    <button class="button button-clear button-positive" ng-click="reject()">No</button>
+                    <button class="button button-clear button-positive" ng-click="accept()">Yes</button>
+                </div>
+            </swipe-card>
+        </swipe-cards>
+
+        <!--<swipe-cards on-swipe="onSwipe($event)">
+            <swipe-cards>
+                <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index, cards[$index].userId)">
+
+                    <div class="image">
+                        <img ng-src="{{card.image}}">
+                        <a class="subdued">{{userName}}</a>
+
+
+                    </div>
+
+                </swipe-card>
+            </swipe-cards>
+        </swipe-cards>
+
+        -->
+
+    </ion-pane>
+
+    <div class="swipe-button-left">
+        <button class="button ion-close-round icon-cancel-soyloco" ng-click="reject()"></button>
+    </div>
+>>>>>>> nightly
+
+    <div class="swipe-button-right">
+        <button class="button ion-ios7-heart icon-heart-soyloco" ng-click="accept()"></button>
+    </div>
+
 
 </ion-view>
