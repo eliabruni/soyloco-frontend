@@ -3,6 +3,7 @@ platforms/android
 platforms/ios
 .idea
 .sass-cache
+hooks
 <<<<<<< HEAD
 plugins
 www/components

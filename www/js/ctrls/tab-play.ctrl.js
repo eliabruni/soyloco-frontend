@@ -82,6 +82,7 @@ angular.module('splash.tabPlay.ctrl', [])
          * LOGIC
          ***************/
 
+        var lastIndex = 0;
         $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
         $scope.cardSwiped = function(index) {

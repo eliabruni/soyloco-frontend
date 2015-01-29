@@ -2,9 +2,8 @@
 
 <ion-pane no-scroll ng-style="{'background-color':'#32506d'}">
 
-      <div class="play-div">
 
-      <swipe-cards on-card-swipe="onSwipe($event)">
+      <swipe-cards>
 
 
       <!-- CARD 1 -->
@@ -28,29 +27,36 @@
                   'margin-left': marginLeft, 'margin-top' : marginTop}" >
 
         <div ng-controller="CardCtrl" >
-          <div class="image" ng-click="goAway()">
+          <div class="image" ng-click="goAway()"
+                  >
             <img ng-src="{{card.image}}"
-                 ng-style="{'width':width, 'height':height}">
+                 ng-style="{'width':width, 'height':height}"
+                 class="img-responsive"
+                 ng-click="image.selected = !image.selected"
+                 ng-class="{ 'selected-image': image.selected }">
           </div>
         </div>
       </swipe-card>
 
+          </swipe-cards>
 
       <!-- CARD 2 -->
 
-      <div class="card">
+          <swipe-cards2>
 
-        <swipe-card on-card-swipe="cardSwiped()"
+          <div class="card">
+
+        <swipe-card2 on-card-swipe="cardSwiped()"
                     id="start-card2"
                     ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
                     'width': width2, 'height': height2, 'margin-left': marginLeft2,
                     'margin-top' : marginTop2}" >
           Swipe down for a new card
-        </swipe-card>
+        </swipe-card2>
 
       </div>
 
-      <swipe-card ng-repeat="card in cards"
+      <swipe-card2 ng-repeat="card in cards"
                   on-destroy="cardDestroyed($index)"
                   on-card-swipe="cardSwiped($index)"
                   ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
@@ -59,13 +65,16 @@
 
         <div ng-controller="CardCtrl" >
           <div class="image" ng-click="goAway()">
-            <img ng-src="{{card.image}}"
-                 ng-style="{'width':width, 'height':height}">
+              <img ng-src="{{card.image}}"
+                   ng-style="{'width':width, 'height':height}"
+                   class="img-responsive"
+                   ng-click="image.selected = !image.selected"
+                   ng-class="{ 'selected-image': image.selected }">
           </div>
         </div>
-      </swipe-card>
+      </swipe-card2>
+          </swipe-cards2>
 
   </ion-pane>
-</div>
 
 </ion-view>

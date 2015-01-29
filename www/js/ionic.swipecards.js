@@ -166,7 +166,16 @@
      * Swipe a card out programtically
      */
     swipe: function() {
-      this.transitionOut();
+        var self = this;
+
+        this.onSwipe && this.onSwipe();
+
+        // Trigger destroy after card has swiped out
+        setTimeout(function() {
+            self.onDestroy && self.onDestroy();
+            //}, duration * 1000);
+        }, 400);
+      //this.transitionOut();
     },
 
     /**
@@ -192,6 +201,7 @@
         // Trigger destroy after card has swiped out
         setTimeout(function() {
           self.onDestroy && self.onDestroy();
+            //}, duration * 1000);
         }, duration * 1000);
       }
     },

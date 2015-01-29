@@ -1,7 +1,7 @@
 <ion-view view-title="Events">
 
   <ion-content scroll>
-
+      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
     <div class="list">
 
       <a ng-repeat="event in events"
