@@ -1,18 +1,51 @@
 <ion-view view-title="Events">
 
-  <ion-content scroll>
+  <ion-content scroll ng-style="{'background-color':'#B0B0B0'}">
       <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-    <div class="list">
 
-      <a ng-repeat="event in events"
-         href="#/tab/event/{{event.id}}"
-         class="item item-thumbnail-left">
+            <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+                <div class="container">
+                    <header>
+                        <div class="bio">
+                            <img src="{{event.image}}" alt="background" class="bg"
+                                 ng-style="{'width': cardWidth, 'height': cardHeight}">
+                            <div class="desc"
+                                 ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
+                                <h3>VIP ROOM</h3>
+                                <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                            </div>
+                        </div>
 
-        <img ng-src="{{ event.image }}">
-        <h2>{{ event.name }}</h2>
-        <h4>{{ event.date }}</h4>
-      </a>
 
-    </div>
+
+
+                    </header>
+
+                    <div class="content">
+                        <div class="data">
+                            <ul>
+                                <li>
+                                    2,934
+                                    <span>Tweets</span>
+                                </li>
+                                <li>
+                                    1,119
+                                    <span>Followers</span>
+                                </li>
+                                <li>
+                                    530
+                                    <span>Following</span>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </a>
+
   </ion-content>
+
 </ion-view>

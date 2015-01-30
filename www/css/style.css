@@ -135,7 +135,6 @@
 */
 
 
-
 /*.pane {*/
   /*background-color: #32506d !important*/
 /*}*/
@@ -280,3 +279,82 @@ border-radius: 0px 0px 4px 4px;
 .swipe-card2.pop-in {
   -webkit-animation: bounceIn 0.3s ease-out;
 }
+
+
+
+/***************
+ * TAB-EVENTS
+ */
+
+
+
+body {
+    background-color: #666; }
+
+header {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+//to adapt full screen
+width: 320px;
+    margin: 0em auto 1em auto;
+    padding-bottom: 1.5em;
+    background-color: #dde1e2;
+}
+
+.bg {
+    border-bottom: 0px solid #32506d; }
+
+
+.content {
+    height: 30px;
+}
+
+.data {
+    margin-top: .6em;
+    color: #81878b; }
+.data li {
+    width: 32%;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.5em;
+    font-family: 'Lato';
+    border-right: solid 1px #bdc3c7; }
+.data li:last-child {
+    border: none; }
+.data li span {
+    display: block;
+    text-transform: uppercase;
+    font-family: 'Quicksand';
+    font-size: .5em;
+    margin-top: .6em;
+    font-weight:700;
+}
+
+
+.desc {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    color: white;
+    text-align: left;
+    opacity: 0;
+}
+.desc h3 {
+    color: #fff;
+    font-family: "Lato";
+    font-size: 2em;
+    margin-bottom: .1em; }
+.desc p {
+    color: #B0B0B0 ;
+    font-size: .9em;
+    font-family: 'Quicksand';
+    line-height: 1.5em; }
+
+
+.bio > .desc {
+    cursor: pointer;
+    opacity: 1; }
