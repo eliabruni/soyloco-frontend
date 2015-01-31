@@ -1,27 +1,28 @@
 <ion-view view-title="Events">
 
-  <ion-content scroll ng-style="{'background-color':'#B0B0B0'}">
+  <ion-content scroll ng-style="{'background-color':'#35465c'}">
       <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
             <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
-                <div class="container">
+                <div class="container"
+                     ng-style="{
+                     'width': cardWidth,
+                     'margin': containerMargin,
+                     'padding-bottom': containerPaddingBottom
+                     }">
                     <header>
                         <div class="bio">
                             <img src="{{event.image}}" alt="background" class="bg"
                                  ng-style="{'width': cardWidth, 'height': cardHeight}">
                             <div class="desc"
                                  ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
-                                <h3>VIP ROOM</h3>
+                                <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
                                 <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
                             </div>
                         </div>
-
-
-
-
                     </header>
 
-                    <div class="content">
+                    <div class="content" ng-style="{'height': contentHeight}">
                         <div class="data">
                             <ul>
                                 <li>

@@ -19,29 +19,29 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
-$tabs-height: 55px;
+//$tabs-height: 45px;
 //$bar-height: 100px;
 //$tabs-icon-size:                  35px;
 //$tabs-default-bg:                 #282828;
 //$tabs-default-text:               #ffffff;
 
-$positive:                        #32506d !default;
+$positive:                        #35465c !default;
 
 .tabs-positive {
   .tabs {
-    background-color: #32506d;
+    background-color: #35465c;
   }
   .tab-item {
     // default android tab
     opacity: 0.3;
     color:#fff;
-    background-color: #32506d;
+    background-color: #35465c;
 
     &.tab-item-active,
     &.active,
     &.activated {
       color: #fff;
-      background-color: #32506d;
+      background-color: #35465c;
       //margin-top: -$tabs-striped-border-width;
       //border-style: solid;
       //border-width: $tabs-striped-border-width 0 0 0;
@@ -50,7 +50,7 @@ $positive:                        #32506d !default;
         //top: $tabs-striped-border-width;
         opacity: 1;
         color: #fff;
-        background-color: #32506d;
+        background-color: #35465c;
 
 
       }
