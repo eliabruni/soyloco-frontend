@@ -102,9 +102,16 @@ angular.module('splash.tabPlay.ctrl', [])
 
     })
 
-    .controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
-        $scope.goAway = function() {
-            var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
-            card.swipe();
-        };
+    .controller('CardCtrl', function($scope, $timeout, $ionicSwipeCardDelegate) {
+        $scope.goAway = function(index) {
+            $timeout(function () {
+                $scope.cards.splice(index, 1);
+                $scope.addCard();
+            }, 400);
+        }
+
+        //$scope.goAway = function() {
+        //    var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+        //    card.swipe();
+        //};
     });

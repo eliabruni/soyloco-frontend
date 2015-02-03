@@ -23,7 +23,6 @@ angular.module('splash',
         'splash.profile',
 
         'ionic.contrib.ui.cards',
-        'ionic.contrib.ui.cards2',
     ])
 
     .run(function($rootScope, $ionicPlatform, $ionicLoading, $profile) {

@@ -12,7 +12,7 @@
 
         <swipe-card on-card-swipe="cardSwiped()"
                     id="start-card"
-                    ng-style="{'background-color':'red', 'left' : left, 'top': top,
+                    ng-style="{'left' : left, 'top': top,
                     'width': width, 'height': height, 'margin-left': marginLeft,
                     'margin-top' : marginTop}" >
           Swipe down for a new card
@@ -38,28 +38,28 @@
         </div>
       </swipe-card>
 
-          </swipe-cards>
+          <!--</swipe-cards>-->
 
       <!-- CARD 2 -->
 
-          <swipe-cards2>
+          <!--<swipe-cards>-->
 
           <div class="card">
 
-        <swipe-card2 on-card-swipe="cardSwiped()"
+        <swipe-card on-card-swipe="cardSwiped()"
                     id="start-card2"
-                    ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
+                    ng-style="{'left' : left2, 'top': top2,
                     'width': width2, 'height': height2, 'margin-left': marginLeft2,
                     'margin-top' : marginTop2}" >
           Swipe down for a new card
-        </swipe-card2>
+        </swipe-card>
 
       </div>
 
-      <swipe-card2 ng-repeat="card in cards"
+      <swipe-card ng-repeat="card in cards"
                   on-destroy="cardDestroyed($index)"
                   on-card-swipe="cardSwiped($index)"
-                  ng-style="{'background-color':'red', 'left' : left2, 'top': top2,
+                  ng-style="{'left' : left2, 'top': top2,
                   'width': width2, 'height': height2, 'margin-left': marginLeft2,
                   'margin-top' : marginTop2}" >
 
@@ -72,8 +72,8 @@
                    ng-class="{ 'selected-image': image.selected }">
           </div>
         </div>
-      </swipe-card2>
-          </swipe-cards2>
+      </swipe-card>
+          </swipe-cards>
 
   </ion-pane>
 
