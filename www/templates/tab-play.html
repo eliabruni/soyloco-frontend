@@ -8,18 +8,6 @@
 
       <!-- CARD 1 -->
 
-      <div class="card">
-
-        <swipe-card on-card-swipe="cardSwiped()"
-                    id="start-card"
-                    ng-style="{'left' : left, 'top': top,
-                    'width': width, 'height': height, 'margin-left': marginLeft,
-                    'margin-top' : marginTop}" >
-          Swipe down for a new card
-        </swipe-card>
-
-      </div>
-
       <swipe-card ng-repeat="card in cards"
                   on-destroy="cardDestroyed($index)"
                   on-card-swipe="cardSwiped($index)"
@@ -27,7 +15,7 @@
                   'margin-left': marginLeft, 'margin-top' : marginTop}" >
 
         <div ng-controller="CardCtrl" >
-          <div class="image" ng-click="goAway()"
+          <div class="image" ng-click="goAway($index)"
                   >
             <img ng-src="{{card.image}}"
                  ng-style="{'width':width, 'height':height}"
@@ -38,23 +26,7 @@
         </div>
       </swipe-card>
 
-          <!--</swipe-cards>-->
-
       <!-- CARD 2 -->
-
-          <!--<swipe-cards>-->
-
-          <div class="card">
-
-        <swipe-card on-card-swipe="cardSwiped()"
-                    id="start-card2"
-                    ng-style="{'left' : left2, 'top': top2,
-                    'width': width2, 'height': height2, 'margin-left': marginLeft2,
-                    'margin-top' : marginTop2}" >
-          Swipe down for a new card
-        </swipe-card>
-
-      </div>
 
       <swipe-card ng-repeat="card in cards"
                   on-destroy="cardDestroyed($index)"
@@ -64,7 +36,7 @@
                   'margin-top' : marginTop2}" >
 
         <div ng-controller="CardCtrl" >
-          <div class="image" ng-click="goAway()">
+          <div class="image" ng-click="goAway($index)">
               <img ng-src="{{card.image}}"
                    ng-style="{'width':width, 'height':height}"
                    class="img-responsive"
