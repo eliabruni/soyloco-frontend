@@ -1,6 +1,6 @@
 angular.module('splash.tabEvents.ctrl', [])
 
-    .controller('TabEventsCtrl', function($rootScope, $scope, Events) {
+    .controller('TabEventsCtrl', function($scope, $localstorage, Events) {
 
         $scope.events = Events.all();
 
@@ -15,27 +15,30 @@ angular.module('splash.tabEvents.ctrl', [])
 
 
         /***************
-         * CSS stuff
-         ***************/
+        * CSS stuff
+        ***************/
 
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
 
         /***************
-         * CARDS
-         */
+        * CARDS
+        */
 
-        $scope.containerMargin = [($rootScope.width * 0.04) + "px auto " + ($rootScope.width * 0.04) + "px auto"];
-        $scope.containerPaddingBottom = ($rootScope.width * 0.06) + "px";
+        $scope.containerMargin = [(screenWidth * 0.04) + "px auto " + (screenWidth * 0.04) + "px auto"];
+        $scope.containerPaddingBottom = (screenWidth * 0.06) + "px";
 
-        $scope.cardHeight = ($rootScope.width * 0.9) + "px";
-        $scope.cardWidth = ($rootScope.width * 0.96) + "px";
+        $scope.cardHeight = (screenWidth * 0.9) + "px";
+        $scope.cardWidth = (screenWidth * 0.96) + "px";
 
-        $scope.descPaddingTop = ($rootScope.width * 0.72) + "px";
-        $scope.descPaddingLeft = ($rootScope.width * 0.025) + "px";
-        $scope.descpPaddingTop = ($rootScope.width * 0.04) + "px";
+        $scope.descPaddingTop = (screenWidth * 0.72) + "px";
+        $scope.descPaddingLeft = (screenWidth * 0.025) + "px";
+        $scope.descpPaddingTop = (screenWidth * 0.04) + "px";
 
-        $scope.contentHeight = ($rootScope.width * 0.1) + "px";
+        $scope.contentHeight = (screenWidth * 0.1) + "px";
 
-        $scope.descH3FontSize = ($rootScope.width * 0.07) + "px";
-        $scope.descMarginBottom = ($rootScope.width * 0.004) + "px";
+        $scope.descH3FontSize = (screenWidth * 0.07) + "px";
+        $scope.descMarginBottom = (screenWidth * 0.004) + "px";
+
 
     });

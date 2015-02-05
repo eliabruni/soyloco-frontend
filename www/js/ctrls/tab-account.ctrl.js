@@ -80,7 +80,7 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.logout = function() {
             $cordovaFacebook.logout().then(function (success) {
-                // success
+                $localstorage.setObject('fbToken', null);
                 $state.go('signin');
             }, function (error) {
                 // error

@@ -1,25 +1,24 @@
 angular.module('splash.tabPlay.ctrl', [])
 
 
-    .controller('TabPlayCtrl', function($rootScope, $scope, $ionicSwipeCardDelegate) {
-
+    .controller('TabPlayCtrl', function($rootScope, $localstorage, $scope, $ionicSwipeCardDelegate) {
 
         /***************
          * CSS stuff
          ***************/
 
+        // We get screen size only at fb login time
+        if(!$rootScope.appInitialized) {
+            var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
+            var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
 
-            //var  height = document.getElementsByTagName('ion-pane')[0].clientHeight;
-            //var width = document.getElementsByTagName('ion-pane')[0].clientWidth;
-        $rootScope.height = document.getElementsByTagName('ion-pane')[0].clientHeight;
-        $rootScope.width = document.getElementsByTagName('ion-pane')[0].clientWidth;
-        //$rootScope.tabsHeight = document.getElementsByTagName('ion-tabs')[0].clientHeight;
+            $localstorage.setObject('screenHeight', newScreenHeight);
+            $localstorage.setObject('screenWidth', newScreenWidth);
+        }
 
-        //alert($rootScope.height)
-        //  alert($rootScope.tabsHeight)
+        var screenHeight = $localstorage.getObject('screenHeight');
 
-        var size = ($rootScope.height * 0.85) / 2;
-
+        var size = (screenHeight * 0.85) / 2;
 
         /***************
          * CARD 1

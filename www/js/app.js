@@ -25,7 +25,7 @@ angular.module('splash',
         'ionic.contrib.ui.cards',
     ])
 
-    .run(function($rootScope, $ionicPlatform, $ionicLoading, $profile) {
+    .run(function($rootScope, $state, $ionicPlatform, $localstorage) {
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -35,8 +35,19 @@ angular.module('splash',
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-
         });
+
+        if($localstorage.getObject('fbToken') != null) {
+            $rootScope.appInitialized = true;
+            $state.go('tab.play');
+
+        }
+        else if ($localstorage.getObject('fbToken') == null) {
+            $rootScope.appInitialized = false;
+            $state.go('signin');
+
+        }
+
     })
 
 
@@ -125,7 +136,7 @@ angular.module('splash',
                 }
             })
 
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/signin');
+        //// if none of the above states are matched, use this as the fallback
+        //$urlRouterProvider.otherwise('/signin');
 
     })

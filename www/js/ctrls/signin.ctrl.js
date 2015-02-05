@@ -22,7 +22,9 @@ angular.module('splash.signin.ctrl', [])
             $cordovaFacebook.getAccessToken()
                 .then(function (success) {
 
-                    // success
+                    // Save fb token into local storage
+                    $localstorage.setObject('fbToken', success);
+
                     $state.go('tab.play')
 
                 }, function (error) {
@@ -31,15 +33,21 @@ angular.module('splash.signin.ctrl', [])
                     $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                         .then(function(success) {
 
+                            // Save fb token into local storage
+                            $cordovaFacebook.getAccessToken()
+                                .then(function (success) {
+
+                                    $localstorage.setObject('fbToken', success);
+                                })
 
                             /**********************************************************
                              *              RETRIEVE PROFILE INFO
                              *
                              * ********************************************************/
 
-                            // TODO: refactor this as a $profile function
+                                // TODO: refactor this as a $profile function
 
-                            // Wait for device API libraries to load
+                                // Wait for device API libraries to load
                             document.addEventListener("deviceready", onDeviceReady, false);
 
                             // device APIs are available
