@@ -1,19 +1,24 @@
 <ion-view view-title="Events">
 
-  <ion-content scroll ng-style="{'background-color':'#35465c'}">
-      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <ion-content scroll ng-style="{'background-color':'#35465c'}">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-            <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
-                <div class="container"
-                     ng-style="{
-                     'width': cardWidth,
-                     'margin': containerMargin,
-                     'padding-bottom': containerPaddingBottom
-                     }">
+        <ion-list>
+
+            <ion-item back-img="{{event.image}}"
+                      ng-repeat="event in events"
+                      item="item"
+                      class="item-stable"
+                      href="#/tab/event/{{event.id}}"
+                      ng-style="{
+                        'width': cardWidth,
+                        'height': cardHeight,
+                        'margin': containerMargin,
+                        'padding-bottom': containerPaddingBottom
+                        }"
+                    >
                     <header>
                         <div class="bio">
-                            <img src="{{event.image}}" alt="background" class="bg"
-                                 ng-style="{'width': cardWidth, 'height': cardHeight}">
                             <div class="desc"
                                  ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
                                 <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
@@ -22,31 +27,75 @@
                         </div>
                     </header>
 
-                    <div class="content" ng-style="{'height': contentHeight}">
-                        <div class="data">
-                            <ul>
-                                <li>
-                                    2,934
-                                    <span>Tweets</span>
-                                </li>
-                                <li>
-                                    1,119
-                                    <span>Followers</span>
-                                </li>
-                                <li>
-                                    530
-                                    <span>Following</span>
-                                </li>
-                            </ul>
-                        </div>
+                    <!--<div class="content" ng-style="{'height': contentHeight}">-->
+                        <!--<div class="data">-->
+                            <!--<ul>-->
+                                <!--<li>-->
+                                    <!--2,934-->
+                                    <!--<span>Tweets</span>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--1,119-->
+                                    <!--<span>Followers</span>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--530-->
+                                    <!--<span>Following</span>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
 
 
-                    </div>
+                    <!--</div>-->
 
 
-                </div>
-            </a>
+            </ion-item>
 
-  </ion-content>
+        </ion-list>
+
+        <!--<a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">-->
+        <!--<div class="container"-->
+        <!--ng-style="{-->
+        <!--'width': cardWidth,-->
+        <!--'margin': containerMargin,-->
+        <!--'padding-bottom': containerPaddingBottom-->
+        <!--}">-->
+        <!--<header>-->
+        <!--<div class="bio">-->
+        <!--<img src="{{event.image}}" alt="background" class="bg"-->
+        <!--ng-style="{'width': cardWidth, 'height': cardHeight}">-->
+        <!--<div class="desc"-->
+        <!--ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">-->
+        <!--<h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>-->
+        <!--<p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</header>-->
+
+        <!--<div class="content" ng-style="{'height': contentHeight}">-->
+        <!--<div class="data">-->
+        <!--<ul>-->
+        <!--<li>-->
+        <!--2,934-->
+        <!--<span>Tweets</span>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--1,119-->
+        <!--<span>Followers</span>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--530-->
+        <!--<span>Following</span>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+
+
+        <!--</div>-->
+
+
+        <!--</div>-->
+        <!--</a>-->
+    </ion-content>
 
 </ion-view>

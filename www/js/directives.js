@@ -24,3 +24,20 @@ angular.module('splash.directives', [])
             }
         }
     })
+
+    .directive('backImg', function($rootScope){
+        return function(scope, element, attrs){
+            var url = attrs.backImg;
+            var content = element.find('a');
+            content.css({
+                'background': 'url(' + url +')',
+                'height' : ($rootScope.width * 0.9) + "px",
+                'width' : ($rootScope.width * 0.96) + "px",
+                '-webkit-border-radius': '4px',
+                '-moz-border-radius': '4px',
+                '-ms-border-radius': '4px',
+                '-o-border-radius': '4px',
+                'border-radius': '4px'
+            });
+        };
+    });

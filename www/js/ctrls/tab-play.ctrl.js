@@ -107,7 +107,7 @@ angular.module('splash.tabPlay.ctrl', [])
             $timeout(function () {
                 $scope.cards.splice(index, 1);
                 $scope.addCard();
-            }, 400);
+            }, 0);
         }
 
         //$scope.goAway = function() {
