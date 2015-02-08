@@ -106,23 +106,12 @@ angular.module('splash',
                     }
                 }
             })
-
             .state('tab.eventDetail', {
                 url: '/event/:eventId',
                 views: {
                     'tab-events': {
                         templateUrl: 'templates/eventDetail.html',
                         controller: 'EventDetailCtrl'
-                    }
-                }
-            })
-
-            .state('tab.tomorrowEvents', {
-                url: '/tomorrowEvents',
-                views: {
-                    'tab-events': {
-                        templateUrl: 'templates/tab-tomorrowEvents.html',
-                        controller: 'TabEventsCtrl'
                     }
                 }
             })
