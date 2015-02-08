@@ -1,6 +1,6 @@
 angular.module('splash.tabEvents.ctrl', [])
 
-    .controller('TabEventsCtrl', function($scope, $localstorage, Events) {
+    .controller('TabEventsCtrl', function($scope, $localstorage, $ionicSlideBoxDelegate, Events) {
 
         $scope.events = Events.all();
 
@@ -13,6 +13,27 @@ angular.module('splash.tabEvents.ctrl', [])
             }, 3000);
         };
 
+
+        $scope.deactivateSlide = function(slie) {
+            $ionicSlideBoxDelegate.enableSlide(false);
+        };
+
+        $scope.goToToday = function() {
+            alert('here 1')
+            $ionicSlideBoxDelegate.to(1)
+        }
+
+        $scope.goToTomorrow = function() {
+            alert('here 2')
+
+            $ionicSlideBoxDelegate.to(2)
+        }
+
+        $scope.goToWeekend = function() {
+            alert('here 3')
+
+            $ionicSlideBoxDelegate.to(3)
+        }
 
         /***************
         * CSS stuff

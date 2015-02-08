@@ -1,73 +1,211 @@
-<!--<ion-view view-title="Events">-->
-    <ion-header-bar class="bar" ng-style="{'background-color':'#fff'}">
-        <div class="tabs">
-            <a class="tab-item" ui-sref="tab.account">
-                <p>Today</p>
-            </a>
-            <a class="tab-item" ui-sref="tab.selectCategories">
-                <p>Tomorrow</p>
-            </a>
-            <a class="tab-item" ui-sref="tab.selectCategories">
-                <p>Weekend</p>
-            </a>
+<ion-view view-title="">
+    <!--<ion-header-bar class="bar" ng-style="{'background-color':'#fff'}">-->
+    <!--<div class="tabs">-->
+    <!--<a class="tab-item" ui-sref="tab.account">-->
+    <!--<p>Today</p>-->
+    <!--</a>-->
+    <!--<a class="tab-item" ui-sref="tab.selectCategories">-->
+    <!--<p>Tomorrow</p>-->
+    <!--</a>-->
+    <!--<a class="tab-item" ui-sref="tab.selectCategories">-->
+    <!--<p>Weekend</p>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</ion-header-bar>-->
+
+    <!--<ion-header-bar class="bar-positive">-->
+        <div class="button-bar" >
+            <a class="button" ng-click="goToToday()">Today</a>
+            <a class="button" ng-click="goToTomorrow()">Tomorrow</a>
+            <a class="button" ng-click="goToWeekend()">Weekend</a>
         </div>
-    </ion-header-bar>
-    <ion-nav-view animation="slide-left-right">
-
-    <ion-content scroll ng-style="{'background-color':'#35465c'}">
-        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <!--</ion-header-bar>-->
 
 
+    <!--<div class="bar bar-stable">-->
+
+    <!--<div class="button-bar" >-->
+    <!--<a class="button">All</a>-->
+    <!--<a class="button">Channel 1</a>-->
+    <!--<a class="button">Channel 2</a>-->
+    <!--<a class="button">Channel 3</a>-->
+    <!--<a class="button">Channel 4</a>-->
+    <!--</div>-->
+
+    <!--</div>-->
 
 
 
-        <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
-            <div class="container"
-                 ng-style="{
+
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" >
+        <ion-slide>
+            <ion-content ng-style="{'background-color':'#35465c'}">
+
+                <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+                <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+                    <div class="container"
+                         ng-style="{
         'width': cardWidth,
         'margin': containerMargin,
         'padding-bottom': containerPaddingBottom
         }">
-                <header>
-                    <div class="bio">
-                        <img src="{{event.image}}" alt="background" class="bg"
-                             ng-style="{'width': cardWidth, 'height': cardHeight}">
-                        <div class="desc"
-                             ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
-                            <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                            <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
-                        </div>
-                    </div>
-                    <!--<div class="avatarcontainer">-->
-                        <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
+                        <header>
+                            <div class="bio">
+                                <img src="{{event.image}}" alt="background" class="bg"
+                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
+                                <div class="desc"
+                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
+                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
+                                    <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                                </div>
+                            </div>
+                            <!--<div class="avatarcontainer">-->
+                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
                             <!--<div class="icon-twitter"></div>-->
-                    <!--</div>-->
-                </header>
+                            <!--</div>-->
+                        </header>
 
-                <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                    <div class="data">
-                        <ul>
-                            <li>
-                                2,934
-                                <span>Tweets</span>
-                            </li>
-                            <li>
-                                1,119
-                                <span>Followers</span>
-                            </li>
-                            <li>
-                                530
-                                <span>Following</span>
-                            </li>
-                        </ul>
+                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
+                            <div class="data">
+                                <ul>
+                                    <li>
+                                        2,934
+                                        <span>Tweets</span>
+                                    </li>
+                                    <li>
+                                        1,119
+                                        <span>Followers</span>
+                                    </li>
+                                    <li>
+                                        530
+                                        <span>Following</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+
                     </div>
+                </a>
+            </ion-content>
+
+        </ion-slide>
+        <ion-slide>
+            <ion-content ng-style="{'background-color':'#35465c'}">
+                <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+                <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+                    <div class="container"
+                         ng-style="{
+        'width': cardWidth,
+        'margin': containerMargin,
+        'padding-bottom': containerPaddingBottom
+        }">
+                        <header>
+                            <div class="bio">
+                                <img src="{{event.image}}" alt="background" class="bg"
+                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
+                                <div class="desc"
+                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
+                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
+                                    <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                                </div>
+                            </div>
+                            <!--<div class="avatarcontainer">-->
+                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
+                            <!--<div class="icon-twitter"></div>-->
+                            <!--</div>-->
+                        </header>
+
+                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
+                            <div class="data">
+                                <ul>
+                                    <li>
+                                        2,934
+                                        <span>Tweets</span>
+                                    </li>
+                                    <li>
+                                        1,119
+                                        <span>Followers</span>
+                                    </li>
+                                    <li>
+                                        530
+                                        <span>Following</span>
+                                    </li>
+                                </ul>
+                            </div>
 
 
-                </div>
+                        </div>
 
 
-            </div>
-        </a>
-    </ion-content>
+                    </div>
+                </a>
+            </ion-content>
 
-<!--</ion-view>-->
+        </ion-slide>
+        <ion-slide>
+            <ion-content ng-style="{'background-color':'#35465c'}">
+                <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+                <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+                    <div class="container"
+                         ng-style="{
+        'width': cardWidth,
+        'margin': containerMargin,
+        'padding-bottom': containerPaddingBottom
+        }">
+                        <header>
+                            <div class="bio">
+                                <img src="{{event.image}}" alt="background" class="bg"
+                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
+                                <div class="desc"
+                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
+                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
+                                    <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                                </div>
+                            </div>
+                            <!--<div class="avatarcontainer">-->
+                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
+                            <!--<div class="icon-twitter"></div>-->
+                            <!--</div>-->
+                        </header>
+
+                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
+                            <div class="data">
+                                <ul>
+                                    <li>
+                                        2,934
+                                        <span>Tweets</span>
+                                    </li>
+                                    <li>
+                                        1,119
+                                        <span>Followers</span>
+                                    </li>
+                                    <li>
+                                        530
+                                        <span>Following</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </a>
+            </ion-content>
+
+        </ion-slide>
+    </ion-slide-box>
+
+
+
+
+
+
+</ion-view>

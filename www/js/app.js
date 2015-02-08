@@ -22,7 +22,7 @@ angular.module('splash',
         'splash.events',
         'splash.profile',
 
-        'ionic.contrib.ui.cards',
+        'ionic.contrib.ui.cards'
     ])
 
     .run(function($rootScope, $state, $ionicPlatform, $localstorage) {
@@ -106,12 +106,23 @@ angular.module('splash',
                     }
                 }
             })
+
             .state('tab.eventDetail', {
                 url: '/event/:eventId',
                 views: {
                     'tab-events': {
                         templateUrl: 'templates/eventDetail.html',
                         controller: 'EventDetailCtrl'
+                    }
+                }
+            })
+
+            .state('tab.tomorrowEvents', {
+                url: '/tomorrowEvents',
+                views: {
+                    'tab-events': {
+                        templateUrl: 'templates/tab-tomorrowEvents.html',
+                        controller: 'TabEventsCtrl'
                     }
                 }
             })
