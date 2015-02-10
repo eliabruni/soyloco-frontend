@@ -429,19 +429,25 @@ header {
 }
 
 
-.bar.bar-subheader .button-bar .button {
-    border: none;
-    background: none;
-    color: #181818;
-    border-width: 0;
-    border-style: none;
-    border-radius: 0;
+/*SUBHEADER (TODAY, TOMORROW, WEEKEND)*/
+.button-clear.active, .button-clear.activated {
+    opacity: 1;
+    color: limegreen !important;
 }
-.bar.bar-stable.bar-subheader  {
-    border: none;
-    background: #fff;
-    color: #181818;
-}
+
+/*.bar.bar-subheader .button-bar .button {*/
+    /*border: none;*/
+    /*background: none;*/
+    /*color: #35465c;*/
+    /*border-width: 0;*/
+    /*border-style: none;*/
+    /*border-radius: 0;*/
+/*}*/
+/*.bar.bar-stable.bar-subheader  {*/
+    /*border: none;*/
+    /*background: #fff;*/
+    /*color: #35465c;*/
+/*}*/
 
 /*.avatarcontainer {*/
     /*position: absolute;*/
