@@ -118,5 +118,11 @@ angular.module('splash.tabEvents.ctrl', [])
         $scope.descH3FontSize = (screenWidth * 0.05) + "px";
         $scope.descMarginBottom = (screenWidth * 0.004) + "px";
 
+        $scope.descPFontSize = (screenWidth * 0.04) + "px";
+
+        $scope.dataLiFontSize = (screenWidth * 0.04) + "px";
+
+
+
 
     });
