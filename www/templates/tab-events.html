@@ -1,25 +1,12 @@
-<ion-view view-title="">
-    <!--<ion-header-bar class="bar" ng-style="{'background-color':'#fff'}">-->
-    <!--<div class="tabs">-->
-    <!--<a class="tab-item" ui-sref="tab.account">-->
-    <!--<p>Today</p>-->
-    <!--</a>-->
-    <!--<a class="tab-item" ui-sref="tab.selectCategories">-->
-    <!--<p>Tomorrow</p>-->
-    <!--</a>-->
-    <!--<a class="tab-item" ui-sref="tab.selectCategories">-->
-    <!--<p>Weekend</p>-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--</ion-header-bar>-->
+<ion-view view-title="Events">
 
-    <!--<ion-header-bar class="bar-positive">-->
+    <ion-header-bar class="bar bar-subheader bar-stable">
         <div class="button-bar" >
-            <a class="button" ng-click="goToToday()">Today</a>
-            <a class="button" ng-click="goToTomorrow()">Tomorrow</a>
-            <a class="button" ng-click="goToWeekend()">Weekend</a>
+            <a class="button" ng-class="{'active' : slideIndex == 0}" ng-click="goToToday()">Today</a>
+            <a class="button" ng-class="{'active' : slideIndex == 1}" ng-click="goToTomorrow()">Tomorrow</a>
+            <a class="button" ng-class="{'active' : slideIndex == 2}" ng-click="goToWeekend()">Weekend</a>
         </div>
-    <!--</ion-header-bar>-->
+    </ion-header-bar>
 
 
     <!--<div class="bar bar-stable">-->
@@ -37,7 +24,7 @@
 
 
 
-    <ion-slide-box on-slide-changed="slideHasChanged($index)" >
+    <ion-slide-box on-slide-changed="slideChanged(index)" >
         <ion-slide>
             <ion-content ng-style="{'background-color':'#35465c'}">
 

@@ -13,27 +13,83 @@ angular.module('splash.tabEvents.ctrl', [])
             }, 3000);
         };
 
+        //
+        //$scope.deactivateSlide = function(slie) {
+        //    $ionicSlideBoxDelegate.enableSlide(false);
+        //};
+        //
+        //$scope.goToToday = function() {
+        //    alert('here 1')
+        //    $ionicSlideBoxDelegate.to(1)
+        //}
+        //
+        //$scope.goToTomorrow = function() {
+        //    alert('here 2')
+        //
+        //    $ionicSlideBoxDelegate.to(2)
+        //}
+        //
+        //$scope.goToWeekend = function() {
+        //    alert('here 3')
+        //
+        //    $ionicSlideBoxDelegate.to(3)
+        //}
 
-        $scope.deactivateSlide = function(slie) {
-            $ionicSlideBoxDelegate.enableSlide(false);
+
+
+
+// SLIDER LOGIC
+
+        $scope.slideIndex = 0;
+
+// Called each time the slide changes
+        $scope.slideChanged = function (index) {
+            $scope.slideIndex = index;
         };
 
-        $scope.goToToday = function() {
-            alert('here 1')
-            $ionicSlideBoxDelegate.to(1)
-        }
+        $scope.goToToday = function () {
 
-        $scope.goToTomorrow = function() {
-            alert('here 2')
+            if ($scope.slideIndex == 1) {
+                $ionicSlideBoxDelegate.previous();
+            }
+            else if ($scope.slideIndex == 2) {
+                $ionicSlideBoxDelegate.previous();
+                $ionicSlideBoxDelegate.previous();
+            }
 
-            $ionicSlideBoxDelegate.to(2)
-        }
+            $scope.slideIndex == 0;
 
-        $scope.goToWeekend = function() {
-            alert('here 3')
+        };
 
-            $ionicSlideBoxDelegate.to(3)
-        }
+        $scope.goToTomorrow = function () {
+
+            if ($scope.slideIndex == 0) {
+                $ionicSlideBoxDelegate.next();
+            }
+            else if ($scope.slideIndex == 2) {
+                $ionicSlideBoxDelegate.previous();
+            }
+
+            $scope.slideIndex == 1;
+
+        };
+
+        $scope.goToWeekend = function () {
+
+            if ($scope.slideIndex == 0) {
+                $ionicSlideBoxDelegate.next();
+                $ionicSlideBoxDelegate.next();
+
+            }
+            else if ($scope.slideIndex == 1) {
+                $ionicSlideBoxDelegate.next();
+
+            }
+
+            $scope.slideIndex == 2;
+
+        };
+
 
         /***************
         * CSS stuff

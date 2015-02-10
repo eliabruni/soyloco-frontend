@@ -2,10 +2,10 @@
 /**************************************/
 /**   HEADER
 /**/
-.bar.bar-positive {
-    height:48px;
-    vertical-align: middle;
-}
+/*.bar.bar-positive {*/
+    /*height:48px;*/
+    /*vertical-align: middle;*/
+/*}*/
 
 /*************************************
 *   LOGIN
@@ -429,6 +429,19 @@ header {
 }
 
 
+.bar.bar-subheader .button-bar .button {
+    border: none;
+    background: none;
+    color: #181818;
+    border-width: 0;
+    border-style: none;
+    border-radius: 0;
+}
+.bar.bar-stable.bar-subheader  {
+    border: none;
+    background: #fff;
+    color: #181818;
+}
 
 /*.avatarcontainer {*/
     /*position: absolute;*/
