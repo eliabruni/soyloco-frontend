@@ -82,6 +82,7 @@
         </ion-slide>
         <ion-slide>
             <ion-content ng-style="{'background-color':'#35465c'}">
+
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
                 <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
@@ -98,7 +99,7 @@
                                 <div class="desc"
                                      ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
                                     <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                                    <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                                    <p ng-style="{'padding-top': descpPaddingTop, 'font-size': descPFontSize}">Nightlife Sab 31 Gen, 01:00AM</p>
                                 </div>
                             </div>
                             <!--<div class="avatarcontainer">-->
@@ -108,7 +109,7 @@
                         </header>
 
                         <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                            <div class="data">
+                            <div class="data" ng-style="{'font-size': dataLiFontSize}">
                                 <ul>
                                     <li>
                                         2,934
@@ -136,6 +137,7 @@
         </ion-slide>
         <ion-slide>
             <ion-content ng-style="{'background-color':'#35465c'}">
+
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
                 <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
@@ -152,7 +154,7 @@
                                 <div class="desc"
                                      ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
                                     <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                                    <p ng-style="{'padding-top': descpPaddingTop}">Nightlife Sab 31 Gen, 01:00AM</p>
+                                    <p ng-style="{'padding-top': descpPaddingTop, 'font-size': descPFontSize}">Nightlife Sab 31 Gen, 01:00AM</p>
                                 </div>
                             </div>
                             <!--<div class="avatarcontainer">-->
@@ -162,7 +164,7 @@
                         </header>
 
                         <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                            <div class="data">
+                            <div class="data" ng-style="{'font-size': dataLiFontSize}">
                                 <ul>
                                     <li>
                                         2,934
