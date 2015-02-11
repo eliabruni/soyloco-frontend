@@ -22,10 +22,15 @@ angular.module('splash.signin.ctrl', [])
             $cordovaFacebook.getAccessToken()
                 .then(function (success) {
 
-                    // Save fb token into local storage
-                    $localstorage.setObject('fbToken', success);
+                    if($localstorage.get('profileInfoRetrieved') == 'true') {
 
-                    $state.go('tab.play')
+                        // Save fb token into local storage
+                        //$localstorage.setObject('fbToken', success);
+                        $state.go('tab.play');
+
+                    } else {
+                        retrieveProfileInfo();
+                    }
 
                 }, function (error) {
 
@@ -33,81 +38,88 @@ angular.module('splash.signin.ctrl', [])
                     $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                         .then(function(success) {
 
-                            // Save fb token into local storage
-                            $cordovaFacebook.getAccessToken()
-                                .then(function (success) {
-
-                                    $localstorage.setObject('fbToken', success);
-                                })
-
-                            /**********************************************************
-                             *              RETRIEVE PROFILE INFO
-                             *
-                             * ********************************************************/
-
-                                // TODO: refactor this as a $profile function
-
-                                // Wait for device API libraries to load
-                            document.addEventListener("deviceready", onDeviceReady, false);
-
-                            // device APIs are available
-                            function onDeviceReady() {
-
-                                $scope.cityInfoReady = false;
-                                $scope.basicProfileReady = false;
-                                $scope.profilePhotoReady = false;
-
-                                $ionicLoading.show({
-                                    template: 'Connecting with Facebook...'
-                                });
-
-                                $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
-                                    if (newValues[0] && newValues[1] && newValues[2]) {
-                                        $ionicLoading.hide();
-                                        $state.go('tab.play');
-                                    }
-                                });
-
-                                $profile.getCities()
-                                    .then(function(success) {
-                                        var cities = success;
-                                        $localstorage.setObject('myCity', cities[0]);
-                                        $localstorage.setObject('cities', cities);
-                                        $scope.cityInfoReady = true;
-
-
-                                        $profile.getBasicInfo()
-                                            .then(function(success) {
-                                                var basicInfo = success;
-                                                $localstorage.setObject('basicInfo', basicInfo);
-                                                $scope.basicProfileReady = true;
-
-
-                                                $profile.getProfilePhoto()
-                                                    .then(function(success) {
-                                                        var profilePhoto = success;
-                                                        $localstorage.set('profilePhoto', profilePhoto);
-                                                        $scope.profilePhotoReady = true;
-
-                                                    }, function (error) {
-                                                        // error
-                                                    });
-
-                                            }, function (error) {
-                                                // error
-                                            });
-
-
-                                    }, function (error) {
-                                        // error
-                                    })
-                            }
+                            retrieveProfileInfo();
 
                         }, function (error) {
                             // error
-                            //$state.go('tab.play')
                             $state.go('signin');
                         });
                 });
+        }
+
+        function retrieveProfileInfo() {
+
+            /**********************************************************
+             *              RETRIEVE PROFILE INFO
+             *
+             * ********************************************************/
+
+                // TODO: refactor this as a $profile function
+
+                // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // device APIs are available
+            function onDeviceReady() {
+
+                $scope.cityInfoReady = false;
+                $scope.basicProfileReady = false;
+                $scope.profilePhotoReady = false;
+
+                $ionicLoading.show({
+                    template: 'Connecting with Facebook...'
+                });
+
+                $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
+                    if (newValues[0] && newValues[1] && newValues[2]) {
+                        $ionicLoading.hide();
+                        $state.go('tab.play');
+                    }
+                });
+
+                $profile.getCities()
+                    .then(function(success) {
+                        var cities = success;
+                        $localstorage.setObject('myCity', cities[0]);
+                        $localstorage.setObject('cities', cities);
+                        $scope.cityInfoReady = true;
+
+
+                        $profile.getBasicInfo()
+                            .then(function(success) {
+                                var basicInfo = success;
+                                $localstorage.setObject('basicInfo', basicInfo);
+                                $scope.basicProfileReady = true;
+
+
+                                $profile.getProfilePhoto()
+                                    .then(function(success) {
+                                        var profilePhoto = success;
+                                        $localstorage.set('profilePhoto', profilePhoto);
+                                        $scope.profilePhotoReady = true;
+
+
+
+                                        // Save fb token into local storage
+                                        // We save it only when all the profile info are ready
+                                        $cordovaFacebook.getAccessToken()
+                                            .then(function (success) {
+
+                                                $localstorage.set('profileInfoRetrieved', 'true');
+                                            })
+
+                                    }, function (error) {
+                                        // error
+                                    });
+
+                            }, function (error) {
+                                // error
+                            });
+
+
+                    }, function (error) {
+                        // error
+                    })
+            }
         }
     })

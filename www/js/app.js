@@ -37,15 +37,14 @@ angular.module('splash',
             }
         });
 
-        if($localstorage.getObject('fbToken') != null) {
+        if($localstorage.get('profileInfoRetrieved') == 'true') {
             $rootScope.appInitialized = true;
             $state.go('tab.play');
 
         }
-        else if ($localstorage.getObject('fbToken') == null) {
+        else {
             $rootScope.appInitialized = false;
             $state.go('signin');
-
         }
 
     })
