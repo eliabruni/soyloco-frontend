@@ -106,7 +106,7 @@ angular.module('splash.tabEvents.ctrl', [])
         $scope.containerPaddingBottom = (screenWidth * 0.03) + "px";
 
         $scope.cardHeight = (screenWidth * 0.75) + "px";
-        $scope.cardWidth = (screenWidth * 0.96) + "px";
+        $scope.cardWidth = (screenWidth * 1) + "px";
 
         $scope.descPaddingTop = (screenWidth * 0.03) + "px";
         $scope.descPaddingLeft = (screenWidth * 0.02) + "px";
