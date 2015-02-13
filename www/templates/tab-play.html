@@ -1,53 +1,65 @@
 <ion-view hide-back-button="true" hide-nav-bar="true">
 
-<ion-pane ng-style="{'background-color':'#35465c'}">
+<ion-content ng-style="{'background-color':'#35465c'}">
 
 
-      <swipe-cards>
+    <div class="main-wrap" ng-style="{'width': cardWidth,'height' : cardWidth}">
 
+        <div class="row">
 
-      <!-- CARD 1 -->
-
-      <swipe-card ng-repeat="card in cards"
-                  on-destroy="cardDestroyed($index)"
-                  on-card-swipe="cardSwiped($index)"
-                  ng-style="{'left' : left, 'top': top, 'width': width, 'height': height,
-                  'margin-left': marginLeft, 'margin-top' : marginTop}" >
-
-        <div ng-controller="CardCtrl" >
-          <div class="image" on-touch="goAway($index)"
-                  >
-            <img ng-src="{{card.image}}"
-                 ng-style="{'width':width, 'height':height}"
-                 class="img-responsive"
-                 ng-click="image.selected = !image.selected"
-                 ng-class="{ 'selected-image': image.selected }">
-          </div>
+            <button class="col button button-test" ng-style="{'padding':padding, 'background-image': card.image, 'background-size':width, 'background-repeat':'no-repeat', 'height' : height}" ng-click="addCard()">eLIA</button>
         </div>
-      </swipe-card>
+        <div class="row">
 
-      <!-- CARD 2 -->
-
-      <swipe-card ng-repeat="card in cards"
-                  on-destroy="cardDestroyed($index)"
-                  on-card-swipe="cardSwiped($index)"
-                  ng-style="{'left' : left2, 'top': top2,
-                  'width': width2, 'height': height2, 'margin-left': marginLeft2,
-                  'margin-top' : marginTop2}" >
-
-        <div ng-controller="CardCtrl" >
-            <button class="button" on-tap="goAway($index)"
-                    ng-style="{'width':width2, 'height':height2}">
-
-            <div class="image" ng-style="{'width':width2, 'height':height2}">
-              <img ng-src="{{card.image}}"
-                    >
-          </div>
-            </button>
+            <button class="col button button-test" ng-style="{'padding':padding, 'background-image': card.image, 'background-size':width, 'background-repeat':'no-repeat', 'height' : height}" ng-click="addCard()">eLIA</button>
         </div>
-      </swipe-card>
-          </swipe-cards>
+    </div>
 
-  </ion-pane>
+      <!--<swipe-cards>-->
+
+
+      <!--&lt;!&ndash; CARD 1 &ndash;&gt;-->
+
+      <!--<swipe-card ng-repeat="card in cards"-->
+                  <!--on-destroy="cardDestroyed($index)"-->
+                  <!--on-card-swipe="cardSwiped($index)"-->
+                  <!--ng-style="{'left' : left, 'top': top, 'width': width, 'height': height,-->
+                  <!--'margin-left': marginLeft, 'margin-top' : marginTop}" >-->
+
+        <!--<div ng-controller="CardCtrl" >-->
+          <!--<div class="image" on-touch="goAway($index)"-->
+                  <!-->-->
+            <!--<img ng-src="{{card.image}}"-->
+                 <!--ng-style="{'width':width, 'height':height}"-->
+                 <!--class="img-responsive"-->
+                 <!--ng-click="image.selected = !image.selected"-->
+                 <!--ng-class="{ 'selected-image': image.selected }">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</swipe-card>-->
+
+      <!--&lt;!&ndash; CARD 2 &ndash;&gt;-->
+
+      <!--<swipe-card ng-repeat="card in cards"-->
+                  <!--on-destroy="cardDestroyed($index)"-->
+                  <!--on-card-swipe="cardSwiped($index)"-->
+                  <!--ng-style="{'left' : left2, 'top': top2,-->
+                  <!--'width': width2, 'height': height2, 'margin-left': marginLeft2,-->
+                  <!--'margin-top' : marginTop2}" >-->
+
+        <!--<div ng-controller="CardCtrl" >-->
+            <!--<button class="button" on-tap="goAway($index)"-->
+                    <!--ng-style="{'width':width2, 'height':height2}">-->
+
+            <!--<div class="image" ng-style="{'width':width2, 'height':height2}">-->
+              <!--<img ng-src="{{card.image}}"-->
+                    <!-->
+          <!--</div>-->
+            <!--</button>-->
+        <!--</div>-->
+      <!--</swipe-card>-->
+          <!--</swipe-cards>-->
+
+  </ion-content>
 
 </ion-view>

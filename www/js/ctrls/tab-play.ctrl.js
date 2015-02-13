@@ -8,7 +8,7 @@ angular.module('splash.tabPlay.ctrl', [])
          ***************/
 
         // We get screen size only at fb login time
-        if(!$rootScope.appInitialized) {
+        if (!$rootScope.appInitialized) {
             var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
             var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
 
@@ -46,7 +46,7 @@ angular.module('splash.tabPlay.ctrl', [])
         $scope.width2 = (size) + "px";
 
 
-        $scope.marginTop2 =  (size * 0.0) + "px";
+        $scope.marginTop2 = (size * 0.0) + "px";
         $scope.marginLeft2 = -(size * 0.5) + "px";
 
         // Top needs to be
@@ -54,63 +54,116 @@ angular.module('splash.tabPlay.ctrl', [])
         $scope.top2 = (size) + "px";
         $scope.left2 = 50 + "%";
 
+        $scope.padding = '15px 0px'
+        $scope.cardWidth = '600px'
 
-        /***************
-         * MOKE DATA
-         ***************/
 
+        //    /***************
+        //     * MOKE DATA
+        //     ***************/
         var cardTypes = [{
             title: 'Swipe down to clear the card',
-            image: 'img/pic.png'
-        }, {
-            title: 'Where is this?',
-            image: 'img/pic.png'
-        }, {
-            title: 'What kind of grass is this?',
-            image: 'img/pic2.png'
-        }, {
-            title: 'What beach is this?',
-            image: 'img/pic3.png'
-        }, {
-            title: 'What kind of clouds are these?',
-            image: 'img/pic4.png'
-        }];
+            image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+        },
+            {
+                title: 'Where is this?',
+                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+            },
+            {
+                title: 'What kind of grass is this?',
+                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+            },
+            {
+                title: 'What beach is this?',
+                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)'
+            },
+            {
+                title: 'What kind of clouds are these?',
+                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)'
+            }];
 
 
         /***************
          * LOGIC
          ***************/
 
-        var lastIndex = 0;
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0);
+        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
-        $scope.cardSwiped = function(index) {
+        $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+
+
+        $scope.cardSwiped = function (index) {
             $scope.addCard();
         };
 
-        $scope.cardDestroyed = function(index) {
+        $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
         };
 
-        $scope.addCard = function() {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            newCard.id = Math.random();
-            $scope.cards.unshift(angular.extend({}, newCard));
-        };
+        $scope.addCard = function () {
+            $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
 
+        }
 
     })
 
-    .controller('CardCtrl', function($scope, $timeout, $ionicSwipeCardDelegate) {
-        $scope.goAway = function(index) {
-            $timeout(function () {
-                $scope.cards.splice(index, 1);
-                $scope.addCard();
-            }, 0);
-        }
 
-        //$scope.goAway = function() {
-        //    var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
-        //    card.swipe();
-        //};
-    });
+//    /***************
+//     * MOKE DATA
+//     ***************/
+//
+//    var cardTypes = [{
+//        title: 'Swipe down to clear the card',
+//        image: 'img/pic.png'
+//    }, {
+//        title: 'Where is this?',
+//        image: 'img/pic.png'
+//    }, {
+//        title: 'What kind of grass is this?',
+//        image: 'img/pic2.png'
+//    }, {
+//        title: 'What beach is this?',
+//        image: 'img/pic3.png'
+//    }, {
+//        title: 'What kind of clouds are these?',
+//        image: 'img/pic4.png'
+//    }];
+//
+//
+//    /***************
+//     * LOGIC
+//     ***************/
+//
+//    var lastIndex = 0;
+//    $scope.cards = Array.prototype.slice.call(cardTypes, 0);
+//
+//    $scope.cardSwiped = function(index) {
+//        $scope.addCard();
+//    };
+//
+//    $scope.cardDestroyed = function(index) {
+//        $scope.cards.splice(index, 1);
+//    };
+//
+//    $scope.addCard = function() {
+//        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+//        newCard.id = Math.random();
+//        $scope.cards.unshift(angular.extend({}, newCard));
+//    };
+//
+//
+//})
+//
+//.controller('CardCtrl', function($scope, $timeout, $ionicSwipeCardDelegate) {
+//    $scope.goAway = function(index) {
+//        $timeout(function () {
+//            $scope.cards.splice(index, 1);
+//            $scope.addCard();
+//        }, 0);
+//    }
+//
+//    //$scope.goAway = function() {
+//    //    var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
+//    //    card.swipe();
+//    //};
+//});
