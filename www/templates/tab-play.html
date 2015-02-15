@@ -1,65 +1,148 @@
 <ion-view hide-back-button="true" hide-nav-bar="true">
 
-<ion-content ng-style="{'background-color':'#35465c'}">
-
-
-    <div class="main-wrap" ng-style="{'width': cardWidth,'height' : cardWidth}">
+    <ion-content scroll="false" ng-style="{'background-color':'#35465c'}">
 
         <div class="row">
 
-            <button class="col button button-test" ng-style="{'padding':padding, 'background-image': card.image, 'background-size':width, 'background-repeat':'no-repeat', 'height' : height}" ng-click="addCard()">eLIA</button>
+
+            <div class="container"
+                 ng-style="{
+        'width': cardWidth,
+        'height' : cardHeight,
+        'margin': containerMargin,
+        'padding-bottom': containerPaddingBottom
+        }">
+                <header>
+                    <!--<div class="bio">-->
+                    <button class="col button button-test"
+                            ng-style="{
+
+                    'background-image': card.image1,
+                    'background-size': backgroundSize,
+                    'background-repeat':'no-repeat',
+                    'height' : cardHeight
+                    }"
+                            ng-click="addCard()">
+                        <div class="card-text"
+                             ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                            Elisa, 24
+                        </div>
+                    </button>
+                </header>
+
+                <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                <!--</div>-->
+            </div>
         </div>
+
         <div class="row">
 
-            <button class="col button button-test" ng-style="{'padding':padding, 'background-image': card.image, 'background-size':width, 'background-repeat':'no-repeat', 'height' : height}" ng-click="addCard()">eLIA</button>
+
+            <div class="container"
+                 ng-style="{
+                'width': cardWidth,
+                'height' : cardHeight,
+                'margin': containerMargin,
+                'padding-bottom': containerPaddingBottom
+        }">
+                <header>
+                    <!--<div class="bio">-->
+                    <button class="col button button-test"
+                            ng-style="{
+
+                    'background-image': card.image2,
+                    'background-size':backgroundSize,
+                    'background-repeat':'no-repeat',
+                    'height' : cardHeight
+                    }"
+                            ng-click="addCard()"></button>
+                </header>
+
+                <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                <!--</div>-->
+            </div>
         </div>
-    </div>
-
-      <!--<swipe-cards>-->
 
 
-      <!--&lt;!&ndash; CARD 1 &ndash;&gt;-->
+        <!--<div class="main-wrap" ng-style="{'width': cardWidth,'height' : cardWidth}">-->
 
-      <!--<swipe-card ng-repeat="card in cards"-->
-                  <!--on-destroy="cardDestroyed($index)"-->
-                  <!--on-card-swipe="cardSwiped($index)"-->
-                  <!--ng-style="{'left' : left, 'top': top, 'width': width, 'height': height,-->
-                  <!--'margin-left': marginLeft, 'margin-top' : marginTop}" >-->
+        <!--<div class="row">-->
+
+        <!--<button class="col button button-test"-->
+        <!--ng-style="{-->
+        <!--'padding':padding,-->
+        <!--'background-image': card.image,-->
+        <!--'background-size':width,-->
+        <!--'background-repeat':'no-repeat',-->
+        <!--'height' : height,-->
+        <!--'margin': containerMargin-->
+        <!--}"-->
+        <!--ng-click="addCard()"></button>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+
+        <!--<button class="col button button-test"-->
+        <!--ng-style="{-->
+        <!--'padding':padding,-->
+        <!--'background-image': card.image,-->
+        <!--'background-size':width,-->
+        <!--'background-repeat':'no-repeat',-->
+        <!--'height' : height,-->
+        <!--'margin': containerMargin-->
+        <!--}"-->
+        <!--ng-click="addCard()"></button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<swipe-cards>-->
+
+
+        <!--&lt;!&ndash; CARD 1 &ndash;&gt;-->
+
+        <!--<swipe-card ng-repeat="card in cards"-->
+        <!--on-destroy="cardDestroyed($index)"-->
+        <!--on-card-swipe="cardSwiped($index)"-->
+        <!--ng-style="{'left' : left, 'top': top, 'width': width, 'height': height,-->
+        <!--'margin-left': marginLeft, 'margin-top' : marginTop}" >-->
 
         <!--<div ng-controller="CardCtrl" >-->
-          <!--<div class="image" on-touch="goAway($index)"-->
-                  <!-->-->
-            <!--<img ng-src="{{card.image}}"-->
-                 <!--ng-style="{'width':width, 'height':height}"-->
-                 <!--class="img-responsive"-->
-                 <!--ng-click="image.selected = !image.selected"-->
-                 <!--ng-class="{ 'selected-image': image.selected }">-->
-          <!--</div>-->
+        <!--<div class="image" on-touch="goAway($index)"-->
+        <!-->
+        <!--<img ng-src="{{card.image}}"-->
+        <!--ng-style="{'width':width, 'height':height}"-->
+        <!--class="img-responsive"-->
+        <!--ng-click="image.selected = !image.selected"-->
+        <!--ng-class="{ 'selected-image': image.selected }">-->
         <!--</div>-->
-      <!--</swipe-card>-->
+        <!--</div>-->
+        <!--</swipe-card>-->
 
-      <!--&lt;!&ndash; CARD 2 &ndash;&gt;-->
+        <!--&lt;!&ndash; CARD 2 &ndash;&gt;-->
 
-      <!--<swipe-card ng-repeat="card in cards"-->
-                  <!--on-destroy="cardDestroyed($index)"-->
-                  <!--on-card-swipe="cardSwiped($index)"-->
-                  <!--ng-style="{'left' : left2, 'top': top2,-->
-                  <!--'width': width2, 'height': height2, 'margin-left': marginLeft2,-->
-                  <!--'margin-top' : marginTop2}" >-->
+        <!--<swipe-card ng-repeat="card in cards"-->
+        <!--on-destroy="cardDestroyed($index)"-->
+        <!--on-card-swipe="cardSwiped($index)"-->
+        <!--ng-style="{'left' : left2, 'top': top2,-->
+        <!--'width': width2, 'height': height2, 'margin-left': marginLeft2,-->
+        <!--'margin-top' : marginTop2}" >-->
 
         <!--<div ng-controller="CardCtrl" >-->
-            <!--<button class="button" on-tap="goAway($index)"-->
-                    <!--ng-style="{'width':width2, 'height':height2}">-->
+        <!--<button class="button" on-tap="goAway($index)"-->
+        <!--ng-style="{'width':width2, 'height':height2}">-->
 
-            <!--<div class="image" ng-style="{'width':width2, 'height':height2}">-->
-              <!--<img ng-src="{{card.image}}"-->
-                    <!-->
-          <!--</div>-->
-            <!--</button>-->
+        <!--<div class="image" ng-style="{'width':width2, 'height':height2}">-->
+        <!--<img ng-src="{{card.image}}"-->
+        <!-->
         <!--</div>-->
-      <!--</swipe-card>-->
-          <!--</swipe-cards>-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</swipe-card>-->
+        <!--</swipe-cards>-->
 
-  </ion-content>
+    </ion-content>
 
 </ion-view>

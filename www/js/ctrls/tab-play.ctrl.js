@@ -16,46 +16,81 @@ angular.module('splash.tabPlay.ctrl', [])
             $localstorage.setObject('screenWidth', newScreenWidth);
         }
 
-        var screenHeight = $localstorage.getObject('screenHeight');
+        //var screenHeight = $localstorage.getObject('screenHeight');
 
-        var size = (screenHeight * 0.85) / 2;
+        //var size = (screenHeight * 0.85) / 2;
+
+        ///***************
+        // * CARD 1
+        // */
+        //
+        //$scope.height = size + "px";
+        //$scope.width = size + "px";
+        //
+        //// These two values need simply to be
+        //// -1/2 * (height or weight).
+        //$scope.marginTop = -(size * 0.5) + "px";
+        //$scope.marginLeft = -(size * 0.5) + "px";
+        //
+        //// Top needs to be
+        ////  -1/2 * (height or weight) + something
+        //$scope.top = (size * 0.5 + size * 0.0) + "px";
+        //$scope.left = 50 + "%";
+        //
+        //
+        ///***************
+        // * CARD 2
+        // */
+        //
+        //$scope.height2 = (size) + "px";
+        //$scope.width2 = (size) + "px";
+        //
+        //
+        //$scope.marginTop2 = (size * 0.0) + "px";
+        //$scope.marginLeft2 = -(size * 0.5) + "px";
+        //
+        //// Top needs to be
+        ////  1/2 * (height or weight) + something
+        //$scope.top2 = (size) + "px";
+        //$scope.left2 = 50 + "%";
+
+        //$scope.padding = '50px 0px'
+        //$scope.cardWidth = '600px'
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+
+
 
         /***************
-         * CARD 1
+         * CSS stuff
+         ***************/
+
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+
+        /***************
+         * CARDS
          */
 
-        $scope.height = size + "px";
-        $scope.width = size + "px";
+        $scope.containerMargin = [(-screenWidth * 0.005) + "px auto " + (screenWidth * 0.01) + "px auto"];
+        $scope.containerPaddingBottom = (screenWidth * 0.00) + "px";
 
-        // These two values need simply to be
-        // -1/2 * (height or weight).
-        $scope.marginTop = -(size * 0.5) + "px";
-        $scope.marginLeft = -(size * 0.5) + "px";
+        $scope.cardHeight = (screenWidth * 0.77) + "px";
+        $scope.cardWidth = (screenWidth * 0.77) + "px";
+        $scope.backgroundSize = (screenWidth * 0.77) + "px " + (screenWidth * 0.77) + "px";
 
-        // Top needs to be
-        //  -1/2 * (height or weight) + something
-        $scope.top = (size * 0.5 + size * 0.0) + "px";
-        $scope.left = 50 + "%";
+
+
+        $scope.cardTextHeight = (screenWidth * 0.01) + "px";
+        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
+        $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
+
+
 
 
         /***************
-         * CARD 2
+         * CARDS
          */
-
-        $scope.height2 = (size) + "px";
-        $scope.width2 = (size) + "px";
-
-
-        $scope.marginTop2 = (size * 0.0) + "px";
-        $scope.marginLeft2 = -(size * 0.5) + "px";
-
-        // Top needs to be
-        //  1/2 * (height or weight) + something
-        $scope.top2 = (size) + "px";
-        $scope.left2 = 50 + "%";
-
-        $scope.padding = '15px 0px'
-        $scope.cardWidth = '600px'
 
 
         //    /***************
@@ -63,23 +98,31 @@ angular.module('splash.tabPlay.ctrl', [])
         //     ***************/
         var cardTypes = [{
             title: 'Swipe down to clear the card',
-            image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+            image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)',
+            image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+
         },
             {
                 title: 'Where is this?',
-                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)',
+                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+
             },
             {
                 title: 'What kind of grass is this?',
-                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)',
+                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
             },
             {
                 title: 'What beach is this?',
-                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)'
+                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)',
+                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)'
             },
             {
                 title: 'What kind of clouds are these?',
-                image: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)'
+                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)',
+                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+
             }];
 
 
