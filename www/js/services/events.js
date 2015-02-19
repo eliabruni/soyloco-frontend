@@ -54,7 +54,7 @@ angular.module('splash.events', [])
                 {
                     id: 0,
                     name:'dancing event',
-                    image: 'img/event1.jpg',
+                    image: 'url(img/event1.jpg)',
                     date : 'DIC 25',
                     users: ['313'],
                     posSwipes : 0,
@@ -64,7 +64,7 @@ angular.module('splash.events', [])
                 {
                     id: 1,
                     name:'disco event',
-                    image: 'img/event2.jpg',
+                    image: 'url(img/event2.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314'],
                     posSwipes : 0,
@@ -73,7 +73,7 @@ angular.module('splash.events', [])
                 {
                     id: 2,
                     name:'electro event',
-                    image: 'img/event3.jpg',
+                    image: 'url(img/event3.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314', '315'],
                     posSwipes : 0,
@@ -82,7 +82,7 @@ angular.module('splash.events', [])
                 {
                     id: 3,
                     name:'dancing event',
-                    image: 'img/event1.jpg',
+                    image: 'url(img/event1.jpg)',
                     date : 'DIC 25',
                     users: ['313'],
                     posSwipes : 0,
@@ -92,7 +92,7 @@ angular.module('splash.events', [])
                 {
                     id: 4,
                     name:'disco event',
-                    image: 'img/event2.jpg',
+                    image: 'url(img/event2.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314'],
                     posSwipes : 0,
@@ -101,7 +101,7 @@ angular.module('splash.events', [])
                 {
                     id: 5,
                     name:'electro event',
-                    image: 'img/event3.jpg',
+                    image: 'url(img/event3.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314', '315'],
                     posSwipes : 0,
@@ -110,7 +110,7 @@ angular.module('splash.events', [])
                 {
                     id: 6,
                     name:'dancing event',
-                    image: 'img/event1.jpg',
+                    image: 'url(img/event1.jpg)',
                     date : 'DIC 25',
                     users: ['313'],
                     posSwipes : 0,
@@ -120,7 +120,7 @@ angular.module('splash.events', [])
                 {
                     id: 7,
                     name:'disco event',
-                    image: 'img/event2.jpg',
+                    image: 'url(img/event2.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314'],
                     posSwipes : 0,
@@ -129,7 +129,7 @@ angular.module('splash.events', [])
                 {
                     id: 8,
                     name:'electro event',
-                    image: 'img/event3.jpg',
+                    image: 'url(img/event3.jpg)',
                     date : 'DIC 25',
                     users: ['313', '314', '315'],
                     posSwipes : 0,

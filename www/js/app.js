@@ -25,16 +25,27 @@ angular.module('splash',
         'ionic.contrib.ui.cards'
     ])
 
-    .run(function($rootScope, $state, $ionicPlatform, $localstorage) {
+    .run(function($rootScope, $state, $ionicPlatform, $localstorage, $cordovaGoogleAnalytics) {
         $ionicPlatform.ready(function() {
+
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
+
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+
+            if (typeof analytics !== 'undefined'){
+                $cordovaGoogleAnalytics.startTrackerWithId('UA-59886308-1');
+                //$cordovaGoogleAnalytics.addCustomDimension('dimension1', 'female');
+                $cordovaGoogleAnalytics.addCustomDimension('1', 'female');
+            }
+
+
         });
 
         if($localstorage.get('profileInfoRetrieved') == 'true') {

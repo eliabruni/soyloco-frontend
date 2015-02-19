@@ -1,6 +1,11 @@
 angular.module('splash.selectCategories.ctrl', [])
 
-    .controller('SelectCategoriesCtrl', function($scope, $localstorage) {
+    .controller('SelectCategoriesCtrl', function($scope, $localstorage, $cordovaGoogleAnalytics) {
+
+        // GA
+        $scope.$on('$ionicView.beforeEnter', function() {
+            $cordovaGoogleAnalytics.trackView('SelectCategories');
+        });
 
         var categories = $localstorage.getObject('categories');
         if (categories == null) {

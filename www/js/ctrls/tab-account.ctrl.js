@@ -3,7 +3,12 @@ angular.module('splash.tabAccount.ctrl', [])
 
     .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile,
-                                           $cordovaGeolocation, $localstorage, $profile) {
+                                           $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
+
+        // GA
+        $scope.$on('$ionicView.beforeEnter', function() {
+            $cordovaGoogleAnalytics.trackView('Profile');
+        });
 
         $scope.showView = true;
 

@@ -9,71 +9,49 @@
     </ion-header-bar>
 
 
-    <!--<div class="bar bar-stable">-->
 
-    <!--<div class="button-bar" >-->
-    <!--<a class="button">All</a>-->
-    <!--<a class="button">Channel 1</a>-->
-    <!--<a class="button">Channel 2</a>-->
-    <!--<a class="button">Channel 3</a>-->
-    <!--<a class="button">Channel 4</a>-->
-    <!--</div>-->
-
-    <!--</div>-->
-
-
-    <ion-slide-box on-slide-changed="slideChanged(index)" >
+    <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="deactivateSlide()">
         <ion-slide>
             <ion-content ng-style="{'background-color':'#35465c'}">
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
                 <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+
+
                     <div class="container"
                          ng-style="{
-        'width': cardWidth,
-        'margin': containerMargin,
-        'padding-bottom': containerPaddingBottom
-        }">
-                        <header>
-                            <div class="bio">
-                                <img src="{{event.image}}" alt="background" class="bg"
-                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
-                                <div class="desc"
-                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
-                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                                    <p ng-style="{'padding-top': descpPaddingTop, 'font-size': descPFontSize}">Nightlife Sab 31 Gen, 01:00AM</p>
+                            'width': cardWidth,
+                            'height' : cardHeight,
+                             'margin': containerMargin,
+                            'padding-bottom': containerPaddingBottom
+                                    }">
+                            <!--<div class="bio">-->
+                            <button class="col button button-event"
+                                    ng-style="{
+                                        'background-image': event.image,
+                                        'background-size': backgroundSize,
+                                        'background-repeat':'no-repeat',
+                                        'height' : cardHeight
+                                            }"
+                                   >
+                                <div class="card-text"
+                                     ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                                    Elisa, 24
                                 </div>
-                            </div>
-                            <!--<div class="avatarcontainer">-->
-                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
-                            <!--<div class="icon-twitter"></div>-->
-                            <!--</div>-->
-                        </header>
+                            </button>
 
-                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                            <div class="data" ng-style="{'font-size': dataLiFontSize}">
-                                <ul>
-                                    <li>
-                                        2,934
-                                        <span>Tweets</span>
-                                    </li>
-                                    <li>
-                                        1,119
-                                        <span>Followers</span>
-                                    </li>
-                                    <li>
-                                        530
-                                        <span>Following</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-                        </div>
-
-
+                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                        <!--</div>-->
                     </div>
+                    </div>
+
+
+
                 </a>
             </ion-content>
 
@@ -84,51 +62,41 @@
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
                 <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+
+
                     <div class="container"
                          ng-style="{
-        'width': cardWidth,
-        'margin': containerMargin,
-        'padding-bottom': containerPaddingBottom
-        }">
-                        <header>
-                            <div class="bio">
-                                <img src="{{event.image}}" alt="background" class="bg"
-                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
-                                <div class="desc"
-                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
-                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                                    <p ng-style="{'padding-top': descpPaddingTop, 'font-size': descPFontSize}">Nightlife Sab 31 Gen, 01:00AM</p>
+                            'width': cardWidth,
+                            'height' : cardHeight,
+                             'margin': containerMargin,
+                            'padding-bottom': containerPaddingBottom
+                                    }">
+                            <!--<div class="bio">-->
+                            <button class="col button button-event"
+                                    ng-style="{
+                                        'background-image': event.image,
+                                        'background-size': backgroundSize,
+                                        'background-repeat':'no-repeat',
+                                        'height' : cardHeight
+                                            }"
+                                    >
+                                <div class="card-text"
+                                     ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                                    Elisa, 24
                                 </div>
-                            </div>
-                            <!--<div class="avatarcontainer">-->
-                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
-                            <!--<div class="icon-twitter"></div>-->
-                            <!--</div>-->
-                        </header>
+                            </button>
 
-                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                            <div class="data" ng-style="{'font-size': dataLiFontSize}">
-                                <ul>
-                                    <li>
-                                        2,934
-                                        <span>Tweets</span>
-                                    </li>
-                                    <li>
-                                        1,119
-                                        <span>Followers</span>
-                                    </li>
-                                    <li>
-                                        530
-                                        <span>Following</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-                        </div>
-
-
+                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                        <!--</div>-->
                     </div>
+                    </div>
+
+
+
                 </a>
             </ion-content>
 
@@ -139,51 +107,41 @@
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
                 <a ng-repeat="event in events"  href="#/tab/event/{{event.id}}">
+
+
                     <div class="container"
                          ng-style="{
-        'width': cardWidth,
-        'margin': containerMargin,
-        'padding-bottom': containerPaddingBottom
-        }">
-                        <header>
-                            <div class="bio">
-                                <img src="{{event.image}}" alt="background" class="bg"
-                                     ng-style="{'width': cardWidth, 'height': cardHeight}">
-                                <div class="desc"
-                                     ng-style="{'padding-top': descPaddingTop, 'padding-left':descPaddingLeft}">
-                                    <h3 ng-style="{'font-size': descH3FontSize, 'margin-bottom': descMarginBottom}">VIP ROOM</h3>
-                                    <p ng-style="{'padding-top': descpPaddingTop, 'font-size': descPFontSize}">Nightlife Sab 31 Gen, 01:00AM</p>
+                            'height' : containerHeight,
+                            'width': containerWidth,
+                            'margin': containerMargin,
+                            'padding-bottom': containerPaddingBottom
+                                    }">
+                            <!--<div class="bio">-->
+                            <button class="col button button-event"
+                                    ng-style="{
+                                        'background-image': event.image,
+                                        'background-size': backgroundSize,
+                                        'background-repeat':'no-repeat',
+                                        'height' : cardHeight
+                                            }"
+                                    >
+                                <div class="card-text"
+                                     ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                                    Elisa, 24
                                 </div>
-                            </div>
-                            <!--<div class="avatarcontainer">-->
-                            <!--<img src="http://www.croop.cl/UI/twitter/images/carl.jpg" alt="avatar" class="avatar">-->
-                            <!--<div class="icon-twitter"></div>-->
-                            <!--</div>-->
-                        </header>
+                            </button>
 
-                        <div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">
-                            <div class="data" ng-style="{'font-size': dataLiFontSize}">
-                                <ul>
-                                    <li>
-                                        2,934
-                                        <span>Tweets</span>
-                                    </li>
-                                    <li>
-                                        1,119
-                                        <span>Followers</span>
-                                    </li>
-                                    <li>
-                                        530
-                                        <span>Following</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-                        </div>
-
-
+                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                        <!--</div>-->
                     </div>
+                    </div>
+
+
+
                 </a>
             </ion-content>
 

@@ -1,11 +1,6 @@
 angular.module('splash.tabEvents.ctrl', [])
 
-    .controller('TabEventsCtrl', function($scope, $localstorage, $ionicSlideBoxDelegate, Events, $cordovaGoogleAnalytics) {
-
-        // GA
-        $scope.$on('$ionicView.beforeEnter', function() {
-            $cordovaGoogleAnalytics.trackView('Events');
-        });
+    .controller('TabEventsCtrl', function($scope, $localstorage, $ionicSlideBoxDelegate, Events) {
 
         $scope.events = Events.all();
 
@@ -18,11 +13,27 @@ angular.module('splash.tabEvents.ctrl', [])
             }, 3000);
         };
 
-
-        $scope.deactivateSlide = function() {
-            $ionicSlideBoxDelegate.enableSlide(false);
-        };
-
+        //
+        //$scope.deactivateSlide = function(slie) {
+        //    $ionicSlideBoxDelegate.enableSlide(false);
+        //};
+        //
+        //$scope.goToToday = function() {
+        //    alert('here 1')
+        //    $ionicSlideBoxDelegate.to(1)
+        //}
+        //
+        //$scope.goToTomorrow = function() {
+        //    alert('here 2')
+        //
+        //    $ionicSlideBoxDelegate.to(2)
+        //}
+        //
+        //$scope.goToWeekend = function() {
+        //    alert('here 3')
+        //
+        //    $ionicSlideBoxDelegate.to(3)
+        //}
 
 
 
@@ -94,18 +105,24 @@ angular.module('splash.tabEvents.ctrl', [])
         $scope.containerMargin = [(screenWidth * 0.04) + "px auto " + (screenWidth * 0.04) + "px auto"];
         $scope.containerPaddingBottom = (screenWidth * 0.03) + "px";
 
-        $scope.containerHeight = (screenWidth * 1.1) + "px";
-        $scope.containerWidth = (screenWidth * 1) + "px";
-
-        $scope.cardHeight = (screenWidth * 1) + "px";
+        $scope.cardHeight = (screenWidth * 0.75) + "px";
         $scope.cardWidth = (screenWidth * 1) + "px";
-        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 0.8) + "px";
+
+        $scope.descPaddingTop = (screenWidth * 0.03) + "px";
+        $scope.descPaddingLeft = (screenWidth * 0.02) + "px";
+        $scope.descpPaddingTop = (screenWidth * 0.01) + "px";
+
+        $scope.contentHeight = (screenWidth * 0.2) + "px";
+        $scope.contentPaddingTop = (screenWidth * 0.05) + "px";
+
+        $scope.descH3FontSize = (screenWidth * 0.05) + "px";
+        $scope.descMarginBottom = (screenWidth * 0.004) + "px";
+
+        $scope.descPFontSize = (screenWidth * 0.04) + "px";
+
+        $scope.dataLiFontSize = (screenWidth * 0.04) + "px";
 
 
-
-        $scope.cardTextHeight = (screenWidth * 0.01) + "px";
-        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
-        $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
 
 
     });

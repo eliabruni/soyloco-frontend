@@ -18,6 +18,11 @@ Enter the project
 cd soyloco-frontend
 ```
 
+The cordova.plugins.Keyboard object provides functions to make interacting with the keyboard:
+```bash
+cordova plugin add com.ionic.keyboard
+```
+
 Basic device information:
 ```bash
 cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git

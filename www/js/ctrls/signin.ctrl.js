@@ -2,7 +2,12 @@ angular.module('splash.signin.ctrl', [])
 
 
     .controller('SigninCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal, $state, $cordovaFacebook,
-                                       $ionicLoading, $profile, $localstorage) {
+                                       $ionicLoading, $profile, $localstorage, $cordovaGoogleAnalytics) {
+
+        // GA
+        $scope.$on('$ionicView.beforeEnter', function() {
+            $cordovaGoogleAnalytics.trackView('Signin');
+        });
 
         $ionicSideMenuDelegate.canDragContent(false);
 

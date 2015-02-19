@@ -339,52 +339,32 @@
 /*EXPERIMENTAL*/
 
 
-/*This part to make the item background and borders*/
-/*.list{*/
-/*background-color: transparent !important;*/
-/*}*/
-/*.item{*/
-/*background-color: transparent !important; ;*/
-/*border: 0  !important;*/
-/*}*/
-/*.item-content{*/
-/*background-color: transparent !important ;*/
-/*}*/
-
-/*.bar-header{*/
-/*background-color: transparent;*/
-/*border: 0 !important;}*/
-/*.bar{*/
-/*background-size:100% 0px  !important;*/
-/*}*/
-
-
-/*This part to for the highlight transition when item is tapped*/
-/*.item-content{*/
-/*color: white !important;*/
-/*}*/
-
-/*.item-content:before {*/
-/*content: "" !important;*/
-/*display: block !important;*/
-/*position: absolute !important;*/
-/*top: 0 !important;*/
-/*bottom: 0 !important;*/
-/*left: 0 !important;*/
-/*width: 100% !important;*/
-/*opacity: 0 !important;*/
-/*background: rgba(0,0,0,0.5) !important;*/
-/*-moz-transition: opacity 0s !important;*/
-/*-webkit-transition: opacity 0s !important;*/
-/*transition: opacity 0s !important;*/
-/*z-index: -1;*/
-/*}*/
-
-
-/*.item-content.activated:before {*/
-/*background-color: white !important;*/
-/*opacity: 0.5 !important;*/
-/*}*/
+.button-event {
+    -webkit-transition: opacity 0.0s;
+    transition: opacity 0.0s;
+    border-color: transparent !important;
+    box-shadow: none;
+    border: none !important;
+    border: 0 !important;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.button-event.button-event {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    border: none !important;
+    border: 0 !important;
+    /*color: red;*/
+}
+.button-event.button-icon {
+    border-color: transparent;
+    background: none; }
+.button-event.active, .button-event.activated {
+    /*background-color:red;*/
+    opacity: 0.8;
+}
 
 
 /*CONTENT*/
