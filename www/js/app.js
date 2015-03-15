@@ -50,7 +50,7 @@ angular.module('splash',
 
         if($localstorage.get('profileInfoRetrieved') == 'true') {
             $rootScope.appInitialized = true;
-            $state.go('tab.play');
+            $state.go('app.play');
 
         }
         else {
@@ -63,11 +63,11 @@ angular.module('splash',
 
     .config(function($ionicConfigProvider, $stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
 
-        // note that you can also chain conf
-        $ionicConfigProvider.tabs.position('bottom');
-        $ionicConfigProvider.tabs.style('standard');
-        $ionicConfigProvider.views.transition('none');
-        $ionicConfigProvider.backButton.icon('ion-arrow-left-c');
+        //// note that you can also chain conf
+        //$ionicConfigProvider.tabs.position('bottom');
+        //$ionicConfigProvider.tabs.style('standard');
+        //$ionicConfigProvider.views.transition('none');
+        //$ionicConfigProvider.backButton.icon('ion-arrow-left-c');
 
         // This block is only for web debugging
         if (!window.cordova) {
@@ -89,57 +89,67 @@ angular.module('splash',
             })
 
             // setup an abstract state for the tabs directive
-            .state('tab', {
-                url: "/tab",
+            .state('app', {
+                url: "/app",
                 abstract: true,
                 templateUrl: "templates/tabs.html"
             })
 
             // Each tab has its own nav history stack:
 
-            .state('tab.play', {
+            .state('app.play', {
                 url: '/play',
                 views: {
-                    'tab-dash': {
+                    'menuContent': {
                         templateUrl: 'templates/tab-play.html',
                         controller: 'TabPlayCtrl'
                     }
                 }
             })
 
-            .state('tab.events', {
+            .state('app.playTest', {
+                url: '/playTest',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/tab-play-test.html',
+                        controller: 'TabPlayCtrl'
+                    }
+                }
+            })
+
+            .state('app.events', {
                 url: '/events',
                 views: {
-                    'tab-events': {
+                    'menuContent': {
                         templateUrl: 'templates/tab-events.html',
                         controller: 'TabEventsCtrl'
                     }
                 }
             })
-            .state('tab.eventDetail', {
+            .state('app.eventDetail', {
                 url: '/event/:eventId',
                 views: {
-                    'tab-events': {
+                    'menuContent': {
                         templateUrl: 'templates/eventDetail.html',
                         controller: 'EventDetailCtrl'
                     }
                 }
             })
 
-            .state('tab.account', {
+            .state('app.account', {
                 url: '/account',
                 views: {
-                    'tab-account': {
+                    'menuContent': {
                         templateUrl: 'templates/tab-account.html',
                         controller: 'TabAccountCtrl'
                     }
                 }
             })
 
-            .state('tab.selectCategories', {
+            .state('app.selectCategories', {
                 url: '/selectCategories',
                 views: {
-                    'tab-account': {
+                    'menuContent': {
                         templateUrl: 'templates/selectCategories.html',
                         controller: 'SelectCategoriesCtrl'
                     }

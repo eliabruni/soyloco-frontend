@@ -76,12 +76,13 @@ angular.module('splash.tabPlay.ctrl', [])
          * CARDS
          */
 
-        $scope.containerMargin = [(-screenWidth * 0.005) + "px auto " + (screenWidth * 0.01) + "px auto"];
-        $scope.containerPaddingBottom = (screenWidth * 0.00) + "px";
+        $scope.containerMargin = [(-screenWidth * 0.01) + "px" + (-screenWidth * 0.2) + "px " + (screenWidth * 0.0) + "px " + (-screenWidth * 0.2) + "px "];
+        //$scope.containerMargin = [(-screenWidth * 0.01) + "px auto " + (screenWidth * 0.0) + "px auto"];
+        $scope.containerPaddingBottom = (screenWidth * 0.02) + "px";
 
-        $scope.cardHeight = (screenWidth * 0.77) + "px";
-        $scope.cardWidth = (screenWidth * 0.77) + "px";
-        $scope.backgroundSize = (screenWidth * 0.77) + "px " + (screenWidth * 0.77) + "px";
+        $scope.cardHeight = (screenWidth * 1) + "px";
+        $scope.cardWidth = (screenWidth * 1) + "px";
+        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
 
 
 
@@ -102,30 +103,30 @@ angular.module('splash.tabPlay.ctrl', [])
         //     ***************/
         var cardTypes = [{
             title: 'Swipe down to clear the card',
-            image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)',
-            image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)'
+            image1: 'url(img/emilia.jpg)',
+            image2: 'url(img/emma.jpg)'
 
         },
             {
                 title: 'Where is this?',
-                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)',
-                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+                image1: 'url(img/frieda.jpg)',
+                image2: 'url(img/olga.jpg)'
 
             },
             {
                 title: 'What kind of grass is this?',
-                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic4.png)',
-                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+                image1: 'url(img/emma.jpg)',
+                image2: 'url(img/kristen.jpg)'
             },
             {
                 title: 'What beach is this?',
-                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic.png)',
-                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)'
+                image1: 'url(img/frieda.jpg)',
+                image2: 'url(img/emma.jpg)'
             },
             {
                 title: 'What kind of clouds are these?',
-                image1: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic3.png)',
-                image2: 'url(http://ionicframework.com.s3.amazonaws.com/demos/ionic-contrib-swipecards/pic2.png)'
+                image1: 'url(img/olga.jpg)',
+                image2: 'url(img/kristen.jpg)'
 
             }];
 

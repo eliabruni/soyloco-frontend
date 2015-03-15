@@ -31,7 +31,7 @@ angular.module('splash.signin.ctrl', [])
 
                         // Save fb token into local storage
                         //$localstorage.setObject('fbToken', success);
-                        $state.go('tab.play');
+                        $state.go('app.play');
 
                     } else {
                         retrieveProfileInfo();
@@ -78,7 +78,7 @@ angular.module('splash.signin.ctrl', [])
                 $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
                     if (newValues[0] && newValues[1] && newValues[2]) {
                         $ionicLoading.hide();
-                        $state.go('tab.play');
+                        $state.go('app.play');
                     }
                 });
 

@@ -1,0 +1,69 @@
+<ion-view view-title="Welcome">
+    <ion-content style="top:0;">
+
+        <div class="row">
+
+
+            <div class="container"
+                 ng-style="{
+        'width': cardWidth,
+        'height' : cardHeight,
+        'margin': containerMargin,
+        'padding-bottom': containerPaddingBottom
+        }">
+                <header>
+                    <!--<div class="bio">-->
+                    <button class="col button button-test"
+                            ng-style="{
+
+                    'background-image': card.image1,
+                    'background-size': backgroundSize,
+                    'background-repeat':'no-repeat',
+                    'height' : cardHeight
+                    }"
+                            ng-click="addCard()">
+                        <div class="card-text"
+                             ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                            Elisa, 24
+                        </div>
+                    </button>
+                </header>
+
+                <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <div class="container"
+                 ng-style="{
+                'width': cardWidth,
+                'height' : cardHeight,
+                'margin': containerMargin,
+                'padding-bottom': containerPaddingBottom
+        }">
+                <header>
+                    <!--<div class="bio">-->
+                    <button class="col button button-test"
+                            ng-style="{
+
+                    'background-image': card.image2,
+                    'background-size':backgroundSize,
+                    'background-repeat':'no-repeat',
+                    'height' : cardHeight
+                    }"
+                            ng-click="addCard()"></button>
+                </header>
+
+                <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                <!--</div>-->
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
