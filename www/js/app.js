@@ -107,16 +107,6 @@ angular.module('splash',
                 }
             })
 
-            .state('app.playTest', {
-                url: '/playTest',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/tab-play-test.html',
-                        controller: 'TabPlayCtrl'
-                    }
-                }
-            })
-
             .state('app.events', {
                 url: '/events',
                 views: {
