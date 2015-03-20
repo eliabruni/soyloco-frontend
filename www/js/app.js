@@ -66,7 +66,7 @@ angular.module('splash',
         //// note that you can also chain conf
         //$ionicConfigProvider.tabs.position('bottom');
         //$ionicConfigProvider.tabs.style('standard');
-        //$ionicConfigProvider.views.transition('none');
+        $ionicConfigProvider.views.transition('none');
         //$ionicConfigProvider.backButton.icon('ion-arrow-left-c');
 
         // This block is only for web debugging
