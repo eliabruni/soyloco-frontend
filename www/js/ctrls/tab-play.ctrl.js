@@ -1,14 +1,14 @@
 angular.module('splash.tabPlay.ctrl', [])
 
 
-    .controller('TabPlayCtrl', function($rootScope, $localstorage, $scope, $cordovaGoogleAnalytics, $ionicSwipeCardDelegate) {
+    .controller('TabPlayCtrl', function($rootScope, $localstorage, $scope, $timeout, $cordovaGoogleAnalytics, $ionicSwipeCardDelegate) {
 
         $scope.$on('$ionicView.beforeEnter', function() {
             $cordovaGoogleAnalytics.trackView('Play');
         });
 
         /***************
-         * CSS stuff
+         * CSS size stuff
          ***************/
 
         // We get screen size only at fb login time
@@ -20,83 +20,29 @@ angular.module('splash.tabPlay.ctrl', [])
             $localstorage.setObject('screenWidth', newScreenWidth);
         }
 
-        //var screenHeight = $localstorage.getObject('screenHeight');
-
-        //var size = (screenHeight * 0.85) / 2;
-
-        ///***************
-        // * CARD 1
-        // */
-        //
-        //$scope.height = size + "px";
-        //$scope.width = size + "px";
-        //
-        //// These two values need simply to be
-        //// -1/2 * (height or weight).
-        //$scope.marginTop = -(size * 0.5) + "px";
-        //$scope.marginLeft = -(size * 0.5) + "px";
-        //
-        //// Top needs to be
-        ////  -1/2 * (height or weight) + something
-        //$scope.top = (size * 0.5 + size * 0.0) + "px";
-        //$scope.left = 50 + "%";
-        //
-        //
-        ///***************
-        // * CARD 2
-        // */
-        //
-        //$scope.height2 = (size) + "px";
-        //$scope.width2 = (size) + "px";
-        //
-        //
-        //$scope.marginTop2 = (size * 0.0) + "px";
-        //$scope.marginLeft2 = -(size * 0.5) + "px";
-        //
-        //// Top needs to be
-        ////  1/2 * (height or weight) + something
-        //$scope.top2 = (size) + "px";
-        //$scope.left2 = 50 + "%";
-
-        //$scope.padding = '50px 0px'
-        //$scope.cardWidth = '600px'
         // Screen width and height are set at signin only once
         var screenWidth = $localstorage.getObject('screenWidth');
+        var screenHeight = $localstorage.getObject('screenHeight');
 
 
-
-        /***************
-         * CSS stuff
-         ***************/
-
-        // Screen width and height are set at signin only once
-        var screenWidth = $localstorage.getObject('screenWidth');
-
-        /***************
-         * CARDS
-         */
-
-        $scope.containerMargin = [(-screenWidth * 0.01) + "px" + (-screenWidth * 0.2) + "px " + (screenWidth * 0.0) + "px " + (-screenWidth * 0.2) + "px "];
+        $scope.containerMargin = [(-screenWidth * 0.2) + "px" + (screenWidth * 0) + "px " + (screenWidth * 0.0) + "px " + (screenWidth * 0) + "px "];
         //$scope.containerMargin = [(-screenWidth * 0.01) + "px auto " + (screenWidth * 0.0) + "px auto"];
-        $scope.containerPaddingBottom = (screenWidth * 0.02) + "px";
+        $scope.containerPaddingBottom = (screenWidth * 0.0) + "px";
+
+        $scope.scrollHeight = (screenHeight * 0.51) + "px";
 
         $scope.cardHeight = (screenWidth * 1) + "px";
         $scope.cardWidth = (screenWidth * 1) + "px";
         $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
-
-
 
         $scope.cardTextHeight = (screenWidth * 0.01) + "px";
         $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
         $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
 
 
-
-
         /***************
          * CARDS
          */
-
 
         //    /***************
         //     * MOKE DATA
@@ -148,70 +94,20 @@ angular.module('splash.tabPlay.ctrl', [])
             $scope.cards.splice(index, 1);
         };
 
-        $scope.addCard = function () {
-            $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+        $scope.addCardUp = function () {
+            $scope.buttonUpOpacity = 0.1;
+            $timeout(function() {
+                $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+                $scope.buttonUpOpacity = 1;
+            }, 300);
+        }
 
+        $scope.addCardBottom = function () {
+            $scope.buttonBottomOpacity = 0.1;
+            $timeout(function() {
+                $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+                $scope.buttonBottomOpacity = 1;
+            }, 300);
         }
 
     })
-
-
-//    /***************
-//     * MOKE DATA
-//     ***************/
-//
-//    var cardTypes = [{
-//        title: 'Swipe down to clear the card',
-//        image: 'img/pic.png'
-//    }, {
-//        title: 'Where is this?',
-//        image: 'img/pic.png'
-//    }, {
-//        title: 'What kind of grass is this?',
-//        image: 'img/pic2.png'
-//    }, {
-//        title: 'What beach is this?',
-//        image: 'img/pic3.png'
-//    }, {
-//        title: 'What kind of clouds are these?',
-//        image: 'img/pic4.png'
-//    }];
-//
-//
-//    /***************
-//     * LOGIC
-//     ***************/
-//
-//    var lastIndex = 0;
-//    $scope.cards = Array.prototype.slice.call(cardTypes, 0);
-//
-//    $scope.cardSwiped = function(index) {
-//        $scope.addCard();
-//    };
-//
-//    $scope.cardDestroyed = function(index) {
-//        $scope.cards.splice(index, 1);
-//    };
-//
-//    $scope.addCard = function() {
-//        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-//        newCard.id = Math.random();
-//        $scope.cards.unshift(angular.extend({}, newCard));
-//    };
-//
-//
-//})
-//
-//.controller('CardCtrl', function($scope, $timeout, $ionicSwipeCardDelegate) {
-//    $scope.goAway = function(index) {
-//        $timeout(function () {
-//            $scope.cards.splice(index, 1);
-//            $scope.addCard();
-//        }, 0);
-//    }
-//
-//    //$scope.goAway = function() {
-//    //    var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
-//    //    card.swipe();
-//    //};
-//});
