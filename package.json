@@ -22,6 +22,7 @@
   },
   "cordovaPlugins": [
     "https://github.com/danwilson/google-analytics-plugin.git",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "org.apache.cordova.file-transfer"
   ]
 }

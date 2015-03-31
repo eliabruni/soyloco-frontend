@@ -84,6 +84,8 @@ angular.module('splash.signin.ctrl', [])
 
                 $profile.getCities()
                     .then(function(success) {
+
+                        alert('inside get cities')
                         var cities = success;
                         $localstorage.setObject('myCity', cities[0]);
                         $localstorage.setObject('cities', cities);
@@ -92,6 +94,9 @@ angular.module('splash.signin.ctrl', [])
 
                         $profile.getBasicInfo()
                             .then(function(success) {
+
+                                alert('inside get basic info')
+
                                 var basicInfo = success;
                                 $localstorage.setObject('basicInfo', basicInfo);
                                 $scope.basicProfileReady = true;
@@ -99,6 +104,9 @@ angular.module('splash.signin.ctrl', [])
 
                                 $profile.getProfilePhoto()
                                     .then(function(success) {
+
+                                        alert('inside get profile photo')
+
                                         var profilePhoto = success;
                                         $localstorage.set('profilePhoto', profilePhoto);
                                         $scope.profilePhotoReady = true;
@@ -109,6 +117,9 @@ angular.module('splash.signin.ctrl', [])
                                         // We save it only when all the profile info are ready
                                         $cordovaFacebook.getAccessToken()
                                             .then(function (success) {
+
+
+                                                alert('inside set profileInfoRetrieved')
 
                                                 $localstorage.set('profileInfoRetrieved', 'true');
                                             })
