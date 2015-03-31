@@ -28,26 +28,17 @@ angular.module('splash.profile', [])
                 $cordovaFacebook.api("me/picture?redirect=0&height=400&type=normal&width=400", ["public_profile"])
                     .then(function (success) {
 
-                        alert('1')
-
-
                         var photo = success.data;
                         var fileTransferDir = cordova.file.externalDataDirectory;
-                        alert('2')
-
                         var hostPath = photo.url;
                         var clientPath = fileTransferDir + 'profilePhoto.jpg';
                         var fileTransferOptions = {};
-                        alert('3')
 
                         $cordovaFileTransfer.download(hostPath, clientPath, true, fileTransferOptions).then(function (result) {
                             // Success!
-                            alert('4')
-
                             q.resolve(clientPath);
 
                         }, function (err) {
-                            alert('err')
                             // Error
                             q.reject();
                         }, function (progress) {

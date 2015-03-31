@@ -99,7 +99,7 @@ angular.module('splash.tabPlay.ctrl', [])
             $timeout(function() {
                 $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
                 $scope.buttonUpOpacity = 1;
-            }, 300);
+            }, 250);
         }
 
         $scope.addCardBottom = function () {
@@ -107,7 +107,7 @@ angular.module('splash.tabPlay.ctrl', [])
             $timeout(function() {
                 $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
                 $scope.buttonBottomOpacity = 1;
-            }, 300);
+            }, 250);
         }
 
     })
