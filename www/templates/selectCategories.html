@@ -3,13 +3,22 @@
                                     }">
     <ion-content has-header="true" >
 
-        <div class="list">
+        <div id="event-categories">
+
+        <div class="list" ng-style="{
+                            'padding-top': '25px'
+                                    }">
             <ion-checkbox ng-repeat="category in categories"
                           ng-model="category.checked"
                           ng-checked="category.checked"
-                          ng-change="updateStorage(category)">
+                          ng-change="updateStorage(category)" ng-style="{
+                            'background-color': '#062142',
+                            'color': 'white',
+                            'border':'none'
+                                    }">
                 {{ category.name }}
             </ion-checkbox>
+        </div>
         </div>
 
     </ion-content>
