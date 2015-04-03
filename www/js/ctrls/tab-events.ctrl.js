@@ -9,7 +9,6 @@ angular.module('splash.tabEvents.ctrl', [])
 
         $scope.events = Events.all();
 
-
         $scope.doRefresh = function() {
             setTimeout(function() {
 
@@ -22,8 +21,6 @@ angular.module('splash.tabEvents.ctrl', [])
         $scope.deactivateSlide = function() {
             $ionicSlideBoxDelegate.enableSlide(false);
         };
-
-
 
 
 

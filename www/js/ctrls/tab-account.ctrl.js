@@ -14,61 +14,8 @@ angular.module('splash.tabAccount.ctrl', [])
 
         if ($localstorage.get('profilePhoto') == null ||  $localstorage.getObject('basicInfo') == null || $localstorage.getObject('myCity') == null) {
 
-
             alert('Profile info problems, need to deal with this case')
-           /* $scope.showView = false;
 
-            $ionicLoading.show({
-                template: 'loading'
-            });
-
-            if ($localstorage.get('profilePhoto') == null) {
-                $scope.profilePhotoReady = false;
-            }
-
-            if ($localstorage.getObject('myCity') == null) {
-                $scope.profileInfoReady = false;
-            }
-
-            // Wait for device API libraries to load
-            document.addEventListener("deviceready", onDeviceReady, false);
-
-            // device APIs are available
-            function onDeviceReady() {
-
-                $scope.$watchGroup(['profilePhotoReady', 'profileInfoReady'], function(newValues, oldValues) {
-                    if (newValues[0] && newValues[1]) {
-                        $ionicLoading.hide();
-                        $scope.showView = true;
-                    }
-                });
-
-                if(!$scope.profilePhotoReady) {
-
-                    $profile.getProfilePhoto()
-                        .then(function(success) {
-                            $scope.profilePhoto = success;
-                            $localstorage.set('profilePhoto', $scope.profilePhoto);
-                            $scope.profilePhotoReady = true;
-                        }, function (error) {
-                            // error
-                        });
-                }
-
-                if (!$scope.profileInfoReady) {
-
-                    $profile.getCities()
-                        .then(function(success) {
-                            $scope.cities = success;
-                            $scope.myCity = $scope.cities[0];
-                            $localstorage.setObject('myCity', $scope.cities[0]);
-                            $localstorage.setObject('cities', $scope.cities);
-                            $scope.profileInfoReady = true;
-                        }, function (error) {
-                            // error
-                        })
-                }
-            }*/
         } else {
             $scope.cities = $localstorage.getObject('cities');
             $scope.myCity = $localstorage.getObject('myCity');
@@ -92,4 +39,25 @@ angular.module('splash.tabAccount.ctrl', [])
             })
         }
 
-    })
+        /***************
+         * CSS stuff
+         ***************/
+
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+        var screenHeight = $localstorage.getObject('screenHeight');
+
+        /***************
+         * CARDS
+         */
+
+        $scope.contentMarginTop = (screenHeight * 0.2) + "px";
+        $scope.contentPaddingTop = (screenHeight * 0.2) + "px";
+
+        $scope.profileInfoTop = -(screenHeight * 0.1) + "px";
+
+        $scope.imageWidth = (screenHeight * 0.2) + "px";
+        $scope.imageHeight = (screenHeight * 0.2) + "px";
+        $scope.imageBorderRadius = (screenHeight * 0.15) + "px";
+
+    });

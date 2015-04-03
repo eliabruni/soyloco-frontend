@@ -1,9 +1,9 @@
-<ion-view view-title="Categories">
-
-    <ion-content>
+<ion-view view-title="Categories" ng-style="{
+                            'background-color': '#1F599E'
+                                    }">
+    <ion-content has-header="true" >
 
         <div class="list">
-
             <ion-checkbox ng-repeat="category in categories"
                           ng-model="category.checked"
                           ng-checked="category.checked"
