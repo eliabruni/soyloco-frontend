@@ -3,6 +3,10 @@
                                     }">
 
     <ion-content has-header="true" ng-if="showView" >
+
+
+        <!--PROFILE IMAGE AND NAME-->
+
         <div id="content" ng-style="{
                             'margin-top': contentMarginTop,
                             'padding-top': contentPaddingTop
@@ -15,28 +19,36 @@
                             'height': imageHeight,
                             'border-radius': imageBorderRadius
                                     }">
-                <h3 id="profile-name">{{basicInfo.name}}</h3>
+                <h3 id="profile-name" ng-style="{
+                            'margin-top': profileNameMarginTop
+                                    }"
+                        >
+                    {{basicInfo.name}}
+                </h3>
             </div>
 
 
-            <!--<div class="list" ng-style="{-->
-            <!--'padding-top': '50px'-->
-            <!--}">-->
+            <!--CITY SELECTOR-->
 
             <div id="city-event-block" ng-style="{
-                            'padding-top': '25px'
-                                    }">
+                            'margin-top': buttonBoxMarginTop
+                            }">
 
-                <div class="item item-input item-select" ng-style="{
+                <div class="item item-input item-select"
+                            ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
                             'color': 'white',
                             'border':'none',
                             'background-color': '#062142',
-                            'height': '50px',
-                            'border-radius': '8px'
+                            'border-radius' : buttonBorderRadius
                                     }">
-                    <div class="input-label" ng-style="{
-                            'color': 'white',
-                            'background-color': '#062142'
+                    <div class="input-label"
+                            ng-style="{
+                               'color': 'white',
+                               'background-color': '#062142'
                                     }">
                         City
                     </div>
@@ -45,8 +57,8 @@
                             ng-options="city.name for city in cities"
                             ng-change="updateCity(city)"
                             ng-style="{
-                            'background-color': '#062142',
-                            'color': 'white'
+                                'background-color': '#062142',
+                                'color': 'white'
                                     }">
 
                     </select>
@@ -54,16 +66,20 @@
             </div>
 
             <div id="event-block" ng-style="{
-                            'padding-top': '5px'
+                            'padding-top': intraButtonPaddingTop
                                     }">
 
 
-                <a class="item" href="#/app/selectCategories" ng-style="{
-                            'color': 'white',
-                            'border':'none',
-                            'background-color': '#062142',
-                            'height': '50px',
-                            'border-radius': '8px'
+                <a class="item" href="#/app/selectCategories"
+                            ng-style="{
+                                'width': buttonBoxWidth,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto',
+                                'color': 'white',
+                                'border':'none',
+                                'background-color': '#062142',
+                                'height': buttonHeight,
+                                'border-radius' : buttonBorderRadius
                                     }">
                     Event categories
                 </a>
@@ -71,56 +87,78 @@
             </div>
 
 
-            <div id="gender-selector" ng-style="{
-                            'margin-top': genderSelectorMarginTop,
-                            'width': genderSelectorWidth
+            <!--GENDER SELECTOR-->
+
+            <div id="gender-selector"
+                            ng-style="{
+                                'margin-top': buttonBoxMarginTop,
+                                'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto'
                                     }">
 
-                <div id="show-gender-text" ng-style="{
-                            'padding-left': genderTextPaddingLeft,
-                            'padding-bottom': genderTextPaddingBottom
+                <div id="show-gender-text"
+                            ng-style="{
+                                'padding-left': genderTextPaddingLeft,
+                                'padding-bottom': genderTextPaddingBottom,
+                                                            'margin-left': 'auto',
+                            'margin-right': 'auto'
                                     }">Show</div>
 
-            <div id="gender-checkbox" ng-style="{
-                            'background-color': '#062142',
-                            'height': genderCheckboxHeight,
-                            'width': genderCheckboxWidth,
-                            'border-radius' : genderCheckboxBorderRadius
+                <div id="gender-checkbox"
+                            ng-style="{
+                                'background-color': '#062142',
+                                'height': genderCheckboxHeight,
+                                'width': buttonBoxWidth,
+                                'border-radius' : buttonBorderRadius,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
                                     }">
-                <ion-checkbox class="item item-checkbox"
-                              ng-repeat="gender in genders"
-                              ng-model="gender.checked"
-                              ng-checked="gender.checked"
-                              ng-change="updateGender(gender)" ng-style="{
-                            'color': 'white',
-                            'border-radius': checkBoxBorderRadius,
-                            'border-color': '#062142',
-                            'background-color': '#062142',
-                            'margin-left' : '0px',
-                            'margin-right' : '0px',
-                            'height': checkBoxHeight,
-                            'padding-top':paddingTopCheckBoxText,
-                            'line-height' : lineHeight
+                    <ion-checkbox
+                            class="item item-checkbox"
+                            ng-repeat="gender in genders"
+                            ng-model="gender.checked"
+                            ng-checked="gender.checked"
+                            ng-change="updateGender(gender)"
+                            ng-style="{
+                                'height': buttonHeight,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto',
+                                'color': 'white',
+                                'border-radius': adHocInternalBorderRadius,
+                                'border-color': '#062142',
+                                'background-color': '#062142',
+                                'padding-top':paddingTopCheckBoxText,
+                                'line-height' : lineHeight
                                     }">
-                    {{ gender.type }}
 
-                </ion-checkbox>
+                        {{ gender.type }}
+
+                     </ion-checkbox>
+                </div>
             </div>
-            </div>
 
 
-            <!--</div>-->
+            <!--LOGOUT BUTTON-->
 
-            <div id="logout-button" ng-style="{
-                            'padding-top': '25px'
+            <div id="logout-button"
+                            ng-style="{
+                                'margin-top': buttonBoxMarginTop
                                     }">
-                <button class="button button-block button-assertive"
+                <button
+                        class="button button-block button-assertive"
                         ng-click="logout()"
                         ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
                             'text-align':'left',
-                            'border-radius': '8px'
+                            'border-radius' : buttonBorderRadius
                                     }"
-                        >Logout</button>
+                        >
+                    Logout
+                </button>
             </div>
 
         </div>

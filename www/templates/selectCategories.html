@@ -7,21 +7,24 @@
                             'background-color': '#062142',
                             'height': eventCategoriesHeight,
                             'width': eventCategoriesWidth,
-                            'margin-top': eventCategoriesMarginTop,
-                            'border-radius' : eventCategoriesBorderRadius
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'margin-top': buttonBoxMarginTop,
+                            'border-radius' : buttonBorderRadius
                                     }">
             <ion-checkbox class="my-item"
                           ng-repeat="category in categories"
                           ng-model="category.checked"
                           ng-checked="category.checked"
                           ng-change="updateStorage(category)" ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
                             'color': 'white',
-                            'border-radius': checkBoxBorderRadius,
+                            'border-radius': adHocInternalBorderRadius,
                             'border-color': '#062142',
                             'background-color': '#062142',
-                            'margin-left' : '0px',
-                            'margin-right' : '0px',
-                            'height': checkBoxHeight,
                             'padding-top':paddingTopCheckBoxText,
                             'line-height' : lineHeight
                                     }">
