@@ -20,94 +20,93 @@
 
 
             <!--<div class="list" ng-style="{-->
-                            <!--'padding-top': '50px'-->
-                                    <!--}">-->
+            <!--'padding-top': '50px'-->
+            <!--}">-->
 
-                <div id="city-event-block" ng-style="{
+            <div id="city-event-block" ng-style="{
                             'padding-top': '25px'
                                     }">
 
-                    <div class="item item-input item-select" ng-style="{
+                <div class="item item-input item-select" ng-style="{
                             'color': 'white',
                             'border':'none',
                             'background-color': '#062142',
                             'height': '50px',
                             'border-radius': '8px'
                                     }">
-                        <div class="input-label" ng-style="{
+                    <div class="input-label" ng-style="{
                             'color': 'white',
                             'background-color': '#062142'
                                     }">
-                            City
-                        </div>
-                        <select ng-model="city"
-                                ng-init="city=cities[myCity.id]"
-                                ng-options="city.name for city in cities"
-                                ng-change="updateStorage(city)"
-                                ng-style="{
+                        City
+                    </div>
+                    <select ng-model="city"
+                            ng-init="city=cities[myCity.id]"
+                            ng-options="city.name for city in cities"
+                            ng-change="updateCity(city)"
+                            ng-style="{
                             'background-color': '#062142',
                             'color': 'white'
                                     }">
 
-                        </select>
-                    </div>
+                    </select>
                 </div>
+            </div>
 
-                <div id="event-block" ng-style="{
+            <div id="event-block" ng-style="{
                             'padding-top': '5px'
                                     }">
 
 
-                    <a class="item" href="#/app/selectCategories" ng-style="{
+                <a class="item" href="#/app/selectCategories" ng-style="{
                             'color': 'white',
                             'border':'none',
                             'background-color': '#062142',
                             'height': '50px',
                             'border-radius': '8px'
                                     }">
-                        Event categories
-                    </a>
+                    Event categories
+                </a>
 
-                </div>
+            </div>
 
 
-                <div id="show-gender">
-
-                    <ul class="list" ng-style="{
-                            'padding-top': '25px'
+            <div id="gender-selector" ng-style="{
+                            'margin-top': genderSelectorMarginTop,
+                            'width': genderSelectorWidth
                                     }">
-                        <div id="show-text">Show</div>
 
-                        <li class="item item-checkbox" ng-style="{
-                            'color': 'white',
-                            'border':'none',
+                <div id="show-gender-text" ng-style="{
+                            'padding-left': genderTextPaddingLeft,
+                            'padding-bottom': genderTextPaddingBottom
+                                    }">Show</div>
+
+            <div id="gender-checkbox" ng-style="{
                             'background-color': '#062142',
-                            'height': '50px',
-                            'border-radius': '8px 8px 0px 0px'
-                            }">
-                            <label class="checkbox" ng-style="{
-                            'border-bottom': 'none'
+                            'height': genderCheckboxHeight,
+                            'width': genderCheckboxWidth,
+                            'border-radius' : genderCheckboxBorderRadius
                                     }">
-                                <input type="checkbox">
-                            </label>
-                            Men
-                        </li>
-                        <li class="item item-checkbox" ng-style="{
+                <ion-checkbox class="item item-checkbox"
+                              ng-repeat="gender in genders"
+                              ng-model="gender.checked"
+                              ng-checked="gender.checked"
+                              ng-change="updateGender(gender)" ng-style="{
                             'color': 'white',
-                            'border':'none',
+                            'border-radius': checkBoxBorderRadius,
+                            'border-color': '#062142',
                             'background-color': '#062142',
-                            'height': '50px',
-                            'border-radius': '0px 0px 8px 8px'
+                            'margin-left' : '0px',
+                            'margin-right' : '0px',
+                            'height': checkBoxHeight,
+                            'padding-top':paddingTopCheckBoxText,
+                            'line-height' : lineHeight
                                     }">
-                            <label class="checkbox" ng-style="{
-                            'border-top': 'none'
-                                    }">
-                                <input type="checkbox">
-                            </label>
-                            Women
-                        </li>
-                    </ul>
-                </div>
+                    {{ gender.type }}
+
+                </ion-checkbox>
+            </div>
+            </div>
 
 
             <!--</div>-->

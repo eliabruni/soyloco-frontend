@@ -12,6 +12,10 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.showView = true;
 
+
+        /***************
+         * GENERAL PROFILE INFO
+         */
         if ($localstorage.get('profilePhoto') == null ||  $localstorage.getObject('basicInfo') == null || $localstorage.getObject('myCity') == null) {
 
             alert('Profile info problems, need to deal with this case')
@@ -24,12 +28,37 @@ angular.module('splash.tabAccount.ctrl', [])
         }
 
         // set localStorage when function is called after a value is changed
-        $scope.updateStorage = function(city){
+        $scope.updateCity = function(city){
 
             $localstorage.setObject('cities', $scope.cities);
             $localstorage.setObject('myCity', city);
         };
 
+        /***************
+         * GENDER
+         */
+        var genders = $localstorage.getObject('genders');
+        if (genders == null) {
+            $scope.genders = [
+                {id:0, type: "Male", checked: false },
+                {id:1, type: "Female", checked: false }
+            ];
+            $localstorage.setObject('genders', $scope.genders);
+        } else {
+            $scope.genders = genders;
+        }
+
+        // set localStorage when function is called after a value is changed
+        $scope.updateGender = function(gender){
+            var genders = $localstorage.getObject('genders');
+            genders[gender.id] = gender;
+            $localstorage.setObject('genders', genders);
+        };
+
+
+        /***************
+         * LOGOUT
+         */
         $scope.logout = function() {
             $cordovaFacebook.logout().then(function (success) {
                 $localstorage.set('profileInfoRetrieved', 'false');
@@ -38,6 +67,13 @@ angular.module('splash.tabAccount.ctrl', [])
                 // error
             })
         }
+
+
+
+
+
+
+
 
         /***************
          * CSS stuff
@@ -48,7 +84,7 @@ angular.module('splash.tabAccount.ctrl', [])
         var screenHeight = $localstorage.getObject('screenHeight');
 
         /***************
-         * CARDS
+         *
          */
 
         $scope.contentMarginTop = (screenHeight * 0.2) + "px";
@@ -59,5 +95,30 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.imageWidth = (screenHeight * 0.2) + "px";
         $scope.imageHeight = (screenHeight * 0.2) + "px";
         $scope.imageBorderRadius = (screenHeight * 0.15) + "px";
+
+        // CONSTANTS
+        // todo: to be hardcoded into local storage
+        var lineHeight = 20;
+        var eventCategoriesBorderRadius = 8;
+        var checkBoxHeight = screenHeight * 0.08;
+
+        // VARIABLES
+        $scope.genderSelectorMarginTop = (screenHeight * 0.04) + "px";
+        $scope.genderSelectorWidth = (screenWidth * 0.9) + "px";
+
+        $scope.genderTextPaddingLeft = (screenHeight * 0.01) + "px";
+        $scope.genderTextPaddingBottom = (screenHeight * 0.005) + "px";
+
+        $scope.genderCheckboxHeight = ($scope.checkBoxHeight * 3) + "px";
+        $scope.genderCheckboxWidth = (screenWidth * 0.9) + "px";
+        $scope.genderCheckboxBorderRadius = eventCategoriesBorderRadius + "px";
+
+        $scope.lineHeight = lineHeight+ "px";
+
+        $scope.checkBoxHeight = checkBoxHeight + "px";
+        $scope.paddingTopCheckBoxText = (checkBoxHeight/2 - lineHeight/2) + "px";
+
+        $scope.checkBoxBorderRadius = 4 * eventCategoriesBorderRadius + "px";
+
 
     });

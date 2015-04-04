@@ -35,8 +35,8 @@ angular.module('splash.selectCategories.ctrl', [])
         var screenWidth = $localstorage.getObject('screenWidth');
         var screenHeight = $localstorage.getObject('screenHeight');
 
-        // CONTSTANTS
-        // todo: put them into local storage
+        // CONSTANTS
+        // todo: to be hardcoded into local storage
         var lineHeight = 20;
         var eventCategoriesBorderRadius = 8;
         var checkBoxHeight = screenHeight * 0.08;

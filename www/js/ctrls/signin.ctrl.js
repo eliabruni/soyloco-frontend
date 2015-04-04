@@ -98,15 +98,12 @@ angular.module('splash.signin.ctrl', [])
                                 $localstorage.setObject('basicInfo', basicInfo);
                                 $scope.basicProfileReady = true;
 
-
                                 $profile.getProfilePhoto()
                                     .then(function(success) {
 
                                         var profilePhoto = success;
                                         $localstorage.set('profilePhoto', profilePhoto);
                                         $scope.profilePhotoReady = true;
-
-
 
                                         // Save fb token into local storage
                                         // We save it only when all the profile info are ready
