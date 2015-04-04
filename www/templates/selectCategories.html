@@ -3,23 +3,51 @@
                                     }">
     <ion-content has-header="true" >
 
-        <div id="event-categories">
-
-        <div class="list" ng-style="{
-                            'padding-top': '25px'
+        <div id="event-categories" ng-style="{
+                            'background-color': '#062142',
+                            'height': eventCategoriesHeight,
+                            'width': eventCategoriesWidth,
+                            'margin-top': eventCategoriesMarginTop
                                     }">
-            <ion-checkbox ng-repeat="category in categories"
+            <ion-checkbox class="my-item"
+                          ng-repeat="category in categories"
                           ng-model="category.checked"
                           ng-checked="category.checked"
                           ng-change="updateStorage(category)" ng-style="{
-                            'background-color': '#062142',
                             'color': 'white',
-                            'border':'none'
+                            'border':'none',
+                            'background-color': '#062142',
+                            'margin-left' : '8px',
+                            'margin-right' : '8px',
+                            'height': checkBoxHeight,
+                            'padding-top':paddingTopCheckBoxText,
+                            'line-height' : lineHeight
                                     }">
-                {{ category.name }}
+               {{ category.name }}
+
             </ion-checkbox>
         </div>
-        </div>
+
+
+        <!--<div id="event-categories">-->
+
+        <!--<div class="list" ng-style="{-->
+        <!--'padding-top': '25px',-->
+        <!--'background-color': 'red'-->
+
+        <!--}">-->
+        <!--<ion-checkbox ng-repeat="category in categories"-->
+        <!--ng-model="category.checked"-->
+        <!--ng-checked="category.checked"-->
+        <!--ng-change="updateStorage(category)" ng-style="{-->
+        <!--'color': 'white',-->
+        <!--'border':'none',-->
+        <!--'opacity': '1'-->
+        <!--}">-->
+        <!--{{ category.name }}-->
+        <!--</ion-checkbox>-->
+        <!--</div>-->
+        <!--</div>-->
 
     </ion-content>
 </ion-view>

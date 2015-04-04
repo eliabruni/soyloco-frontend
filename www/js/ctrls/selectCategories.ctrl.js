@@ -26,4 +26,25 @@ angular.module('splash.selectCategories.ctrl', [])
             $localstorage.setObject('categories', categories);
         };
 
+
+        /***************
+         * CSS stuff
+         ***************/
+
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+        var screenHeight = $localstorage.getObject('screenHeight');
+
+        $scope.eventCategoriesHeight = ($scope.checkBoxHeight * 3) + "px";
+        $scope.eventCategoriesWidth = (screenWidth * 0.9) + "px";
+        $scope.eventCategoriesMarginTop = (screenHeight * 0.05) + "px";
+        
+        var lineHeight = 20;
+        var checkBoxHeight = screenHeight * 0.08;
+        $scope.lineHeight = lineHeight+ "px";
+
+        $scope.checkBoxHeight = checkBoxHeight + "px";
+        $scope.paddingTopCheckBoxText = (checkBoxHeight/2 - lineHeight/2) + "px";
+
+
     });
