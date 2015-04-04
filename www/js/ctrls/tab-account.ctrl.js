@@ -113,7 +113,7 @@ angular.module('splash.tabAccount.ctrl', [])
 
         //PROFILE INFO
         $scope.profileInfoTop = -(screenHeight * 0.1) + "px";
-        $scope.profileNameMarginTop = -(screenHeight * 0.000001) + "px";
+        $scope.profileNameMarginTop = (screenHeight * 0.01) + "px";
 
         $scope.imageWidth = (screenHeight * 0.2) + "px";
         $scope.imageHeight = (screenHeight * 0.2) + "px";
