@@ -35,16 +35,24 @@ angular.module('splash.selectCategories.ctrl', [])
         var screenWidth = $localstorage.getObject('screenWidth');
         var screenHeight = $localstorage.getObject('screenHeight');
 
+        // CONTSTANTS
+        // todo: put them into local storage
+        var lineHeight = 20;
+        var eventCategoriesBorderRadius = 8;
+        var checkBoxHeight = screenHeight * 0.08;
+
+        // VARIABLES
         $scope.eventCategoriesHeight = ($scope.checkBoxHeight * 3) + "px";
         $scope.eventCategoriesWidth = (screenWidth * 0.9) + "px";
-        $scope.eventCategoriesMarginTop = (screenHeight * 0.05) + "px";
-        
-        var lineHeight = 20;
-        var checkBoxHeight = screenHeight * 0.08;
+        $scope.eventCategoriesMarginTop = (screenHeight * 0.04) + "px";
+        $scope.eventCategoriesBorderRadius = eventCategoriesBorderRadius + "px";
+
         $scope.lineHeight = lineHeight+ "px";
 
         $scope.checkBoxHeight = checkBoxHeight + "px";
         $scope.paddingTopCheckBoxText = (checkBoxHeight/2 - lineHeight/2) + "px";
+
+        $scope.checkBoxBorderRadius = 4 * eventCategoriesBorderRadius + "px";
 
 
     });
