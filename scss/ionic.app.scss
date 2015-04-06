@@ -27,36 +27,43 @@ $tabs-icon-size:                  32px;
 
 $positive:                        #35465c !default;
 
-.tabs-positive {
-  .tabs {
-    background-color: #35465c;
+$light: #3f4041;
+
+.light {
+  background-color: #fff !important;
+  color: #ffffff;
+  .scroll-content {
+    background-color: #fff !important;
   }
-  .tab-item {
-    // default android tab
-    opacity: 0.3;
-    color:#fff;
-    background-color: #35465c;
+  .item {
+    background-color: $light;
+    border: none;
+    border-top: 1px solid #464646;
+    border-bottom: 2px solid #333333;
+    color: #F0F1F1;
+    max-height: none;
 
-    &.tab-item-active,
-    &.active,
-    &.activated {
-      color: #fff;
-      background-color: #35465c;
-      //margin-top: -$tabs-striped-border-width;
-      //border-style: solid;
-      //border-width: $tabs-striped-border-width 0 0 0;
-      //border-color: $dark;
-      .badge {
-        //top: $tabs-striped-border-width;
-        opacity: 1;
-        color: #fff;
-        background-color: #35465c;
-
-
-      }
+    &:last-child {
+      border-bottom: 1px solid #333333;
+    }
+    &.current{ background-color:darken( $light, 10% )   !important;
+      border-top: 1px solid #464646 !important;
+      border-bottom: 2px solid #333333 !important;
+      p,h3{opacity: .7;}
     }
   }
+  h2,
+  h3,
+  p,
+  a{
+    color: #F0F1F1;
+  }
 }
+.dark-head {
+  text-decoration: none;
+}
+
+
 
 
 

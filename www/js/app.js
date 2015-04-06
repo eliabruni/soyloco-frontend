@@ -9,6 +9,7 @@ angular.module('splash',
         'ngCordova',
 
         'splash.signin.ctrl',
+        'splash.tabs.ctrl',
         'splash.tabAccount.ctrl',
         'splash.tabPlay.ctrl',
         'splash.tabEvents.ctrl',
@@ -92,7 +93,8 @@ angular.module('splash',
             .state('app', {
                 url: "/app",
                 abstract: true,
-                templateUrl: "templates/tabs.html"
+                templateUrl: "templates/tabs.html",
+                controller: 'TabsCtrl'
             })
 
             // Each tab has its own nav history stack:
