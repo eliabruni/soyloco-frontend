@@ -13,31 +13,6 @@
         <ion-nav-view name="menuContent"></ion-nav-view>
     </ion-side-menu-content>
 
-    <!--<ion-side-menu side="left">-->
-        <!--<ion-header-bar class="bar-assertive">-->
-            <!--<h1 class="title">Left</h1>-->
-        <!--</ion-header-bar>-->
-        <!--<ion-content>-->
-            <!--<ion-list>-->
-                <!--&lt;!&ndash;<ion-item nav-clear menu-close ng-click="login()">&ndash;&gt;-->
-                    <!--&lt;!&ndash;Login&ndash;&gt;-->
-                <!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
-                <!--<ion-item nav-clear menu-close href="#/app/play">-->
-                    <!--Play-->
-                <!--</ion-item>-->
-                <!--<ion-item nav-clear menu-close href="#/app/events">-->
-                    <!--Events-->
-                <!--</ion-item>-->
-                <!--<ion-item nav-clear menu-close href="#/app/account">-->
-                    <!--Account-->
-                <!--</ion-item>-->
-            <!--</ion-list>-->
-        <!--</ion-content>-->
-    <!--</ion-side-menu>-->
-
-
-
-
     <ion-side-menu side="left" class="left-menu" >
 
         <ion-content class="light">
@@ -49,8 +24,7 @@
                             'margin-top': '-5px',
                             'padding-top': profileItemPaddingTop,
                             'background-color': '#292929',
-                            'border-left': 'none',
-                            'border-right': 'none'
+                            'border-color': '#292929'
                                     }"
                nav-clear menu-close>
 
@@ -61,8 +35,9 @@
                             'height': imageHeight,
                             'border-radius': imageBorderRadius
                                     }">
-                {{basicInfo.name}}
-                <h3 id="profile-name"
+                <h3 id="profile-name" ng-style="{
+                            'margin-top': profileNameMarginTop
+                                    }"
                         >
                     {{basicInfo.name}}
                 </h3>
@@ -79,10 +54,10 @@
                 <i class="icon ion-android-person ion-heart-specs"></i>
                 Account
             </a>
-            <!--<a class="item item-icon-left" href="#/app/invite" nav-clear menu-close>-->
-                <!--<i class="icon ion-android-share-alt"></i>-->
-                <!--Share Splash-->
-            <!--</a>-->
+            <a class="item item-icon-left" href="#/app/invite" nav-clear menu-close>
+                <i class="icon ion-android-share-alt"></i>
+                Share Splash
+            </a>
 
         </ul>
             </ion-content>

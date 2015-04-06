@@ -42,7 +42,6 @@ angular.module('splash.tabs.ctrl', [])
         }
 
 
-
         /***************
          * CSS stuff
          ***************/
@@ -51,62 +50,13 @@ angular.module('splash.tabs.ctrl', [])
         var screenWidth = $localstorage.getObject('screenWidth');
         var screenHeight = $localstorage.getObject('screenHeight');
 
-        /***************
-         *
-         */
-
-
-        // CONSTANTS
-        // todo: to be hardcoded into local storage
-        var buttonBoxWidth = (screenWidth * 0.9);
-        var buttonBoxMarginTop = (screenHeight * 0.04);
-        var buttonHeight = (screenHeight * 0.08);
-        var buttonBorderRadius = 8;
-        var intraButtonPaddingTop = 5;
-        var adHocInternalBorderRadius = 4 * buttonBorderRadius;
-        var lineHeight = 20;
-
-
-        // VARIABLES
-
-        //GENERAL
-        $scope.buttonBoxWidth = buttonBoxWidth + "px";
-        $scope.buttonBoxMarginTop = buttonBoxMarginTop + "px";
-        $scope.buttonHeight = buttonHeight + "px";
-        $scope.buttonBorderRadius = buttonBorderRadius + "px";
-        $scope.intraButtonPaddingTop = intraButtonPaddingTop + "px";
-        $scope.adHocInternalBorderRadius = adHocInternalBorderRadius + "px";
-        $scope.lineHeight = lineHeight+ "px";
-
-
-
         //PROFILE INFO
-        $scope.profileItemPaddingTop = (screenHeight * 0.08) + "px";
-        $scope.profileNameMarginTop = (screenHeight * 0.3) + "px";
+        $scope.profileItemPaddingTop = (screenHeight * 0.04) + "px";
+        $scope.profileNameMarginTop = (screenHeight * 0.01) + "px";
 
 
-        $scope.imageWidth = (screenHeight * 0.15) + "px";
-        $scope.imageHeight = (screenHeight * 0.15) + "px";
+        $scope.imageWidth = (screenHeight * 0.19) + "px";
+        $scope.imageHeight = (screenHeight * 0.19) + "px";
         $scope.imageBorderRadius = (screenHeight * 0.15) + "px";
-
-
-        //GENDER BOX
-        $scope.genderSelectorMarginTop = (screenHeight * 0.04) + "px";
-        $scope.genderSelectorWidth = (screenWidth * 0.9) + "px";
-
-        $scope.genderTextPaddingLeft = (screenHeight * 0.01) + "px";
-        $scope.genderTextPaddingBottom = (screenHeight * 0.005) + "px";
-
-        $scope.genderCheckboxHeight = (buttonHeight * 2) + "px";
-        $scope.genderCheckboxWidth = (screenWidth * 0.9) + "px";
-
-        $scope.checkBoxHeight = buttonHeight + "px";
-        $scope.paddingTopCheckBoxText = (buttonHeight/2 - lineHeight/2) + "px";
-
-
-        //LOGOUT BUTTON
-        $scope.logoutButtonMarginTop = (screenHeight * 0.04) + "px";
-
-
 
     });
