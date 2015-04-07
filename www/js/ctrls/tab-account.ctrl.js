@@ -1,7 +1,7 @@
 angular.module('splash.tabAccount.ctrl', [])
 
 
-    .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,
+    .controller('TabAccountCtrl', function($rootScope, $scope, $q, $state, $ionicModal, $ionicLoading,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -33,6 +33,72 @@ angular.module('splash.tabAccount.ctrl', [])
             $localstorage.setObject('cities', $scope.cities);
             $localstorage.setObject('myCity', city);
         };
+
+        $scope.retrieveActualCities = function() {
+            $profile.getCities()
+                .then(function(success) {
+
+                    var cities = success;
+
+
+
+                })
+
+        }
+
+        /***************
+         * CITY SELECTOR EXPERIMENTAL
+         */
+
+
+        $ionicModal.fromTemplateUrl('templates/cityModal.html', function(modal) {
+            $scope.cityModalCtrl = modal;
+        }, {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        });
+
+        $scope.modalData = { msg : {value: "ng"} };
+
+        $scope.data = {
+            clientSide: 'ng'
+        };
+
+
+        $scope.openModal = function() {
+            $scope.cityModalCtrl.show();
+        };
+
+        $scope.hideModal = function() {
+            $scope.cityModalCtrl.hide();
+        };
+
+
+        $scope.clientSideList = [
+            { msg: "Backbone", value: "bb" },
+            { msg: "Angular", value: "ng" },
+            { msg: "Ember", value: "em" },
+            { msg: "Knockout", value: "ko" }
+        ];
+
+
+        $scope.doSomething = function(item) {
+            $scope.modalData.msg = item;
+            $scope.cityModalCtrl.hide();
+        };
+
+
+
+        //
+
+        //
+        //$scope.modalData = {name : $scope.cities[0].name, value : 'leipzig'};
+        //
+        //
+
+
+
 
         /***************
          * GENDER

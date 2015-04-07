@@ -138,6 +138,11 @@ angular.module('splash',
                 }
             })
 
+            .state('cityModal', {
+                url: '/cityModal',
+                templateUrl: 'templates/cityModal.html'
+            })
+
             .state('app.selectCategories', {
                 url: '/selectCategories',
                 views: {

@@ -49,7 +49,13 @@ angular.module('splash.geo', [])
                         var city = {};
                         city['id'] = idx;
                         city['name'] =  sortable[idx][0];
+                        city['value'] =  sortable[idx][0];
                         city['p'] =  sortable[idx][1];
+                        if (idx == 0) {
+                            city['selected'] = true;
+                        } else {
+                            city['selected'] = false;
+                        }
                         sortedCities[idx] = city;
                     }
 

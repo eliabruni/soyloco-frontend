@@ -49,7 +49,7 @@ angular.module('splash.tabPlay.ctrl', [])
         //     ***************/
         var cardTypes = [{
             name1: 'Emilia',
-            name1: 'Emma',
+            name2: 'Emma',
             image1: 'url(img/emilia.jpg)',
             image2: 'url(img/emma.jpg)'
 
@@ -68,14 +68,14 @@ angular.module('splash.tabPlay.ctrl', [])
                 image2: 'url(img/kristen.jpg)'
             },
             {
-                name: 'Frieda',
-                name: 'Emma',
+                name1: 'Frieda',
+                name2: 'Emma',
                 image1: 'url(img/frieda.jpg)',
                 image2: 'url(img/emma.jpg)'
             },
             {
-                name: 'Olga',
-                name: 'Kristen',
+                name1: 'Olga',
+                name2: 'Kristen',
                 image1: 'url(img/olga.jpg)',
                 image2: 'url(img/kristen.jpg)'
 

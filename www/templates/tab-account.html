@@ -28,6 +28,28 @@
             </div>
 
 
+
+            <!--CITY SELECTOR EXPERIMENTAL-->
+
+            <div
+                 ng-style="{
+                                'margin-top': buttonBoxMarginTop
+                                    }">
+                <button
+                        class="button button-block button-assertive"
+                        ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : buttonBorderRadius
+                                    }"
+                        ng-click="openModal()">{{modalData.msg.value}}
+                </button>
+            </div>
+
             <!--CITY SELECTOR-->
 
             <div id="city-event-block" ng-style="{
@@ -53,7 +75,7 @@
                         City
                     </div>
                     <select ng-model="city"
-                            ng-init="city=cities[myCity.id]"
+                                ng-init="city=cities[myCity.id]"
                             ng-options="city.name for city in cities"
                             ng-change="updateCity(city)"
                             ng-style="{
