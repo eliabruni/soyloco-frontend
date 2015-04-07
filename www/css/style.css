@@ -1,12 +1,3 @@
-
-/**************************************/
-/**   HEADER
-/**/
-/*.bar.bar-positive {*/
-/*height:48px;*/
-/*vertical-align: middle;*/
-/*}*/
-
 /*************************************
 *   LOGIN
 */
@@ -69,8 +60,6 @@
     color: #ffffff;
 
 }
-
-
 
 /*************************************
 *   SIDE-MENU
@@ -160,8 +149,6 @@ Profile image circular
 #logout-button {
 }
 
-
-
 /*************************************
 *   SELECT CATEGORIES
 */
@@ -173,7 +160,6 @@ Profile image circular
     /*right: 0;*/
     /*line-height: normal;*/
 }
-
 
 /*************************************
 *   SWIPE
@@ -235,13 +221,12 @@ Profile image circular
     text-align: left;
 }
 
+
 /***************
  * TAB-EVENTS
  */
 
-
 /*EXPERIMENTAL*/
-
 
 .button-event {
     -webkit-transition: opacity 0.0s;

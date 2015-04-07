@@ -1,7 +1,7 @@
 angular.module('splash.tabs.ctrl', [])
 
 
-    .controller('TabsCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,
+    .controller('TabsCtrl', function($rootScope, $scope, $q, $state, $ionicModal, $ionicLoading,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -11,6 +11,16 @@ angular.module('splash.tabs.ctrl', [])
         });
 
         $scope.showView = true;
+
+        // We get screen size only at fb login time
+        if (!$rootScope.appInitialized) {
+            var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
+            var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
+
+            $localstorage.setObject('screenHeight', newScreenHeight);
+            $localstorage.setObject('screenWidth', newScreenWidth);
+        }
+
 
 
         /***************

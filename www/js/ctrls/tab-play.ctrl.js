@@ -11,14 +11,14 @@ angular.module('splash.tabPlay.ctrl', [])
          * CSS size stuff
          ***************/
 
-        // We get screen size only at fb login time
-        if (!$rootScope.appInitialized) {
-            var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
-            var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
-
-            $localstorage.setObject('screenHeight', newScreenHeight);
-            $localstorage.setObject('screenWidth', newScreenWidth);
-        }
+        //// We get screen size only at fb login time
+        //if (!$rootScope.appInitialized) {
+        //    var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
+        //    var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
+        //
+        //    $localstorage.setObject('screenHeight', newScreenHeight);
+        //    $localstorage.setObject('screenWidth', newScreenWidth);
+        //}
 
         // Screen width and height are set at signin only once
         var screenWidth = $localstorage.getObject('screenWidth');
@@ -48,29 +48,34 @@ angular.module('splash.tabPlay.ctrl', [])
         //     * MOKE DATA
         //     ***************/
         var cardTypes = [{
-            title: 'Swipe down to clear the card',
+            name1: 'Emilia',
+            name1: 'Emma',
             image1: 'url(img/emilia.jpg)',
             image2: 'url(img/emma.jpg)'
 
         },
             {
-                title: 'Where is this?',
+                name1: 'Frieda',
+                name2: 'Olga',
                 image1: 'url(img/frieda.jpg)',
                 image2: 'url(img/olga.jpg)'
 
             },
             {
-                title: 'What kind of grass is this?',
+                name1: 'Emma',
+                name2: 'Kristen',
                 image1: 'url(img/emma.jpg)',
                 image2: 'url(img/kristen.jpg)'
             },
             {
-                title: 'What beach is this?',
+                name: 'Frieda',
+                name: 'Emma',
                 image1: 'url(img/frieda.jpg)',
                 image2: 'url(img/emma.jpg)'
             },
             {
-                title: 'What kind of clouds are these?',
+                name: 'Olga',
+                name: 'Kristen',
                 image1: 'url(img/olga.jpg)',
                 image2: 'url(img/kristen.jpg)'
 
