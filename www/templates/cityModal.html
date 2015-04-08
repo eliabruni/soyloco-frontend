@@ -1,6 +1,10 @@
 <div class="modal">
-  <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Select Month</h1>
+  <ion-header-bar class="bar bar-header" ng-style="{
+                            'background-color': '#1F599E'
+                                    }">
+    <h1 class="title" ng-style="{
+                            'color' : 'white'
+                                    }">Choose your city or town</h1>
     <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
   </ion-header-bar>
   <ion-content>
@@ -11,7 +15,7 @@
                      ng-value="item.value"
                      ng-model="data.clientSide"
                      ng-click="doSomething(item)">
-              {{ item.msg }}
+              {{ item.name }}
           </ion-radio>
 
       </div>

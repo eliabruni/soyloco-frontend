@@ -52,40 +52,42 @@
 
             <!--CITY SELECTOR-->
 
-            <div id="city-event-block" ng-style="{
-                            'margin-top': buttonBoxMarginTop
-                            }">
+            <!--<div id="city-event-block" ng-style="{-->
+                            <!--'margin-top': buttonBoxMarginTop-->
+                            <!--}">-->
 
-                <div class="item item-input item-select"
-                            ng-style="{
-                            'height': buttonHeight,
-                            'width': buttonBoxWidth,
-                            'margin-left': 'auto',
-                            'margin-right': 'auto',
-                            'color': 'white',
-                            'border':'none',
-                            'background-color': '#062142',
-                            'border-radius' : buttonBorderRadius
-                                    }">
-                    <div class="input-label"
-                            ng-style="{
-                               'color': 'white',
-                               'background-color': '#062142'
-                                    }">
-                        City
-                    </div>
-                    <select ng-model="city"
-                                ng-init="city=cities[myCity.id]"
-                            ng-options="city.name for city in cities"
-                            ng-change="updateCity(city)"
-                            ng-style="{
-                                'background-color': '#062142',
-                                'color': 'white'
-                                    }">
+                <!--<div class="item item-input item-select"-->
+                            <!--ng-style="{-->
+                            <!--'height': buttonHeight,-->
+                            <!--'width': buttonBoxWidth,-->
+                            <!--'margin-left': 'auto',-->
+                            <!--'margin-right': 'auto',-->
+                            <!--'color': 'white',-->
+                            <!--'border':'none',-->
+                            <!--'background-color': '#062142',-->
+                            <!--'border-radius' : buttonBorderRadius-->
+                                    <!--}">-->
+                    <!--<div class="input-label"-->
+                            <!--ng-style="{-->
+                               <!--'color': 'white',-->
+                               <!--'background-color': '#062142'-->
+                                    <!--}">-->
+                        <!--City-->
+                    <!--</div>-->
+                    <!--<select ng-model="city"-->
+                                <!--ng-init="city=cities[myCity.id]"-->
+                            <!--ng-options="city.name for city in cities"-->
+                            <!--ng-change="updateCity(city)"-->
+                            <!--ng-style="{-->
+                                <!--'background-color': '#062142',-->
+                                <!--'color': 'white'-->
+                                    <!--}">-->
 
-                    </select>
-                </div>
-            </div>
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--EVENT CATEGORIES SELECTOR-->
 
             <div id="event-block" ng-style="{
                             'padding-top': intraButtonPaddingTop
@@ -123,8 +125,8 @@
                             ng-style="{
                                 'padding-left': genderTextPaddingLeft,
                                 'padding-bottom': genderTextPaddingBottom,
-                                                            'margin-left': 'auto',
-                            'margin-right': 'auto'
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
                                     }">Show</div>
 
                 <div id="gender-checkbox"
@@ -153,7 +155,7 @@
                                 'padding-top':paddingTopCheckBoxText,
                                 'line-height' : lineHeight
                                     }">
-
+                        
                         {{ gender.type }}
 
                      </ion-checkbox>

@@ -34,21 +34,21 @@ angular.module('splash.tabAccount.ctrl', [])
             $localstorage.setObject('myCity', city);
         };
 
+
+        /***************
+         * CITY SELECTOR
+         */
+
+
+        //EXPERIMENTAL
         $scope.retrieveActualCities = function() {
             $profile.getCities()
                 .then(function(success) {
 
                     var cities = success;
-
-
-
                 })
-
         }
-
-        /***************
-         * CITY SELECTOR EXPERIMENTAL
-         */
+        //EXPERIMENTAL
 
 
         $ionicModal.fromTemplateUrl('templates/cityModal.html', function(modal) {
@@ -59,10 +59,10 @@ angular.module('splash.tabAccount.ctrl', [])
             focusFirstInput: true
         });
 
-        $scope.modalData = { msg : {value: "ng"} };
+        $scope.modalData = { msg : {value: $scope.cities[0].value} };
 
         $scope.data = {
-            clientSide: 'ng'
+            clientSide: $scope.cities[0].value
         };
 
 
@@ -74,30 +74,12 @@ angular.module('splash.tabAccount.ctrl', [])
             $scope.cityModalCtrl.hide();
         };
 
-
-        $scope.clientSideList = [
-            { msg: "Backbone", value: "bb" },
-            { msg: "Angular", value: "ng" },
-            { msg: "Ember", value: "em" },
-            { msg: "Knockout", value: "ko" }
-        ];
-
+        $scope.clientSideList = $scope.cities;
 
         $scope.doSomething = function(item) {
             $scope.modalData.msg = item;
             $scope.cityModalCtrl.hide();
         };
-
-
-
-        //
-
-        //
-        //$scope.modalData = {name : $scope.cities[0].name, value : 'leipzig'};
-        //
-        //
-
-
 
 
         /***************
@@ -133,7 +115,6 @@ angular.module('splash.tabAccount.ctrl', [])
                 // error
             })
         }
-
 
 
         /***************
@@ -202,7 +183,5 @@ angular.module('splash.tabAccount.ctrl', [])
 
         //LOGOUT BUTTON
         $scope.logoutButtonMarginTop = (screenHeight * 0.04) + "px";
-
-
 
     });
