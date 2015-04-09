@@ -77,9 +77,6 @@ angular.module('splash.signin.ctrl', [])
                     template: '<p class="item-icon-left">Loading Splash...<ion-spinner icon="lines"/></p>'
                 });
 
-                //$ionicLoading.show({
-                //    template: 'Connecting with Facebook...'
-                //});
 
                 $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
 

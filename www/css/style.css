@@ -204,6 +204,7 @@ Profile image circular
 }
 
 .button-test {
+    position: relative;
     -webkit-transition: opacity 0.0s;
     transition: opacity 0.0s;
     border-color: transparent !important;
@@ -302,6 +303,7 @@ header {
 .container {
 
     background-color: #dde1e2;
+
     /*-webkit-border-radius: 4px;*/
     /*-moz-border-radius: 4px;*/
     /*-ms-border-radius: 4px;*/
