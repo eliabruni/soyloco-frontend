@@ -38,6 +38,11 @@ Device orientation:
 cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
 ```
 
+Cordova toast
+```bash
+cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
+```
+
 
 File:
 ```bash
