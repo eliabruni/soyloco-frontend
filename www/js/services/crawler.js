@@ -309,7 +309,7 @@ angular.module('splash.crawler', [])
 
 
 
-        facebookGeoLocation : function(latitude, longitude, radius, callback) {
+        function facebookGeoLocation(latitude, longitude, radius, callback) {
 
                 var getPlacesURL = function(latitude, longitude, radius) {
                     var BASE_URL = "search?q=*&type=place";

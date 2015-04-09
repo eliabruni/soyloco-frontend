@@ -1,8 +1,8 @@
 angular.module('splash.signin.ctrl', [])
 
 
-    .controller('SigninCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal, $state, $cordovaFacebook,
-                                       $ionicLoading, $profile, $localstorage, $cordovaGoogleAnalytics) {
+    .controller('SigninCtrl', function($scope, $timeout, $ionicSideMenuDelegate, $state, $ionicModal, $cordovaFacebook,
+                                       $ionicLoading, $profile, $localstorage, $cordovaGoogleAnalytics, $cordovaToast) {
 
         // GA
         $scope.$on('$ionicView.beforeEnter', function() {
@@ -19,7 +19,7 @@ angular.module('splash.signin.ctrl', [])
             scope: $scope
         }).then(function(modal) {
             $scope.modal = modal;
-        })
+        });
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function() {
@@ -50,7 +50,7 @@ angular.module('splash.signin.ctrl', [])
                             $state.go('signin');
                         });
                 });
-        }
+        };
 
         function retrieveProfileInfo() {
 
@@ -76,10 +76,26 @@ angular.module('splash.signin.ctrl', [])
                 });
 
                 $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
-                    if (newValues[0] && newValues[1] && newValues[2]) {
-                        $ionicLoading.hide();
-                        $state.go('app.play');
-                    }
+
+                    // if profile info is not retrieved until
+                    // $timout time, process is interrupted
+                    $timeout(function() {
+                        if (newValues[0] && newValues[1] && newValues[2]) {
+                            $ionicLoading.hide();
+                            $state.go('app.play');
+                        } else {
+                            $ionicLoading.hide();
+                            $cordovaToast.showLongBottom('Check that internet and GPS are on.').then(function(success) {
+                                // success
+                            }, function (error) {
+                                // error
+                            });
+
+                        }
+
+                    }, 8000);
+
+
                 });
 
                 $profile.getCities()
@@ -127,4 +143,4 @@ angular.module('splash.signin.ctrl', [])
                     })
             }
         }
-    })
+    });
