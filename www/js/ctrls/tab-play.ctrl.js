@@ -88,14 +88,11 @@ angular.module('splash.tabPlay.ctrl', [])
          * LOGIC
          ***************/
 
+
         $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
         $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
 
-
-        $scope.cardSwiped = function (index) {
-            $scope.addCard();
-        };
 
         $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
@@ -107,7 +104,7 @@ angular.module('splash.tabPlay.ctrl', [])
                 $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
                 $scope.buttonUpOpacity = 1;
             }, 250);
-        }
+        };
 
         $scope.addCardBottom = function () {
             $scope.buttonBottomOpacity = 0.1;
@@ -115,6 +112,6 @@ angular.module('splash.tabPlay.ctrl', [])
                 $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
                 $scope.buttonBottomOpacity = 1;
             }, 250);
-        }
+        };
 
-    })
+    });

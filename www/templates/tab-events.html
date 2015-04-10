@@ -1,10 +1,18 @@
-<ion-view view-title="EVENTS">
+<ion-view view-title="Events" ng-style="{
+                            'background-color': '#1F599E'
+                                    }">
+
+    <ion-header-bar class="bar"  ng-style="{
+                            'background-color': '#1F599E'
+                                    }">
+
+    </ion-header-bar>
 
     <ion-header-bar class="bar bar-subheader bar-stable">
         <div class="button-bar" >
-            <a class="button  button-clear " ng-class="{'active' : slideIndex == 0}" ng-click="goToToday()">TODAY</a>
-            <a class="button  button-clear " ng-class="{'active' : slideIndex == 1}" ng-click="goToTomorrow()">TOMORROW</a>
-            <a class="button  button-clear " ng-class="{'active' : slideIndex == 2}" ng-click="goToWeekend()">WEEKEND</a>
+            <a class="button  button-clear " ng-class="{'active' : slideIndex == 0}" ng-click="goToToday()">Today</a>
+            <a class="button  button-clear " ng-class="{'active' : slideIndex == 1}" ng-click="goToTomorrow()">Tomorrow</a>
+            <a class="button  button-clear " ng-class="{'active' : slideIndex == 2}" ng-click="goToWeekend()">Weekend</a>
         </div>
     </ion-header-bar>
 
@@ -12,11 +20,13 @@
 
     <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false" active-slide="deactivateSlide()">
         <ion-slide>
-            <ion-content ng-style="{'background-color':'#35465c'}">
+            <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-                <a ng-repeat="event in events"  href="#/app/event/{{event.id}}">
+                <div class="list">
+
+                <a class="event" ng-repeat="event in events"  href="#/app/event/{{event.id}}">
 
 
                     <div class="container"
@@ -39,7 +49,8 @@
                                      ng-style="{
                                      'height': cardTextHeight,
                                      'padding-top': cardTextPaddingTop,
-                                     'font-size': cardTextFontSize
+                                     'font-size': cardTextFontSize,
+                                     'text-decoration': 'none'
                                         }">
                                     Elisa, 24
                                 </div>
@@ -48,16 +59,16 @@
                         <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
                         <!--</div>-->
                     </div>
-                    </div>
-
 
 
                 </a>
+                </div>
+
             </ion-content>
 
         </ion-slide>
         <ion-slide>
-            <ion-content ng-style="{'background-color':'#35465c'}">
+            <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
@@ -102,7 +113,7 @@
 
         </ion-slide>
         <ion-slide>
-            <ion-content ng-style="{'background-color':'#35465c'}">
+            <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 

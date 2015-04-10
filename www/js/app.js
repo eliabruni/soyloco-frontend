@@ -77,6 +77,8 @@ angular.module('splash',
             $cordovaFacebookProvider.setAppID(appID, version);
         }
 
+        if(ionic.Platform.isAndroid()) $ionicConfigProvider.scrolling.jsScrolling(false);
+
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
         // Set up the various states which the app can be in.

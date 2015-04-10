@@ -88,20 +88,20 @@ angular.module('splash.tabEvents.ctrl', [])
         * CARDS
         */
 
-        $scope.containerMargin = [(screenWidth * 0.04) + "px auto " + (screenWidth * 0.04) + "px auto"];
-        $scope.containerPaddingBottom = (screenWidth * 0.03) + "px";
+        $scope.containerMargin = [(screenWidth * 0.0) + "px auto " + (screenWidth * 0.04) + "px auto"];
+        $scope.containerPaddingBottom = (screenWidth * 0.02) + "px";
 
-        $scope.containerHeight = (screenWidth * 1.1) + "px";
+        $scope.containerHeight = (screenWidth * 1.05) + "px";
         $scope.containerWidth = (screenWidth * 1) + "px";
 
-        $scope.cardHeight = (screenWidth * 1) + "px";
+        $scope.cardHeight = (screenWidth * 1.1) + "px";
         $scope.cardWidth = (screenWidth * 1) + "px";
-        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 0.8) + "px";
+        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 0.95) + "px";
 
 
 
         $scope.cardTextHeight = (screenWidth * 0.01) + "px";
-        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
+        $scope.cardTextPaddingTop = (screenWidth * 0.4) + "px";
         $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
 
 
