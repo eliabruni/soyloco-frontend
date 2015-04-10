@@ -246,6 +246,7 @@ Profile image circular
 /*EXPERIMENTAL*/
 
 .button-event {
+    position: relative;
     -webkit-transition: opacity 0.0s;
     transition: opacity 0.0s;
     border-color: transparent !important;
@@ -266,10 +267,11 @@ Profile image circular
 }
 .button-event.button-icon {
     border-color: transparent;
-    background: none; }
+    background: none;
+}
 .button-event.active, .button-event.activated {
     /*background-color:red;*/
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 

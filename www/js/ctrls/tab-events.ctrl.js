@@ -1,6 +1,7 @@
 angular.module('splash.tabEvents.ctrl', [])
 
-    .controller('TabEventsCtrl', function($scope, $localstorage, $ionicSlideBoxDelegate, Events, $cordovaGoogleAnalytics) {
+    .controller('TabEventsCtrl', function($scope, $timeout, $localstorage, $ionicSlideBoxDelegate,
+                                          Events, $cordovaGoogleAnalytics) {
 
         // GA
         $scope.$on('$ionicView.beforeEnter', function() {
@@ -88,7 +89,7 @@ angular.module('splash.tabEvents.ctrl', [])
         * CARDS
         */
 
-        $scope.containerMargin = [(screenWidth * 0.0) + "px auto " + (screenWidth * 0.04) + "px auto"];
+        $scope.containerMargin = [-(screenWidth * 0.001) + "px auto " + (screenWidth * 0.04) + "px auto"];
         $scope.containerPaddingBottom = (screenWidth * 0.02) + "px";
 
         $scope.containerHeight = (screenWidth * 1.05) + "px";

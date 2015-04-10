@@ -16,8 +16,6 @@
         </div>
     </ion-header-bar>
 
-
-
     <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false" active-slide="deactivateSlide()">
         <ion-slide>
             <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
@@ -26,57 +24,15 @@
 
                 <div class="list">
 
-                <a class="event" ng-repeat="event in events"  href="#/app/event/{{event.id}}">
+                    <a class="event"
+                       ng-repeat="event in events"
+                       href="#/app/event/{{event.id}}"
+                            ng-style="{
+                            'text-decoration' : 'none'
+                                }">
 
-
-                    <div class="container"
-                         ng-style="{
-                            'width': cardWidth,
-                            'height' : cardHeight,
-                             'margin': containerMargin,
-                            'padding-bottom': containerPaddingBottom
-                                    }">
-                            <!--<div class="bio">-->
-                            <button class="col button button-event"
-                                    ng-style="{
-                                        'background-image': event.image,
-                                        'background-size': backgroundSize,
-                                        'background-repeat':'no-repeat',
-                                        'height' : cardHeight
-                                            }"
-                                   >
-                                <div class="card-text"
-                                     ng-style="{
-                                     'height': cardTextHeight,
-                                     'padding-top': cardTextPaddingTop,
-                                     'font-size': cardTextFontSize,
-                                     'text-decoration': 'none'
-                                        }">
-                                    Elisa, 24
-                                </div>
-                            </button>
-
-                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                        <!--</div>-->
-                    </div>
-
-
-                </a>
-                </div>
-
-            </ion-content>
-
-        </ion-slide>
-        <ion-slide>
-            <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
-
-                <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-
-                <a ng-repeat="event in events"  href="#/app/event/{{event.id}}">
-
-
-                    <div class="container"
-                         ng-style="{
+                        <div class="container"
+                             ng-style="{
                             'width': cardWidth,
                             'height' : cardHeight,
                              'margin': containerMargin,
@@ -101,14 +57,14 @@
                                 </div>
                             </button>
 
-                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                        <!--</div>-->
-                    </div>
-                    </div>
+                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                            <!--</div>-->
+                        </div>
 
 
+                    </a>
+                </div>
 
-                </a>
             </ion-content>
 
         </ion-slide>
@@ -117,11 +73,67 @@
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-                <a ng-repeat="event in events"  href="#/app/event/{{event.id}}">
+                <div class="list">
 
+                    <a class="event"
+                       ng-repeat="event in events"
+                       href="#/app/event/{{event.id}}"
+                       ng-style="{
+                            'text-decoration' : 'none'
+                                }">
 
-                    <div class="container"
-                         ng-style="{
+                        <div class="container"
+                             ng-style="{
+                            'width': cardWidth,
+                            'height' : cardHeight,
+                             'margin': containerMargin,
+                            'padding-bottom': containerPaddingBottom
+                                    }">
+                            <!--<div class="bio">-->
+                            <button class="col button button-event"
+                                    ng-style="{
+                                        'background-image': event.image,
+                                        'background-size': backgroundSize,
+                                        'background-repeat':'no-repeat',
+                                        'height' : cardHeight
+                                            }"
+                                    >
+                                <div class="card-text"
+                                     ng-style="{
+                                     'height': cardTextHeight,
+                                     'padding-top': cardTextPaddingTop,
+                                     'font-size': cardTextFontSize
+                                        }">
+                                    Elisa, 24
+                                </div>
+                            </button>
+
+                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                            <!--</div>-->
+                        </div>
+
+                    </a>
+                </div>
+
+            </ion-content>
+
+        </ion-slide>
+        <ion-slide>
+            <ion-content has-header="true" ng-style="{'background-color':'#E5E5E5'}">
+
+                <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+                <div class="list">
+
+                    <a class="event"
+                       ng-repeat="event in events"
+                       href="#/app/event/{{event.id}}"
+                       ng-style="{
+                            'text-decoration' : 'none'
+                                }">
+
+                        <div class="container"
+                             ng-style="{
                             'height' : containerHeight,
                             'width': containerWidth,
                             'margin': containerMargin,
@@ -146,14 +158,13 @@
                                 </div>
                             </button>
 
-                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                        <!--</div>-->
-                    </div>
-                    </div>
+                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                            <!--</div>-->
+                        </div>
 
+                    </a>
+                </div>
 
-
-                </a>
             </ion-content>
 
         </ion-slide>

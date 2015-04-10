@@ -2,18 +2,18 @@
     <ion-content style="top:0;" scroll="false">
 
 
-            <div class="container"
-                 ng-style="{
+        <div class="container"
+             ng-style="{
         'width': cardWidth,
         'height' : cardHeight,
         'margin': containerMargin,
         'padding-bottom': containerPaddingBottom
         }">
-                <!--<header>-->
-                    <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
+            <!--<header>-->
+            <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
 
-                    <button class="col button button-test"
-                            ng-style="{
+                <button class="col button button-test"
+                        ng-style="{
 
                     'background-image': card.image1,
                     'background-size': backgroundSize,
@@ -22,12 +22,12 @@
                     'opacity': buttonUpOpacity
                     }"
 
-                            ng-click="addCardUp()">
+                        ng-click="addCardUp()">
 
-                    </button>
+                </button>
 
                 <!--</header>-->
-            </div>
+        </div>
         </ion-scroll>
         <div class="card-text"
              ng-style="{
@@ -43,16 +43,16 @@
 
 
 
-            <div class="container"
-                 ng-style="{
+        <div class="container"
+             ng-style="{
                 'margin-top' : secondContainerMarginTop,
                 'width': cardWidth,
                 'height' : cardHeight,
                 'margin': containerMargin,
                 'padding-bottom': containerPaddingBottom
         }">
-                <header>
-                    <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
+            <header>
+                <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
 
                     <!--<div class="bio">-->
                     <button class="col button button-test"
@@ -68,8 +68,8 @@
                             ng-click="addCardBottom()">
 
                     </button>
-                </header>
-            </div>
+            </header>
+        </div>
         </ion-scroll>
 
         <div class="card-text"
