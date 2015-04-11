@@ -51,15 +51,11 @@
                                      'padding-top': cardTextPaddingTop,
                                      'font-size': cardTextFontSize
                                         }">
-                                    Elisa, 24
+                                    {{event.name}}
                                 </div>
                             </button>
 
-                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                            <!--</div>-->
                         </div>
-
-
                     </a>
 
             </ion-content>
@@ -70,47 +66,45 @@
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-                <div class="list">
-
-                    <a class="event"
-                       ng-repeat="event in events"
-                       href="#/app/event/{{event.id}}"
-                       ng-style="{
+                <a
+                        ng-repeat="event in events"
+                        href="#/app/event/{{event.id}}"
+                        ng-style="{
                             'text-decoration' : 'none'
                                 }">
 
-                        <div class="container"
-                             ng-style="{
+                    <div class="container"
+                         ng-style="{
                             'width': cardWidth,
                             'height' : cardHeight,
                              'margin': containerMargin,
                             'padding-bottom': containerPaddingBottom
                                     }">
-                            <!--<div class="bio">-->
-                            <button class="col button button-event"
-                                    ng-style="{
+                        <!--<div class="bio">-->
+                        <button class="col button button-event"
+                                ng-style="{
                                         'background-image': event.backImage,
                                         'background-size': backgroundSize,
                                         'background-repeat':'no-repeat',
                                         'height' : cardHeight
                                             }"
-                                    >
-                                <div class="card-text"
-                                     ng-style="{
+                                >
+                            <div class="card-text"
+                                 ng-style="{
                                      'height': cardTextHeight,
                                      'padding-top': cardTextPaddingTop,
                                      'font-size': cardTextFontSize
                                         }">
-                                    Elisa, 24
-                                </div>
-                            </button>
+                                {{event.name}}
+                            </div>
+                        </button>
 
-                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                            <!--</div>-->
-                        </div>
+                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                        <!--</div>-->
+                    </div>
 
-                    </a>
-                </div>
+
+                </a>
 
             </ion-content>
 
@@ -120,47 +114,45 @@
 
                 <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-                <div class="list">
-
-                    <a class="event"
-                       ng-repeat="event in events"
-                       href="#/app/event/{{event.id}}"
-                       ng-style="{
+                <a
+                        ng-repeat="event in events"
+                        href="#/app/event/{{event.id}}"
+                        ng-style="{
                             'text-decoration' : 'none'
                                 }">
 
-                        <div class="container"
-                             ng-style="{
-                            'height' : containerHeight,
-                            'width': containerWidth,
-                            'margin': containerMargin,
+                    <div class="container"
+                         ng-style="{
+                            'width': cardWidth,
+                            'height' : cardHeight,
+                             'margin': containerMargin,
                             'padding-bottom': containerPaddingBottom
                                     }">
-                            <!--<div class="bio">-->
-                            <button class="col button button-event"
-                                    ng-style="{
+                        <!--<div class="bio">-->
+                        <button class="col button button-event"
+                                ng-style="{
                                         'background-image': event.backImage,
                                         'background-size': backgroundSize,
                                         'background-repeat':'no-repeat',
                                         'height' : cardHeight
                                             }"
-                                    >
-                                <div class="card-text"
-                                     ng-style="{
+                                >
+                            <div class="card-text"
+                                 ng-style="{
                                      'height': cardTextHeight,
                                      'padding-top': cardTextPaddingTop,
                                      'font-size': cardTextFontSize
                                         }">
-                                    Elisa, 24
-                                </div>
-                            </button>
+                                {{event.name}}
+                            </div>
+                        </button>
 
-                            <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
-                            <!--</div>-->
-                        </div>
+                        <!--<div class="content" ng-style="{'height': contentHeight, 'padding-top': contentPaddingTop}">-->
+                        <!--</div>-->
+                    </div>
 
-                    </a>
-                </div>
+
+                </a>
 
             </ion-content>
 

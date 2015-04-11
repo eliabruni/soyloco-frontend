@@ -14,7 +14,7 @@ angular.module('splash.tabEvents.ctrl', [])
         });
 
         $scope.events = Events.all();
-        
+
         $scope.doRefresh = function() {
             setTimeout(function() {
 
@@ -104,10 +104,8 @@ angular.module('splash.tabEvents.ctrl', [])
         $scope.cardWidth = (screenWidth * 1) + "px";
         $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 0.95) + "px";
 
-
-
         $scope.cardTextHeight = (screenWidth * 0.01) + "px";
-        $scope.cardTextPaddingTop = (screenWidth * 0.4) + "px";
+        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
         $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
 
 
