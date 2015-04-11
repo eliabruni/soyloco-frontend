@@ -77,6 +77,7 @@ angular.module('splash',
             $cordovaFacebookProvider.setAppID(appID, version);
         }
 
+        // Android native scrolling
         if(ionic.Platform.isAndroid()) $ionicConfigProvider.scrolling.jsScrolling(false);
 
         // Ionic uses AngularUI Router which uses the concept of states

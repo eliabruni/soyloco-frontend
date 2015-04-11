@@ -1,7 +1,7 @@
 angular.module('splash.tabAccount.ctrl', [])
 
 
-    .controller('TabAccountCtrl', function($rootScope, $scope, $q, $state, $ionicModal, $ionicLoading,
+    .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -41,22 +41,22 @@ angular.module('splash.tabAccount.ctrl', [])
 
 
         //EXPERIMENTAL
-        $scope.retrieveActualCities = function() {
-            $profile.getCities()
-                .then(function(success) {
-
-                    var cities = success;
-                })
-        }
+        //$scope.retrieveActualCities = function() {
+        //    $profile.getCities()
+        //        .then(function(success) {
+        //
+        //            var cities = success;
+        //        })
+        //}
         //EXPERIMENTAL
 
 
         $ionicModal.fromTemplateUrl('templates/cityModal.html', function(modal) {
             $scope.cityModalCtrl = modal;
         }, {
-            scope: $scope,
-            animation: 'slide-in-up',
-            focusFirstInput: true
+            scope: $scope
+            //animation: 'slide-in-up',
+            //focusFirstInput: true
         });
 
         $scope.modalData = { msg : {value: $scope.cities[0].value} };
@@ -64,7 +64,6 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.data = {
             clientSide: $scope.cities[0].value
         };
-
 
         $scope.openModal = function() {
             $scope.cityModalCtrl.show();

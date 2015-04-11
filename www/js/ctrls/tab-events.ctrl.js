@@ -8,8 +8,13 @@ angular.module('splash.tabEvents.ctrl', [])
             $cordovaGoogleAnalytics.trackView('Events');
         });
 
-        $scope.events = Events.all();
+        // workaround for bug (check https://github.com/driftyco/ionic/issues/2817)
+        $scope.$on('$ionicView.beforeEnter', function() {
+            $ionicSlideBoxDelegate.update();
+        });
 
+        $scope.events = Events.all();
+        
         $scope.doRefresh = function() {
             setTimeout(function() {
 
