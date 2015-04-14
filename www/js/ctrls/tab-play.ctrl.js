@@ -8,41 +8,6 @@ angular.module('splash.tabPlay.ctrl', [])
         });
 
         /***************
-         * CSS size stuff
-         ***************/
-
-        //// We get screen size only at fb login time
-        //if (!$rootScope.appInitialized) {
-        //    var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
-        //    var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
-        //
-        //    $localstorage.setObject('screenHeight', newScreenHeight);
-        //    $localstorage.setObject('screenWidth', newScreenWidth);
-        //}
-
-        // Screen width and height are set at signin only once
-        var screenWidth = $localstorage.getObject('screenWidth');
-        var screenHeight = $localstorage.getObject('screenHeight');
-
-
-        $scope.containerMargin = [(-screenWidth * 0.2) + "px" + (screenWidth * 0) + "px " + (screenWidth * 0.0) + "px " + (screenWidth * 0) + "px "];
-        //$scope.containerMargin = [(-screenWidth * 0.01) + "px auto " + (screenWidth * 0.0) + "px auto"];
-        $scope.containerPaddingBottom = (screenWidth * 0.0) + "px";
-
-        $scope.scrollHeight = (screenHeight * 0.51) + "px";
-
-        $scope.cardHeight = (screenWidth * 1) + "px";
-        $scope.cardWidth = (screenWidth * 1) + "px";
-        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
-
-        $scope.cardTextHeight = (screenWidth * 0.01) + "px";
-        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
-        $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
-        $scope.cardTextMarginTop = -(screenHeight * 0.14) + "px";
-        $scope.secondContainerMarginTop = -(screenHeight * 0.085) + "px";
-
-
-        /***************
          * CARDS
          */
 
@@ -113,5 +78,40 @@ angular.module('splash.tabPlay.ctrl', [])
                 $scope.buttonBottomOpacity = 1;
             }, 250);
         };
+
+
+        /***************
+         * CSS size stuff
+         ***************/
+
+        //// We get screen size only at fb login time
+        //if (!$rootScope.appInitialized) {
+        //    var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
+        //    var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
+        //
+        //    $localstorage.setObject('screenHeight', newScreenHeight);
+        //    $localstorage.setObject('screenWidth', newScreenWidth);
+        //}
+
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+        var screenHeight = $localstorage.getObject('screenHeight');
+
+
+        $scope.containerMargin = [(-screenWidth * 0.2) + "px" + (screenWidth * 0) + "px " + (screenWidth * 0.0) + "px " + (screenWidth * 0) + "px "];
+        //$scope.containerMargin = [(-screenWidth * 0.01) + "px auto " + (screenWidth * 0.0) + "px auto"];
+        $scope.containerPaddingBottom = (screenWidth * 0.0) + "px";
+
+        $scope.scrollHeight = (screenHeight * 0.51) + "px";
+
+        $scope.cardHeight = (screenWidth * 1) + "px";
+        $scope.cardWidth = (screenWidth * 1) + "px";
+        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
+
+        $scope.cardTextHeight = (screenWidth * 0.01) + "px";
+        $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
+        $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
+        $scope.cardTextMarginTop = -(screenHeight * 0.14) + "px";
+        $scope.secondContainerMarginTop = -(screenHeight * 0.085) + "px";
 
     });

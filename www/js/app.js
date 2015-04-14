@@ -146,6 +146,16 @@ angular.module('splash',
                 templateUrl: 'templates/cityModal.html'
             })
 
+            //.state('app.selectCity', {
+            //    url: '/selectCity',
+            //    views: {
+            //        'menuContent': {
+            //            templateUrl: 'templates/selectC.html',
+            //            controller: 'SelectCategoriesCtrl'
+            //        }
+            //    }
+            //})
+
             .state('app.selectCategories', {
                 url: '/selectCategories',
                 views: {
