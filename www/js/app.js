@@ -29,7 +29,6 @@ angular.module('splash',
     .run(function($rootScope, $state, $ionicPlatform, $localstorage, $cordovaGoogleAnalytics) {
         $ionicPlatform.ready(function() {
 
-
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -45,7 +44,6 @@ angular.module('splash',
                 //$cordovaGoogleAnalytics.addCustomDimension('dimension1', 'female');
                 $cordovaGoogleAnalytics.addCustomDimension('1', 'female');
             }
-
 
         });
 
@@ -88,6 +86,7 @@ angular.module('splash',
 
             .state('signin', {
                 url: '/signin',
+                cache: false,
                 templateUrl: 'templates/signin.html',
                 controller: 'SigninCtrl'
             })
@@ -101,7 +100,6 @@ angular.module('splash',
             })
 
             // Each tab has its own nav history stack:
-
             .state('app.play', {
                 url: '/play',
                 views: {
@@ -121,6 +119,7 @@ angular.module('splash',
                     }
                 }
             })
+
             .state('app.eventDetail', {
                 url: '/event/:eventId',
                 views: {
@@ -146,16 +145,6 @@ angular.module('splash',
                 templateUrl: 'templates/cityModal.html'
             })
 
-            //.state('app.selectCity', {
-            //    url: '/selectCity',
-            //    views: {
-            //        'menuContent': {
-            //            templateUrl: 'templates/selectC.html',
-            //            controller: 'SelectCategoriesCtrl'
-            //        }
-            //    }
-            //})
-
             .state('app.selectCategories', {
                 url: '/selectCategories',
                 views: {
@@ -164,7 +153,7 @@ angular.module('splash',
                         controller: 'SelectCategoriesCtrl'
                     }
                 }
-            })
+            });
 
         //// if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.otherwise('/signin');

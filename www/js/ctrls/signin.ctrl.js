@@ -1,13 +1,18 @@
 angular.module('splash.signin.ctrl', [])
 
 
-    .controller('SigninCtrl', function($scope, $timeout, $ionicSideMenuDelegate, $state, $ionicModal, $cordovaFacebook,
+    .controller('SigninCtrl', function($scope, $timeout, $ionicSideMenuDelegate, $ionicHistory, $state, $ionicModal, $cordovaFacebook,
                                        $ionicLoading, $profile, $localstorage, $cordovaGoogleAnalytics, $cordovaToast) {
 
         // GA
         $scope.$on('$ionicView.beforeEnter', function() {
             $cordovaGoogleAnalytics.trackView('Signin');
         });
+
+        // Clear all history
+        $ionicHistory.clearHistory();
+        // Clear all cache (except current view)
+        $ionicHistory.clearCache();
 
         $ionicSideMenuDelegate.canDragContent(false);
 

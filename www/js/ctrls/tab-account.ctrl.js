@@ -1,7 +1,7 @@
 angular.module('splash.tabAccount.ctrl', [])
 
 
-    .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,
+    .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,$ionicHistory,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -10,8 +10,7 @@ angular.module('splash.tabAccount.ctrl', [])
             $cordovaGoogleAnalytics.trackView('Profile');
         });
 
-        $scope.showView = true;
-
+        $scope.showView = "true";
 
         /***************
          * GENERAL PROFILE INFO
@@ -29,16 +28,14 @@ angular.module('splash.tabAccount.ctrl', [])
 
         // set localStorage when function is called after a value is changed
         $scope.updateCity = function (city) {
-
             $localstorage.setObject('cities', $scope.cities);
             $localstorage.setObject('myCity', city);
         };
 
-
         /***************
          * CITY SELECTOR
          */
-        
+
         $ionicModal.fromTemplateUrl('templates/cityModal.html', function (modal) {
             $scope.cityModalCtrl = modal;
         }, {
@@ -68,8 +65,6 @@ angular.module('splash.tabAccount.ctrl', [])
             $scope.cityModalCtrl.hide();
         };
 
-
-
         $scope.show = {
             icon: false
         };
@@ -97,8 +92,7 @@ angular.module('splash.tabAccount.ctrl', [])
                 function (error) {
 
                 });
-        }
-
+        };
 
         /***************
          * GENDER
@@ -128,11 +122,24 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.logout = function() {
             $cordovaFacebook.logout().then(function (success) {
                 $localstorage.set('profileInfoRetrieved', 'false');
+
+                // This to stop the city refresh spinner in case
+                // it is running
+                $scope.show = {
+                    icon: false
+                };
+
+                // Clear all history
+                $ionicHistory.clearHistory();
+                // Clear all cache (except current view)
+                $ionicHistory.clearCache();
+                
                 $state.go('signin');
+
             }, function (error) {
                 // error
             })
-        }
+        };
 
 
         /***************

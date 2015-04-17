@@ -1,7 +1,7 @@
 angular.module('splash.tabPlay.ctrl', [])
 
 
-    .controller('TabPlayCtrl', function($rootScope, $localstorage, $scope, $timeout, $cordovaGoogleAnalytics, $ionicSwipeCardDelegate) {
+    .controller('TabPlayCtrl', function($localstorage, $scope, $timeout, $cordovaGoogleAnalytics, $ionicSwipeCardDelegate) {
 
         $scope.$on('$ionicView.beforeEnter', function() {
             $cordovaGoogleAnalytics.trackView('Play');
