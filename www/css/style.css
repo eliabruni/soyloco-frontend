@@ -1,103 +1,19 @@
 /*************************************
-*   LOGIN
-*/
+*            LOGIN VIEW              *
+**************************************/
 
 
-/*Experimental*/
-/*@mihaimoraru*/
-
-/*@mihaimoraru*/
-
-
-.fbBtn {
-
-    display:block;
-    height:48px;
-    width: 330px;
-    line-height: 48px;
-    margin: 0;
-    padding-left: 8px;
-    padding-right: 15px;
-    text-indent: 10px;
-    border:none;
-    font-size: 20px;
-    background:#3c5a98;
-    color: #fff;
-    font-family:Tahoma, Geneva, sans-serif;
-
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    text-shadow:0 -1px 0 rgba(0,0,0,0.5);
-    -moz-box-shadow:0 0 4px rgba(0,0,0,0.4);
-    -webkit-box-shadow:0 0 4px rgba(0,0,0,0.4);
-    box-shadow:0 0 4px rgba(0,0,0,0.4);
-}
-
-.fbBtn::before{
-    font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;;
-    content:"f";
-    float:left;
-    margin-left: 20px;
-    width:48px;
-    height:48px;
-    border-color:#3c5a98;
-    text-transform:lowercase;
-    text-indent:10px;
-    font-weight:bold;
-    margin:0 0 0 -8px;
-    font-size:48px;
-    line-height:48px;
-    color:#fff;
-    overflow:hidden;
-    border: none;
-
-    -moz-box-shadow:0 0 4px rgba(0,0,0,0.4);
-    -webkit-box-shadow:0 0 4px rgba(0,0,0,0.4);
-    box-shadow:0 0 4px rgba(0,0,0,0.4);
-
-    text-shadow:0 -1px 0 rgba(0,0,0,0.5);
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-
-.fbBtn:hover{
-    background: rgb(50,75,126);
-    background: -moz-linear-gradient(top,  rgba(50,75,126,1) 0%, rgba(60,90,152,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(50,75,126,1)), color-stop(100%,rgba(60,90,152,1)));
-    background: -webkit-linear-gradient(top,  rgba(50,75,126,1) 0%,rgba(60,90,152,1) 100%);
-    background: -o-linear-gradient(top,  rgba(50,75,126,1) 0%,rgba(60,90,152,1) 100%);
-    background: -ms-linear-gradient(top,  rgba(50,75,126,1) 0%,rgba(60,90,152,1) 100%);
-    background: linear-gradient(to bottom,  rgba(50,75,126,1) 0%,rgba(60,90,152,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#324b7e', endColorstr='#3c5a98',GradientType=0 );
-}
-
-.fbBtn:active{
-    background: rgb(35,53,88);
-    background: -moz-linear-gradient(top,  rgba(35,53,88,1) 0%, rgba(50,75,126,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(35,53,88,1)), color-stop(100%,rgba(50,75,126,1)));
-    background: -webkit-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
-    background: -o-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
-    background: -ms-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
-    background: linear-gradient(to bottom,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#233558', endColorstr='#324b7e',GradientType=0 );
-}
-
-/*Experimental*/
-
+/*******************
+/*INTRO TUTORIAL   */
 
 .login-slider {
-    height: 75%;
+    height: 80%;
 }
 
 .slider {
     height: 100%;
 }
+
 .slider-slide {
     padding-top: 40px;
     background-color: #ffffff;
@@ -105,29 +21,6 @@
     font-size: 28px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
-}
-
-#facebook-logo {
-    width: 90% ;
-    margin-left: auto ;
-    margin-right: auto ;
-    background-color:#ffffff;
-
-}
-
-.facebook-button {
-    background-color: #3b5998;
-    color: #ffffff;
-    border-radius: 10px 10px 10px 10px;
-    font-size: 19px;
-}
-
-
-#facebook-disclaimer {
-    color: #000000;
-    width: 90% ;
-    margin-left: auto ;
-    margin-right: auto ;
 }
 
 #list {
@@ -150,6 +43,77 @@
 
 }
 
+
+/*******************
+/*FACEBOOK CONNECT*/
+
+#facebook-connect {
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+    background-color:#ffffff;
+}
+
+.fbBtn {
+    display:block;
+    margin: 0;
+    border:none;
+    background:#3c5a98;
+    color: #fff;
+    font-family:Tahoma, Geneva, sans-serif;
+}
+
+.fbBtn:active{
+    background: rgb(35,53,88);
+    background: -moz-linear-gradient(top,  rgba(35,53,88,1) 0%, rgba(50,75,126,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(35,53,88,1)), color-stop(100%,rgba(50,75,126,1)));
+    background: -webkit-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
+    background: -o-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
+    background: linear-gradient(to bottom,  rgba(35,53,88,1) 0%,rgba(50,75,126,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#233558', endColorstr='#324b7e',GradientType=0 );
+}
+
+#facebook-disclaimer {
+    color: #000000;
+    width: 90% ;
+    margin-left: auto ;
+    margin-right: auto ;
+    margin-top: 20px;
+}
+
+/*This is the f letter for the fb connect button*/
+/*.fbBtn::before{*/
+/*font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;;*/
+/*content:"f";*/
+/*float:left;*/
+/*margin-left: 20px;*/
+/*width:48px;*/
+/*height:48px;*/
+/*border-color:#3c5a98;*/
+/*text-transform:lowercase;*/
+/*text-indent:10px;*/
+/*font-weight:bold;*/
+/*margin:0 0 0 -8px;*/
+/*font-size:48px;*/
+/*line-height:48px;*/
+/*color:#fff;*/
+/*overflow:hidden;*/
+/*border: none;*/
+
+/*-moz-box-shadow:0 0 4px rgba(0,0,0,0.4);*/
+/*-webkit-box-shadow:0 0 4px rgba(0,0,0,0.4);*/
+/*box-shadow:0 0 4px rgba(0,0,0,0.4);*/
+
+/*text-shadow:0 -1px 0 rgba(0,0,0,0.5);*/
+/*-webkit-border-top-left-radius: 5px;*/
+/*-webkit-border-bottom-left-radius: 5px;*/
+/*-moz-border-radius-topleft: 5px;*/
+/*-moz-border-radius-bottomleft: 5px;*/
+/*border-top-left-radius: 5px;*/
+/*border-bottom-left-radius: 5px;*/
+/*}*/
+
 /*LOADING SPLASH SPINNER*/
 
 .item-icon-left ion-spinner {
@@ -166,9 +130,11 @@
     fill: #999;
 }
 
+
+
 /*************************************
-*   SIDE-MENU
-*/
+*          SIDE-MENU VIEW            *
+**************************************/
 
 .menu.menu-left {
     background-color: white;
@@ -208,11 +174,10 @@ Profile image circular
     font-size: 200px;
 }
 
+
 /*************************************
-*   ACCOUNT
-*/
-
-
+*           ACCOUNT VIEW             *
+**************************************/
 #content {
     position: relative;
 }
@@ -254,9 +219,11 @@ Profile image circular
 #logout-button {
 }
 
+
 /*************************************
-*   SELECT CATEGORIES
-*/
+*       SELECT CATEGORIES VIEW       *
+**************************************/
+
 #event-categories {
 }
 
@@ -266,13 +233,10 @@ Profile image circular
     /*line-height: normal;*/
 }
 
+
 /*************************************
-*   SWIPE
-*/
-
-
-/*EXPERIMENTAL*/
-
+*             PLAY VIEW              *
+**************************************/
 
 .main-wrap{
     margin:auto;
@@ -328,11 +292,9 @@ Profile image circular
 }
 
 
-/***************
- * TAB-EVENTS
- */
-
-/*EXPERIMENTAL*/
+/*************************************
+*           EVENTS VIEW              *
+**************************************/
 
 .button-event {
     position: relative;

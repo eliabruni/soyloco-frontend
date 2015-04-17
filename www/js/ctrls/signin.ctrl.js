@@ -141,4 +141,27 @@ angular.module('splash.signin.ctrl', [])
                     })
             }
         }
+
+
+        /***************
+         * CSS stuff
+         ***************/
+
+        // Screen width and height are set at signin only once
+        var screenWidth = $localstorage.getObject('screenWidth');
+        var screenHeight = $localstorage.getObject('screenHeight');
+
+        /***************
+         *
+         */
+
+        //CONTAINER
+        $scope.fbButtonHeight = (screenHeight * 0.083) + "px";
+        $scope.fbButtonWidth = (screenWidth * 0.9) + "px";
+        $scope.fbButtonLineHeight = (screenHeight * 0.083) + "px";
+        $scope.fbButtonFontSize = (screenHeight * 0.03) + "px";
+        $scope.fbButtonBorderRadius = 8 + "px";
+
+
+
     });

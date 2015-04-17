@@ -34,9 +34,16 @@
       </ion-slide-box>
 
 
-      <div id="facebook-logo">
-        <button class="fbBtn" ng-click="doLogin()">Connect with Facebook</button>
-
+      <div id="facebook-connect">
+        <button class="fbBtn" ng-click="doLogin()" ng-style="{
+                            'height': fbButtonHeight,
+                            'width': fbButtonWidth,
+                            'line-height':  fbButtonLineHeight,
+                            'font-size': fbButtonFontSize,
+                            'border-radius' : fbButtonBorderRadius
+                                    }">
+          Connect with Facebook
+        </button>
       </div>
 
       <div id="facebook-disclaimer">
