@@ -182,6 +182,30 @@ Profile image circular
     position: relative;
 }
 
+/*******************
+/* CITY SELECTOR   */
+
+.ion-refresh-button,
+.ion-refresh-button:before{
+    /*font-size:76px !important;*/
+    color:white;
+
+}
+
+
+.spinnert svg,
+.spinnert svg:before{
+    /* 85,53% of height*/
+    width: 74% !important;
+    height: 60% !important;
+    color: white !important;
+    fill: #fff;
+    stroke: #fff;
+}
+
+/*******************
+/* PROFILE INFO   */
+
 #profile-info {
     background-color: #1F599E;
     position: absolute;

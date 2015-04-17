@@ -163,5 +163,4 @@ angular.module('splash.signin.ctrl', [])
         $scope.fbButtonBorderRadius = 8 + "px";
 
 
-
     });

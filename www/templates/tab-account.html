@@ -31,86 +31,71 @@
 
             <!--CITY SELECTOR MODAL-->
 
-            <div
+            <div class="button-container"
+
                  ng-style="{
-                                'margin-top': buttonBoxMarginTop
-                                    }">
-                <button
-                        class="button button-block button-assertive"
-                        ng-style="{
                             'height': buttonHeight,
                             'width': buttonBoxWidth,
                             'margin-left': 'auto',
                             'margin-right': 'auto',
                             'text-align':'left',
                             'border':'none',
-                            'border-radius' : buttonBorderRadius
+                            'border-radius' : buttonBorderRadius,
+                            'background-color': '#062142'
+
+                                    }">
+
+                <div
+                        ng-style="{
+                                'margin-top': buttonBoxMarginTop
+                                    }">
+                    <button
+                            class="button button-assertive"
+                            ng-style="{
+                            'height': buttonHeight,
+                            'width': cityModalButtonWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : '8px 0px 0px 8px',
+                            'border-style': 'solid',
+                            'border-color':   '#fff',
+                            'border-right': 'none',
+                             'border-left': 'none',
+                             'border-top': 'none',
+                              'border-bottom' : 'none'
                                     }"
-                        ng-click="openModal()">{{modalData.msg.value}}
-                </button>
-            </div>
+                            ng-click="openModal()">City: {{modalData.msg.value}}
 
+                    </button>
+                </div>
 
+                <div class="spinner-container"
+                     ng-style="{
+                            'margin-top': cityModalMarginTop,
+                            'height': buttonHeight,
+                             'width': buttonHeight,
+                            'margin-left': cityModalMarginLeft,
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border-radius' : '8px'
+                                    }">
 
-            <!--&lt;!&ndash;CITY SELECTOR EXPERIMENTAL&ndash;&gt;-->
+                    <div class="toggle-icon" ng-if="show.icon">
+                        <ion-spinner icon="spiral" class="spinnert" ></ion-spinner>
 
-            <!--<div id="city-select-block" ng-style="{-->
-                            <!--'padding-top': intraButtonPaddingTop-->
-                                    <!--}">-->
+                    </div>
 
+                    <div ng-click="show.icon = !show.icon; recheckCities()" class="toggle-icon" ng-if="!show.icon">
+                        <i class="icon ion-ios-refresh ion-refresh-button"
+                           ng-style="{'font-size': cityModalRefreshButtonSize}">
+                        </i>
 
-                <!--<a class="item" href="#/app/selectCity"-->
-                   <!--ng-style="{-->
-                                <!--'width': buttonBoxWidth,-->
-                                <!--'margin-left': 'auto',-->
-                                <!--'margin-right': 'auto',-->
-                                <!--'color': 'white',-->
-                                <!--'border':'none',-->
-                                <!--'background-color': '#062142',-->
-                                <!--'height': buttonHeight,-->
-                                <!--'border-radius' : buttonBorderRadius-->
-                                    <!--}">-->
-                    <!--Select city-->
-                <!--</a>-->
+                    </div>
 
-            <!--</div>-->
+                </div>
 
-            <!--OLD CITY SELECTOR-->
-
-            <!--<div id="city-event-block" ng-style="{-->
-                            <!--'margin-top': buttonBoxMarginTop-->
-                            <!--}">-->
-
-                <!--<div class="item item-input item-select"-->
-                            <!--ng-style="{-->
-                            <!--'height': buttonHeight,-->
-                            <!--'width': buttonBoxWidth,-->
-                            <!--'margin-left': 'auto',-->
-                            <!--'margin-right': 'auto',-->
-                            <!--'color': 'white',-->
-                            <!--'border':'none',-->
-                            <!--'background-color': '#062142',-->
-                            <!--'border-radius' : buttonBorderRadius-->
-                                    <!--}">-->
-                    <!--<div class="input-label"-->
-                            <!--ng-style="{-->
-                               <!--'color': 'white',-->
-                               <!--'background-color': '#062142'-->
-                                    <!--}">-->
-                        <!--City-->
-                    <!--</div>-->
-                    <!--<select ng-model="city"-->
-                                <!--ng-init="city=cities[myCity.id]"-->
-                            <!--ng-options="city.name for city in cities"-->
-                            <!--ng-change="updateCity(city)"-->
-                            <!--ng-style="{-->
-                                <!--'background-color': '#062142',-->
-                                <!--'color': 'white'-->
-                                    <!--}">-->
-
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <!--EVENT CATEGORIES SELECTOR-->
 

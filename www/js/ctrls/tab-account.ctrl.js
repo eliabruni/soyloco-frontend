@@ -6,7 +6,7 @@ angular.module('splash.tabAccount.ctrl', [])
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
         // GA
-        $scope.$on('$ionicView.beforeEnter', function() {
+        $scope.$on('$ionicView.beforeEnter', function () {
             $cordovaGoogleAnalytics.trackView('Profile');
         });
 
@@ -16,7 +16,7 @@ angular.module('splash.tabAccount.ctrl', [])
         /***************
          * GENERAL PROFILE INFO
          */
-        if ($localstorage.get('profilePhoto') == null ||  $localstorage.getObject('basicInfo') == null || $localstorage.getObject('myCity') == null) {
+        if ($localstorage.get('profilePhoto') == null || $localstorage.getObject('basicInfo') == null || $localstorage.getObject('myCity') == null) {
 
             alert('Profile info problems, need to deal with this case')
 
@@ -28,7 +28,7 @@ angular.module('splash.tabAccount.ctrl', [])
         }
 
         // set localStorage when function is called after a value is changed
-        $scope.updateCity = function(city){
+        $scope.updateCity = function (city) {
 
             $localstorage.setObject('cities', $scope.cities);
             $localstorage.setObject('myCity', city);
@@ -38,20 +38,8 @@ angular.module('splash.tabAccount.ctrl', [])
         /***************
          * CITY SELECTOR
          */
-
-
-        //EXPERIMENTAL
-        //$scope.retrieveActualCities = function() {
-        //    $profile.getCities()
-        //        .then(function(success) {
-        //
-        //            var cities = success;
-        //        })
-        //}
-        //EXPERIMENTAL
-
-
-        $ionicModal.fromTemplateUrl('templates/cityModal.html', function(modal) {
+        
+        $ionicModal.fromTemplateUrl('templates/cityModal.html', function (modal) {
             $scope.cityModalCtrl = modal;
         }, {
             scope: $scope
@@ -59,26 +47,57 @@ angular.module('splash.tabAccount.ctrl', [])
             //focusFirstInput: true
         });
 
-        $scope.modalData = { msg : {value: $scope.cities[0].value} };
+        $scope.modalData = {msg: {value: $scope.cities[0].value}};
 
         $scope.data = {
             clientSide: $scope.cities[0].value
         };
 
-        $scope.openModal = function() {
+        $scope.openModal = function () {
             $scope.cityModalCtrl.show();
         };
 
-        $scope.hideModal = function() {
+        $scope.hideModal = function () {
             $scope.cityModalCtrl.hide();
         };
 
         $scope.clientSideList = $scope.cities;
 
-        $scope.doSomething = function(item) {
+        $scope.doSomething = function (item) {
             $scope.modalData.msg = item;
             $scope.cityModalCtrl.hide();
         };
+
+
+
+        $scope.show = {
+            icon: false
+        };
+
+        $scope.recheckCities = function() {
+
+            $profile.getCities()
+                .then(function (success) {
+
+                    var cities = success;
+                    $localstorage.setObject('myCity', cities[0]);
+                    $localstorage.setObject('cities', cities);
+                    $scope.cityInfoReady = true;
+                    $scope.modalData = {msg: {value: $scope.cities[0].value}};
+                    $scope.data = {
+                        clientSide: $scope.cities[0].value
+                    };
+                    $scope.cityModalCtrl.show();
+
+                    $scope.show = {
+                        icon: false
+                    };
+
+                },
+                function (error) {
+
+                });
+        }
 
 
         /***************
@@ -164,6 +183,13 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.imageWidth = (screenHeight * 0.19) + "px";
         $scope.imageHeight = (screenHeight * 0.19) + "px";
         $scope.imageBorderRadius = (screenHeight * 0.15) + "px";
+
+        // SELECT CITY
+        $scope.cityModalButtonWidth = (buttonBoxWidth - buttonHeight) + "px";
+        $scope.cityModalRefreshButtonSize = (screenHeight * 0.07) + "px";
+        $scope.cityModalMarginTop = -(screenHeight * 0.071) + "px";
+        $scope.cityModalMarginLeft = (screenWidth * 0.784)  + "px";
+
 
 
         //GENDER BOX
