@@ -13,3 +13,5 @@ www/components
 www/lib
 bower_components
 >>>>>>> nightly
+
+*.log

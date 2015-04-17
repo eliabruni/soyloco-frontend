@@ -43,7 +43,8 @@ angular.module('splash.signin.ctrl', [])
                     $cordovaFacebook.login(["public_profile", "email", "user_friends"])
                         .then(function(success) {
 
-                            retrieveProfileInfo();
+                            $scope.doLogin();
+                            //retrieveProfileInfo();
 
                         }, function (error) {
                             // error
@@ -71,35 +72,29 @@ angular.module('splash.signin.ctrl', [])
                 $scope.basicProfileReady = false;
                 $scope.profilePhotoReady = false;
 
-
                 $ionicLoading.show({
                     noBackdrop: true,
                     template: '<p class="item-icon-left">Loading Splash...<ion-spinner icon="lines"/></p>'
                 });
 
 
-                $scope.$watchGroup(['cityInfoReady', 'basicProfileReady', 'profilePhotoReady'], function(newValues, oldValues) {
+                // if profile info is not retrieved until
+                // $timout time, process is interrupted
+                $timeout(function() {
+                    if ($scope.cityInfoReady && $scope.basicProfileReady && $scope.profilePhotoReady) {
+                        $ionicLoading.hide();
+                        $state.go('app.play');
+                    } else {
+                        $ionicLoading.hide();
+                        $cordovaToast.showLongBottom('Check that Internet and GPS are on.').then(function(success) {
+                            // success
+                        }, function (error) {
+                            // error
+                        });
+                    }
 
-                    // if profile info is not retrieved until
-                    // $timout time, process is interrupted
-                    $timeout(function() {
-                        if (newValues[0] && newValues[1] && newValues[2]) {
-                            $ionicLoading.hide();
-                            $state.go('app.play');
-                        } else {
-                            $ionicLoading.hide();
-                            $cordovaToast.showLongBottom('Check that internet and GPS are on.').then(function(success) {
-                                // success
-                            }, function (error) {
-                                // error
-                            });
+                }, 8000);
 
-                        }
-
-                    }, 8000);
-
-
-                });
 
                 $profile.getCities()
                     .then(function(success) {

@@ -23,14 +23,11 @@ angular.module('splash.tabEvents.ctrl', [])
             }, 3000);
         };
 
-
-        // this function is required if we want to deactivate
-        // the sliding between event times
-        //$scope.deactivateSlide = function() {
-        //    $ionicSlideBoxDelegate.enableSlide(false);
-        //};
-
-
+         //this function is required if we want to deactivate
+         // the sliding between event times
+        $scope.deactivateSlide = function() {
+            $ionicSlideBoxDelegate.enableSlide(false);
+        };
 
 // SLIDER LOGIC
 
