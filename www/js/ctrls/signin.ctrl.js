@@ -82,25 +82,6 @@ angular.module('splash.signin.ctrl', [])
                     template: '<p class="item-icon-left">Loading Splash...<ion-spinner icon="lines"/></p>'
                 });
 
-
-                // if profile info is not retrieved until
-                // $timout time, process is interrupted
-                $timeout(function() {
-                    if ($scope.cityInfoReady && $scope.basicProfileReady && $scope.profilePhotoReady) {
-                        $ionicLoading.hide();
-                        $state.go('app.play');
-                    } else {
-                        $ionicLoading.hide();
-                        $cordovaToast.showLongBottom('Check that Internet and GPS are on.').then(function(success) {
-                            // success
-                        }, function (error) {
-                            // error
-                        });
-                    }
-
-                }, 8000);
-
-
                 $profile.getCities()
                     .then(function(success) {
 
@@ -130,22 +111,34 @@ angular.module('splash.signin.ctrl', [])
                                             .then(function (success) {
 
                                                 $localstorage.set('profileInfoRetrieved', 'true');
+                                                $ionicLoading.hide();
+                                                $state.go('app.play');
+
                                             })
 
                                     }, function (error) {
-                                        // error
+                                        getErrorMessage();
                                     });
 
                             }, function (error) {
-                                // error
+                                getErrorMessage();
                             });
 
-
                     }, function (error) {
-                        // error
+                        getErrorMessage();
                     })
             }
         }
+
+
+        var getErrorMessage = function( ) {
+            $ionicLoading.hide();
+            $cordovaToast.showLongBottom('Check that Internet and GPS are on.').then(function(success) {
+                // success
+            }, function (error) {
+                // error
+            });
+        };
 
 
         /***************
@@ -166,6 +159,5 @@ angular.module('splash.signin.ctrl', [])
         $scope.fbButtonLineHeight = (screenHeight * 0.083) + "px";
         $scope.fbButtonFontSize = (screenHeight * 0.03) + "px";
         $scope.fbButtonBorderRadius = 8 + "px";
-
 
     });

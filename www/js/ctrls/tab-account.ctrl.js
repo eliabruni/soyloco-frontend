@@ -2,7 +2,7 @@ angular.module('splash.tabAccount.ctrl', [])
 
 
     .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,$ionicHistory,
-                                           $ionicPopup, $cordovaFacebook, $cordovaFile,
+                                           $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaToast,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
         // GA
@@ -113,7 +113,14 @@ angular.module('splash.tabAccount.ctrl', [])
 
                 },
                 function (error) {
-
+                    $scope.show = {
+                        icon: false
+                    };
+                    $cordovaToast.showLongBottom('Check that Internet and GPS are on.').then(function(success) {
+                        // success
+                    }, function (error) {
+                        // error
+                    });
                 });
         };
 
