@@ -12,6 +12,20 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.showView = "true";
 
+        var updateCity = true;
+
+        // All the actions to be taken when leaving the view
+        // via menu, for $state.go('signin') we need to repeat the actions
+        $scope.$on('$ionicView.beforeLeave', function(){
+            // This to stop the city refresh spinner in case
+            // it is running
+            $scope.show = {
+                icon: false
+            };
+
+            updateCity = false;
+        });
+
         /***************
          * GENERAL PROFILE INFO
          */
@@ -71,22 +85,31 @@ angular.module('splash.tabAccount.ctrl', [])
 
         $scope.recheckCities = function() {
 
+            updateCity = true;
+
             $profile.getCities()
                 .then(function (success) {
 
-                    var cities = success;
-                    $localstorage.setObject('myCity', cities[0]);
-                    $localstorage.setObject('cities', cities);
-                    $scope.cityInfoReady = true;
-                    $scope.modalData = {msg: {value: $scope.cities[0].value}};
-                    $scope.data = {
-                        clientSide: $scope.cities[0].value
-                    };
-                    $scope.cityModalCtrl.show();
+                    // This is a check to possibly abort the city recheck
+                    // when view is abandoned before request is finished
+                    // and modal is opened
+                    if (updateCity) {
 
-                    $scope.show = {
-                        icon: false
-                    };
+                        var cities = success;
+                        $localstorage.setObject('myCity', cities[0]);
+                        $localstorage.setObject('cities', cities);
+                        $scope.cityInfoReady = true;
+                        $scope.modalData = {msg: {value: $scope.cities[0].value}};
+                        $scope.data = {
+                            clientSide: $scope.cities[0].value
+                        };
+
+                        $scope.cityModalCtrl.show();
+
+                        $scope.show = {
+                            icon: false
+                        };
+                    }
 
                 },
                 function (error) {
@@ -128,12 +151,13 @@ angular.module('splash.tabAccount.ctrl', [])
                 $scope.show = {
                     icon: false
                 };
+                updateCity = false;
 
                 // Clear all history
                 $ionicHistory.clearHistory();
                 // Clear all cache (except current view)
                 $ionicHistory.clearCache();
-                
+
                 $state.go('signin');
 
             }, function (error) {
