@@ -85,7 +85,7 @@ angular.module('splash.tabAccount.ctrl', [])
             icon: false
         };
 
-        $scope.recheckCities = function(range) {
+        $scope.recheckCities = function() {
 
             updateCity = true;
 
@@ -96,7 +96,7 @@ angular.module('splash.tabAccount.ctrl', [])
             $scope.rangeDisable = true;
 
 
-            $profile.getCities()
+            $profile.getCities($scope.range.km)
                 .then(function (success) {
 
                     // This is a check to possibly abort the city recheck
@@ -152,7 +152,7 @@ angular.module('splash.tabAccount.ctrl', [])
 
             timeoutId = $timeout(function () {
 
-                $scope.recheckCities($scope.range.km);
+                $scope.recheckCities();
 
                 $timeout.cancel(timeoutId);
                 timeoutId = null;

@@ -60,7 +60,7 @@ angular.module('splash.geo', [])
                     }
 
                     return callback(sortedCities);
-                }
+                };
 
                 var compare = function(city1, city2)
                 {

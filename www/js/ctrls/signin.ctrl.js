@@ -82,7 +82,7 @@ angular.module('splash.signin.ctrl', [])
                     template: '<p class="item-icon-left">Loading Splash...<ion-spinner icon="lines"/></p>'
                 });
 
-                $profile.getCities()
+                $profile.getCities(5)
                     .then(function(success) {
 
                         var cities = success;

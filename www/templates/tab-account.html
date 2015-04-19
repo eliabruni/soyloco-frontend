@@ -116,7 +116,7 @@
                                 ng-style="{'margin-left': '0px',
                                'color': '#fff'}">Range: {{range.km}}km </div>
 
-                        <input type="range" name="range" ng-disabled="rangeDisable" ng-model="range.km"
+                        <input type="range" name="range"  min="1" max="50" ng-disabled="rangeDisable" ng-model="range.km"
                                ng-style="{ 'margin-top':'0px',
                                                     'margin-bottom': 'auto'}">
 

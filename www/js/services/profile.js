@@ -52,15 +52,17 @@ angular.module('splash.profile', [])
                 return q.promise;
             }
 
-            function getCities() {
+            function getCities(radius) {
 
                 var d = $q.defer();
 
+                var radiusInMeters = radius*1000;
+                
                 $cordovaGeolocation
                     .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
                     .then(function (position) {
 
-                        $geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, 50000, function (cities) {
+                        $geo.facebookGeoLocation(position.coords.latitude, position.coords.longitude, radiusInMeters, function (cities) {
                             d.resolve(cities);
                         });
 
