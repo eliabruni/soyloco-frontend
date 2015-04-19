@@ -2,7 +2,7 @@
                             'background-color': '#1F599E'
                                     }">
 
-    <ion-content has-header="true" ng-if="showView" >
+    <ion-content has-header="true" ng-if="showView"  scroll="true">
 
 
         <!--PROFILE IMAGE AND NAME-->
@@ -50,6 +50,7 @@
                                     }">
                     <button
                             class="button button-assertive"
+                            ng-disabled="rangeDisable"
                             ng-style="{
                             'height': buttonHeight,
                             'width': cityModalButtonWidth,
@@ -86,7 +87,7 @@
 
                     </div>
 
-                    <div ng-click="show.icon = !show.icon; recheckCities()" class="toggle-icon" ng-if="!show.icon">
+                    <div ng-click="recheckCities()" class="toggle-icon" ng-if="!show.icon">
                         <i class="icon ion-ios-refresh ion-refresh-button"
                            ng-style="{'font-size': cityModalRefreshButtonSize}">
                         </i>
@@ -95,11 +96,37 @@
 
                 </div>
 
+                <div class="button-container"
+
+                     ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : buttonBorderRadius,
+                            'background-color': '#062142'
+                                    }">
+
+
+                    <div class="range">
+
+                        <div class="text-range"
+                                ng-style="{'margin-left': '0px',
+                               'color': '#fff'}">Range: {{range.km}}km </div>
+
+                        <input type="range" name="range" ng-disabled="rangeDisable" ng-model="range.km"
+                               ng-style="{ 'margin-top':'0px',
+                                                    'margin-bottom': 'auto'}">
+
+                    </div>
+
+
 
             <!--EVENT CATEGORIES SELECTOR-->
 
-            <div id="event-block" ng-style="{
-                            'padding-top': intraButtonPaddingTop
+            <div id="event-block" ng-style="{'margin-top': buttonBoxMarginTop
                                     }">
 
 

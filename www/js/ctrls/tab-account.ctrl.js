@@ -1,7 +1,7 @@
 angular.module('splash.tabAccount.ctrl', [])
 
 
-    .controller('TabAccountCtrl', function($scope, $q, $state, $ionicModal, $ionicLoading,$ionicHistory,
+    .controller('TabAccountCtrl', function($scope, $q, $state, $timeout, $ionicModal, $ionicLoading,$ionicHistory,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaToast,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -58,6 +58,8 @@ angular.module('splash.tabAccount.ctrl', [])
             //focusFirstInput: true
         });
 
+        $scope.rangeDisable = false;
+
         $scope.modalData = {msg: {value: $scope.cities[0].value}};
 
         $scope.data = {
@@ -83,9 +85,16 @@ angular.module('splash.tabAccount.ctrl', [])
             icon: false
         };
 
-        $scope.recheckCities = function() {
+        $scope.recheckCities = function(range) {
 
             updateCity = true;
+
+            $scope.show = {
+                icon: true
+            };
+
+            $scope.rangeDisable = true;
+
 
             $profile.getCities()
                 .then(function (success) {
@@ -109,6 +118,11 @@ angular.module('splash.tabAccount.ctrl', [])
                         $scope.show = {
                             icon: false
                         };
+
+                        $scope.rangeDisable = false;
+
+                        //$scope.range = { 'km' : range};
+
                     }
 
                 },
@@ -116,13 +130,39 @@ angular.module('splash.tabAccount.ctrl', [])
                     $scope.show = {
                         icon: false
                     };
+                    $scope.rangeDisable = false;
                     $cordovaToast.showLongBottom('Check that Internet and GPS are on.').then(function(success) {
                         // success
                     }, function (error) {
                         // error
                     });
                 });
+
         };
+
+
+        $scope.range = { 'km' : '5' };
+        var timeoutId = null;
+
+        $scope.$watch('range.km', function() {
+
+            if (timeoutId !== null) {
+                return;
+            }
+
+            timeoutId = $timeout(function () {
+
+                $scope.recheckCities($scope.range.km);
+
+                $timeout.cancel(timeoutId);
+                timeoutId = null;
+
+                // Now load data from server
+            }, 5000);
+        })
+
+        //
+        //});
 
         /***************
          * GENDER
