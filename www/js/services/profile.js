@@ -57,7 +57,7 @@ angular.module('splash.profile', [])
                 var d = $q.defer();
 
                 var radiusInMeters = radius*1000;
-                
+
                 $cordovaGeolocation
                     .getCurrentPosition({timeout: 10000, enableHighAccuracy: true})
                     .then(function (position) {

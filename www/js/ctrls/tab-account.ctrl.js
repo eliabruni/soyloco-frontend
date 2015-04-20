@@ -105,13 +105,17 @@ angular.module('splash.tabAccount.ctrl', [])
                     if (updateCity) {
 
                         var cities = success;
+                        $scope.myCity = cities[0];
                         $localstorage.setObject('myCity', cities[0]);
                         $localstorage.setObject('cities', cities);
+                        $scope.cities = cities;
                         $scope.cityInfoReady = true;
-                        $scope.modalData = {msg: {value: $scope.cities[0].value}};
+                        $scope.modalData = {msg: {value: cities[0].value}};
                         $scope.data = {
-                            clientSide: $scope.cities[0].value
+                            clientSide: cities[0].value
                         };
+                        $scope.clientSideList = cities;
+
 
                         $scope.cityModalCtrl.show();
 
@@ -120,8 +124,6 @@ angular.module('splash.tabAccount.ctrl', [])
                         };
 
                         $scope.rangeDisable = false;
-
-                        //$scope.range = { 'km' : range};
 
                     }
 
@@ -141,10 +143,17 @@ angular.module('splash.tabAccount.ctrl', [])
         };
 
 
+        // Watch the range changes
         $scope.range = { 'km' : '5' };
-        var timeoutId = null;
 
+        var rangeInit = true;
+        var timeoutId = null;
         $scope.$watch('range.km', function() {
+
+            if (rangeInit) {
+                rangeInit = false;
+                return;
+            }
 
             if (timeoutId !== null) {
                 return;
@@ -158,7 +167,7 @@ angular.module('splash.tabAccount.ctrl', [])
                 timeoutId = null;
 
                 // Now load data from server
-            }, 5000);
+            }, 3000);
         })
 
         //
