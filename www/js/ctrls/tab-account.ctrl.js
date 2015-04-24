@@ -10,8 +10,6 @@ angular.module('splash.tabAccount.ctrl', [])
             $cordovaGoogleAnalytics.trackView('Profile');
         });
 
-        $scope.showView = "true";
-
         var updateCity = true;
 
         // All the actions to be taken when leaving the view
@@ -116,6 +114,7 @@ angular.module('splash.tabAccount.ctrl', [])
                         };
                         $scope.clientSideList = cities;
 
+                        $localstorage.setObject('cityRange', $scope.range);
 
                         $scope.cityModalCtrl.show();
 
@@ -143,9 +142,14 @@ angular.module('splash.tabAccount.ctrl', [])
         };
 
 
-        // Watch the range changes
-        $scope.range = { 'km' : '5' };
+        if ($localstorage.getObject('cityRange') == null) {
+            $scope.range = { 'km' : '5' };
+            $localstorage.setObject('cityRange', $scope.range);
+        } else {
+            $scope.range = $localstorage.getObject('cityRange');
+        }
 
+        // Watch the range changes
         var rangeInit = true;
         var timeoutId = null;
         $scope.$watch('range.km', function() {
