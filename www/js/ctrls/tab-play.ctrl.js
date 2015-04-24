@@ -112,6 +112,7 @@ angular.module('splash.tabPlay.ctrl', [])
         $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
         $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
         $scope.cardTextMarginTop = -(screenHeight * 0.14) + "px";
-        $scope.secondContainerMarginTop = -(screenHeight * 0.085) + "px";
+        $scope.secondContainerMarginTop = (screenHeight * 0.03) + "px";
+
 
     });

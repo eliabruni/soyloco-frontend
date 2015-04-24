@@ -8,17 +8,22 @@
         'height' : cardHeight,
         'margin': containerMargin,
         'padding-bottom': containerPaddingBottom
+
         }">
             <!--<header>-->
-            <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
+            <ion-scroll zooming="false" direction="y"
+                        ng-style="{
+                            'height' : scrollHeight,
+                            'position' : 'relative'
+                            }" >
 
-                <button class="col button button-test"
+
+            <button class="col button button-test"
                         ng-style="{
 
                     'background-image': card.image1,
                     'background-size': backgroundSize,
                     'background-repeat':'no-repeat',
-                    'background-position': '30% 20%',
                     'height' : cardHeight,
                     'opacity': buttonUpOpacity
                     }"
@@ -36,7 +41,7 @@
                                      'font-size': cardTextFontSize,
                                      'z-index' : '10',
                                      'color' : '#fff',
-                                     'position' : 'absolute'
+                                     'position' : 'relative'
                                         }">
             {{card.name1}}
         </div>
@@ -53,7 +58,11 @@
                 'padding-bottom': containerPaddingBottom
         }">
             <header>
-                <ion-scroll zooming="false" direction="y" ng-style="{'height' : scrollHeight}" >
+                <ion-scroll zooming="false" direction="y"
+                            ng-style="{
+                            'height' : scrollHeight,
+                            'position' : 'relative'
+                            }" >
 
                     <!--<div class="bio">-->
                     <button class="col button button-test"
@@ -79,7 +88,7 @@
                                      'font-size': cardTextFontSize,
                                      'z-index' : '10',
                                      'color' : '#fff',
-                                     'position' : 'absolute'
+                                     'position' : 'relative'
                                         }">
             {{card.name2}}
         </div>
