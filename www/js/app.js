@@ -9,6 +9,7 @@ angular.module('splash',
         'ngCordova',
 
         'splash.signin.ctrl',
+        'splash.settings.ctrl',
         'splash.tabs.ctrl',
         'splash.tabAccount.ctrl',
         'splash.tabPlay.ctrl',
@@ -136,6 +137,16 @@ angular.module('splash',
                     'menuContent': {
                         templateUrl: 'templates/tab-account.html',
                         controller: 'TabAccountCtrl'
+                    }
+                }
+            })
+
+            .state('app.settings', {
+                url: '/app/settings',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/settings.html',
+                        controller: 'SettingsCtrl'
                     }
                 }
             })

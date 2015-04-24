@@ -1,7 +1,7 @@
-angular.module('splash.tabAccount.ctrl', [])
+angular.module('splash.settings.ctrl', [])
 
 
-    .controller('TabAccountCtrl', function($scope, $q, $state, $timeout, $ionicModal, $ionicLoading,$ionicHistory,
+    .controller('SettingsCtrl', function($scope, $q, $state, $timeout, $ionicModal, $ionicLoading,$ionicHistory,
                                            $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaToast,
                                            $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
@@ -24,12 +24,6 @@ angular.module('splash.tabAccount.ctrl', [])
             updateCity = false;
         });
 
-
-
-        $scope.goToSettings = function goToSettings() {
-            $state.go('app.settings')
-        }
-
         /***************
          * GENERAL PROFILE INFO
          */
@@ -41,7 +35,7 @@ angular.module('splash.tabAccount.ctrl', [])
             $scope.cities = $localstorage.getObject('cities');
             $scope.myCity = $localstorage.getObject('myCity');
             $scope.basicInfo = $localstorage.getObject('basicInfo');
-            $scope.accountProfilePhoto = 'url('+$localstorage.get('profilePhoto')+')';
+            $scope.profilePhoto = $localstorage.get('profilePhoto');
         }
 
         // set localStorage when function is called after a value is changed
@@ -248,7 +242,7 @@ angular.module('splash.tabAccount.ctrl', [])
         // CONSTANTS
         // todo: to be hardcoded into local storage
         var buttonBoxWidth = (screenWidth * 0.9);
-        var buttonBoxMarginTop = (screenHeight * 0.04);
+        var buttonBoxMarginTop = (screenHeight * 0.07);
         var buttonHeight = (screenHeight * 0.08);
         var buttonBorderRadius = 8;
         var intraButtonPaddingTop = 5;
@@ -269,15 +263,8 @@ angular.module('splash.tabAccount.ctrl', [])
 
 
         //CONTAINER
-        $scope.accountContainerHeight = screenWidth + "px";
-        $scope.accountContainerWidth = screenWidth + "px";
-        $scope.accountContainerMarginTop = (screenHeight * 0.15) + "px";
-        $scope.accountContainerPaddingTop = (screenHeight * 0.15) + "px";
-
-        $scope.accountContainerAfterInfoHeight = (screenHeight) + "px";
-        $scope.accountContainerAfterInfoWidth = screenWidth + "px";
-        $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
-
+        $scope.contentMarginTop = -(screenHeight * 0.03) + "px";
+        $scope.contentPaddingTop = (screenHeight * 0) + "px";
 
 
         //PROFILE INFO
@@ -311,6 +298,6 @@ angular.module('splash.tabAccount.ctrl', [])
 
 
         //LOGOUT BUTTON
-        $scope.logoutButtonMarginTop = (screenHeight * 0.04) + "px";
+        $scope.logoutButtonMarginTop = (screenHeight * 0.13) + "px";
 
     });

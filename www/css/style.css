@@ -182,6 +182,14 @@ Profile image circular
     position: relative;
 }
 
+#profile-content-after-info {
+    position: relative;
+
+}
+#profile-content {
+    position: relative;
+}
+
 /*******************
 /* CITY SELECTOR   */
 
@@ -215,8 +223,13 @@ Profile image circular
 }
 
 #profile-name {
-    color: white;
-    font-size: 20px;
+    color: #fff;
+    font-size: 18px;
+}
+
+#profile-view {
+    color: #E0E0E0;
+    font-size: 15px;
 }
 
 #profile-image {
@@ -230,9 +243,19 @@ Profile image circular
 #gender-selector {
 }
 
-#show-gender-text {
-    font-size: 20px;
-    color: white;
+#show-button-box-text {
+    font-size: 22px;
+    color: #181818;
+}
+
+#city-selector-button-box-text {
+    font-size: 22px;
+    color: #181818;
+}
+
+#category-selector-button-box-text {
+    font-size: 22px;
+    color: #181818;
 }
 
 #gender-checkbox {

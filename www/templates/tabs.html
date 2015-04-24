@@ -21,6 +21,7 @@
             <a class="item menu-item-profile"
                href="#/app/account"
                ng-style="{
+                            'height' : profileItemHeight,
                             'margin-top': '-5px',
                             'padding-top': profileItemPaddingTop,
                             'background-color': '#292929',
@@ -41,6 +42,12 @@
                         >
                     {{basicInfo.name}}
                 </h3>
+                <h3 id="profile-view" ng-style="{
+                            'margin-top': profileViewMarginTop
+                                    }"
+                        >
+                    view profile
+                </h3>
             </a>
             <a class="item item-icon-left" href="#/app/play" nav-clear menu-close>
                 <i class="icon ion-android-favorite ion-heart-specs"></i>
@@ -50,10 +57,10 @@
                 <i class="icon ion-android-star ion-heart-specs"></i>
                 Events
             </a>
-            <a class="item item-icon-left" href="#/app/account" nav-clear menu-close>
-                <i class="icon ion-android-person ion-heart-specs"></i>
-                Account
-            </a>
+            <!--<a class="item item-icon-left" href="#/app/account" nav-clear menu-close>-->
+                <!--<i class="icon ion-android-person ion-heart-specs"></i>-->
+                <!--Account-->
+            <!--</a>-->
             <a class="item item-icon-left" href="#/app/invite" nav-clear menu-close>
                 <i class="icon ion-android-share-alt"></i>
                 Share Splash

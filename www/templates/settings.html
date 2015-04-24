@@ -1,0 +1,251 @@
+<ion-view  view-title="Settings" ng-style="{
+                            'background-color': '#292929'
+                                    }">
+
+    <ion-content has-header="true"  scroll="false" ng-style="{
+                            'background-color': '#D8D8D8'
+                                    }">
+
+        <!--PROFILE IMAGE AND NAME-->
+
+        <div id="content" ng-style="{
+                            'margin-top': contentMarginTop,
+                            'padding-top': contentPaddingTop
+                                    }">
+
+            <!--CITY SELECTOR MODAL-->
+
+            <div id="city-selector"
+                 ng-style="{
+                            'margin-top': buttonBoxMarginTop,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto'
+                                    }">
+
+                <div id="city-selector-button-box-text"
+                     ng-style="{
+                                'padding-left': genderTextPaddingLeft,
+                                'padding-bottom': genderTextPaddingBottom,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
+                                    }">Choose your city</div>
+
+                <div class="button-container"
+
+                     ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : buttonBorderRadius,
+                            'background-color': '#292929'
+
+                                    }">
+
+                    <button
+                            class="button"
+                            ng-disabled="rangeDisable"
+                            ng-style="{
+                            'height': buttonHeight,
+                            'width': cityModalButtonWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : '8px 0px 0px 8px',
+                            'border-style': 'solid',
+                            'border-color':   '#fff',
+                            'border-right': 'none',
+                             'border-left': 'none',
+                             'border-top': 'none',
+                              'border-bottom' : 'none',
+                              'background-color': '#fff',
+                              'color' : '#292929'
+
+                                    }"
+                            ng-click="openModal()">City: {{modalData.msg.value}}
+
+                    </button>
+
+                    <div class="spinner-container"
+                         ng-style="{
+                            'margin-top': cityModalMarginTop,
+                            'height': buttonHeight,
+                             'width': buttonHeight,
+                            'margin-left': cityModalMarginLeft,
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border-radius' : '8px'
+                                    }">
+
+                        <div class="toggle-icon" ng-if="show.icon">
+                            <ion-spinner icon="spiral" class="spinnert" ></ion-spinner>
+
+                        </div>
+
+                        <div ng-click="recheckCities()" class="toggle-icon" ng-if="!show.icon">
+                            <i class="icon ion-ios-refresh ion-refresh-button"
+                               ng-style="{'font-size': cityModalRefreshButtonSize}">
+                            </i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="button-container"
+
+                         ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : buttonBorderRadius,
+                            'background-color': '#fff'
+                                    }">
+
+
+                        <div class="range">
+
+                            <div class="text-range"
+                                 ng-style="{'margin-left': '0px',
+                               'color': '#292929'}">Range: {{range.km}}km </div>
+
+                            <input type="range" name="range"  min="1" max="50" ng-disabled="rangeDisable" ng-model="range.km"
+                                   ng-style="{ 'margin-top':'0px',
+                                                    'margin-bottom': 'auto'}">
+
+                        </div>
+                    </div>
+
+
+
+                    <!--EVENT CATEGORIES SELECTOR-->
+
+
+                    <div id="category-selector"
+                         ng-style="{
+                            'margin-top': buttonBoxMarginTop,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto'
+                                    }">
+
+                        <div id="category-selector-button-box-text"
+                             ng-style="{
+                                'padding-left': genderTextPaddingLeft,
+                                'padding-bottom': genderTextPaddingBottom,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
+                                    }">Choose the event categories</div>
+
+
+
+
+                        <a class="item" href="#/app/selectCategories"
+                           ng-style="{
+                                'width': buttonBoxWidth,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto',
+                                'color': '#292929',
+                                'border':'none',
+                                'background-color': '#fff',
+                                'height': buttonHeight,
+                                'border-radius' : buttonBorderRadius
+                                    }">
+                            Event categories
+                        </a>
+
+                    </div>
+
+
+                    <!--GENDER SELECTOR-->
+
+                    <div id="gender-selector"
+                         ng-style="{
+                                'margin-top': buttonBoxMarginTop,
+                                'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto'
+                                    }">
+
+                        <div id="show-button-box-text"
+                             ng-style="{
+                                'padding-left': genderTextPaddingLeft,
+                                'padding-bottom': genderTextPaddingBottom,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
+                                    }">Show</div>
+
+                        <div id="gender-checkbox"
+                             ng-style="{
+                                'background-color': '#fff',
+                                'height': genderCheckboxHeight,
+                                'width': buttonBoxWidth,
+                                'border-radius' : buttonBorderRadius,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto'
+                                    }">
+
+                             <!--TODO: change to color #292929, following-->
+                             <!--http://forum.ionicframework.com/t/color-checkbox/5228-->
+                            <ion-checkbox
+                                    class="item item-checkbox"
+                                    ng-repeat="gender in genders"
+                                    ng-model="gender.checked"
+                                    ng-checked="gender.checked"
+                                    ng-change="updateGender(gender)"
+                                    ng-style="{
+                                'height': buttonHeight,
+                                'margin-left': 'auto',
+                                'margin-right': 'auto',
+                                'color': '#292929',
+                                'border-radius': adHocInternalBorderRadius,
+                                'border-color': '#fff',
+                                'background-color': '#fff',
+                                'padding-top':paddingTopCheckBoxText,
+                                'line-height' : lineHeight
+                                    }">
+
+                                {{ gender.type }}
+
+                            </ion-checkbox>
+                        </div>
+                    </div>
+
+
+                    <!--LOGOUT BUTTON-->
+
+                    <div id="logout-button"
+                         ng-style="{
+                                'margin-top': logoutButtonMarginTop
+                                    }">
+                        <button
+                                class="button button-block button-assertive"
+                                ng-click="logout()"
+                                ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border':'none',
+                            'border-radius' : buttonBorderRadius
+                                    }"
+                                >
+                            Logout
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+
+</ion-view>

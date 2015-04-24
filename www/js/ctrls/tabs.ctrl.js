@@ -61,8 +61,10 @@ angular.module('splash.tabs.ctrl', [])
         var screenHeight = $localstorage.getObject('screenHeight');
 
         //PROFILE INFO
-        $scope.profileItemPaddingTop = (screenHeight * 0.04) + "px";
-        $scope.profileNameMarginTop = (screenHeight * 0.01) + "px";
+        $scope.profileItemHeight = (screenHeight * 0.38) + "px";
+        $scope.profileItemPaddingTop = (screenHeight * 0.06) + "px";
+        $scope.profileNameMarginTop = (screenHeight * 0.015) + "px";
+        $scope.profileViewMarginTop = (screenHeight * 0.005) + "px";
 
 
         $scope.imageWidth = (screenHeight * 0.19) + "px";
