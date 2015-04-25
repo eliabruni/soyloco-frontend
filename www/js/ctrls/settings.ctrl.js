@@ -38,12 +38,6 @@ angular.module('splash.settings.ctrl', [])
             $scope.profilePhoto = $localstorage.get('profilePhoto');
         }
 
-        //// set localStorage when function is called after a value is changed
-        //$scope.updateCity = function (city) {
-        //    $localstorage.setObject('cities', $scope.cities);
-        //    $localstorage.setObject('myCity', city);
-        //};
-
         /***************
          * CITY SELECTOR
          */
@@ -80,7 +74,6 @@ angular.module('splash.settings.ctrl', [])
             rangeInit = true;
             $scope.cityModalCtrl.hide();
 
-            //$scope.range.km = $localstorage.getObject('cityRange');
         };
 
         $scope.hideModal = function () {
@@ -164,6 +157,13 @@ angular.module('splash.settings.ctrl', [])
             $localstorage.setObject('cityRange', $scope.range);
         } else {
             $scope.range = $localstorage.getObject('cityRange');
+            $scope.cities = $localstorage.getObject('cities');
+            $scope.myCity = $localstorage.getObject('myCity');
+            $scope.data = {
+                clientSide: $scope.myCity
+            };
+            $scope.modalData = {msg: {value: $scope.myCity}};
+            $scope.clientSideList = $scope.cities;
         }
 
         // Watch the range changes
