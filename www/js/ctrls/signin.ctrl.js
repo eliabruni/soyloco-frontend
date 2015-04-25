@@ -97,7 +97,7 @@ angular.module('splash.signin.ctrl', [])
                     .then(function(success) {
 
                         var cities = success;
-                        $localstorage.setObject('myCity', cities[0]);
+                        $localstorage.setObject('myCity', cities[0].name);
                         $localstorage.setObject('cities', cities);
                         $scope.cityInfoReady = true;
 

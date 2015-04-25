@@ -2,8 +2,8 @@ angular.module('splash.settings.ctrl', [])
 
 
     .controller('SettingsCtrl', function($scope, $q, $state, $timeout, $ionicModal, $ionicLoading,$ionicHistory,
-                                           $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaToast,
-                                           $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
+                                         $ionicPopup, $cordovaFacebook, $cordovaFile, $cordovaToast,
+                                         $cordovaGeolocation, $localstorage, $cordovaGoogleAnalytics, $profile) {
 
         // GA
         $scope.$on('$ionicView.beforeEnter', function () {
@@ -33,9 +33,18 @@ angular.module('splash.settings.ctrl', [])
 
         } else {
             $scope.cities = $localstorage.getObject('cities');
+            $scope.clientSideList = $scope.cities;
             $scope.myCity = $localstorage.getObject('myCity');
+            $scope.data = {
+                clientSide: $scope.myCity
+            };
+            $scope.modalData = {msg: {value: $scope.myCity}};
+
+
+
             $scope.basicInfo = $localstorage.getObject('basicInfo');
             $scope.profilePhoto = $localstorage.get('profilePhoto');
+
         }
 
         /***************
@@ -51,12 +60,6 @@ angular.module('splash.settings.ctrl', [])
         });
 
         $scope.rangeDisable = false;
-
-        $scope.modalData = {msg: {value: $scope.cities[0].value}};
-
-        $scope.data = {
-            clientSide: $scope.cities[0].value
-        };
 
         $scope.openModal = function () {
             $scope.cityModalCtrl.show();
@@ -155,15 +158,10 @@ angular.module('splash.settings.ctrl', [])
         if ($localstorage.getObject('cityRange') == null) {
             $scope.range = { 'km' : '5' };
             $localstorage.setObject('cityRange', $scope.range);
+
         } else {
             $scope.range = $localstorage.getObject('cityRange');
-            $scope.cities = $localstorage.getObject('cities');
-            $scope.myCity = $localstorage.getObject('myCity');
-            $scope.data = {
-                clientSide: $scope.myCity
-            };
-            $scope.modalData = {msg: {value: $scope.myCity}};
-            $scope.clientSideList = $scope.cities;
+
         }
 
         // Watch the range changes
@@ -309,7 +307,7 @@ angular.module('splash.settings.ctrl', [])
 
 
 
-            //GENDER BOX
+        //GENDER BOX
         $scope.genderSelectorMarginTop = (screenHeight * 0.04) + "px";
         $scope.genderSelectorWidth = (screenWidth * 0.9) + "px";
 
