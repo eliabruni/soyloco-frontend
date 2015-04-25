@@ -1,7 +1,7 @@
 angular.module('splash.signin.ctrl', [])
 
 
-    .controller('SigninCtrl', function($scope, $timeout, $ionicSideMenuDelegate, $ionicHistory, $state, $ionicModal, $cordovaFacebook,
+    .controller('SigninCtrl', function($rootScope, $scope, $timeout, $ionicSideMenuDelegate, $ionicHistory, $state, $ionicModal, $cordovaFacebook,
                                        $ionicLoading, $profile, $localstorage, $cordovaGoogleAnalytics, $cordovaToast) {
 
         // GA
@@ -9,12 +9,23 @@ angular.module('splash.signin.ctrl', [])
             $cordovaGoogleAnalytics.trackView('Signin');
         });
 
-        // Clear all history
-        $ionicHistory.clearHistory();
-        // Clear all cache (except current view)
-        $ionicHistory.clearCache();
+        //// Clear all history
+        //$ionicHistory.clearHistory();
+        //// Clear all cache (except current view)
+        //$ionicHistory.clearCache();
 
-        $ionicSideMenuDelegate.canDragContent(false);
+        $ionicSideMenuDelegate.canDragContent(false)
+
+
+        // We get screen size only at fb login time
+        if (!$rootScope.appInitialized) {
+
+            var newScreenHeight = document.getElementsByTagName('ion-view')[0].clientHeight;
+            var newScreenWidth = document.getElementsByTagName('ion-view')[0].clientWidth;
+
+            $localstorage.setObject('screenHeight', newScreenHeight);
+            $localstorage.setObject('screenWidth', newScreenWidth);
+        }
 
         // Form data for the login modal
         $scope.loginData = {};
