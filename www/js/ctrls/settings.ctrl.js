@@ -38,11 +38,11 @@ angular.module('splash.settings.ctrl', [])
             $scope.profilePhoto = $localstorage.get('profilePhoto');
         }
 
-        // set localStorage when function is called after a value is changed
-        $scope.updateCity = function (city) {
-            $localstorage.setObject('cities', $scope.cities);
-            $localstorage.setObject('myCity', city);
-        };
+        //// set localStorage when function is called after a value is changed
+        //$scope.updateCity = function (city) {
+        //    $localstorage.setObject('cities', $scope.cities);
+        //    $localstorage.setObject('myCity', city);
+        //};
 
         /***************
          * CITY SELECTOR
@@ -68,6 +68,21 @@ angular.module('splash.settings.ctrl', [])
             $scope.cityModalCtrl.show();
         };
 
+        $scope.cancelCityChange = function() {
+            $scope.range = $localstorage.getObject('cityRange');
+            $scope.cities = $localstorage.getObject('cities');
+            $scope.myCity = $localstorage.getObject('myCity');
+            $scope.data = {
+                clientSide: $scope.myCity
+            };
+            $scope.modalData = {msg: {value: $scope.myCity}};
+            $scope.clientSideList = $scope.cities;
+            rangeInit = true;
+            $scope.cityModalCtrl.hide();
+
+            //$scope.range.km = $localstorage.getObject('cityRange');
+        };
+
         $scope.hideModal = function () {
             $scope.cityModalCtrl.hide();
         };
@@ -76,6 +91,9 @@ angular.module('splash.settings.ctrl', [])
 
         $scope.doSomething = function (item) {
             $scope.modalData.msg = item;
+            $localstorage.setObject('cityRange', $scope.range);
+            $localstorage.setObject('myCity', $scope.modalData.msg.value);
+            $localstorage.setObject('cities', $scope.cities);
             $scope.cityModalCtrl.hide();
         };
 
@@ -103,20 +121,19 @@ angular.module('splash.settings.ctrl', [])
                     if (updateCity) {
 
                         var cities = success;
+
+                        $scope.cityModalCtrl.show();
+
                         $scope.myCity = cities[0];
-                        $localstorage.setObject('myCity', cities[0]);
-                        $localstorage.setObject('cities', cities);
+
                         $scope.cities = cities;
-                        $scope.cityInfoReady = true;
+                        //$scope.cityInfoReady = true;
                         $scope.modalData = {msg: {value: cities[0].value}};
                         $scope.data = {
                             clientSide: cities[0].value
                         };
                         $scope.clientSideList = cities;
 
-                        $localstorage.setObject('cityRange', $scope.range);
-
-                        $scope.cityModalCtrl.show();
 
                         $scope.show = {
                             icon: false

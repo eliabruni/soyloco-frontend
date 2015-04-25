@@ -3,18 +3,27 @@
                             'background-color': '#292929'
                                     }">
     <h1 class="title" ng-style="{
-                            'color' : 'white'
-                                    }">Choose your city or town</h1>
-    <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
+                            'color' : 'white',
+                            'font-size' : categoryDividerFontSize,
+                             'font-weight': 'bold'
+                                    }">CHOOSE YOUR LOCATION</h1>
+    <button class="button button-clear button-primary" ng-click="cancelCityChange()" ng-style="{
+                                'font-weight': 'bold',
+                                'font-size' : itemFontSize
+                                    }">Cancel</button>
   </ion-header-bar>
-  <ion-content>
+  <ion-content scroll="false">
       <div class="list">
-
 
           <ion-radio ng-repeat="item in clientSideList"
                      ng-value="item.value"
                      ng-model="data.clientSide"
-                     ng-click="doSomething(item)">
+                     ng-click="doSomething(item)"
+                     ng-style="{
+                                'color' : '#292929',
+                                'font-weight': 'bold',
+                                'font-size' : itemFontSize
+                                    }">
               {{ item.name }}
           </ion-radio>
 
