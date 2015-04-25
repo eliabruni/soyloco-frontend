@@ -2,10 +2,17 @@
                             'background-color': '#292929'
                                     }">
 
-    <ion-nav-buttons side="right">
+    <ion-nav-buttons side="right" >
         <!--<a class="button button-icon button-clear ion-gear-a" href="#/settings">-->
         <!--</a>-->
-        <button class="button button-icon button-clear ion-android-settings" ng-click="goToSettings()"></button>
+        <div id="settings-button">
+            <button class="button button-icon button-clear ion-android-settings" ng-click="goToSettings()"
+                    ng-style="{
+                            'padding-top' : settingsButtonPaddingTop
+                                    }"
+                    ></button>
+        </div>
+
     </ion-nav-buttons>
 
     <ion-content has-header="true"  scroll="true">

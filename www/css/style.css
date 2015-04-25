@@ -196,7 +196,7 @@ Profile image circular
 .ion-refresh-button,
 .ion-refresh-button:before{
     /*font-size:76px !important;*/
-    color:white;
+    color:#292929;
 
 }
 
@@ -206,9 +206,9 @@ Profile image circular
     /* 85,53% of height*/
     width: 74% !important;
     height: 60% !important;
-    color: white !important;
-    fill: #fff;
-    stroke: #fff;
+    color: #292929 !important;
+    fill: #292929;
+    stroke: #292929;
 }
 
 /*******************

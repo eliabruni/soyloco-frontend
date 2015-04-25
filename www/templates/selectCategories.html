@@ -1,10 +1,12 @@
 <ion-view view-title="Categories" ng-style="{
                             'background-color': '#292929'
                                     }">
-    <ion-content has-header="true" >
+    <ion-content has-header="true" scroll="false" ng-style="{
+                            'background-color': '#fff'
+                                    }">
 
-        <div id="event-categories" ng-style="{
-                            'background-color': '#062142',
+        <div            ng-style="{
+                            'background-color': '#fff',
                             'height': eventCategoriesHeight,
                             'width': eventCategoriesWidth,
                             'margin-left': 'auto',
@@ -12,26 +14,42 @@
                             'margin-top': buttonBoxMarginTop,
                             'border-radius' : buttonBorderRadius
                                     }">
-            <ion-checkbox class="my-item"
-                          ng-repeat="category in categories"
-                          ng-model="category.checked"
-                          ng-checked="category.checked"
-                          ng-change="updateStorage(category)" ng-style="{
+
+            <div class="item item-divider"
+                        ng-style="{
+                             'font-weight': 'bold',
+                            'border-left' : 'none',
+                            'border-right' : 'none',
+                            'border-top' : 'none',
+                            'border-bottom-width' : '2px',
+                            'background-color': '#fff',
+                            'font-size' : categoryDividerFontSize
+                                    }">
+                CHOOSE YOUR CATEGORIES
+            </div>
+            <ion-toggle class="my-item"
+                            ng-repeat="category in categories"
+                            ng-model="category.checked"
+                            ng-checked="category.checked"
+                            ng-change="updateStorage(category)"
+                            ng-style="{
                             'height': buttonHeight,
                             'width': buttonBoxWidth,
-                            'margin-left': 'auto',
-                            'margin-right': 'auto',
-                            'color': 'white',
-                            'border-radius': adHocInternalBorderRadius,
-                            'border-color': '#062142',
-                            'background-color': '#062142',
+                            'border-left' : 'none',
+                            'border-right' : 'none',
+                            'background-color': '#fff',
                             'padding-top':paddingTopCheckBoxText,
-                            'line-height' : lineHeight
-                                    }">
-               {{ category.name }}
+                            'line-height' : lineHeight,
+                             'font-weight': 'bold',
+                             'font-size' : itemFontSize
 
-            </ion-checkbox>
+                                    }">
+                {{ category.name }}
+
+            </ion-toggle>
+
         </div>
+
 
     </ion-content>
 </ion-view>

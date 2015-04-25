@@ -64,6 +64,8 @@ angular.module('splash.selectCategories.ctrl', [])
         $scope.eventCategoriesHeight = (buttonHeight * 3) + "px";
         $scope.eventCategoriesWidth = (screenWidth * 0.9) + "px";
         $scope.paddingTopCheckBoxText = (buttonHeight/2 - lineHeight/2) + "px";
+        $scope.itemFontSize = (screenWidth * 0.042) + "px";
+        $scope.categoryDividerFontSize = (screenWidth * 0.045) + "px";
 
 
     });

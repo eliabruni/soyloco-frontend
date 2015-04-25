@@ -242,7 +242,7 @@ angular.module('splash.settings.ctrl', [])
         // CONSTANTS
         // todo: to be hardcoded into local storage
         var buttonBoxWidth = (screenWidth * 0.9);
-        var buttonBoxMarginTop = (screenHeight * 0.07);
+        var buttonBoxMarginTop = (screenHeight * 0.06);
         var buttonHeight = (screenHeight * 0.08);
         var buttonBorderRadius = 8;
         var intraButtonPaddingTop = 5;
@@ -260,6 +260,9 @@ angular.module('splash.settings.ctrl', [])
         $scope.intraButtonPaddingTop = intraButtonPaddingTop + "px";
         $scope.adHocInternalBorderRadius = adHocInternalBorderRadius + "px";
         $scope.lineHeight = lineHeight+ "px";
+        $scope.itemFontSize = (screenWidth * 0.042) + "px";
+        $scope.categoryDividerFontSize = (screenWidth * 0.045) + "px";
+
 
 
         //CONTAINER
@@ -281,9 +284,12 @@ angular.module('splash.settings.ctrl', [])
         $scope.cityModalMarginTop = -(screenHeight * 0.071) + "px";
         $scope.cityModalMarginLeft = (screenWidth * 0.784)  + "px";
 
+        $scope.textRangeWidth = (screenWidth * 0.3)  + "px";
+        $scope.textRangeMarginLeft = (screenWidth * 0.007)  + "px";
 
 
-        //GENDER BOX
+
+            //GENDER BOX
         $scope.genderSelectorMarginTop = (screenHeight * 0.04) + "px";
         $scope.genderSelectorWidth = (screenWidth * 0.9) + "px";
 
@@ -295,6 +301,7 @@ angular.module('splash.settings.ctrl', [])
 
         $scope.checkBoxHeight = buttonHeight + "px";
         $scope.paddingTopCheckBoxText = (buttonHeight/2 - lineHeight/2) + "px";
+
 
 
         //LOGOUT BUTTON

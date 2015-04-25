@@ -268,6 +268,8 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.lineHeight = lineHeight+ "px";
 
 
+        $scope.settingsButtonPaddingTop = (screenWidth * 0.006)  + "px";
+
         //CONTAINER
         $scope.accountContainerHeight = screenWidth + "px";
         $scope.accountContainerWidth = screenWidth + "px";
@@ -277,7 +279,6 @@ angular.module('splash.tabAccount.ctrl', [])
         $scope.accountContainerAfterInfoHeight = (screenHeight) + "px";
         $scope.accountContainerAfterInfoWidth = screenWidth + "px";
         $scope.backgroundSize = (screenWidth * 1) + "px " + (screenWidth * 1) + "px";
-
 
 
         //PROFILE INFO
