@@ -29,11 +29,11 @@ angular.module('splash.tabEvents.ctrl', [])
             $ionicSlideBoxDelegate.enableSlide(false);
         };
 
-// SLIDER LOGIC
+        // SLIDER LOGIC
 
         $scope.slideIndex = 0;
 
-// Called each time the slide changes
+        // Called each time the slide changes
         $scope.slideChanged = function (index) {
             $scope.slideIndex = index;
         };
@@ -80,6 +80,15 @@ angular.module('splash.tabEvents.ctrl', [])
             $scope.slideIndex == 2;
 
         };
+
+        //$scope.buttonOpacity = 1;
+        ////EXPERIMENTAL
+        //$scope.fire = function () {
+        //    $scope.buttonOpacity = 0.1;
+        //    $timeout(function() {
+        //        $scope.buttonOpacity = 1;
+        //    }, 250);
+        //};
 
 
         /***************

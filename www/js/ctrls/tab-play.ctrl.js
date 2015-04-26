@@ -53,7 +53,6 @@ angular.module('splash.tabPlay.ctrl', [])
          * LOGIC
          ***************/
 
-
         $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
         $scope.card = cardTypes[Math.floor(Math.random() * cardTypes.length)];
@@ -83,15 +82,6 @@ angular.module('splash.tabPlay.ctrl', [])
         /***************
          * CSS size stuff
          ***************/
-
-        //// We get screen size only at fb login time
-        //if (!$rootScope.appInitialized) {
-        //    var newScreenHeight = document.getElementsByTagName('ion-pane')[0].clientHeight;
-        //    var newScreenWidth = document.getElementsByTagName('ion-pane')[0].clientWidth;
-        //
-        //    $localstorage.setObject('screenHeight', newScreenHeight);
-        //    $localstorage.setObject('screenWidth', newScreenWidth);
-        //}
 
         // Screen width and height are set at signin only once
         var screenWidth = $localstorage.getObject('screenWidth');
