@@ -88,11 +88,11 @@ angular.module('splash.tabPlay.ctrl', [])
         var screenHeight = $localstorage.getObject('screenHeight');
 
 
-        $scope.containerMargin = [(-screenWidth * 0.2) + "px" + (screenWidth * 0) + "px " + (screenWidth * 0.0) + "px " + (screenWidth * 0) + "px "];
-        //$scope.containerMargin = [(-screenWidth * 0.01) + "px auto " + (screenWidth * 0.0) + "px auto"];
+        $scope.containerMargin = [(screenWidth * 0) + "px" + (screenWidth * 0) + "px " + (screenWidth * 0.0) + "px " + (screenWidth * 0) + "px "];
         $scope.containerPaddingBottom = (screenWidth * 0.0) + "px";
 
-        $scope.scrollHeight = (screenHeight * 0.51) + "px";
+        $scope.scrollHeight = (screenWidth * 0.86) + "px";
+
 
         $scope.cardHeight = (screenWidth * 1) + "px";
         $scope.cardWidth = (screenWidth * 1) + "px";
@@ -101,8 +101,11 @@ angular.module('splash.tabPlay.ctrl', [])
         $scope.cardTextHeight = (screenWidth * 0.01) + "px";
         $scope.cardTextPaddingTop = (screenWidth * 0.5) + "px";
         $scope.cardTextFontSize = (screenWidth * 0.06) + "px";
-        $scope.cardTextMarginTop = -(screenHeight * 0.14) + "px";
-        $scope.secondContainerMarginTop = (screenHeight * 0.03) + "px";
+
+        $scope.cardTextMarginTop = -(screenHeight * 0.117) + "px";
+
+        $scope.cardTextMarginLeft = (screenHeight * 0.02) + "px";
+        $scope.secondContainerMarginTop = -(screenWidth * 0) + "px";
 
 
     });

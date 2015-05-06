@@ -297,7 +297,7 @@ angular.module('splash.settings.ctrl', [])
         $scope.cityModalButtonWidth = (buttonBoxWidth - buttonHeight) + "px";
         $scope.cityModalRefreshButtonSize = (screenHeight * 0.07) + "px";
         $scope.cityModalMarginTop = -(screenHeight * 0.072) + "px";
-        $scope.cityModalMarginLeft = (screenWidth * 0.784)  + "px";
+        $scope.cityModalMarginLeft = (screenWidth * 0.765)  + "px";
         $scope.spinnerButtonHeight = (screenHeight * 0.0745) + "px";
         $scope.spinnerButtonWidth = (screenHeight * 0.08) + "px";
 

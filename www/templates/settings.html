@@ -29,11 +29,11 @@
                             'border-left' : 'none',
                             'border-right' : 'none',
                             'border-top' : 'none',
-                            'border-bottom-width' : '2px',
+                            'border-bottom-width' : '3px',
                             'background-color': '#fff',
                             'font-size' : categoryDividerFontSize
                                     }">
-                    EVENT PREFERENCES
+                    CITY PREFERENCES
                 </div>
 
                 <div class="button-container"
@@ -144,7 +144,7 @@
                             'border-left' : 'none',
                             'border-right' : 'none',
                             'border-top' : 'none',
-                            'border-bottom-width' : '2px',
+                            'border-bottom-width' : '3px',
                             'background-color': '#fff',
                             'font-size' : categoryDividerFontSize
                                     }">
@@ -191,7 +191,7 @@
                             'border-left' : 'none',
                             'border-right' : 'none',
                             'border-top' : 'none',
-                            'border-bottom-width' : '2px',
+                            'border-bottom-width' : '3px',
                             'background-color': '#fff',
                             'font-size' : categoryDividerFontSize
                                     }">
@@ -235,37 +235,53 @@
                             'border-left' : 'none',
                             'border-right' : 'none',
                             'border-top' : 'none',
-                            'border-bottom-width' : '2px',
+                            'border-bottom-width' : '3px',
                             'background-color': '#fff',
                             'font-size' : categoryDividerFontSize
                                     }">
 
                         </div>
 
-                        <button
-                                class="button button-clear"
-                                ng-click="logout()"
-                                ng-style="{
+
+
+                        <div class="button-container"
+
+                             ng-style="{
                             'height': buttonHeight,
                             'width': buttonBoxWidth,
                             'margin-left': 'auto',
                             'margin-right': 'auto',
                             'text-align':'left',
-                            'border-left' : 'none',
-                            'border-right' : 'none',
-                            'font-weight': 'bold',
-                             'font-size' : itemFontSize,
-                             'color' : 'red'
-                                                             }"
-                                >
+                            'background-color': '#fff'
+                                    }">
 
-                                    Logout
+                            <button
+                                    class="button"
+                                    ng-disabled="rangeDisable"
+                                    ng-style="{
+                            'height': buttonHeight,
+                            'width': buttonBoxWidth,
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                            'text-align':'left',
+                            'border-color':   '#fff',
+                              'background-color': '#fff',
+                              'color' : '#292929',
+                              'font-weight': 'bold',
+                             'font-size' : itemFontSize
+                                    }"
+                                    ng-click="logout()"
+                                    >
+                                Logout
 
-                        </button>
+                            </button>
+                        </div>
+
+
                     </div>
 
                 </div>
-            </div>
+
         </div>
 
 
